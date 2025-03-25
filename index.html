@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能卡片生成器</title>
+    <!-- API配置 -->
+    <script src="config.js"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 min-h-screen transition-colors duration-200">
+    <div class="container mx-auto px-4 py-8">
+        <header class="mb-8 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-primary-600 dark:text-primary-400">智能卡片生成器</h1>
+            <button id="theme-toggle" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-all duration-200">
+                <span id="theme-icon" class="material-icons text-gray-600 dark:text-gray-300">dark_mode</span>
+            </button>
+        </header>
+        
+        <main class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-6">
+            <!-- 输入部分 -->
+            <section class="w-full md:w-1/2 lg:w-1/2">
+                <div class="input-group">
+                    <label for="text-input" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">内容文本</label>
+                    <div class="relative rounded-md overflow-hidden transition-all duration-200 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+                        <textarea id="text-input" rows="10" class="block w-full p-3 bg-transparent border-0 focus:ring-0 focus:outline-none resize-none text-gray-900 dark:text-gray-100" placeholder="请输入卡片内容..."></textarea>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="style-selector" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">选择风格</label>
+                    <select id="style-selector" class="block w-full p-3 rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-primary-500 focus:border-primary-500">
+                        <option value="加载中...">加载中...</option>
+                    </select>
+                    <p id="style-description" class="mt-2 text-xs text-gray-500 dark:text-gray-400">选择一种卡片风格</p>
+                </div>
+                
+                <button id="generate-btn" class="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-md shadow-sm transition-all transform hover:scale-[1.02] active:scale-[0.98]">
+                    生成卡片
+                </button>
+                
+                <div class="text-xs text-gray-500 dark:text-gray-400 mt-2 flex items-center">
+                    <span class="material-icons text-xs mr-1">keyboard</span>
+                    <span>提示: 按 Ctrl+Enter 快速生成, Alt+T 切换主题</span>
+                </div>
+            </section>
+            
+            <div class="w-full md:w-1/2 lg:w-1/2 flex flex-col space-y-4">
+                <div class="flex flex-row justify-between items-center">
+                    <h2 class="text-xl font-semibold">生成结果</h2>
+                </div>
+                <div id="preview-stage" class="p-4 bg-white dark:bg-gray-700 rounded-md w-full overflow-auto">
+                    <div id="stream-text" class="font-mono text-sm h-[800px] overflow-auto"></div>
+                    <div id="preview-content" class="w-[500px] mx-auto" style="display: none;"></div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="mt-12 text-center text-sm text-gray-500 dark:text-gray-400 py-4">
+            <p> 2025 智能卡片生成器 - 由AI驱动设计</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // 主题切换功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+            
+            // 检查系统偏好
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                html.classList.add('dark');
+            }
+            
+            // 检查本地存储
+            if (localStorage.getItem('theme') === 'dark') {
+                html.classList.add('dark');
+            } else if (localStorage.getItem('theme') === 'light') {
+                html.classList.remove('dark');
+            }
+            
+            // 切换主题
+            themeToggle.addEventListener('click', function() {
+                if (html.classList.contains('dark')) {
+                    html.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    html.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

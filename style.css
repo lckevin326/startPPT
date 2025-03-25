@@ -1,0 +1,135 @@
+/* 全局样式和动画 */
+:root {
+  --animation-duration: 200ms;
+}
+
+/* 主题切换过渡效果 */
+.theme-transition {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 淡入动画 */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 图标闪烁动画 */
+.animate-pulse-custom {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* 按钮悬停和点击效果 */
+button:not(:disabled),
+.button {
+  transition: all 0.2s ease;
+}
+
+button:not(:disabled):hover,
+.button:hover {
+  transform: translateY(-1px);
+}
+
+button:not(:disabled):active,
+.button:active {
+  transform: translateY(1px);
+}
+
+/* 输入框样式增强 */
+.input-group textarea:focus {
+  box-shadow: 0 0 0 3px rgba(var(--color-primary-500), 0.2);
+  outline: none;
+}
+
+/* 自定义滚动条 */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* 卡片悬停效果 */
+.card {
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.dark .card:hover {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* 移动端适配优化 */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  .input-group {
+    margin-bottom: 1rem;
+  }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) {
+  button:not(:disabled):hover,
+  .button:hover {
+    transform: none;
+  }
+  
+  .card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}

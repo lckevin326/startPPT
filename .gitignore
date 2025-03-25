@@ -9,3 +9,6 @@ venv/
 # Ignore IDE specific files
 .vscode/
 .idea/
+
+# 忽略config.js文件
+config.js
