@@ -43,7 +43,7 @@
 
 2. **启动服务器**
    ```
-   http-server "d:\AI\product\startPPT" -p 8000
+   http-server "xxx\xxx\startPPT" -p 8000
    ```
    然后在浏览器中访问 http://localhost:8000
 
