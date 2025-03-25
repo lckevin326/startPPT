@@ -63,13 +63,22 @@ document.addEventListener('DOMContentLoaded', async function() {
                 throw new Error('无法加载提示模板');
             }
             
+            // 加载风格列表
+            const styles = await loadStyleJSON();
+            if (!styles) {
+                throw new Error('无法加载风格列表');
+            }
+            
+            // 获取风格描述
+            const styleDescription = getStyleDescription(style, styles);
+            
             // 格式化日期和时间
             const date = getCurrentBeijingDate();
             
             // 创建完整的提示词
             let fullPrompt = promptTemplate
-                .replace('{{内容}}', text)
-                .replace('{{风格}}', style)
+                .replace('{{输入主题}}', text)
+                .replace('{{设计风格}}', styleDescription)
                 .replace('{{日期}}', date);
             
             // 显示处理状态
@@ -87,10 +96,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                         model: window.OPENROUTER_CONFIG.MODEL,
                         messages: [
                             {
-                                role: 'system',
-                                content: '你是一个HTML卡片生成专家，可以将文本转换为美观的HTML卡片。请务必生成完整的HTML代码，包含必要的CSS和JS，确保代码可直接使用。'
-                            },
-                            {
                                 role: 'user',
                                 content: fullPrompt
                             }
@@ -99,6 +104,22 @@ document.addEventListener('DOMContentLoaded', async function() {
                         temperature: 0.7,
                         stream: true
                     };
+                    
+                    // 打印请求信息到控制台
+                    console.log('OpenRouter API请求信息:');
+                    console.log('- URL:', window.OPENROUTER_CONFIG.API_URL);
+                    console.log('- 模型:', window.OPENROUTER_CONFIG.MODEL);
+                    console.log('- 提示词占位符替换:');
+                    console.log('  - 输入主题:', text);
+                    console.log('  - 设计风格:', styleDescription);
+                    console.log('  - 日期:', date);
+                    console.log('- 请求体结构:', JSON.stringify({
+                        model: requestBody.model,
+                        messages: [{role: 'user', content: fullPrompt}],
+                        max_tokens: requestBody.max_tokens,
+                        temperature: requestBody.temperature,
+                        stream: requestBody.stream
+                    }, null, 2));
                     
                     const response = await fetch(window.OPENROUTER_CONFIG.API_URL, {
                         method: 'POST',
@@ -316,8 +337,9 @@ function populateStyleSelector(styles) {
 
 // 获取指定风格的描述
 function getStyleDescription(styleName, styles) {
-    const style = styles.find(s => s.id === styleName);
-    return style ? style.description : '';
+    if (!styles || !styleName) return "无";
+    const style = styles.find(s => s.style === styleName);
+    return style ? style.description : "无";
 }
 
 // 加载style.txt模板
