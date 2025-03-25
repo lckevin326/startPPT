@@ -106,20 +106,20 @@ document.addEventListener('DOMContentLoaded', async function() {
                     };
                     
                     // 打印请求信息到控制台
-                    console.log('OpenRouter API请求信息:');
-                    console.log('- URL:', window.OPENROUTER_CONFIG.API_URL);
-                    console.log('- 模型:', window.OPENROUTER_CONFIG.MODEL);
-                    console.log('- 提示词占位符替换:');
-                    console.log('  - 输入主题:', text);
-                    console.log('  - 设计风格:', styleDescription);
-                    console.log('  - 日期:', date);
-                    console.log('- 请求体结构:', JSON.stringify({
-                        model: requestBody.model,
-                        messages: [{role: 'user', content: fullPrompt}],
-                        max_tokens: requestBody.max_tokens,
-                        temperature: requestBody.temperature,
-                        stream: requestBody.stream
-                    }, null, 2));
+                    // console.log('OpenRouter API请求信息:');
+                    // console.log('- URL:', window.OPENROUTER_CONFIG.API_URL);
+                    // console.log('- 模型:', window.OPENROUTER_CONFIG.MODEL);
+                    // console.log('- 提示词占位符替换:');
+                    // console.log('  - 输入主题:', text);
+                    // console.log('  - 设计风格:', styleDescription);
+                    // console.log('  - 日期:', date);
+                    // console.log('- 请求体结构:', JSON.stringify({
+                    //     model: requestBody.model,
+                    //     messages: [{role: 'user', content: fullPrompt}],
+                    //     max_tokens: requestBody.max_tokens,
+                    //     temperature: requestBody.temperature,
+                    //     stream: requestBody.stream
+                    // }, null, 2));
                     
                     const response = await fetch(window.OPENROUTER_CONFIG.API_URL, {
                         method: 'POST',
