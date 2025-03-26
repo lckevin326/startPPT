@@ -10,5 +10,5 @@ venv/
 .vscode/
 .idea/
 
-# 忽略config.js文件
-config.js
+# 只忽略根目录下的config.js文件
+/config.js
