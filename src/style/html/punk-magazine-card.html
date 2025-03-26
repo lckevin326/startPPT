@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>朋克风格 | PUNK AESTHETIC</title>
+    <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'PunkFont';
+            src: url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        :root {
+            --color-black: #000000;
+            --color-white: #ffffff;
+            --color-red: #ff0000;
+            --color-yellow: #ffff00;
+            --color-pink: #ff00ff;
+            --font-punk: 'Special Elite', 'Courier New', monospace;
+            --font-sans: 'Noto Sans SC', sans-serif;
+            --font-serif: 'Noto Serif SC', serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #222222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: var(--font-sans);
+        }
+        
+        .magazine-card {
+            width: 400px;
+            max-height: 1680px;
+            background-color: var(--color-black);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.8s ease-in;
+            color: var(--color-white);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* 朋克风格元素 */
+        .punk {
+            position: relative;
+        }
+        
+        /* 胶带效果 */
+        .tape {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            transform: rotate(var(--rotation, 2deg));
+            z-index: 10;
+        }
+        
+        .tape-1 {
+            width: 120px;
+            height: 25px;
+            top: 50px;
+            right: -20px;
+            --rotation: -30deg;
+            opacity: 0.5;
+        }
+        
+        .tape-2 {
+            width: 80px;
+            height: 20px;
+            bottom: 200px;
+            left: -15px;
+            --rotation: 40deg;
+            opacity: 0.4;
+        }
+        
+        .tape-3 {
+            width: 100px;
+            height: 22px;
+            top: 300px;
+            right: -10px;
+            --rotation: -20deg;
+            background-color: rgba(255, 255, 0, 0.3);
+            opacity: 0.6;
+        }
+        
+        /* 安全别针效果 */
+        .safety-pin {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            transform: rotate(var(--rotation, 0deg));
+            z-index: 10;
+        }
+        
+        .pin-1 {
+            top: 120px;
+            right: 30px;
+            --rotation: 20deg;
+        }
+        
+        .pin-2 {
+            bottom: 250px;
+            left: 20px;
+            --rotation: -30deg;
+        }
+        
+        /* 污渍和撕裂效果 */
+        .stain {
+            position: absolute;
+            background-color: var(--color-red);
+            border-radius: 50%;
+            filter: blur(10px);
+            opacity: 0.15;
+            mix-blend-mode: multiply;
+        }
+        
+        .stain-1 {
+            width: 100px;
+            height: 100px;
+            top: 10%;
+            left: -30px;
+        }
+        
+        .stain-2 {
+            width: 80px;
+            height: 80px;
+            bottom: 20%;
+            right: -20px;
+            background-color: var(--color-yellow);
+            opacity: 0.1;
+        }
+        
+        .tear {
+            position: absolute;
+            background-color: var(--color-black);
+            z-index: 2;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 15%, 40% 30%, 70% 50%, 30% 70%, 60% 85%, 20% 100%, 0% 100%);
+        }
+        
+        .tear-1 {
+            width: 30px;
+            height: 80px;
+            top: 0;
+            right: 80px;
+            background-color: #222;
+        }
+        
+        .tear-2 {
+            width: 40px;
+            height: 100px;
+            bottom: 0;
+            left: 60px;
+            background-color: #222;
+        }
+        
+        /* 涂鸦和X标记 */
+        .graffiti {
+            position: absolute;
+            font-family: var(--font-punk);
+            font-weight: bold;
+            color: var(--color-red);
+            transform: rotate(var(--rotation, 0deg));
+            letter-spacing: -1px;
+            z-index: 5;
+            text-shadow: 1px 1px 0px var(--color-black);
+        }
+        
+        .graffiti-1 {
+            top: 15%;
+            right: 30px;
+            font-size: 28px;
+            --rotation: -5deg;
+        }
+        
+        .graffiti-2 {
+            bottom: 10%;
+            left: 40px;
+            font-size: 32px;
+            --rotation: 3deg;
+        }
+        
+        .x-mark {
+            position: absolute;
+            font-family: var(--font-punk);
+            font-size: 40px;
+            font-weight: bold;
+            color: var(--color-red);
+            z-index: 5;
+        }
+        
+        .x-mark-1 {
+            top: 35%;
+            right: 20px;
+            transform: rotate(-10deg);
+        }
+        
+        .x-mark-2 {
+            bottom: 30%;
+            left: 25px;
+            transform: rotate(5deg);
+        }
+        
+        .header {
+            padding: 30px 20px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 3px solid var(--color-white);
+        }
+        
+        .issue-date {
+            font-family: var(--font-punk);
+            font-size: 14px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: var(--color-white);
+            letter-spacing: -1px;
+            transform: rotate(3deg);
+            background-color: var(--color-red);
+            padding: 3px 8px;
+            border: 1px dashed var(--color-white);
+            z-index: 10;
+        }
+        
+        .title-container {
+            margin-top: 30px;
+            position: relative;
+            transform: rotate(-2deg);
+        }
+        
+        .title-main {
+            font-family: var(--font-sans);
+            font-size: 50px;
+            font-weight: 900;
+            line-height: 1;
+            color: var(--color-white);
+            margin-left: -10px;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            text-shadow: 3px 3px 0 var(--color-red);
+            -webkit-text-stroke: 1px var(--color-white);
+        }
+        
+        .title-sub {
+            font-family: var(--font-sans);
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 10px;
+            margin-left: 5px;
+            color: var(--color-white);
+            background-color: var(--color-red);
+            padding: 3px 8px;
+            display: inline-block;
+            transform: rotate(1deg);
+        }
+        
+        .content-section {
+            padding: 20px;
+            position: relative;
+        }
+        
+        .quote-block {
+            margin: 40px 0;
+            position: relative;
+            font-family: var(--font-sans);
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 1.4;
+            padding: 15px;
+            border: 2px solid var(--color-white);
+            border-style: dashed;
+            transform: rotate(-1deg);
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .quote-block::before {
+            content: "";
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            width: 30px;
+            height: 30px;
+            background-color: var(--color-black);
+            border: 2px dashed var(--color-white);
+            transform: rotate(45deg);
+            z-index: -1;
+        }
+        
+        .core-points {
+            position: relative;
+            margin: 40px 0;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--color-white);
+            transform: rotate(1deg);
+        }
+        
+        .core-points::after {
+            content: "NO FUTURE";
+            position: absolute;
+            bottom: -10px;
+            right: 20px;
+            font-family: var(--font-punk);
+            font-size: 12px;
+            color: var(--color-red);
+            transform: rotate(-3deg);
+        }
+        
+        .core-points-title {
+            font-family: var(--font-punk);
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--color-red);
+            display: inline-block;
+            transform: rotate(-2deg);
+            border-bottom: 2px solid var(--color-white);
+            text-transform: uppercase;
+        }
+        
+        .points-list {
+            list-style-type: none;
+            padding-left: 5px;
+        }
+        
+        .points-list li {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 25px;
+            font-size: 16px;
+            line-height: 1.5;
+            font-family: var(--font-sans);
+        }
+        
+        .points-list li::before {
+            content: "⚠";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--color-red);
+            font-size: 18px;
+        }
+        
+        .points-list li:nth-child(even) {
+            border-left: 3px solid var(--color-red);
+            padding-left: 30px;
+            margin-left: -10px;
+        }
+        
+        .points-list li:nth-child(odd) {
+            border-right: 3px solid var(--color-red);
+            margin-right: -10px;
+            text-align: right;
+            padding-right: 30px;
+            padding-left: 0;
+        }
+        
+        .points-list li:nth-child(odd)::before {
+            content: "✖";
+            right: 5px;
+            left: auto;
+        }
+        
+        .qr-section {
+            margin: 50px 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            transform: rotate(-2deg);
+        }
+        
+        .qr-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            border: 3px solid var(--color-white);
+            padding: 10px;
+            background-color: var(--color-white);
+        }
+        
+        .qr-container::before, .qr-container::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: var(--color-black);
+            clip-path: polygon(0 0, 15% 0, 15% 100%, 0 100%);
+            z-index: 2;
+        }
+        
+        .qr-container::after {
+            clip-path: polygon(85% 0, 100% 0, 100% 100%, 85% 100%);
+        }
+        
+        .qr-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: contrast(200%) brightness(90%);
+            mix-blend-mode: multiply;
+        }
+        
+        .qr-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%) rotate(2deg);
+            font-family: var(--font-punk);
+            font-size: 14px;
+            color: var(--color-white);
+            background-color: var(--color-black);
+            padding: 3px 8px;
+            border: 1px solid var(--color-white);
+            white-space: nowrap;
+        }
+        
+        .qr-exclamation {
+            position: absolute;
+            top: -20px;
+            right: -15px;
+            font-family: var(--font-punk);
+            font-size: 40px;
+            color: var(--color-red);
+            transform: rotate(15deg);
+        }
+        
+        .editor-notes {
+            margin: 40px 15px;
+            padding: 20px;
+            position: relative;
+            font-family: var(--font-sans);
+            font-size: 16px;
+            line-height: 1.6;
+            background-color: rgba(255, 0, 0, 0.1);
+            border: 1px solid var(--color-red);
+            border-style: dashed;
+            transform: rotate(1deg);
+        }
+        
+        .editor-title {
+            font-family: var(--font-punk);
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 15px;
+            transform: rotate(-2deg);
+            display: inline-block;
+            color: var(--color-red);
+            border-bottom: 2px solid var(--color-white);
+            text-transform: uppercase;
+        }
+        
+        .editor-notes p {
+            margin-bottom: 10px;
+        }
+        
+        .handwritten {
+            font-family: 'Courier New', monospace;
+            transform: rotate(-2deg);
+            display: inline-block;
+            color: var(--color-red);
+            border-bottom: 1px dashed var(--color-white);
+            padding: 0 5px;
+        }
+        
+        .footer {
+            padding: 20px;
+            font-family: var(--font-punk);
+            font-size: 14px;
+            color: var(--color-white);
+            text-align: center;
+            border-top: 3px double var(--color-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        /* 颗粒噪点效果 */
+        .grain-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJub2lzZSIgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuNjUiIHJlc3VsdD0ibm9pc2UiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48ZmVDb2xvck1hdHJpeCBpbj0ibm9pc2UiIHR5cGU9Im1hdHJpeCIgdmFsdWVzPSIxIDAgMCAwIDAgMCAxIDAgMCAwIDAgMCAxIDAgMCAwIDAgMCAwLjUgMCIgcmVzdWx0PSJjb2xvcmVkTm9pc2UiLz48ZmVDb21wb3NpdGUgb3BlcmF0b3I9ImluIiBpbjI9IlNvdXJjZUdyYXBoaWMiLz48ZmVCbGVuZCBtb2RlPSJvdmVybGF5IiBpbjI9IlNvdXJjZUdyYXBoaWMiIHJlc3VsdD0ibWl4Ii8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbGw9IiNmZmYiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuMTUiLz48L3N2Zz4=');
+            pointer-events: none;
+            opacity: 0.5;
+            z-index: 100;
+            mix-blend-mode: overlay;
+        }
+        
+        /* 剪贴纸张效果 */
+        .cutout {
+            position: absolute;
+            background-color: var(--color-white);
+            z-index: 1;
+            transform: rotate(var(--rotation, 0deg));
+        }
+        
+        .cutout-1 {
+            width: 50px;
+            height: 30px;
+            top: 8%;
+            left: 30px;
+            --rotation: 15deg;
+        }
+        
+        .cutout-2 {
+            width: 70px;
+            height: 40px;
+            bottom: 15%;
+            right: 20px;
+            --rotation: -10deg;
+            background-color: var(--color-yellow);
+            opacity: 0.3;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 450px) {
+            .magazine-card {
+                width: 95%;
+                margin: 0 auto;
+            }
+            
+            .title-main {
+                font-size: 42px;
+            }
+        }
+        
+        /* 剪贴纸文字 */
+        .cutout-text {
+            position: absolute;
+            background-color: var(--color-white);
+            color: var(--color-black);
+            font-family: var(--font-punk);
+            font-size: 14px;
+            padding: 5px 10px;
+            transform: rotate(var(--rotation, 0deg));
+            z-index: 10;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+        
+        .cutout-text-1 {
+            top: 5%;
+            left: 30px;
+            --rotation: -5deg;
+        }
+        
+        .cutout-text-2 {
+            bottom: 5%;
+            right: 20px;
+            --rotation: 3deg;
+            background-color: var(--color-red);
+            color: var(--color-white);
+        }
+        
+        /* 复印机错误效果 */
+        .xerox-error {
+            position: absolute;
+            background-color: var(--color-white);
+            opacity: 0.1;
+            height: 10px;
+        }
+        
+        .xerox-error-1 {
+            width: 100%;
+            top: 30%;
+        }
+        
+        .xerox-error-2 {
+            width: 60%;
+            bottom: 40%;
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="magazine-card punk">
+        <!-- 颗粒噪点效果 -->
+        <div class="grain-overlay"></div>
+        
+        <!-- 胶带效果 -->
+        <div class="tape tape-1"></div>
+        <div class="tape tape-2"></div>
+        <div class="tape tape-3"></div>
+        
+        <!-- 安全别针效果 -->
+        <div class="safety-pin pin-1">🧷</div>
+        <div class="safety-pin pin-2">🧷</div>
+        
+        <!-- 污渍和撕裂效果 -->
+        <div class="stain stain-1"></div>
+        <div class="stain stain-2"></div>
+        <div class="tear tear-1"></div>
+        <div class="tear tear-2"></div>
+        
+        <!-- 涂鸦和X标记 -->
+        <div class="graffiti graffiti-1">ANARCHY</div>
+        <div class="graffiti graffiti-2">CHAOS!</div>
+        <div class="x-mark x-mark-1">✖</div>
+        <div class="x-mark x-mark-2">✖</div>
+        
+        <!-- 剪贴纸张效果 -->
+        <!-- <div class="cutout cutout-1"></div> -->
+        <div class="cutout cutout-2"></div>
+        
+        <!-- 剪贴纸文字 -->
+        <!-- <div class="cutout-text cutout-text-1">DIY OR DIE</div> -->
+        <div class="cutout-text cutout-text-2">REBEL</div>
+        
+        <!-- 复印机错误效果 -->
+        <div class="xerox-error xerox-error-1"></div>
+        <div class="xerox-error xerox-error-2"></div>
+        
+        <header class="header">
+            <div class="issue-date">27.MAR.2025</div>
+            
+            <div class="title-container">
+                <h1 class="title-main">朋克风格</h1>
+                <h2 class="title-sub">反叛与独立的视觉宣言</h2>
+            </div>
+        </header>
+        
+        <div class="content-section">
+            <blockquote class="quote-block">
+                "朋克不只是音乐，它是态度。它是反抗既定秩序、拒绝被主流定义的生活方式。"
+            </blockquote>
+            
+            <div class="core-points">
+                <h3 class="core-points-title">核心特征</h3>
+                <ul class="points-list">
+                    <li>DIY精神和反叛文化，表现为粗糙、手工制作的视觉效果</li>
+                    <li>高对比度色彩——黑、白、红色为主，辅以荧光色点缀</li>
+                    <li>粗暴不规则的排版和字体处理，文字被切割或部分遮挡</li>
+                    <li>安全别针、胶带、污渍和撕裂效果的大量运用</li>
+                    <li>高对比度、粗颗粒处理的图像，模拟劣质印刷效果</li>
+                </ul>
+            </div>
+            
+            <div class="qr-section">
+                <div class="qr-container">
+                    <img class="qr-image" src="https://images.cubox.pro/rhkekb/file/2025032609523776560/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250326095228.jpg" alt="QR Code">
+                    <div class="qr-exclamation">!</div>
+                    <div class="qr-label">SCAN IF YOU DARE</div>
+                </div>
+            </div>
+            
+            <div class="editor-notes">
+                <div class="editor-title">编辑札记</div>
+                <p>朋克风格源于70年代的英国和美国，作为对主流文化的反抗。它以Sex Pistols的专辑封面和早期朋克杂志为代表，强调DIY精神、原始表达和反建制态度。</p>
+                <p class="handwritten">— 朋克不死，只是换了种方式活着。</p>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            ANTI-ESTABLISHMENT SINCE 1977 | PUNK IS NOT DEAD
+        </footer>
+    </div>
+</body>
+</html>

@@ -84,20 +84,20 @@
     "english_style": "Punk",
     "style_value": "punk",
     "description": "采用朋克风格设计，体现DIY精神和反叛文化。必须使用粗糙、手工制作的视觉效果，如剪贴报纸、复印机扭曲和胶带痕迹。色彩应高对比且原始，主要使用黑、白、红色，可添加荧光色点缀。排版必须粗暴且不规则，使用手写、喷漆或剪贴字体，文字可被切割或部分遮挡。装饰元素应包含安全别针、胶带、污渍和撕裂效果。图像应使用高对比度、粗颗粒处理，模拟劣质印刷。必须添加随机元素如涂鸦、X标记和感叹号。整体设计应呈现出原始、粗糙且充满能量的视觉冲击，仿佛一张来自70-80年代伦敦或纽约地下场景的传单，参考Sex Pistols的专辑封面和早期朋克杂志。",
-    "chinese_example": "src/style/html",
-    "english_example": "src/style/html",
-    "chinese_reference_image": "src/style/img",
-    "english_reference_image": "src/style/img"
+    "chinese_example": "src/style/html/punk-magazine-card.html",
+    "english_example": "src/style/html/punk-magazine-card.html",
+    "chinese_reference_image": "src/style/img/punk-magazine-card.png",
+    "english_reference_image": "src/style/img/punk-magazine-card.png"
   },
   {
     "style": "英伦摇滚风格 (British Rock)",
     "english_style": "British Rock",
     "style_value": "british-rock",
     "description": "采用英伦摇滚风格设计，融合英国传统元素与反叛摇滚美学。色彩应使用英国国旗色系（红、白、蓝）或复古棕色调，可添加做旧效果。排版应混合经典与现代，使用衬线字体与手写字体的组合，标题可使用哥特式或维多利亚风格字体。装饰元素应包含英国符号的现代演绎，如Union Jack图案、皇家纹章或伦敦地标的抽象表现。图像应使用复古滤镜，模拟老式胶片效果。可添加唱片、吉他或音符等音乐元素作为点缀。整体设计应呈现出典雅中带有叛逆、传统中融入现代的独特英伦风格，参考Oasis、The Beatles专辑封面和NME杂志的视觉语言。",
-    "chinese_example": "src/style/html",
-    "english_example": "src/style/html",
-    "chinese_reference_image": "src/style/img",
-    "english_reference_image": "src/style/img"
+    "chinese_example": "src/style/html/british-rock-magazine-card.html",
+    "english_example": "src/style/html/british-rock-magazine-card.html",
+    "chinese_reference_image": "src/style/img/british-rock-magazine-card.png",
+    "english_reference_image": "src/style/img/british-rock-magazine-card.png"
   },
   {
     "style": "黑金属风格 (Black Metal)",

@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英伦摇滚风格 | BRITISH ROCK</title>
+    <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cinzel:wght@400;700;900&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'BritishFont';
+            src: url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        :root {
+            --color-navy: #1a2d5e;
+            --color-red: #c8102e;
+            --color-white: #f8f8f8;
+            --color-cream: #f5f0e1;
+            --color-brown: #704214;
+            --color-gold: #d4af37;
+            --font-serif: 'Playfair Display', 'Noto Serif SC', serif;
+            --font-gothic: 'Cinzel', serif;
+            --font-sans: 'Noto Sans SC', sans-serif;
+            --font-handwritten: 'Caveat', cursive;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: var(--font-sans);
+        }
+        
+        .magazine-card {
+            width: 400px;
+            max-height: 1680px;
+            background-color: var(--color-cream);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* 英伦摇滚风格元素 */
+        .british-rock {
+            position: relative;
+        }
+        
+        /* Union Jack斜纹 */
+        .union-jack-stripe {
+            position: absolute;
+            background-color: var(--color-red);
+            opacity: 0.8;
+            z-index: 1;
+        }
+        
+        .red-stripe-1 {
+            width: 450px;
+            height: 30px;
+            top: 100px;
+            left: -25px;
+            transform: rotate(-5deg);
+        }
+        
+        .blue-background {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            top: 0;
+            right: 0;
+            background-color: var(--color-navy);
+            opacity: 0.8;
+            z-index: 0;
+        }
+        
+        .white-stripe-1 {
+            position: absolute;
+            width: 450px;
+            height: 20px;
+            top: 105px;
+            left: -25px;
+            background-color: var(--color-white);
+            transform: rotate(-5deg);
+            z-index: 2;
+        }
+        
+        /* 音乐元素装饰 */
+        .music-note {
+            position: absolute;
+            font-size: 24px;
+            color: var(--color-navy);
+            opacity: 0.6;
+            z-index: 5;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .note-1 {
+            top: 50px;
+            left: 30px;
+            font-size: 30px;
+            animation-delay: 0.5s;
+        }
+        
+        .note-2 {
+            bottom: 100px;
+            right: 40px;
+            animation-delay: 1s;
+        }
+        
+        .note-3 {
+            top: 400px;
+            left: 20px;
+            animation-delay: 1.5s;
+        }
+        
+        /* 唱片装饰 */
+        .vinyl-record {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #000, #333);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 5;
+        }
+        
+        .vinyl-record::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: var(--color-cream);
+            border: 3px solid #000;
+        }
+        
+        .vinyl-1 {
+            top: 20px;
+            right: 30px;
+            transform: rotate(-15deg);
+        }
+        
+        .vinyl-2 {
+            bottom: 80px;
+            left: 20px;
+            transform: rotate(10deg);
+            width: 40px;
+            height: 40px;
+        }
+        
+        /* 皇家纹章元素 */
+        .royal-crest {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBkPSJNNTAgNWwxMCAxNSAxOC01LTUgMThMMTAwIDUwbC0yNyAxN3Y1bDIwIDExLTI1IDMgNyAxNCAtMjUtMTAtTDUwIDEwMGwtMTAtMTktMTUgMTAtNS0yMC0yMCAxMCAxMC0yNUwzIDAzbDI3IDExIDMtMjAgMTcgMjB2LTlsMTUtNXoiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzcwNDIxNCIgc3Ryb2tlLXdpZHRoPSIyIi8+PC9zdmc+');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            z-index: 2;
+        }
+        
+        .crest-1 {
+            top: 160px;
+            right: 20px;
+        }
+        
+        .crest-2 {
+            bottom: 40px;
+            left: 30px;
+            transform: rotate(15deg);
+        }
+        
+        .header {
+            padding: 40px 20px 20px;
+            position: relative;
+            overflow: hidden;
+            z-index: 5;
+        }
+        
+        .issue-date {
+            font-family: var(--font-gothic);
+            font-size: 14px;
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            color: var(--color-navy);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--color-gold);
+            padding-bottom: 2px;
+        }
+        
+        .title-container {
+            margin-top: 40px;
+            position: relative;
+            text-align: center;
+        }
+        
+        .title-main {
+            font-family: var(--font-gothic);
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1;
+            color: var(--color-navy);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 1px 1px 0 var(--color-gold);
+        }
+        
+        .title-divider {
+            width: 80px;
+            height: 3px;
+            background-color: var(--color-red);
+            margin: 0 auto 15px;
+        }
+        
+        .title-sub {
+            font-family: var(--font-serif);
+            font-size: 18px;
+            font-style: italic;
+            margin-top: 5px;
+            color: var(--color-brown);
+        }
+        
+        .content-section {
+            padding: 30px;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .quote-block {
+            margin: 40px 0;
+            position: relative;
+            font-family: var(--font-serif);
+            font-size: 22px;
+            font-style: italic;
+            line-height: 1.6;
+            padding: 20px 30px;
+            color: var(--color-brown);
+            border-left: 3px solid var(--color-red);
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .quote-block::before {
+            content: """;
+            position: absolute;
+            font-size: 80px;
+            font-family: var(--font-serif);
+            color: var(--color-red);
+            opacity: 0.2;
+            top: -20px;
+            left: 5px;
+            z-index: -1;
+        }
+        
+        .quote-block::after {
+            content: """;
+            position: absolute;
+            font-size: 80px;
+            font-family: var(--font-serif);
+            color: var(--color-red);
+            opacity: 0.2;
+            bottom: -60px;
+            right: 5px;
+            z-index: -1;
+        }
+        
+        .core-points {
+            position: relative;
+            margin: 50px 0;
+            padding: 25px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border: 1px solid var(--color-gold);
+        }
+        
+        .core-points::before {
+            content: "";
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 30px;
+            height: 30px;
+            border-top: 3px solid var(--color-gold);
+            border-left: 3px solid var(--color-gold);
+        }
+        
+        .core-points::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            right: -15px;
+            width: 30px;
+            height: 30px;
+            border-bottom: 3px solid var(--color-gold);
+            border-right: 3px solid var(--color-gold);
+        }
+        
+        .core-points-title {
+            font-family: var(--font-gothic);
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--color-navy);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid var(--color-gold);
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+        
+        .points-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .points-list li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 25px;
+            font-family: var(--font-serif);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--color-brown);
+        }
+        
+        .points-list li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: var(--color-red);
+        }
+        
+        .qr-section {
+            margin: 50px 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .qr-container {
+            position: relative;
+            padding: 10px;
+            background-color: var(--color-white);
+            border: 1px solid var(--color-gold);
+        }
+        
+        .qr-frame {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid var(--color-navy);
+            z-index: -1;
+        }
+        
+        .qr-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            filter: sepia(20%);
+        }
+        
+        .qr-label {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-gothic);
+            font-size: 14px;
+            color: var(--color-navy);
+            white-space: nowrap;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .editor-notes {
+            margin: 60px 0 30px;
+            padding: 25px;
+            position: relative;
+            font-family: var(--font-serif);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--color-brown);
+            background-color: rgba(26, 45, 94, 0.05);
+            border-top: 1px solid var(--color-navy);
+            border-bottom: 1px solid var(--color-navy);
+        }
+        
+        .editor-title {
+            font-family: var(--font-gothic);
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--color-navy);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .editor-notes p {
+            margin-bottom: 10px;
+        }
+        
+        .handwritten {
+            font-family: var(--font-handwritten);
+            font-size: 18px;
+            display: block;
+            margin-top: 15px;
+            color: var(--color-navy);
+            text-align: right;
+        }
+        
+        .footer {
+            padding: 20px;
+            font-family: var(--font-gothic);
+            font-size: 12px;
+            color: var(--color-navy);
+            text-align: center;
+            border-top: 1px solid var(--color-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        /* 做旧效果 */
+        .vintage-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iLjA1Ii8+PC9zdmc+');
+            pointer-events: none;
+            opacity: 0.3;
+            mix-blend-mode: multiply;
+            z-index: 3;
+        }
+        
+        .vintage-edge {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0) 70%, rgba(160,82,45,0.2) 100%);
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        /* 吉他装饰 */
+        .guitar-icon {
+            position: absolute;
+            color: var(--color-navy);
+            opacity: 0.4;
+            font-size: 36px;
+            z-index: 1;
+        }
+        
+        .guitar-1 {
+            bottom: 120px;
+            right: 30px;
+            transform: rotate(30deg);
+        }
+        
+        /* 伦敦地标装饰 */
+        .london-landmark {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
+        .big-ben {
+            bottom: 40px;
+            right: 40px;
+            width: 60px;
+            height: 150px;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MCAxNTAiPjxwYXRoIGQ9Ik0yMCAwaDEwdjEwaDVsMCAxMGgtNXYxMGg1bDAgMTBoLTV2MTBsNSAwaDBsMCAxMGgtNXYxMGg1bDAgMTBoLTV2MTBsNSAwaDBsMCAxMGgtNXYxMGg1bDAgMTBoLTV2MTBsNSAwaDBsMCAxMGgtNXY0aC0xMHYtNGgtNWwwLTEwaDV2LTEwbC01IDBsMCAtMTBoNXYtMTBoLTVsMCAtMTBoNXYtMTBsLTUgMGgwbDAgLTEwaDV2LTEwaC01bDAgLTEwaDV2LTEwbC01IDBsMCAtMTBoNXYtMTBoLTVsMCAtMTB6IiBmaWxsPSIjMWEyZDVlIi8+PC9zdmc+');
+            background-repeat: no-repeat;
+        }
+        
+        /* 英语装饰文本 */
+        .english-text {
+            position: absolute;
+            font-family: var(--font-gothic);
+            font-size: 12px;
+            color: var(--color-navy);
+            opacity: 0.4;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 1;
+        }
+        
+        .english-1 {
+            top: 15px;
+            right: 20px;
+            transform: rotate(90deg);
+        }
+        
+        .english-2 {
+            bottom: 20px;
+            left: 15px;
+            transform: rotate(-90deg);
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 450px) {
+            .magazine-card {
+                width: 95%;
+                margin: 0 auto;
+            }
+            
+            .title-main {
+                font-size: 42px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="magazine-card british-rock">
+        <!-- 做旧效果 -->
+        <div class="vintage-overlay"></div>
+        <div class="vintage-edge"></div>
+        
+        <!-- Union Jack元素 -->
+        <div class="blue-background"></div>
+        <div class="union-jack-stripe red-stripe-1"></div>
+        <div class="union-jack-stripe white-stripe-1"></div>
+        
+        <!-- 音乐元素 -->
+        <div class="music-note note-1">♪</div>
+        <div class="music-note note-2">♫</div>
+        <div class="music-note note-3">♬</div>
+        
+        <!-- 唱片装饰 -->
+        <div class="vinyl-record vinyl-1"></div>
+        <div class="vinyl-record vinyl-2"></div>
+        
+        <!-- 皇家纹章元素 -->
+        <div class="royal-crest crest-1"></div>
+        <div class="royal-crest crest-2"></div>
+        
+        <!-- 吉他装饰 -->
+        <div class="guitar-icon guitar-1"><i class="fas fa-guitar"></i></div>
+        
+        <!-- 伦敦地标装饰 -->
+        <div class="london-landmark big-ben"></div>
+        
+        <!-- 英语装饰文本 -->
+        <div class="english-text english-1">RULE BRITANNIA</div>
+        <div class="english-text english-2">GOD SAVE THE QUEEN</div>
+        
+        <header class="header">
+            <div class="issue-date">27 MARCH 2025</div>
+            
+            <div class="title-container">
+                <h1 class="title-main">英伦摇滚</h1>
+                <div class="title-divider"></div>
+                <h2 class="title-sub">传统与叛逆交织的美学风格</h2>
+            </div>
+        </header>
+        
+        <div class="content-section">
+            <blockquote class="quote-block">
+                "英伦摇滚不仅是一种音乐，更是一种态度——它将经典英国传统与摇滚反叛精神完美融合，创造出独特的文化标识。"
+            </blockquote>
+            
+            <div class="core-points">
+                <h3 class="core-points-title">核心特征</h3>
+                <ul class="points-list">
+                    <li>英国国旗色系（红、白、蓝）或复古棕色调的运用，常配以做旧效果</li>
+                    <li>混合经典与现代的排版风格，衬线字体与手写字体的组合</li>
+                    <li>英国传统符号的现代演绎，包括Union Jack图案、皇家纹章及伦敦地标</li>
+                    <li>复古滤镜处理的图像，模拟老式胶片质感</li>
+                    <li>唱片、吉他或音符等音乐元素的巧妙点缀</li>
+                </ul>
+            </div>
+            
+            <div class="qr-section">
+                <div class="qr-container">
+                    <div class="qr-frame"></div>
+                    <img class="qr-image" src="https://images.cubox.pro/rhkekb/file/2025032609523776560/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250326095228.jpg" alt="QR Code">
+                    <div class="qr-label">EXPLORE THE COLLECTION</div>
+                </div>
+            </div>
+            
+            <div class="editor-notes">
+                <div class="editor-title">编辑札记</div>
+                <p>英伦摇滚风格源于60年代的英国，通过Oasis、The Beatles等乐队的专辑封面和NME杂志的视觉语言得到完美体现。这种风格将英国的传统贵族气质与街头摇滚的叛逆精神相融合，创造出典雅中带有反叛、传统中融入现代的独特美学。</p>
+                <p class="handwritten">— 永远保持那份绅士般的叛逆，这就是英伦精神。</p>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            BRITISH HERITAGE & ROCK SPIRIT | SINCE 1960
+        </footer>
+    </div>
+</body>
+</html>
