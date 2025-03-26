@@ -66,6 +66,24 @@
 - **动画效果**：使用CSS过渡和动画属性
 - **服务器**：基于Node.js的简易HTTP服务器
 
+## 环境配置
+
+项目使用环境变量来管理API密钥和配置信息：
+
+1. **环境变量设置**
+   - 在`env`文件夹下创建`.env`文件（该文件不会被提交到版本控制系统）
+   - 参考`env/.env.example`中的示例进行配置
+   - 设置以下变量：
+     ```
+     OPENROUTER_API_URL=https://openrouter.ai/api/v1/chat/completions
+     OPENROUTER_API_KEY=你的API密钥
+     OPENROUTER_MODEL=你选择的AI模型
+     ```
+
+2. **首次运行**
+   - 确保创建并配置好`.env`文件
+   - 启动本地服务器后，环境变量会被自动加载
+
 ## 未来改进方向
 
 - 添加更多卡片模板和样式选项
