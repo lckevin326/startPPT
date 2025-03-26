@@ -6,6 +6,13 @@ document.addEventListener('DOMContentLoaded', async function() {
         return;
     }
 
+    // 全局状态变量
+    window.appState = {
+        isGenerating: false,    // 是否正在生成内容
+        hasGeneratedContent: false,  // 是否已经生成了内容
+        currentStylePreview: null  // 当前预览的风格
+    };
+
     // 加载风格列表并初始化选择器
     await loadStyleJSON()
         .then(styles => {
@@ -23,7 +30,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // 获取DOM元素
     const textInput = document.getElementById('text-input');
-    const styleSelector = document.getElementById('style-selector');
+    const styleGrid = document.getElementById('style-grid');
     const generateBtn = document.getElementById('generate-btn');
     const previewContent = document.getElementById('preview-content');
     const streamTextArea = document.getElementById('stream-text');
@@ -31,13 +38,17 @@ document.addEventListener('DOMContentLoaded', async function() {
     // 给生成按钮添加点击事件
     generateBtn.addEventListener('click', async () => {
         const text = textInput?.value || '';
-        const style = styleSelector?.value || 'beautifulCard';
+        const style = getSelectedStyle();
         
         // 确保用户输入了文本
         if (!text.trim()) {
             alert('请输入内容再生成卡片');
             return;
         }
+
+        // 设置生成状态
+        window.appState.isGenerating = true;
+        window.appState.hasGeneratedContent = false;
 
         // 禁用生成按钮并更改文本
         generateBtn.disabled = true;
@@ -49,11 +60,12 @@ document.addEventListener('DOMContentLoaded', async function() {
         // 重置文本区域
         if (streamTextArea) {
             streamTextArea.innerHTML = '<p>开始生成卡片内容...</p>';
+            streamTextArea.style.display = 'block';
         }
         
-        // 重置预览区域
+        // 隐藏预览区域
         if (previewContent) {
-            previewContent.innerHTML = '';
+            previewContent.style.display = 'none';
         }
         
         try {
@@ -159,6 +171,10 @@ document.addEventListener('DOMContentLoaded', async function() {
                             if (done) {
                                 // 流结束后，显示最终HTML预览
                                 displayFinalHTML(fullResponse, document.getElementById('preview-content'), true);
+                                
+                                // 更新生成状态
+                                window.appState.isGenerating = false;
+                                window.appState.hasGeneratedContent = true;
                                 break;
                             }
                             
@@ -199,7 +215,17 @@ document.addEventListener('DOMContentLoaded', async function() {
                             }
                         }
                     } catch (streamError) {
-                        streamTextArea.innerHTML += `<p style="color: red;">❌ 读取响应流时出错: ${streamError.message}</p>`;
+                        streamTextArea.innerHTML += `<p style="color: red;">❌ 流式处理错误: ${streamError.message}</p>`;
+                        
+                        // 恢复按钮状态和应用状态
+                        generateBtn.disabled = false;
+                        generateBtn.innerText = '生成卡片';
+                        generateBtn.classList.remove('bg-gray-400');
+                        generateBtn.classList.add('bg-primary-600', 'hover:bg-primary-700');
+                        generateBtn.style.cursor = 'pointer';
+                        
+                        // 重置生成状态
+                        window.appState.isGenerating = false;
                     }
                     
                     // 恢复按钮状态
@@ -212,22 +238,28 @@ document.addEventListener('DOMContentLoaded', async function() {
             } catch (error) {
                 streamTextArea.innerHTML += `<p style="color: red;">❌ ${error.message}</p>`;
                 
-                // 恢复按钮状态
+                // 恢复按钮状态和应用状态
                 generateBtn.disabled = false;
                 generateBtn.innerText = '生成卡片';
                 generateBtn.classList.remove('bg-gray-400');
                 generateBtn.classList.add('bg-primary-600', 'hover:bg-primary-700');
                 generateBtn.style.cursor = 'pointer';
+                
+                // 重置生成状态
+                window.appState.isGenerating = false;
             }
         } catch (error) {
             alert('发生错误: ' + error.message);
             
-            // 恢复按钮状态
+            // 恢复按钮状态和应用状态
             generateBtn.disabled = false;
             generateBtn.innerText = '生成卡片';
             generateBtn.classList.remove('bg-gray-400');
             generateBtn.classList.add('bg-primary-600', 'hover:bg-primary-700');
             generateBtn.style.cursor = 'pointer';
+            
+            // 重置生成状态
+            window.appState.isGenerating = false;
         }
     });
 
@@ -243,18 +275,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 // 显示最终HTML内容
 function displayFinalHTML(content, container, isComplete = false) {
-    // 尝试从回复内容中提取HTML代码
-    let htmlContent = content;
-    
-    // 尝试提取```html ```或<html></html>之间的内容
-    const htmlPattern = /```html\s+([\s\S]*?)\s+```|<html[\s\S]*?>([\s\S]*?)<\/html>/i;
-    const match = content.match(htmlPattern);
-    
-    if (match) {
-        // 使用第一个非空的捕获组
-        htmlContent = match[1] || match[2] || content;
-    }
-    
     // 获取流式输出和预览元素
     const streamTextArea = document.getElementById('stream-text');
     const previewContent = document.getElementById('preview-content');
@@ -266,43 +286,59 @@ function displayFinalHTML(content, container, isComplete = false) {
         return;
     }
     
+    // 尝试从回复内容中提取HTML代码
+    let htmlContent = content;
+    
+    // 尝试提取```html ```或<html></html>之间的内容
+    const htmlRegex = /```html\s+([\s\S]*?)\s+```|<html[\s\S]*?>([\s\S]*?)<\/html>/i;
+    const match = content.match(htmlRegex);
+    
+    if (match) {
+        // 使用第一个非空的捕获组
+        htmlContent = match[1] || match[2] || content;
+    } else {
+        // 如果没有找到HTML标记，尝试查找```与```之间的内容
+        const codeBlockRegex = /```(?:html)?\s+([\s\S]*?)\s+```/i;
+        const codeMatch = content.match(codeBlockRegex);
+        if (codeMatch && codeMatch[1]) {
+            htmlContent = codeMatch[1];
+        }
+    }
+    
+    // 添加必要的HTML包装
+    if (!htmlContent.trim().startsWith('<')) {
+        htmlContent = '<div>' + htmlContent + '</div>';
+    }
+    
+    if (!htmlContent.trim().startsWith('<html')) {
+        htmlContent = `
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <style>
+                    body {
+                        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                        margin: 0;
+                        padding: 0;
+                    }
+                </style>
+            </head>
+            <body>
+                ${htmlContent}
+            </body>
+            </html>
+        `;
+    }
+    
+    console.log("提取的HTML内容:", htmlContent);
+    
     // 生成完成后，隐藏流式输出，显示预览
     if (streamTextArea) streamTextArea.style.display = 'none';
     if (previewContent) previewContent.style.display = 'block';
     
-    // 清空预览容器
-    if (container) {
-        container.innerHTML = '';
-        
-        // 创建iframe以安全地渲染HTML
-        const iframe = document.createElement('iframe');
-        iframe.style.width = '100%';
-        iframe.style.height = '500px';
-        iframe.style.border = 'none';
-        iframe.style.background = 'transparent';
-        
-        // 添加iframe到预览容器
-        container.appendChild(iframe);
-        
-        // 为iframe写入内容
-        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-        iframeDoc.open();
-        iframeDoc.write(htmlContent);
-        iframeDoc.close();
-        
-        // 自动调整iframe高度
-        setTimeout(() => {
-            try {
-                const height = iframeDoc.body.scrollHeight;
-                iframe.style.height = (height + 20) + 'px';
-            } catch (e) {
-                // 处理高度调整错误
-            }
-        }, 100);
-        
-        // 同步iframe的主题
-        updateIframeTheme(iframe);
-    }
+    // 使用公共函数显示HTML
+    displayHTML(htmlContent, container);
 }
 
 // 加载style.json文件的内容
@@ -320,25 +356,118 @@ async function loadStyleJSON() {
 
 // 填充风格选择器
 function populateStyleSelector(styles) {
-    const styleSelector = document.getElementById('style-selector');
-    if (!styleSelector || !styles) return;
+    const styleGrid = document.getElementById('style-grid');
+    if (!styleGrid || !styles) return;
     
     // 清空选择器
-    styleSelector.innerHTML = '';
+    styleGrid.innerHTML = '';
+    
+    // 记录当前选中的样式
+    let selectedStyle = null;
     
     // 添加风格选项
     styles.forEach(style => {
-        const option = document.createElement('option');
-        option.value = style.style;  
-        option.textContent = style.style;  
-        styleSelector.appendChild(option);
+        // 创建宫格项
+        const gridItem = document.createElement('div');
+        gridItem.className = 'style-grid-item';
+        gridItem.dataset.style = style.style;
+        gridItem.dataset.styleValue = style.style_value;
+        
+        // 创建图片元素
+        const img = document.createElement('img');
+        img.className = 'style-grid-item-img';
+        
+        // 正确处理图片路径，添加相对路径前缀
+        let imagePath = style.chinese_reference_image;
+        if (imagePath && !imagePath.startsWith('http') && !imagePath.startsWith('/')) {
+            imagePath = './' + imagePath; // 添加相对路径前缀
+        }
+        
+        img.src = imagePath; // 从JSON文件中读取图片路径
+        img.alt = style.style;
+        
+        // 内嵌的占位图数据
+        const placeholderImage = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMzMzIiB2aWV3Qm94PSIwIDAgMjAwIDMzMyIgZmlsbD0ibm9uZSI+PHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIzMzMiIGZpbGw9IiNFNUU3RUIiLz48dGV4dCB4PSIzMCIgeT0iMTYwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IiM5Q0EzQUYiPuWbvueJh+WKoOi9veWksei0pTwvdGV4dD48L3N2Zz4=';
+        
+        img.onerror = function() {
+            // 图片加载失败时显示占位图
+            this.src = placeholderImage;
+            console.error(`图片加载失败: ${imagePath}`);
+        };
+        
+        gridItem.appendChild(img);
+        
+        // 创建标签
+        const label = document.createElement('div');
+        label.className = 'style-grid-item-label';
+        
+        // 创建文本元素，用于滚动
+        const textSpan = document.createElement('span');
+        textSpan.className = 'style-grid-item-text';
+        textSpan.textContent = style.style;
+        label.appendChild(textSpan);
+        
+        gridItem.appendChild(label);
+        
+        // 添加点击事件
+        gridItem.addEventListener('click', () => {
+            // 移除之前选中项的选中状态
+            document.querySelectorAll('.style-grid-item.selected').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // 添加选中状态
+            gridItem.classList.add('selected');
+            selectedStyle = style;
+            
+            // 预览风格示例
+            previewStyleExample(style.style, styles);
+        });
+        
+        // 检测文本是否需要滚动效果
+        gridItem.addEventListener('mouseenter', checkTextOverflow);
+        // 初始时也检测一次
+        setTimeout(() => checkTextOverflow({currentTarget: gridItem}), 100);
+        
+        // 添加到容器
+        styleGrid.appendChild(gridItem);
     });
+    
+    // 默认选择第一个风格
+    if (styles.length > 0) {
+        const firstItem = styleGrid.querySelector('.style-grid-item');
+        if (firstItem) {
+            firstItem.click();
+        }
+    }
+}
+
+// 检测文本是否溢出并应用相应的类
+function checkTextOverflow(event) {
+    const gridItem = event.currentTarget;
+    const textSpan = gridItem.querySelector('.style-grid-item-text');
+    
+    // 检查文本是否溢出
+    const isOverflowing = textSpan.scrollWidth > textSpan.clientWidth;
+    
+    // 根据是否溢出添加或移除no-scroll类
+    if (isOverflowing) {
+        textSpan.classList.remove('no-scroll');
+    } else {
+        textSpan.classList.add('no-scroll');
+    }
+}
+
+// 获取当前选中的风格
+function getSelectedStyle() {
+    const selectedItem = document.querySelector('.style-grid-item.selected');
+    return selectedItem ? selectedItem.dataset.style : null;
 }
 
 // 获取指定风格的描述
 function getStyleDescription(styleName, styles) {
     if (!styles || !styleName) return "无";
-    const style = styles.find(s => s.style === styleName);
+    const style = styles.find(s => s.style === styleName || s.style_value === styleName);
     return style ? style.description : "无";
 }
 
@@ -429,6 +558,17 @@ function updateIframeTheme(iframe) {
         const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
         const isDark = document.documentElement.classList.contains('dark');
         
+        // 检查iframe内容是否为特殊风格（如未来科技风格）
+        const isFuturisticTech = iframeDoc.title && 
+                              (iframeDoc.title.includes('未来科技') || 
+                               iframeDoc.title.includes('Futuristic'));
+        
+        // 如果是未来科技风格，不修改其主题
+        if (isFuturisticTech) {
+            console.log('检测到未来科技风格，保留原始主题');
+            return;
+        }
+        
         // 更新iframe的类
         if (isDark) {
             iframeDoc.documentElement.classList.add('dark');
@@ -471,4 +611,112 @@ function escapeHtml(unsafe) {
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+}
+
+// 预览风格示例HTML
+async function previewStyleExample(style, styles) {
+    // 如果没有风格或风格列表，则不执行任何操作
+    if (!style || !styles) return;
+    
+    // 查找选中的风格对象
+    const styleObj = styles.find(s => s.style === style || s.style_value === style);
+    if (!styleObj) return;
+    
+    // 获取风格示例HTML路径
+    let examplePath = styleObj.chinese_example;
+    if (!examplePath) return;
+    
+    // 处理路径，添加相对路径前缀
+    if (!examplePath.startsWith('http') && !examplePath.startsWith('/')) {
+        examplePath = './' + examplePath;
+    }
+    
+    console.log("尝试加载HTML预览:", examplePath);
+    
+    // 获取预览容器
+    const previewContent = document.getElementById('preview-content');
+    const streamTextArea = document.getElementById('stream-text');
+    
+    // 如果正在生成内容，则不执行预览操作
+    if (window.appState.isGenerating) return;
+    
+    try {
+        // 如果有已生成的内容，则显示确认对话框
+        if (window.appState.hasGeneratedContent) {
+            if (!confirm('选择风格后，将替换右侧生成的内容，是否继续？')) {
+                return; // 用户取消，保持当前内容
+            }
+        }
+        
+        // 加载风格示例HTML
+        const response = await fetch(examplePath);
+        if (!response.ok) {
+            throw new Error(`无法加载示例HTML: ${response.status} ${response.statusText}`);
+        }
+        
+        const html = await response.text();
+        
+        // 隐藏流式输出，显示预览
+        if (streamTextArea) streamTextArea.style.display = 'none';
+        if (previewContent) {
+            previewContent.style.display = 'block';
+            displayHTML(html, previewContent);
+        }
+        
+        // 更新当前预览的风格
+        window.appState.currentStylePreview = style;
+        
+    } catch (error) {
+        console.error('预览风格示例时出错:', error);
+        alert(`预览风格示例失败: ${error.message}`);
+    }
+}
+
+// 显示HTML内容在容器中
+function displayHTML(html, container) {
+    if (!container) return;
+    
+    // 清空预览容器
+    container.innerHTML = '';
+    
+    // 创建iframe以安全地渲染HTML
+    const iframe = document.createElement('iframe');
+    iframe.style.width = '100%';
+    iframe.style.height = '800px'; // 初始设置更大的高度
+    iframe.style.border = 'none';
+    iframe.style.background = 'transparent';
+    iframe.style.overflow = 'visible'; // 允许内容溢出
+    
+    // 添加iframe到预览容器
+    container.appendChild(iframe);
+    
+    // 为iframe写入内容
+    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+    iframeDoc.open();
+    iframeDoc.write(html);
+    iframeDoc.close();
+    
+    // 检查当前预览的风格，如果是特定风格则不应用主题切换
+    const currentStyle = window.appState.currentStylePreview;
+    const preserveOriginalStyle = currentStyle === '未来科技风格 (Futuristic Tech)' || 
+                               html.includes('未来科技') || 
+                               html.includes('futuristic-tech');
+    
+    // 只有在不需要保留原始样式时才应用主题
+    if (!preserveOriginalStyle) {
+        updateIframeTheme(iframe);
+    } else {
+        console.log('保留风格原始样式，不应用主题切换');
+    }
+    
+    // 自动调整iframe高度以匹配内容
+    setTimeout(() => {
+        try {
+            // 获取iframe中文档的完整高度
+            const height = iframeDoc.body.scrollHeight;
+            iframe.style.height = height + 'px'; // 设置iframe高度为内容实际高度
+        } catch (e) {
+            console.error('调整iframe高度时出错:', e);
+        }
+    }, 500); // 给予足够时间让内容渲染完成
 }

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大胆现代风格杂志卡片</title>
+    <!-- 引入 Font Awesome -->
+    <link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css">
+    <!-- 引入 Tailwind CSS -->
+    <link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- 引入中文字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #ff00ff; /* 荧光粉 */
+            --secondary-color: #00ffff; /* 电子蓝 */
+            --accent-color: #ffff00; /* 亮黄 */
+            --dark-color: #121212;
+            --light-color: #ffffff;
+            --font-sans: 'Noto Sans SC', sans-serif;
+            --font-serif: 'Noto Serif SC', serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: var(--font-sans);
+        }
+        
+        .magazine-card {
+            width: 400px;
+            max-height: 1680px;
+            overflow: hidden;
+            position: relative;
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .magazine-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header {
+            position: relative;
+            padding: 20px;
+            overflow: hidden;
+        }
+        
+        .date {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            transform: rotate(90deg);
+            transform-origin: right top;
+        }
+        
+        .title {
+            font-size: 80px;
+            font-weight: 900;
+            line-height: 0.9;
+            text-transform: uppercase;
+            margin: 40px 0 20px;
+            color: var(--primary-color);
+            position: relative;
+            z-index: 2;
+            transform: skew(-5deg);
+            text-shadow: 3px 3px 0 var(--secondary-color);
+        }
+        
+        .subtitle {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            color: var(--secondary-color);
+            transform: translateX(20px);
+        }
+        
+        .quote-block {
+            margin: 30px 20px;
+            padding: 20px;
+            border-left: 8px solid var(--accent-color);
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .quote-block::before {
+            content: '"';
+            font-size: 120px;
+            position: absolute;
+            top: -40px;
+            left: 10px;
+            color: var(--primary-color);
+            opacity: 0.2;
+            font-family: var(--font-serif);
+        }
+        
+        .quote-text {
+            font-size: 18px;
+            font-style: italic;
+            font-family: var(--font-serif);
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .core-points {
+            margin: 40px 20px;
+            position: relative;
+        }
+        
+        .point-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            transform: skew(-5deg);
+        }
+        
+        .point-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .point-item {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        .point-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 10px;
+            height: 10px;
+            background-color: var(--secondary-color);
+            transform: rotate(45deg);
+        }
+        
+        .qr-section {
+            display: flex;
+            justify-content: center;
+            margin: 30px 20px;
+            position: relative;
+        }
+        
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            border: 5px solid var(--primary-color);
+            padding: 5px;
+            background-color: white;
+            transform: rotate(-5deg);
+            transition: transform 0.3s ease;
+        }
+        
+        .qr-code:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+        
+        .editor-notes {
+            margin: 30px 20px;
+            padding: 15px;
+            background-color: rgba(255, 255, 0, 0.1);
+            border-right: 4px solid var(--accent-color);
+            position: relative;
+        }
+        
+        .notes-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .notes-content {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .geometric-shape {
+            position: absolute;
+            background-color: var(--secondary-color);
+            opacity: 0.2;
+            z-index: 1;
+        }
+        
+        .shape-1 {
+            width: 200px;
+            height: 200px;
+            top: -50px;
+            right: -50px;
+            border-radius: 0 0 0 100%;
+        }
+        
+        .shape-2 {
+            width: 150px;
+            height: 150px;
+            bottom: 100px;
+            left: -50px;
+            transform: rotate(45deg);
+        }
+        
+        .shape-3 {
+            width: 100px;
+            height: 300px;
+            top: 40%;
+            right: -20px;
+            transform: skew(-20deg);
+        }
+        
+        .magazine-footer {
+            padding: 20px;
+            font-size: 12px;
+            text-align: center;
+            background-color: black;
+            color: rgba(255, 255, 255, 0.5);
+            border-top: 2px solid var(--primary-color);
+        }
+        
+        /* 动效 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .magazine-card {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        .point-item {
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        
+        .point-item:nth-child(1) { animation-delay: 0.3s; }
+        .point-item:nth-child(2) { animation-delay: 0.5s; }
+        .point-item:nth-child(3) { animation-delay: 0.7s; }
+        .point-item:nth-child(4) { animation-delay: 0.9s; }
+        .point-item:nth-child(5) { animation-delay: 1.1s; }
+        
+        .magazine-id {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.5);
+            transform: rotate(-90deg);
+            transform-origin: left top;
+        }
+    </style>
+</head>
+<body>
+    <div class="magazine-card">
+        <div class="geometric-shape shape-1"></div>
+        <div class="geometric-shape shape-2"></div>
+        <div class="geometric-shape shape-3"></div>
+        
+        <div class="magazine-id">BOLD ISSUE No.25</div>
+        
+        <div class="header">
+            <div class="date">2025.03.27 THURSDAY</div>
+            <h1 class="title">大胆现代</h1>
+            <h2 class="subtitle">打破常规的视觉革命</h2>
+        </div>
+        
+        <div class="quote-block">
+            <p class="quote-text">设计不是装饰，而是一种态度。大胆的视觉表达能够传递最强烈的情感冲击，突破传统的桎梏。</p>
+        </div>
+        
+        <div class="core-points">
+            <h3 class="point-title">核心要点</h3>
+            <ul class="point-list">
+                <li class="point-item">不对称排版创造动态视觉张力，打破传统平衡感</li>
+                <li class="point-item">荧光色系与深色背景形成强烈对比，增强视觉冲击</li>
+                <li class="point-item">极大字号标题与压缩字体传达前卫态度</li>
+                <li class="point-item">几何形状和锐利边缘构建现代空间感</li>
+                <li class="point-item">文字重叠与溢出营造前卫实验氛围</li>
+            </ul>
+        </div>
+        
+        <div class="qr-section">
+            <img class="qr-code" src="https://images.cubox.pro/rhkekb/file/2025032609523776560/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250326095228.jpg" alt="QR Code">
+        </div>
+        
+        <div class="editor-notes">
+            <h4 class="notes-title">编辑笔记</h4>
+            <p class="notes-content">大胆设计不仅是视觉表达，更是一种思考方式。它挑战常规，启发创新，引领潮流。在数字时代，敢于突破的设计才能真正吸引眼球，留下深刻印象。</p>
+        </div>
+        
+        <div class="magazine-footer">
+            <p>AVANT-GARDE DESIGN COLLECTION &copy; 2025</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>艺术装饰风格杂志卡片</title>
+    <!-- 引入 Font Awesome -->
+    <link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css">
+    <!-- 引入 Tailwind CSS -->
+    <link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- 引入中文字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- 引入装饰性字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --black: #000000;
+            --dark-black: #0a0a0a;
+            --gold: #D4AF37;
+            --light-gold: #E5C766;
+            --dark-gold: #B48F22;
+            --cream: #F5F5DC;
+            --font-display: 'Playfair Display', serif;
+            --font-sans: 'Noto Sans SC', sans-serif;
+            --font-serif: 'Noto Serif SC', serif;
+            --spacing-unit: 20px;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: var(--font-serif);
+        }
+        
+        .magazine-card {
+            width: 400px;
+            max-height: 1680px;
+            background-color: var(--black);
+            color: var(--cream);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* 大理石背景纹理 */
+        .marble-texture {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48ZmlsdGVyIGlkPSJhIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjA1IiBudW1PY3RhdmVzPSIyIi8+PGZlQ29sb3JNYXRyaXggdmFsdWVzPSIwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwLjEgMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWx0ZXI9InVybCgjYSkiLz48L3N2Zz4=');
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* 主要装饰边框 */
+        .art-deco-border {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 2px solid var(--gold);
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        /* 角落装饰 */
+        .corner-decoration {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            z-index: 3;
+        }
+        
+        .corner-top-left {
+            top: 8px;
+            left: 8px;
+            border-top: 3px solid var(--gold);
+            border-left: 3px solid var(--gold);
+        }
+        
+        .corner-top-right {
+            top: 8px;
+            right: 8px;
+            border-top: 3px solid var(--gold);
+            border-right: 3px solid var(--gold);
+        }
+        
+        .corner-bottom-left {
+            bottom: 8px;
+            left: 8px;
+            border-bottom: 3px solid var(--gold);
+            border-left: 3px solid var(--gold);
+        }
+        
+        .corner-bottom-right {
+            bottom: 8px;
+            right: 8px;
+            border-bottom: 3px solid var(--gold);
+            border-right: 3px solid var(--gold);
+        }
+        
+        /* 内容容器 */
+        .content {
+            padding: 45px 30px;
+            position: relative;
+            z-index: 4;
+        }
+        
+        /* 放射纹背景 */
+        .sunburst {
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 200px;
+            height: 200px;
+            background-image: repeating-conic-gradient(
+                var(--gold) 0deg 5deg,
+                transparent 5deg 15deg
+            );
+            opacity: 0.1;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .sunburst-bottom {
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 200px;
+            height: 200px;
+            background-image: repeating-conic-gradient(
+                var(--gold) 0deg 5deg,
+                transparent 5deg 15deg
+            );
+            opacity: 0.1;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        /* 锯齿形装饰 */
+        .zigzag-decoration {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 15px;
+            background-image: linear-gradient(135deg, var(--gold) 25%, transparent 25%), 
+                              linear-gradient(225deg, var(--gold) 25%, transparent 25%);
+            background-size: 20px 20px;
+            z-index: 3;
+            opacity: 0.7;
+        }
+        
+        .zigzag-top {
+            top: 30px;
+        }
+        
+        .zigzag-bottom {
+            bottom: 30px;
+            transform: rotate(180deg);
+        }
+        
+        /* 日期区域 */
+        .date-container {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .date {
+            font-family: var(--font-display);
+            font-size: 14px;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            background-color: var(--black);
+            display: inline-block;
+            padding: 0 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .date-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: var(--gold);
+            z-index: 1;
+        }
+        
+        /* 标题区域 */
+        .title-container {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .title {
+            font-family: var(--font-display);
+            font-size: 50px;
+            color: var(--gold);
+            margin: 0 0 10px;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(to right, var(--dark-gold), var(--gold), var(--light-gold), var(--gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+        
+        .title::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background-color: var(--gold);
+        }
+        
+        .subtitle {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            color: var(--cream);
+            margin-top: 20px;
+            letter-spacing: 1px;
+        }
+        
+        /* 几何图案装饰 */
+        .geometric-decoration {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .geo-pattern {
+            width: 200px;
+            height: 20px;
+            background-image: 
+                linear-gradient(to right, 
+                    var(--gold) 0%, var(--gold) 20%, 
+                    transparent 20%, transparent 40%, 
+                    var(--gold) 40%, var(--gold) 60%, 
+                    transparent 60%, transparent 80%, 
+                    var(--gold) 80%, var(--gold) 100%);
+        }
+        
+        /* 引用区块 */
+        .quote-block {
+            margin: 40px 0;
+            padding: 30px;
+            position: relative;
+            background-color: rgba(10, 10, 10, 0.5);
+            border: 1px solid var(--gold);
+        }
+        
+        .quote-block::before, .quote-block::after {
+            content: "";
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: var(--black);
+            z-index: 1;
+        }
+        
+        .quote-block::before {
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            clip-path: polygon(50% 0, 100% 100%, 0 100%);
+            background-color: var(--gold);
+        }
+        
+        .quote-block::after {
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%) rotate(180deg);
+            clip-path: polygon(50% 0, 100% 100%, 0 100%);
+            background-color: var(--gold);
+        }
+        
+        .quote-text {
+            font-family: var(--font-serif);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--cream);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .quote-mark {
+            font-family: var(--font-display);
+            font-size: 60px;
+            line-height: 0;
+            color: var(--gold);
+            position: absolute;
+            opacity: 0.3;
+        }
+        
+        .quote-mark-left {
+            top: 30px;
+            left: 10px;
+        }
+        
+        .quote-mark-right {
+            bottom: 10px;
+            right: 10px;
+        }
+        
+        /* 核心要点列表 */
+        .core-points {
+            margin: 40px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 24px;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+        }
+        
+        .section-title::before, .section-title::after {
+            content: "•";
+            color: var(--gold);
+            font-size: 24px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .section-title::before {
+            left: 70px;
+        }
+        
+        .section-title::after {
+            right: 70px;
+        }
+        
+        .point-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: points;
+        }
+        
+        .point-item {
+            margin-bottom: 20px;
+            padding-left: 50px;
+            position: relative;
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--cream);
+        }
+        
+        .point-item::before {
+            counter-increment: points;
+            content: counter(points, upper-roman);
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-family: var(--font-display);
+            font-size: 16px;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* 二维码区域 */
+        .qr-section {
+            margin: 50px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        
+        .qr-title {
+            font-family: var(--font-display);
+            font-size: 16px;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+        
+        .qr-container {
+            padding: 15px;
+            background-color: var(--cream);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .qr-container::before {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 1px solid var(--gold);
+            z-index: -1;
+        }
+        
+        .qr-code {
+            display: block;
+            width: 150px;
+            height: 150px;
+        }
+        
+        .qr-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .qr-description {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            color: var(--cream);
+            text-align: center;
+            margin-top: 15px;
+            max-width: 250px;
+        }
+        
+        /* 编辑笔记 */
+        .editor-notes {
+            margin: 40px 0 20px;
+            padding: 30px;
+            background-color: rgba(212, 175, 55, 0.1);
+            border-left: 2px solid var(--gold);
+            border-right: 2px solid var(--gold);
+            position: relative;
+        }
+        
+        .notes-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .notes-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            font-size: 12px;
+        }
+        
+        .notes-title {
+            font-family: var(--font-display);
+            font-size: 18px;
+            color: var(--gold);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .notes-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--cream);
+        }
+        
+        /* 页脚 */
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-family: var(--font-display);
+            font-size: 12px;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        /* 动效 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -100% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        .magazine-card {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .title {
+            background-size: 200% auto;
+            animation: shimmer 4s linear infinite;
+        }
+        
+        .point-item {
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        
+        .point-item:nth-child(1) { animation-delay: 0.3s; }
+        .point-item:nth-child(2) { animation-delay: 0.5s; }
+        .point-item:nth-child(3) { animation-delay: 0.7s; }
+        .point-item:nth-child(4) { animation-delay: 0.9s; }
+        .point-item:nth-child(5) { animation-delay: 1.1s; }
+        
+        /* 模拟金箔效果 */
+        .gold-foil-effect {
+            position: relative;
+        }
+        
+        .gold-foil-effect::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48ZmlsdGVyIGlkPSJhIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjIiIG51bU9jdGF2ZXM9IjIiLz48ZmVDb2xvck1hdHJpeCB2YWx1ZXM9IjAgMCAwIDAgMSAwIDAgMCAwIDEgMCAwIDAgMCAwLjc1IDAgMCAwIDAuMSAwIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIGZpbHRlcj0idXJsKCNhKSIvPjwvc3ZnPg==');
+            pointer-events: none;
+            opacity: 0.1;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="magazine-card">
+        <!-- 大理石背景纹理 -->
+        <div class="marble-texture"></div>
+        
+        <!-- 放射纹背景 -->
+        <div class="sunburst"></div>
+        <div class="sunburst-bottom"></div>
+        
+        <!-- 主要装饰边框 -->
+        <div class="art-deco-border"></div>
+        
+        <!-- 角落装饰 -->
+        <div class="corner-decoration corner-top-left"></div>
+        <div class="corner-decoration corner-top-right"></div>
+        <div class="corner-decoration corner-bottom-left"></div>
+        <div class="corner-decoration corner-bottom-right"></div>
+        
+        <!-- 锯齿形装饰 -->
+        <div class="zigzag-decoration zigzag-top"></div>
+        <div class="zigzag-decoration zigzag-bottom"></div>
+        
+        <div class="content">
+            <!-- 日期区域 -->
+            <div class="date-container">
+                <div class="date-line"></div>
+                <div class="date">MARCH 27, 2025</div>
+            </div>
+            
+            <!-- 标题区域 -->
+            <div class="title-container gold-foil-effect">
+                <h1 class="title">艺术装饰</h1>
+                <h2 class="subtitle">重现二十世纪的几何奢华</h2>
+            </div>
+            
+            <div class="geometric-decoration">
+                <div class="geo-pattern"></div>
+            </div>
+            
+            <!-- 引用区块 -->
+            <div class="quote-block">
+                <span class="quote-mark quote-mark-left">"</span>
+                <p class="quote-text">艺术装饰风格不仅是一种审美，更是一种态度——大胆、奢华、精确，它以几何之美礼赞现代文明，以黄金比例演绎永恒典雅，成就了一个时代的视觉传奇。</p>
+                <span class="quote-mark quote-mark-right">"</span>
+            </div>
+            
+            <div class="geometric-decoration">
+                <div class="geo-pattern"></div>
+            </div>
+            
+            <!-- 核心要点列表 -->
+            <div class="core-points">
+                <h3 class="section-title">核心要点</h3>
+                <ul class="point-list">
+                    <li class="point-item">黑金配色彰显尊贵气质，金色元素象征财富与繁荣，传递爵士时代华丽魅力</li>
+                    <li class="point-item">严格对称的几何构图体现理性与秩序，展现现代工业时代的精准与逻辑</li>
+                    <li class="point-item">扇形放射纹与锯齿形图案传达动感与力量，反映速度与进步的时代精神</li>
+                    <li class="point-item">装饰性强的字体与华丽边框彰显精工细作，每一处细节都经过精心雕琢</li>
+                    <li class="point-item">大理石纹理与金箔质感强调奢华体验，创造出永不过时的视觉享受</li>
+                </ul>
+            </div>
+            
+            <!-- 二维码区域 -->
+            <div class="qr-section">
+                <div class="qr-title">DÉCOUVREZ PLUS</div>
+                <div class="qr-container">
+                    <img class="qr-code" src="https://images.cubox.pro/rhkekb/file/2025032609523776560/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250326095228.jpg" alt="QR Code">
+                </div>
+                <p class="qr-description">扫描二维码，探索更多艺术装饰风格的设计灵感与应用</p>
+            </div>
+            
+            <!-- 编辑笔记 -->
+            <div class="editor-notes">
+                <div class="notes-header">
+                    <div class="notes-icon">i</div>
+                    <h4 class="notes-title">编辑笔记</h4>
+                </div>
+                <p class="notes-content">艺术装饰风格延续至今，影响了从建筑到平面设计的各个领域。其特有的几何美学与奢华感在当代设计中依然焕发活力。现代设计师可以通过学习其标志性元素与构图原则，将这种历久弥新的风格融入当代创作，打造出既怀旧又前卫的视觉作品。</p>
+            </div>
+            
+            <!-- 页脚 -->
+            <div class="footer">
+                <p>LE STYLE MAGNIFIQUE • VOL. XXVII • PARIS</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

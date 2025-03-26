@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>斯堪的纳维亚风格杂志卡片</title>
+    <!-- 引入 Font Awesome -->
+    <link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css">
+    <!-- 引入 Tailwind CSS -->
+    <link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- 引入中文字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- 引入几何无衬线字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --white: #FFFFFF;
+            --light-blue: #A5C7E7;
+            --light-grey: #F5F5F5;
+            --medium-grey: #E0E0E0;
+            --dark-grey: #333333;
+            --wood: #D9C7A7;
+            --light-pink: #F5D6D6;
+            --font-sans: 'Montserrat', 'Noto Sans SC', sans-serif;
+            --spacing-unit: 20px;
+            --transition-speed: 0.3s;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: var(--font-sans);
+            color: var(--dark-grey);
+        }
+        
+        .magazine-card {
+            width: 400px;
+            max-height: 1680px;
+            background-color: var(--white);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* 几何装饰元素 */
+        .geometric-decoration {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.15;
+        }
+        
+        .triangle {
+            width: 100px;
+            height: 100px;
+            top: 40px;
+            right: -20px;
+            background: var(--light-blue);
+            clip-path: polygon(100% 0, 0 0, 100% 100%);
+        }
+        
+        .circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            bottom: 60px;
+            left: -20px;
+            background: var(--light-pink);
+        }
+        
+        .line-decoration {
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: var(--wood);
+            top: 80px;
+            left: 30px;
+        }
+        
+        /* 内容容器 */
+        .content {
+            padding: var(--spacing-unit);
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* 日期区域 */
+        .date {
+            font-size: 12px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: var(--dark-grey);
+            opacity: 0.7;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            text-transform: uppercase;
+        }
+        
+        /* 标题区域 */
+        .title-container {
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+        
+        .title {
+            font-size: 42px;
+            font-weight: 300;
+            line-height: 1.1;
+            color: var(--dark-grey);
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            font-weight: 300;
+            color: var(--dark-grey);
+            opacity: 0.8;
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+        
+        /* 分隔线 */
+        .divider {
+            width: 40px;
+            height: 2px;
+            background-color: var(--light-blue);
+            margin: calc(var(--spacing-unit) * 1.5) 0;
+        }
+        
+        /* 引用区块 */
+        .quote-block {
+            margin: calc(var(--spacing-unit) * 2) 0;
+            padding: var(--spacing-unit);
+            background-color: var(--light-grey);
+            position: relative;
+        }
+        
+        .quote-block::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background-color: var(--light-blue);
+        }
+        
+        .quote-text {
+            font-size: 16px;
+            line-height: 1.6;
+            font-weight: 300;
+            color: var(--dark-grey);
+        }
+        
+        /* 核心要点列表 */
+        .core-points {
+            margin: calc(var(--spacing-unit) * 2) 0;
+        }
+        
+        .section-title {
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: var(--spacing-unit);
+            color: var(--dark-grey);
+        }
+        
+        .point-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .point-item {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+            font-size: 15px;
+            line-height: 1.5;
+            font-weight: 300;
+        }
+        
+        .point-item::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 9px;
+            width: 6px;
+            height: 6px;
+            background-color: var(--light-blue);
+        }
+        
+        /* 二维码区域 */
+        .qr-section {
+            margin: calc(var(--spacing-unit) * 2) 0;
+            display: flex;
+            position: relative;
+        }
+        
+        .qr-container {
+            padding: 15px;
+            background-color: var(--white);
+            border: 1px solid var(--medium-grey);
+            transition: transform var(--transition-speed) ease;
+        }
+        
+        .qr-code {
+            width: 100px;
+            height: 100px;
+            display: block;
+        }
+        
+        .qr-container:hover {
+            transform: translateY(-5px);
+        }
+        
+        .qr-info {
+            margin-left: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .qr-label {
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            color: var(--dark-grey);
+        }
+        
+        .qr-description {
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--dark-grey);
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+        
+        /* 编辑笔记 */
+        .editor-notes {
+            margin-top: calc(var(--spacing-unit) * 2);
+            padding: var(--spacing-unit);
+            background-color: var(--light-grey);
+            border: 1px solid var(--medium-grey);
+        }
+        
+        .notes-title {
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            color: var(--dark-grey);
+            display: flex;
+            align-items: center;
+        }
+        
+        .notes-title::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--wood);
+            margin-right: 8px;
+        }
+        
+        .notes-content {
+            font-size: 14px;
+            line-height: 1.6;
+            font-weight: 300;
+            color: var(--dark-grey);
+        }
+        
+        /* 页脚 */
+        .footer {
+            margin-top: calc(var(--spacing-unit) * 2);
+            padding-top: var(--spacing-unit);
+            border-top: 1px solid var(--medium-grey);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--dark-grey);
+            opacity: 0.7;
+        }
+        
+        .issue-number {
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        .page-number {
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        /* 动效 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .magazine-card {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .title, .subtitle, .quote-block, .core-points, .qr-section, .editor-notes {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .title { animation-delay: 0.1s; }
+        .subtitle { animation-delay: 0.2s; }
+        .quote-block { animation-delay: 0.3s; }
+        .core-points { animation-delay: 0.4s; }
+        .qr-section { animation-delay: 0.5s; }
+        .editor-notes { animation-delay: 0.6s; }
+        
+        .point-item {
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        
+        .point-item:nth-child(1) { animation-delay: 0.5s; }
+        .point-item:nth-child(2) { animation-delay: 0.6s; }
+        .point-item:nth-child(3) { animation-delay: 0.7s; }
+        .point-item:nth-child(4) { animation-delay: 0.8s; }
+        .point-item:nth-child(5) { animation-delay: 0.9s; }
+    </style>
+</head>
+<body>
+    <div class="magazine-card">
+        <!-- 几何装饰元素 -->
+        <div class="geometric-decoration triangle"></div>
+        <div class="geometric-decoration circle"></div>
+        <div class="line-decoration"></div>
+        
+        <div class="content">
+            <!-- 日期区域 -->
+            <div class="date">27 MARS 2025</div>
+            
+            <!-- 标题区域 -->
+            <div class="title-container">
+                <h1 class="title">斯堪的纳维亚</h1>
+                <h2 class="subtitle">探寻北欧设计的简约与温暖</h2>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <!-- 引用区块 -->
+            <div class="quote-block">
+                <p class="quote-text">真正的北欧设计不仅仅是简约，而是在有限元素中寻求最大的表达力，体现功能与美学的完美平衡，呈现生活的本质与自然的和谐。</p>
+            </div>
+            
+            <!-- 核心要点列表 -->
+            <div class="core-points">
+                <h3 class="section-title">核心要点</h3>
+                <ul class="point-list">
+                    <li class="point-item">克制的配色方案源于北欧自然环境，反映出光线与季节变化的微妙关系</li>
+                    <li class="point-item">大量留白创造呼吸感与平静感，帮助用户专注于真正重要的内容</li>
+                    <li class="point-item">功能性与美学并重，每一个设计决策都有其存在的实用理由</li>
+                    <li class="point-item">自然材质与质感的运用，带来温暖感与触觉愉悦，增强与用户的情感连接</li>
+                    <li class="point-item">简约几何形状的巧妙运用，创造视觉平衡与和谐，体现"少即是多"的设计哲学</li>
+                </ul>
+            </div>
+            
+            <!-- 二维码区域 -->
+            <div class="qr-section">
+                <div class="qr-container">
+                    <img class="qr-code" src="https://images.cubox.pro/rhkekb/file/2025032609523776560/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250326095228.jpg" alt="QR Code">
+                </div>
+                <div class="qr-info">
+                    <div class="qr-label">LÄS MER</div>
+                    <div class="qr-description">扫描二维码，探索更多北欧设计理念与实践应用</div>
+                </div>
+            </div>
+            
+            <!-- 编辑笔记 -->
+            <div class="editor-notes">
+                <h4 class="notes-title">编辑笔记</h4>
+                <p class="notes-content">北欧设计的魅力在于它对生活的深刻理解——设计不应是奢华的装饰，而应是对日常生活的尊重与提升。通过简约而精心选择的元素，创造出既实用又美观的空间与物品，让人在使用中感受到愉悦与舒适。这种设计理念也应用于数字界面，创造清晰、直观且人性化的用户体验。</p>
+            </div>
+            
+            <!-- 页脚 -->
+            <div class="footer">
+                <div class="issue-number">ISSUE N°27</div>
+                <div class="page-number">15</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

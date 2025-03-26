@@ -12,7 +12,7 @@
 - **认证方式**: JWT (JSON Web Tokens)
 - **API类型**: RESTful API + 流式响应接口
 - **AI集成**: OpenRouter API (支持多种大型语言模型)
-- **环境管理**: 多环境配置(开发/测试/生产)
+- **环境管理**: 多环境配置(开发/生产)
 
 ## 三、项目目录结构
 
@@ -224,7 +224,8 @@ model APIKey {
 
 **authController.js**
 - 处理用户认证相关请求
-- 职责: 注册、登录、密码管理
+- 职责：对接Google登录
+<!-- - 职责: 注册、登录、密码管理 -->
 
 **cardController.js**
 - 处理卡片管理相关请求
@@ -269,7 +270,7 @@ model APIKey {
 
 **authService.js**
 - 认证业务逻辑
-- 职责: 密码加密、令牌生成、验证
+<!-- - 职责: 密码加密、令牌生成、验证 -->
 
 **cardService.js**
 - 卡片生成业务逻辑
@@ -355,7 +356,7 @@ model APIKey {
 
 ## 九、本地与云端环境配置
 
-### 配置管理系统
+<!-- ### 配置管理系统
 
 **环境配置文件**:
 ```javascript
@@ -406,12 +407,12 @@ const configs = { development, production };
 const env = process.env.NODE_ENV || 'development';
 
 module.exports = configs[env];
-```
+``` -->
 
 ### 环境切换机制
 
 **环境变量管理**:
-```bash
+<!-- ```bash
 # .env.development
 DATABASE_URL=postgres://user:password@dev-instance.example.com:5432/card_generator_dev
 JWT_SECRET=dev_jwt_secret_key
@@ -423,10 +424,10 @@ DATABASE_URL=postgres://user:password@prod-instance.example.com:5432/card_genera
 JWT_SECRET=prod_jwt_secret_key
 OPENROUTER_API_KEY=prod_openrouter_key
 ENCRYPTION_KEY=prod_encryption_key
-```
+``` -->
 
 **环境切换脚本**:
-```json
+<!-- ```json
 // package.json
 {
   "scripts": {
@@ -436,7 +437,7 @@ ENCRYPTION_KEY=prod_encryption_key
     "deploy:prod": "cp .env.production .env && wrangler publish"
   }
 }
-```
+``` -->
 
 ### 本地开发环境
 
@@ -446,13 +447,13 @@ ENCRYPTION_KEY=prod_encryption_key
 - 使用安全的连接池配置
 
 **本地启动**:
-```bash
+<!-- ```bash
 # 启动本地开发环境
 npm run dev
-```
+``` -->
 
 **敏感信息处理**:
-```javascript
+<!-- ```javascript
 // src/utils/securityUtils.js
 const crypto = require('crypto');
 const config = require('../config');
@@ -493,7 +494,7 @@ function decryptData(encryptedObj) {
 }
 
 module.exports = { encryptData, decryptData };
-```
+``` -->
 
 ### 云端环境
 
@@ -503,7 +504,7 @@ module.exports = { encryptData, decryptData };
 - 启用SSL连接和安全配置
 
 **部署配置**:
-```toml
+<!-- ```toml
 # wrangler.toml
 name = "card-generator-api"
 main = "src/index.js"
@@ -537,18 +538,18 @@ routes = [
 routes = [
   "dev-api.yourdomain.com/*"
 ]
-```
+``` -->
 
 ## 十、数据库迁移管理
 
 **使用Prisma管理迁移**:
-```bash
+<!-- ```bash
 # 创建迁移
 npx prisma migrate dev --name init
 
 # 应用迁移到生产环境
 npx prisma migrate deploy
-```
+``` -->
 
 **迁移策略**:
 - 开发阶段使用开发环境数据库
@@ -605,7 +606,7 @@ npx prisma migrate deploy
 
 ### 1. AI服务模块
 
-```javascript
+<!-- ```javascript
 // src/services/aiService.js
 const fetch = require('node-fetch');
 const { ReadableStream } = require('stream/web');
@@ -934,11 +935,11 @@ class AIService {
 }
 
 module.exports = new AIService();
-```
+``` -->
 
 ### 2. 流式响应控制器
 
-```javascript
+<!-- ```javascript
 // src/controllers/aiController.js
 const aiService = require('../services/aiService');
 const membershipService = require('../services/membershipService');
@@ -1015,7 +1016,7 @@ module.exports = {
   streamGenerateContent,
   // 其他AI控制器方法...
 };
-```
+``` -->
 
 ## 十五、初始开发计划
 

@@ -32,7 +32,8 @@ frontend/
 │   │   ├── templates.js   # AI提示词模板
 │   │   ├── config.js      # 环境配置
 │   │   └── main.js        # 主入口脚本
-│   ├── index.html         # 主页/登录页面
+│   ├── index.html         # 主页页面
+│   ├── login.html         # 登录页面
 │   ├── dashboard.html     # 用户控制台页面
 │   └── card-generator.html # 卡片生成页面
 ├── .env.development       # 开发环境变量
@@ -41,47 +42,74 @@ frontend/
 
 ## 四、页面架构
 
-### 1. 首页/登录页 (index.html)
+### 1. 首页 (index.html)
 
 **功能职责**:
 - 展示产品介绍和特点
-- 提供用户登录表单
+<!-- - 提供用户登录表单
 - 提供用户注册表单
-- 忘记密码功能
+- 忘记密码功能 -->
 - 展示卡片示例和AI能力
+- 展示会员介绍
+- 展示联系方式
+- 切换多语言（暂时只支持中英文）
 
 **组件**:
-- 登录表单
+<!-- - 登录表单
 - 注册表单
-- 密码重置表单
+- 密码重置表单 -->
 - 产品介绍区
 - AI生成卡片示例展示
+- 功能介绍
+- 特点优势
+- 会员介绍
+- 联系方式
 
 **状态交互**:
-- 切换登录/注册表单
+<!-- - 切换登录/注册表单 -->
+<!-- - 表单验证 -->
+<!-- - 认证状态管理 -->
+- 切换多语言（暂时只支持中英文）
+
+### 2. 登录 (login.html)
+
+**功能职责**:
+<!-- - 提供用户登录表单
+- 提供用户注册表单
+- 忘记密码功能 -->
+- 接入Google三方登录认证功能
+
+**组件**:
+<!-- - 登录表单
+- 注册表单
+- 密码重置表单 -->
+- Google登录表单
+
+**状态交互**:
+<!-- - 切换登录/注册表单 -->
 - 表单验证
 - 认证状态管理
 
-### 2. 用户控制台 (dashboard.html)
+### 3. 用户控制台 (dashboard.html)
 
 **功能职责**:
 - 显示用户信息和会员状态
 - 展示用户创建的卡片历史
-- 提供卡片管理功能(预览、下载、删除)
+<!-- - 提供卡片管理功能(预览、下载、删除) -->
 - 显示配额使用情况
 
 **组件**:
 - 用户信息面板
 - 会员状态面板
-- 卡片历史列表
+<!-- - 卡片历史列表 -->
 - 使用统计图表
 
 **状态交互**:
-- 加载用户卡片历史
-- 卡片管理操作
+<!-- - 加载用户卡片历史 -->
+<!-- - 卡片管理操作 -->
 - 根据会员级别显示不同功能
 
-### 3. 卡片生成器 (card-generator.html)
+### 4. 卡片生成器 (card-generator.html)
 
 **功能职责**:
 - 提供卡片创建表单
@@ -95,11 +123,13 @@ frontend/
 - 卡片创建表单
 - AI提示词编辑器
 - AI生成参数控制面板
-- 风格选择器
-- 格式选择器
-- 流式内容输出区域
-- 预览区域
+- 风格选择器（宫格图片选择形式，默认、悬浮和选中样式区分）
+- 类型选择器（概念卡片、小红书封面、公众号封面）
+- 语言选择器（中文、英文）
+- 流式内容输出区域（能支持如果接收了代码，代码可以高亮显示）
+- 预览区域（选中风格后，可以实时预览风格样式，流式输出的时候隐藏样式，内容输出完后预览新输出内容的样式）
 - 下载功能
+- 页面左右布局，左侧是内容输入、各种选择器，右侧是流失输出和预览样式、下载
 
 **状态交互**:
 - 表单数据收集
@@ -119,8 +149,8 @@ frontend/
 - 支持流式响应处理
 
 **主要函数**:
-- `login(credentials)` - 用户登录
-- `register(userData)` - 用户注册
+- `login(credentials)` - google Oauth登录
+<!-- - `register(userData)` - 用户注册 -->
 - `getUserInfo()` - 获取用户信息
 - `getCards()` - 获取卡片列表
 - `createCard(cardData)` - 创建卡片
@@ -128,7 +158,7 @@ frontend/
 - `downloadCard(id, format)` - 下载卡片
 - `fetchStream(endpoint, options, onChunk)` - 处理流式响应
 
-### 2. auth.js - 认证管理
+<!-- ### 2. auth.js - 认证管理
 
 **职责**:
 - 管理用户认证状态
@@ -141,7 +171,7 @@ frontend/
 - `register(name, email, password)` - 注册处理
 - `logout()` - 登出处理
 - `isAuthenticated()` - 检查认证状态
-- `getAuthToken()` - 获取认证令牌
+- `getAuthToken()` - 获取认证令牌 -->
 
 ### 3. card.js - 卡片生成功能
 
@@ -191,6 +221,11 @@ frontend/
 - 管理不同环境的配置
 - 提供环境切换功能
 - 存储应用常量
+- 数据库连接配置
+- API基础URL配置
+- JWT密钥配置
+- OpenRouter API密钥配置
+
 
 **主要属性和函数**:
 - `environments` - 环境配置对象
@@ -235,7 +270,7 @@ frontend/
 ### 1. 用户认证流程
 
 ```
-登录页面 → 输入凭证 → 认证成功 → 重定向到控制台
+登录页面 → 后台生成用户临时ID → Google登录重定向 → 认证成功 → 重定向到控制台
    ↑                      |
    └─────────────────────┘
            认证失败
@@ -244,7 +279,7 @@ frontend/
 ### 2. AI辅助卡片创建流程
 
 ```
-卡片生成页 → 填写表单 → 选择AI参数 → 启动AI生成 → 流式显示生成内容 → 用户确认/编辑 → 最终创建卡片 → 保存到用户历史记录中（只保存使用记录，不保存生成内容）
+卡片生成页 → 填写表单 → 选择AI参数 → 启动AI生成 → 流式显示生成内容 → 用户确认/编辑 → 最终创建卡片 → 保存到用户历史记录中
     ↑            |           |              |                |             |
     |            |           |              ↓                |             |
     |            |           |          更新UI状态           |             |
@@ -269,15 +304,15 @@ frontend/
 ## 七、本地与云端环境配置
 
 ### 本地开发环境
-
+<!-- 
 **启动方式**:
 ```bash
 # 使用Browsersync启动项目，支持自动刷新
-npx browser-sync start --server "frontend/src" --files "frontend/src/**/*.{html,css,js}" --port 3000
+npx browser-sync start --server "frontend/src" --files "frontend/src/**/*.{html,css,js}" --port 3000 -->
 ```
 
-**环境配置**:
-```javascript
+<!-- **环境配置**: -->
+<!-- ```javascript
 // config.js
 const environments = {
   development: {
@@ -303,7 +338,7 @@ export function switchEnvironment(env) {
     window.location.reload();
   }
 }
-```
+``` -->
 
 **安全措施**:
 - OpenRouter API密钥仅在后端存储和使用
@@ -313,7 +348,7 @@ export function switchEnvironment(env) {
 ## 八、响应式设计方案
 
 **断点设计**:
-- 桌面: 1200px以上
+- 桌面: 1400px以上
 - 平板: 768px - 1199px
 - 手机: 767px以下
 
@@ -337,8 +372,8 @@ export function switchEnvironment(env) {
 
 ## 十、部署流程
 
-**1. 前端部署到Cloudflare Pages**:
-```bash
+**前端部署到Cloudflare Pages**:
+<!-- ```bash
 # 推送代码到GitHub仓库
 git push origin main
 
@@ -353,7 +388,7 @@ npx wrangler pages publish frontend/src
 
 **3. 域名配置**:
 - 设置自定义域名
-- 配置SSL证书(Cloudflare自动提供)
+- 配置SSL证书(Cloudflare自动提供) -->
 
 ## 十一、初始开发计划
 
@@ -392,147 +427,3 @@ npx wrangler pages publish frontend/src
 - 添加错误处理和恢复机制
 - 实现敏感数据保护
 
-## 十二、流式输出实现细节
-
-### 1. 流式处理核心代码
-
-```javascript
-// ai.js
-async function streamContent(prompt, params, onChunk, onComplete, onError) {
-  try {
-    const response = await fetch(`${config.API_URL}/api/ai/generate/stream`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${getAuthToken()}`
-      },
-      body: JSON.stringify({ prompt, params }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    // 检查流响应
-    if (!response.body) {
-      throw new Error('ReadableStream not supported');
-    }
-
-    // 创建流式读取器
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder();
-    let accumulatedText = '';
-    
-    // 处理流数据
-    while (true) {
-      const { done, value } = await reader.read();
-      
-      if (done) {
-        onComplete(accumulatedText);
-        break;
-      }
-      
-      // 解码并处理文本块
-      const chunk = decoder.decode(value, { stream: true });
-      accumulatedText += chunk;
-      
-      // 调用回调函数处理新文本块
-      onChunk(chunk, accumulatedText);
-    }
-  } catch (error) {
-    console.error('Stream error:', error);
-    onError(error);
-  }
-}
-
-// 在UI中使用流式输出
-function handleGenerateClick() {
-  const promptInput = document.getElementById('prompt-input').value;
-  const outputElement = document.getElementById('ai-output');
-  
-  // 清空输出区域
-  outputElement.textContent = '';
-  
-  // 显示正在生成指示器
-  UI.showGenerating();
-  
-  // 流式生成内容
-  AI.streamContent(
-    promptInput,
-    { model: 'gpt-4', temperature: 0.7 },
-    // 每次收到新数据块时调用
-    (chunk, fullText) => {
-      UI.streamToElement(outputElement, chunk, true);
-    },
-    // 完成时调用
-    (fullText) => {
-      UI.hideGenerating();
-      UI.highlightSyntax(outputElement);
-      // 存储完整文本到表单
-      document.getElementById('card-content').value = fullText;
-    },
-    // 出错时调用
-    (error) => {
-      UI.hideGenerating();
-      UI.showToast(`生成错误: ${error.message}`, 'error');
-    }
-  );
-}
-```
-
-### 2. 流式显示UI实现
-
-```javascript
-// ui.js
-const UI = {
-  // 其他方法...
-  
-  // 流式更新DOM元素
-  streamToElement(element, text, append = true) {
-    if (append) {
-      element.textContent += text;
-    } else {
-      element.textContent = text;
-    }
-    
-    // 自动滚动到底部
-    element.scrollTop = element.scrollHeight;
-  },
-  
-  // 显示"正在生成"指示器
-  showGenerating() {
-    const indicator = document.getElementById('generating-indicator');
-    indicator.classList.remove('hidden');
-    
-    // 添加动画效果
-    this.startTypewriterEffect(indicator);
-  },
-  
-  // 隐藏"正在生成"指示器
-  hideGenerating() {
-    const indicator = document.getElementById('generating-indicator');
-    indicator.classList.add('hidden');
-    this.stopTypewriterEffect(indicator);
-  },
-  
-  // 打字机效果
-  startTypewriterEffect(element) {
-    if (!element.dataset.text) {
-      element.dataset.text = "正在生成";
-    }
-    
-    let dotCount = 0;
-    element.dataset.interval = setInterval(() => {
-      dotCount = (dotCount + 1) % 4;
-      element.textContent = element.dataset.text + '.'.repeat(dotCount);
-    }, 500);
-  },
-  
-  stopTypewriterEffect(element) {
-    if (element.dataset.interval) {
-      clearInterval(parseInt(element.dataset.interval));
-      element.dataset.interval = null;
-    }
-  }
-};
-```

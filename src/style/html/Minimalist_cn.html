@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>极简主义风格</title>
+  <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #121212;
+      --secondary-color: #757575;
+      --tertiary-color: #acacac;
+      --background-color: #ffffff;
+      --subtle-color: #e6e6e6;
+      --space-unit: 8px;
+      --golden-ratio: 1.618;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    body {
+      background-color: #f5f5f5;
+      color: var(--primary-color);
+      font-family: 'Noto Sans SC', sans-serif;
+      line-height: 1.5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    
+    .magazine-card {
+      width: 400px;
+      max-height: 1680px;
+      margin: 0 auto;
+      background: var(--background-color);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: fadeIn 0.8s ease forwards;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .magazine-card:hover {
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+    }
+    
+    .content {
+      padding: calc(var(--space-unit) * 4);
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .date {
+      font-size: 12px;
+      color: var(--tertiary-color);
+      margin-bottom: calc(var(--space-unit) * 3);
+      letter-spacing: 1px;
+      font-weight: 300;
+    }
+    
+    .title-section {
+      margin-bottom: calc(var(--space-unit) * 5);
+    }
+    
+    .title {
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: calc(var(--space-unit) * 2);
+    }
+    
+    .subtitle {
+      font-size: 16px;
+      color: var(--secondary-color);
+      font-weight: 300;
+      line-height: 1.5;
+      max-width: 90%;
+    }
+    
+    .divider {
+      height: 1px;
+      background-color: var(--subtle-color);
+      margin: calc(var(--space-unit) * 5) 0;
+      width: 40%;
+    }
+    
+    .quote-block {
+      margin: calc(var(--space-unit) * 5) 0;
+      position: relative;
+      padding: 0 0 0 calc(var(--space-unit) * 3);
+      border-left: 1px solid var(--subtle-color);
+    }
+    
+    .quote-text {
+      font-size: 17px;
+      line-height: 1.6;
+      font-weight: 400;
+      margin-bottom: calc(var(--space-unit) * 2);
+    }
+    
+    .quote-source {
+      font-size: 14px;
+      color: var(--secondary-color);
+      font-weight: 400;
+    }
+    
+    .key-points {
+      margin: calc(var(--space-unit) * 5) 0;
+    }
+    
+    .key-points-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: calc(var(--space-unit) * 3);
+      color: var(--secondary-color);
+      font-weight: 500;
+    }
+    
+    .key-points-list {
+      list-style: none;
+    }
+    
+    .key-point-item {
+      margin-bottom: calc(var(--space-unit) * 3);
+      font-size: 15px;
+      line-height: 1.5;
+      display: flex;
+      align-items: flex-start;
+    }
+    
+    .key-point-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .key-point-item::before {
+      content: "—";
+      margin-right: calc(var(--space-unit) * 2);
+      color: var(--subtle-color);
+      flex-shrink: 0;
+    }
+    
+    .qr-section {
+      margin: calc(var(--space-unit) * 5) 0;
+      display: flex;
+      align-items: center;
+    }
+    
+    .qr-image {
+      width: 100px;
+      height: 100px;
+      margin-right: calc(var(--space-unit) * 3);
+      background-color: white;
+      padding: calc(var(--space-unit));
+      border: 1px solid var(--subtle-color);
+    }
+    
+    .qr-text {
+      flex: 1;
+    }
+    
+    .qr-title {
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: calc(var(--space-unit) * 1);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .qr-description {
+      font-size: 14px;
+      color: var(--secondary-color);
+      line-height: 1.5;
+    }
+    
+    .editor-note {
+      background-color: var(--background-color);
+      padding: calc(var(--space-unit) * 3);
+      margin: calc(var(--space-unit) * 5) 0;
+      border: 1px solid var(--subtle-color);
+    }
+    
+    .editor-note-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: calc(var(--space-unit) * 2);
+      font-weight: 500;
+    }
+    
+    .editor-note-text {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--secondary-color);
+    }
+    
+    .footer {
+      margin-top: calc(var(--space-unit) * 5);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--subtle-color);
+      padding-top: calc(var(--space-unit) * 3);
+    }
+    
+    .tag {
+      font-size: 11px;
+      color: var(--secondary-color);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .issue-number {
+      font-size: 11px;
+      color: var(--secondary-color);
+    }
+    
+    /* Interactive elements */
+    .key-point-item {
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+    
+    .key-point-item:hover {
+      transform: translateX(3px);
+      color: #000;
+    }
+    
+    .key-point-item:hover::before {
+      color: var(--primary-color);
+    }
+    
+    .subtle-hover {
+      transition: opacity 0.3s ease;
+    }
+    
+    .subtle-hover:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="magazine-card">
+    <div class="content">
+      <!-- Date -->
+      <div class="date">2025-03-26</div>
+      
+      <!-- Title Section -->
+      <section class="title-section">
+        <h1 class="title">极简主义风格</h1>
+        <p class="subtitle">对本质的追求，对复杂的拒绝</p>
+      </section>
+      
+      <div class="divider"></div>
+      
+      <!-- Quote Block -->
+      <div class="quote-block">
+        <p class="quote-text">完美不是没有什么可以再添加，而是没有什么可以再删减。</p>
+        <div class="quote-source">— Antoine de Saint-Exupéry</div>
+      </div>
+      
+      <!-- Key Points -->
+      <div class="key-points">
+        <div class="key-points-title">设计原则</div>
+        <ul class="key-points-list">
+          <li class="key-point-item">减法设计：移除一切非必要元素，专注于核心功能与目的</li>
+          <li class="key-point-item">留白空间：创造视觉呼吸感，引导注意力与构建层次</li>
+          <li class="key-point-item">形式服从功能：每个设计决策都应有明确目的</li>
+          <li class="key-point-item">精准比例：运用黄金分割和精确网格系统构建和谐布局</li>
+          <li class="key-point-item">中性配色：有限的色彩搭配创造永恒的设计美感</li>
+        </ul>
+      </div>
+      
+      <!-- QR Code Section -->
+      <div class="qr-section">
+        <img src="https://images.cubox.pro/rhkekb/file/2025032609523776560/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250326095228.jpg" alt="QR Code" class="qr-image">
+        <div class="qr-text">
+          <div class="qr-title">探索更多</div>
+          <div class="qr-description">扫描二维码了解极简主义设计的应用案例与实践指南</div>
+        </div>
+      </div>
+      
+      <!-- Editor's Note -->
+      <div class="editor-note">
+        <div class="editor-note-title">编辑笔记</div>
+        <p class="editor-note-text">极简主义不仅是一种设计风格，更是一种生活哲学。在信息过载的时代，学会减法思维，回归事物本质，是获得内心平静与清晰思考能力的关键。正如Dieter Rams所言："少，但更好。"</p>
+      </div>
+      
+      <!-- Footer -->
+      <div class="footer">
+        <div class="tag">ESSENTIALIST</div>
+        <div class="issue-number">No.001</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
