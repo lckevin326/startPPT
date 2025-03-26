@@ -3,6 +3,14 @@ const fs = require('fs');
 const path = require('path');
 const url = require('url');
 
+// 引入dotenv模块加载环境变量
+try {
+    require('dotenv').config({ path: path.join(__dirname, 'env', '.env') });
+} catch (err) {
+    console.error('dotenv模块未安装或环境变量加载失败，请运行 npm install dotenv');
+    console.error('确保在env/.env文件中设置了必要的环境变量');
+}
+
 // 端口配置
 const PORT = 3000;
 
@@ -33,6 +41,12 @@ const server = http.createServer((req, res) => {
     // 默认加载index.html
     if (pathname === '/') {
         pathname = '/index.html';
+    }
+    
+    // 处理API配置请求 - 安全地返回前端需要的配置
+    if (pathname === '/api/config') {
+        handleConfigRequest(req, res);
+        return;
     }
     
     // 如果是以/generate开头的请求，这是模拟的API端点
@@ -121,6 +135,22 @@ function handleGenerateRequest(req, res, parsedUrl) {
     req.on('close', () => {
         clearInterval(interval);
     });
+}
+
+// 处理API配置请求
+function handleConfigRequest(req, res) {
+    // 安全地返回前端需要的配置
+    const config = {
+        // OpenRouter配置
+        openrouter: {
+            apiUrl: process.env.OPENROUTER_API_URL || 'https://openrouter.ai/api/v1/chat/completions',
+            apiKey: process.env.OPENROUTER_API_KEY || '',
+            model: process.env.OPENROUTER_MODEL || 'deepseek/deepseek-chat-v3-0324:free'
+        }
+    };
+    
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(config));
 }
 
 // 启动服务器
