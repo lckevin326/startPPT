@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小红书封面 - 柔和科技卡片风</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f5f5f5;
+    }
+    
+    .cover-container {
+      position: relative;
+      width: 450px;
+      height: 600px;
+      overflow: hidden;
+    }
+    
+    .cover-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom right, #eef2ff, #f5f3ff, #fdf2f8);
+      padding: 18px;
+    }
+    
+    .bg-circle-1 {
+      position: absolute;
+      top: 36px;
+      right: 36px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #fef9c3;
+      opacity: 0.4;
+    }
+    
+    .bg-circle-2 {
+      position: absolute;
+      bottom: 60px;
+      left: 30px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: #dbeafe;
+      opacity: 0.5;
+    }
+    
+    .bg-circle-3 {
+      position: absolute;
+      top: 120px;
+      left: 48px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #f3e8ff;
+      opacity: 0.4;
+    }
+    
+    .card {
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      background-color: white;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px;
+      overflow: hidden;
+    }
+    
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 8px;
+    }
+    
+    .account {
+      display: flex;
+      align-items: center;
+    }
+    
+    .account-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: #8b5cf6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+    }
+    
+    .account-name {
+      margin-left: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #374151;
+    }
+    
+    .account-tag {
+      font-size: 12px;
+      color: #8b5cf6;
+      font-weight: 500;
+    }
+    
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+      padding: 16px 0;
+    }
+    
+    .title {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      line-height: 1.2;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(to right, #60a5fa, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .highlight-text {
+      position: relative;
+      padding: 0 4px;
+      z-index: 1;
+      color: #1f2937;
+    }
+    
+    .highlight-bg {
+      position: absolute;
+      inset: 0;
+      background-color: #fef08a;
+      opacity: 0.4;
+      transform: rotate(-1deg);
+      border-radius: 4px;
+      z-index: -1;
+    }
+    
+    .underline-text {
+      position: relative;
+      color: #1f2937;
+    }
+    
+    .underline-bg {
+      position: absolute;
+      bottom: 4px;
+      left: 0;
+      right: 0;
+      height: 12px;
+      background-color: #e9d5ff;
+      opacity: 0.6;
+      z-index: -1;
+    }
+    
+    .subtitle {
+      font-size: 16px;
+      color: #4b5563;
+      margin-bottom: 24px;
+      max-width: 240px;
+    }
+    
+    .info-card {
+      width: 91.666667%;
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      margin-bottom: 16px;
+    }
+    
+    .info-card.blue {
+      background-color: #eff6ff;
+    }
+    
+    .info-card.purple {
+      background-color: #f5f3ff;
+    }
+    
+    .info-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    
+    .info-icon {
+      color: #3b82f6;
+      margin-right: 8px;
+      font-size: 16px;
+    }
+    
+    .info-icon.purple {
+      color: #8b5cf6;
+    }
+    
+    .info-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #374151;
+    }
+    
+    .info-text {
+      color: #4b5563;
+      font-size: 14px;
+    }
+    
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      margin-top: 8px;
+    }
+    
+    .tag {
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 12px;
+    }
+    
+    .tag.blue {
+      background-color: #dbeafe;
+      color: #2563eb;
+    }
+    
+    .tag.purple {
+      background-color: #f3e8ff;
+      color: #7c3aed;
+    }
+    
+    .tag.pink {
+      background-color: #fce7f3;
+      color: #db2777;
+    }
+  </style>
+</head>
+<body>
+  <div class="cover-container">
+    <div class="cover-bg">
+      <!-- 装饰元素 - 背景圆形 -->
+      <div class="bg-circle-1"></div>
+      <div class="bg-circle-2"></div>
+      <div class="bg-circle-3"></div>
+      
+      <!-- 主卡片 -->
+      <div class="card">
+        <!-- 顶部账号信息 -->
+        <div class="header">
+          <div class="account">
+            <div class="account-icon">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <span class="account-name">超人爱AI</span>
+          </div>
+          <span class="account-tag">AI布道者</span>
+        </div>
+        
+        <!-- 主要内容区域 -->
+        <div class="content">
+          <!-- 主标题 - 特殊处理关键词 -->
+          <h1 class="title">
+            <span class="gradient-text">柔和</span>
+            <span class="highlight-text">
+              科技
+              <span class="highlight-bg"></span>
+            </span>
+            <span class="underline-text">
+              卡片风
+              <span class="underline-bg"></span>
+            </span>
+          </h1>
+          
+          <!-- 副标题 -->
+          <p class="subtitle">
+            简约设计 · 优雅呈现 · 极致体验
+          </p>
+          
+          <!-- 信息卡片 -->
+          <div class="info-card blue">
+            <div class="info-header">
+              <i class="fas fa-circle-dot info-icon"></i>
+              <span class="info-title">设计理念</span>
+            </div>
+            <p class="info-text">
+              轻量感官体验，融合科技与人文
+            </p>
+          </div>
+          
+          <div class="info-card purple">
+            <div class="info-header">
+              <i class="fas fa-sparkles info-icon purple"></i>
+              <span class="info-title">核心优势</span>
+            </div>
+            <p class="info-text">
+              视觉层次分明，信息一目了然
+            </p>
+          </div>
+        </div>
+        
+        <!-- 底部标签 -->
+        <div class="tags">
+          <span class="tag blue">#UI设计</span>
+          <span class="tag purple">#科技风格</span>
+          <span class="tag pink">#设计趋势</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -105,6 +105,19 @@ button:not(:disabled):active,
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
+/* 风格选择框比例 */
+.aspect-3-5 {
+  aspect-ratio: 3/5;
+}
+
+.aspect-3-4 {
+  aspect-ratio: 3/4;
+}
+
+.aspect-3\.5-1 {
+  aspect-ratio: 3.5/1;
+}
+
 /* 移动端适配优化 */
 @media (max-width: 640px) {
   .container {

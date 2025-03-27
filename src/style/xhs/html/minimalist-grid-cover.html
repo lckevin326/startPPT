@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>极简格栅主义 - 小红书封面</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --white: #FFFFFF;
+      --accent: #00E676;
+      --gray-light: #E0E0E0;
+      --gray-dark: #212121;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Noto Sans SC', 'Montserrat', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f5f5f5;
+    }
+    
+    .cover-container {
+      position: relative;
+      width: 450px;
+      height: 600px;
+      overflow: hidden;
+      border: 0;
+    }
+    
+    .cover-bg {
+      position: absolute;
+      inset: 0;
+      background-color: var(--black);
+    }
+    
+    /* 网格背景 */
+    .grid-pattern {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      opacity: 0.1;
+      pointer-events: none;
+    }
+    
+    .grid-line-v {
+      width: 1px;
+      height: 100%;
+      background-color: var(--white);
+    }
+    
+    .grid-line-h {
+      width: 100%;
+      height: 1px;
+      background-color: var(--white);
+    }
+    
+    /* 主卡片 */
+    .card {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: 30px;
+      z-index: 2;
+    }
+    
+    /* 几何元素 */
+    .geometric-elements {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    
+    .line {
+      position: absolute;
+      background-color: var(--white);
+      opacity: 0.2;
+    }
+    
+    .line-h {
+      height: 1px;
+      width: 100px;
+      top: 150px;
+      right: 30px;
+    }
+    
+    .line-v {
+      width: 1px;
+      height: 100px;
+      bottom: 100px;
+      left: 60px;
+    }
+    
+    .circle {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border: 1px solid var(--white);
+      border-radius: 50%;
+      opacity: 0.15;
+      bottom: 70px;
+      right: 40px;
+    }
+    
+    .square {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--white);
+      opacity: 0.15;
+      top: 80px;
+      left: 50px;
+    }
+    
+    .arrow {
+      position: absolute;
+      width: 60px;
+      height: 2px;
+      background-color: var(--accent);
+      top: 280px;
+      right: 60px;
+    }
+    
+    .arrow::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: -4px;
+      width: 10px;
+      height: 10px;
+      border-top: 2px solid var(--accent);
+      border-right: 2px solid var(--accent);
+      transform: rotate(45deg);
+    }
+    
+    /* 头部区域 */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+    }
+    
+    .profile {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .profile-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    
+    .profile-tagline {
+      font-size: 12px;
+      color: var(--gray-light);
+      margin-top: 4px;
+    }
+    
+    .date {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray-light);
+      letter-spacing: 1px;
+    }
+    
+    /* 内容区域 */
+    .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .category {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      padding-left: 16px;
+      position: relative;
+    }
+    
+    .category::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 10px;
+      height: 1px;
+      background-color: var(--accent);
+      transform: translateY(-50%);
+    }
+    
+    .title-container {
+      margin-bottom: 30px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: 20px;
+      grid-row-gap: 8px;
+    }
+    
+    .title-main {
+      font-size: 60px;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--white);
+      grid-column: 1 / -1;
+      margin-bottom: 8px;
+    }
+    
+    .title-highlight {
+      background-color: var(--white);
+      color: var(--black);
+      padding: 4px 10px;
+      display: inline-block;
+    }
+    
+    .title-outline {
+      color: transparent;
+      -webkit-text-stroke: 1px var(--white);
+    }
+    
+    .title-accent {
+      color: var(--accent);
+    }
+    
+    .subtitle {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--gray-light);
+      max-width: 360px;
+      margin-bottom: 30px;
+    }
+    
+    .quote-box {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      font-size: 14px;
+      color: var(--white);
+      line-height: 1.6;
+      position: relative;
+      margin-left: 30px;
+    }
+    
+    .quote-box::before {
+      content: '';
+      position: absolute;
+      width: 30px;
+      height: 1px;
+      background-color: rgba(255, 255, 255, 0.1);
+      left: -30px;
+      top: 20px;
+    }
+    
+    .quote-source {
+      font-size: 12px;
+      color: var(--gray-light);
+      margin-top: 10px;
+      text-align: right;
+      font-weight: 500;
+    }
+    
+    /* 底部区域 */
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 30px;
+    }
+    
+    .ref-number {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+    }
+    
+    .ref-number span {
+      margin-right: 6px;
+    }
+    
+    .ref-number::after {
+      content: '';
+      width: 30px;
+      height: 2px;
+      background-color: var(--white);
+    }
+    
+    .tags {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .tag {
+      font-size: 10px;
+      color: var(--gray-light);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* 英文装饰文本 */
+    .decoration-text {
+      position: absolute;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 100px;
+      font-weight: 900;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.03);
+      z-index: 0;
+      pointer-events: none;
+    }
+    
+    .decoration-text.top {
+      top: -40px;
+      left: 20px;
+    }
+    
+    .decoration-text.bottom {
+      bottom: -40px;
+      right: 20px;
+    }
+    
+    /* 竖排文字 */
+    .vertical-text {
+      position: absolute;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      writing-mode: vertical-rl;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 3px;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="cover-container">
+    <div class="cover-bg">
+      <!-- 网格背景 -->
+      <div class="grid-pattern">
+        <div class="grid-line-v"></div>
+        <div class="grid-line-v"></div>
+        <div class="grid-line-v"></div>
+        <div class="grid-line-v"></div>
+        <div class="grid-line-v"></div>
+        <div class="grid-line-h"></div>
+        <div class="grid-line-h"></div>
+        <div class="grid-line-h"></div>
+        <div class="grid-line-h"></div>
+        <div class="grid-line-h"></div>
+        <div class="grid-line-h"></div>
+        <div class="grid-line-h"></div>
+      </div>
+      
+      <!-- 装饰文本 -->
+      <div class="decoration-text top">THINK</div>
+      <div class="decoration-text bottom">GROW</div>
+      
+      <!-- 几何元素 -->
+      <div class="geometric-elements">
+        <div class="line line-h"></div>
+        <div class="line line-v"></div>
+        <div class="circle"></div>
+        <div class="square"></div>
+        <div class="arrow"></div>
+      </div>
+      
+      <!-- 竖排文字 -->
+      <div class="vertical-text">REFLECTION · GROWTH</div>
+      
+      <!-- 主卡片 -->
+      <div class="card">
+        <!-- 头部区域 -->
+        <div class="header">
+          <div class="profile">
+            <div class="profile-name">超人爱AI</div>
+            <div class="profile-tagline">AI布道者</div>
+          </div>
+          <div class="date">2025.03.28</div>
+        </div>
+        
+        <!-- 内容区域 -->
+        <div class="content">
+          <div class="category">成长思维</div>
+          
+          <div class="title-container">
+            <div class="title-main">
+              <span class="title-outline">成长</span>的动力
+            </div>
+            <div class="title-main">
+              是<span class="title-highlight">反思</span>而非
+            </div>
+            <div class="title-main">
+              <span class="title-accent">经历</span>
+            </div>
+          </div>
+          
+          <p class="subtitle">
+            无反思的经历如过眼云烟，唯有反思后才能提升认知，实现真正成长
+          </p>
+          
+          <div class="quote-box">
+            "经一事长一智，非经历本身，而是经历后的思考与总结创造了价值"
+            <div class="quote-source">— 成长心理学</div>
+          </div>
+        </div>
+        
+        <!-- 底部区域 -->
+        <div class="footer">
+          <div class="ref-number">
+            <span>01</span>
+          </div>
+          <div class="tags">
+            <div class="tag">#自我提升</div>
+            <div class="tag">#认知成长</div>
+            <div class="tag">#反思能力</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -501,10 +501,18 @@ async function populateStyleSelector() {
             return;
         }
         
-        // 添加风格选项（3:5比例的宫格显示）
+        // 根据分类设置不同的比例
+        let aspectRatio = 'aspect-3-5'; // 默认3:5
+        if (selectedCategory === '小红书') {
+            aspectRatio = 'aspect-3-4'; // 小红书3:4
+        } else if (selectedCategory === '微信公众号') {
+            aspectRatio = 'aspect-3.5-1'; // 微信公众号3.5:1
+        }
+
+        // 添加风格选项
         filteredStyles.forEach(style => {
             const gridItem = document.createElement('div');
-            gridItem.className = 'style-item';
+            gridItem.className = `style-item ${aspectRatio}`;
             gridItem.dataset.style = style.style_value;
             
             // 创建图片容器
@@ -524,11 +532,13 @@ async function populateStyleSelector() {
                 img.alt = '默认风格图片';
             }
             
-            // 图片加载失败时显示替代图像
+            // 图片加载失败时显示替代图像，只尝试一次
             img.onerror = function() {
-                console.warn(`风格图片加载失败: ${style.style}`);
-                this.src = 'assets/default-style.png';
-                this.alt = '默认风格图片';
+                if (this.src !== 'assets/default-style.png') {
+                    console.warn(`风格图片加载失败: ${style.style}`);
+                    this.src = 'assets/default-style.png';
+                    this.alt = '默认风格图片';
+                }
             };
             
             // 创建风格名称标签（放在图片下方）

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数字极简票券风 - 小红书封面</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Noto+Serif+SC:wght@400;700;900&family=Space+Mono:wght@400;700&family=Zilla+Slab:wght@700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --black-soft: #111111;
+      --white: #FFFFFF;
+      --gray-light: #E0E0E0;
+      --gray-medium: #9E9E9E;
+      --accent: #FF5252;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f5f5f5;
+    }
+    
+    .cover-container {
+      position: relative;
+      width: 450px;
+      height: 600px;
+      overflow: hidden;
+      border: 0;
+    }
+    
+    .cover-bg {
+      position: absolute;
+      inset: 0;
+      background-color: var(--white);
+    }
+    
+    /* 主卡片 */
+    .card {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: 24px;
+      z-index: 2;
+      font-family: 'Noto Sans SC', sans-serif;
+    }
+    
+    /* 票券元素 */
+    .ticket-elements {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    
+    .border-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 12px;
+      background-color: var(--black);
+    }
+    
+    .border-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 12px;
+      background-color: var(--black);
+    }
+    
+    .cut-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      border-top: 1px dashed var(--gray-medium);
+    }
+    
+    .cut-line-top {
+      top: 100px;
+    }
+    
+    .cut-line-bottom {
+      bottom: 100px;
+    }
+    
+    .cut-circle-left {
+      position: absolute;
+      left: -12px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: var(--white);
+      border: 1px solid var(--gray-medium);
+      z-index: 3;
+    }
+    
+    .cut-circle-right {
+      position: absolute;
+      right: -12px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: var(--white);
+      border: 1px solid var(--gray-medium);
+      z-index: 3;
+    }
+    
+    .cut-circle-top-left {
+      top: 89px;
+    }
+    
+    .cut-circle-top-right {
+      top: 89px;
+    }
+    
+    .cut-circle-bottom-left {
+      bottom: 89px;
+    }
+    
+    .cut-circle-bottom-right {
+      bottom: 89px;
+    }
+    
+    .barcode {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 40px;
+      background-image: repeating-linear-gradient(
+        to right,
+        var(--black) 0,
+        var(--black) 2px,
+        transparent 2px,
+        transparent 4px,
+        var(--black) 4px,
+        var(--black) 5px,
+        transparent 5px,
+        transparent 8px,
+        var(--black) 8px,
+        var(--black) 9px,
+        transparent 9px,
+        transparent 12px
+      );
+    }
+    
+    .ticket-number {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: var(--black);
+      letter-spacing: 3px;
+    }
+    
+    /* 头部区域 */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 16px 0;
+      margin-bottom: 40px;
+    }
+    
+    .brand-info {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .brand-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: 1px;
+    }
+    
+    .brand-tagline {
+      font-size: 10px;
+      font-weight: 400;
+      color: var(--gray-medium);
+      margin-top: 4px;
+      letter-spacing: 1px;
+    }
+    
+    .ticket-info {
+      text-align: right;
+    }
+    
+    .ticket-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gray-medium);
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+    
+    .ticket-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: 1px;
+    }
+    
+    /* 内容区域 */
+    .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 16px;
+    }
+    
+    .content-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    
+    .category {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: 1px;
+      background-color: var(--white);
+      padding: 6px 12px;
+      border: 1px solid var(--black);
+    }
+    
+    .content-id {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gray-medium);
+    }
+    
+    .main-title {
+      font-size: 52px;
+      font-weight: 900;
+      line-height: 1.2;
+      color: var(--black);
+      margin-bottom: 24px;
+      font-family: 'Noto Serif SC', serif;
+    }
+    
+    .highlight-growth {
+      color: var(--black);
+      position: relative;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+    
+    .highlight-reflection {
+      position: relative;
+      color: var(--white);
+      background-color: var(--black);
+      padding: 0 8px;
+      font-weight: 900;
+    }
+    
+    .highlight-experience {
+      position: relative;
+      color: var(--accent);
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+    
+    .subtitle {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--black-soft);
+      margin-bottom: 30px;
+      max-width: 360px;
+    }
+    
+    .detail-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+    
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .detail-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--gray-medium);
+      margin-bottom: 4px;
+      letter-spacing: 1px;
+    }
+    
+    .detail-value {
+      font-family: 'Zilla Slab', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--black);
+    }
+    
+    /* 竖排文字 */
+    .vertical-text {
+      position: absolute;
+      right: 24px;
+      top: 190px;
+      writing-mode: vertical-rl;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gray-medium);
+      letter-spacing: 3px;
+      transform: rotate(180deg);
+    }
+    
+    /* 底部区域 */
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      margin-top: 20px;
+    }
+    
+    .check-in {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .check-in-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gray-medium);
+      margin-bottom: 4px;
+      letter-spacing: 1px;
+    }
+    
+    .check-in-arrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--black);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .social-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gray-medium);
+    }
+  </style>
+</head>
+<body>
+  <div class="cover-container">
+    <div class="cover-bg">
+      <!-- 票券元素 -->
+      <div class="ticket-elements">
+        <div class="border-top"></div>
+        <div class="border-bottom"></div>
+        <div class="cut-line cut-line-top"></div>
+        <div class="cut-line cut-line-bottom"></div>
+        <div class="cut-circle-left cut-circle-top-left"></div>
+        <div class="cut-circle-right cut-circle-top-right"></div>
+        <div class="cut-circle-left cut-circle-bottom-left"></div>
+        <div class="cut-circle-right cut-circle-bottom-right"></div>
+        <div class="barcode"></div>
+        <div class="ticket-number">AG20250328</div>
+      </div>
+      
+      <!-- 竖排文字 -->
+      <div class="vertical-text">GROWTH THROUGH REFLECTION</div>
+      
+      <!-- 主卡片 -->
+      <div class="card">
+        <!-- 头部区域 -->
+        <div class="header">
+          <div class="brand-info">
+            <div class="brand-name">超人爱AI</div>
+            <div class="brand-tagline">AI布道者</div>
+          </div>
+          <div class="ticket-info">
+            <div class="ticket-label">ISSUE DATE</div>
+            <div class="ticket-date">2025.03.28</div>
+          </div>
+        </div>
+        
+        <!-- 内容区域 -->
+        <div class="content">
+          <div class="content-header">
+            <div class="category">成长心法</div>
+            <div class="content-id">REF #0328</div>
+          </div>
+          
+          <h1 class="main-title">
+            <span class="highlight-growth">成长</span>的第一动力是<span class="highlight-reflection">反思</span>，
+            而非<span class="highlight-experience">经历</span>
+          </h1>
+          
+          <p class="subtitle">
+            无反思的经历如过眼云烟，唯有反思后才能提升认知，实现真正成长
+          </p>
+          
+          <div class="detail-section">
+            <div class="detail-item">
+              <div class="detail-label">WISDOM SOURCE</div>
+              <div class="detail-value">经一事长一智</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">GROWTH INDEX</div>
+              <div class="detail-value">+3.6x</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 底部区域 -->
+        <div class="footer">
+          <div class="check-in">
+            <div class="check-in-label">TAKE ACTION</div>
+            <div class="check-in-arrow">
+              CHECK IN <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+          <div class="social-tag">@成长思维</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
