@@ -7,7 +7,8 @@
     "chinese_example": "src/style/html/Minimalist.html",
     "english_example": "src/style/html/Minimalist.html",
     "chinese_reference_image": "src/style/img/Minimalist.png",
-    "english_reference_image": "src/style/img/Minimalist.png"
+    "english_reference_image": "src/style/img/Minimalist.png",
+    "cate": "知识卡片"
   },
   {
     "style": "大胆现代风格 (Bold Modern)",
@@ -17,7 +18,8 @@
     "chinese_example": "src/style/html/bold-modern-magazine-card.html",
     "english_example": "src/style/html/bold-modern-magazine-card.html",
     "chinese_reference_image": "src/style/img/bold-modern-magazine-card.png",
-    "english_reference_image": "src/style/img/bold-modern-magazine-card.png"
+    "english_reference_image": "src/style/img/bold-modern-magazine-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "优雅复古风格 (Elegant Vintage)",
@@ -27,7 +29,8 @@
     "chinese_example": "src/style/html/elegant-vintage-magazine-card.html",
     "english_example": "src/style/html/elegant-vintage-magazine-card.html",
     "chinese_reference_image": "src/style/img/elegant-vintage-magazine-card.png",
-    "english_reference_image": "src/style/img/elegant-vintage-magazine-card.png"
+    "english_reference_image": "src/style/img/elegant-vintage-magazine-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "未来科技风格 (Futuristic Tech)",
@@ -37,7 +40,8 @@
     "chinese_example": "src/style/html/futuristic-tech-magazine-card.html",
     "english_example": "src/style/html/futuristic-tech-magazine-card.html",
     "chinese_reference_image": "src/style/img/futuristic-tech-magazine-card.png",
-    "english_reference_image": "src/style/img/futuristic-tech-magazine-card.png"
+    "english_reference_image": "src/style/img/futuristic-tech-magazine-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "斯堪的纳维亚风格 (Scandinavian)",
@@ -47,7 +51,8 @@
     "chinese_example": "src/style/html/scandinavian-magazine-card.html",
     "english_example": "src/style/html/scandinavian-magazine-card.html",
     "chinese_reference_image": "src/style/img/scandinavian-magazine-card.png",
-    "english_reference_image": "src/style/img/scandinavian-magazine-card.png"
+    "english_reference_image": "src/style/img/scandinavian-magazine-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "艺术装饰风格 (Art Deco)",
@@ -57,7 +62,8 @@
     "chinese_example": "src/style/html/art-deco-magazine-card.html",
     "english_example": "src/style/html/art-deco-magazine-card.html",
     "chinese_reference_image": "src/style/img/art-deco-magazine-card.png",
-    "english_reference_image": "src/style/img/art-deco-magazine-card.png"
+    "english_reference_image": "src/style/img/art-deco-magazine-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "日式极简风格 (Japanese Minimalism)",
@@ -67,7 +73,8 @@
     "chinese_example": "src/style/html/japanese-minimalism-card.html",
     "english_example": "src/style/html/japanese-minimalism-card.html",
     "chinese_reference_image": "src/style/img/japanese-minimalism-card.png",
-    "english_reference_image": "src/style/img/japanese-minimalism-card.png"
+    "english_reference_image": "src/style/img/japanese-minimalism-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "后现代解构风格 (Postmodern Deconstruction)",
@@ -77,7 +84,8 @@
     "chinese_example": "src/style/html/postmodern-magazine-card.html",
     "english_example": "src/style/html/postmodern-magazine-card.html",
     "chinese_reference_image": "src/style/img/postmodern-magazine-card.png",
-    "english_reference_image": "src/style/img/postmodern-magazine-card.png"
+    "english_reference_image": "src/style/img/postmodern-magazine-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "朋克风格 (Punk)",
@@ -87,7 +95,8 @@
     "chinese_example": "src/style/html/punk-magazine-card.html",
     "english_example": "src/style/html/punk-magazine-card.html",
     "chinese_reference_image": "src/style/img/punk-magazine-card.png",
-    "english_reference_image": "src/style/img/punk-magazine-card.png"
+    "english_reference_image": "src/style/img/punk-magazine-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "英伦摇滚风格 (British Rock)",
@@ -97,7 +106,8 @@
     "chinese_example": "src/style/html/british-rock-magazine-card.html",
     "english_example": "src/style/html/british-rock-magazine-card.html",
     "chinese_reference_image": "src/style/img/british-rock-magazine-card.png",
-    "english_reference_image": "src/style/img/british-rock-magazine-card.png"
+    "english_reference_image": "src/style/img/british-rock-magazine-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "黑金属风格 (Black Metal)",
@@ -107,7 +117,8 @@
     "chinese_example": "src/style/html/black-metal-magazine-card.html",
     "english_example": "src/style/html/black-metal-magazine-card.html",
     "chinese_reference_image": "src/style/img/black-metal-magazine-card.png",
-    "english_reference_image": "src/style/img/black-metal-magazine-card.png"
+    "english_reference_image": "src/style/img/black-metal-magazine-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "孟菲斯风格 (Memphis Design)",
@@ -117,7 +128,8 @@
     "chinese_example": "src/style/html/memphis-magazine-card.html",
     "english_example": "src/style/html/memphis-magazine-card.html",
     "chinese_reference_image": "src/style/img/memphis-magazine-card.png",
-    "english_reference_image": "src/style/img/memphis-magazine-card.png"
+    "english_reference_image": "src/style/img/memphis-magazine-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "赛博朋克风格 (Cyberpunk)",
@@ -127,7 +139,8 @@
     "chinese_example": "src/style/html/cyberpunk-magazine-card.html",
     "english_example": "src/style/html/cyberpunk-magazine-card.html",
     "chinese_reference_image": "src/style/img/cyberpunk-magazine-card.png",
-    "english_reference_image": "src/style/img/cyberpunk-magazine-card.png"
+    "english_reference_image": "src/style/img/cyberpunk-magazine-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "波普艺术风格 (Pop Art)",
@@ -137,7 +150,8 @@
     "chinese_example": "src/style/html/pop-art-magazine-card.html",
     "english_example": "src/style/html/pop-art-magazine-card.html",
     "chinese_reference_image": "src/style/img/pop-art-magazine-card.png",
-    "english_reference_image": "src/style/img/pop-art-magazine-card.png"
+    "english_reference_image": "src/style/img/pop-art-magazine-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "瑞士国际主义风格的解构版 (Deconstructed Swiss Style)",
@@ -147,7 +161,8 @@
     "chinese_example": "src/style/html/swiss-deconstructed-magazine-card.html",
     "english_example": "src/style/html/swiss-deconstructed-magazine-card.html",
     "chinese_reference_image": "src/style/img/swiss-deconstructed-magazine-card.png",
-    "english_reference_image": "src/style/img/swiss-deconstructed-magazine-card.png"
+    "english_reference_image": "src/style/img/swiss-deconstructed-magazine-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "蒸汽波美学 (Vaporwave Aesthetics)",
@@ -157,7 +172,8 @@
     "chinese_example": "src/style/html/vaporwave-magazine-card.html",
     "english_example": "src/style/html/vaporwave-magazine-card.html",
     "chinese_reference_image": "src/style/img/vaporwave-magazine-card.png",
-    "english_reference_image": "src/style/img/vaporwave-magazine-card.png"
+    "english_reference_image": "src/style/img/vaporwave-magazine-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "新表现主义风格 (Neo-Expressionism)",
@@ -167,7 +183,8 @@
     "chinese_example": "src/style/html/neo-expressionism-magazine-card.html",
     "english_example": "src/style/html/neo-expressionism-magazine-card.html",
     "chinese_reference_image": "src/style/img/neo-expressionism-magazine-card.png",
-    "english_reference_image": "src/style/img/neo-expressionism-magazine-card.png"
+    "english_reference_image": "src/style/img/neo-expressionism-magazine-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "极简主义的极端版本 (Extreme Minimalism)",
@@ -177,7 +194,8 @@
     "chinese_example": "src/style/html/extreme-minimalism-magazine-card.html",
     "english_example": "src/style/html/extreme-minimalism-magazine-card.html",
     "chinese_reference_image": "src/style/img/extreme-minimalism-magazine-card.png",
-    "english_reference_image": "src/style/img/extreme-minimalism-magazine-card.png"
+    "english_reference_image": "src/style/img/extreme-minimalism-magazine-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "新未来主义 (Neo-Futurism)",
@@ -187,7 +205,8 @@
     "chinese_example": "src/style/html/neo-futurism-magazine-card.html",
     "english_example": "src/style/html/neo-futurism-magazine-card.html",
     "chinese_reference_image": "src/style/img/neo-futurism-magazine-card.png",
-    "english_reference_image": "src/style/img/neo-futurism-magazine-card.png"
+    "english_reference_image": "src/style/img/neo-futurism-magazine-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "超现实主义数字拼贴 (Surrealist Digital Collage)",
@@ -197,7 +216,8 @@
     "chinese_example": "src/style/html/surrealist-magazine-card.html",
     "english_example": "src/style/html/surrealist-magazine-card.html",
     "chinese_reference_image": "src/style/img/surrealist-magazine-card.png",
-    "english_reference_image": "src/style/img/surrealist-magazine-card.png"
+    "english_reference_image": "src/style/img/surrealist-magazine-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "新巴洛克数字风格 (Neo-Baroque Digital)",
@@ -207,7 +227,8 @@
     "chinese_example": "src/style/html/neo-baroque-magazine-card.html",
     "english_example": "src/style/html/neo-baroque-magazine-cardd.html",
     "chinese_reference_image": "src/style/img/neo-baroque-magazine-card.png",
-    "english_reference_image": "src/style/img/neo-baroque-magazine-card.png"
+    "english_reference_image": "src/style/img/neo-baroque-magazine-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "液态数字形态主义 (Liquid Digital Morphism)",
@@ -217,7 +238,8 @@
     "chinese_example": "src/style/html/liquid-morphism-magazine-card.html",
     "english_example": "src/style/html/liquid-morphism-magazine-card.html",
     "chinese_reference_image": "src/style/img/liquid-morphism-magazine-card.png",
-    "english_reference_image": "src/style/img/liquid-morphism-magazine-card.png"
+    "english_reference_image": "src/style/img/liquid-morphism-magazine-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "超感官极简主义 (Hypersensory Minimalism)",
@@ -227,7 +249,8 @@
     "chinese_example": "src/style/html/hypersensory-minimalism-card.html",
     "english_example": "src/style/html/hypersensory-minimalism-card.html",
     "chinese_reference_image": "src/style/img/hypersensory-minimalism-card.png",
-    "english_reference_image": "src/style/img/hypersensory-minimalism-card.png"
+    "english_reference_image": "src/style/img/hypersensory-minimalism-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "新表现主义数据可视化 (Neo-Expressionist Data Visualization)",
@@ -237,7 +260,8 @@
     "chinese_example": "src/style/html/neo-expressionist-datavis-card.html",
     "english_example": "src/style/html/neo-expressionist-datavis-card.html",
     "chinese_reference_image": "src/style/img/neo-expressionist-datavis-card.png",
-    "english_reference_image": "src/style/img/neo-expressionist-datavis-card.png"
+    "english_reference_image": "src/style/img/neo-expressionist-datavis-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "维多利亚风格 (Victorian Style)",
@@ -247,7 +271,8 @@
     "chinese_example": "src/style/html/victorian-style-card.html",
     "english_example": "src/style/html/victorian-style-card.html",
     "chinese_reference_image": "src/style/img/victorian-style-card.png",
-    "english_reference_image": "src/style/img/victorian-style-card.png"
+    "english_reference_image": "src/style/img/victorian-style-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "包豪斯风格 (Bauhaus)",
@@ -257,7 +282,8 @@
     "chinese_example": "src/style/html/bauhaus-style-card.html",
     "english_example": "src/style/html/bauhaus-style-card.html",
     "chinese_reference_image": "src/style/img/bauhaus-style-card.png",
-    "english_reference_image": "src/style/img/bauhaus-style-card.png"
+    "english_reference_image": "src/style/img/bauhaus-style-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "构成主义风格 (Constructivism)",
@@ -267,7 +293,8 @@
     "chinese_example": "src/style/html/constructivism-style-card.html",
     "english_example": "src/style/html/constructivism-style-card.html",
     "chinese_reference_image": "src/style/img/constructivism-style-card.png",
-    "english_reference_image": "src/style/img/constructivism-style-card.png"
+    "english_reference_image": "src/style/img/constructivism-style-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "孟菲斯风格 (Memphis Design)",
@@ -277,7 +304,8 @@
     "chinese_example": "src/style/html/memphis-style-card.html",
     "english_example": "src/style/html/memphis-style-card.html",
     "chinese_reference_image": "src/style/img/memphis-style-card.png",
-    "english_reference_image": "src/style/img/memphis-style-card.png"
+    "english_reference_image": "src/style/img/memphis-style-card.png",
+    "cate": "知识卡片"
   },
   {
     "style": "德国表现主义风格 (German Expressionism)",
@@ -287,6 +315,7 @@
     "chinese_example": "src/style/html/german-expressionism-magazine-card.html",
     "english_example": "src/style/html/german-expressionism-magazine-card.html",
     "chinese_reference_image": "src/style/img/german-expressionism-magazine-card.png",
-    "english_reference_image": "src/style/img/german-expressionism-magazine-card.png"
+    "english_reference_image": "src/style/img/german-expressionism-magazine-card.png",
+    "cate": "知识卡片"
   }
 ]

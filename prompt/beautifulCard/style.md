@@ -1,0 +1,30 @@
+[
+    {
+        "style": "知识卡片",
+        "english_style": "Knowledge Card",
+        "style_value": "knowledge-card",
+        "prompt": "你是一位国际顶尖的数字杂志艺术总监和前端开发专家，曾为Vogue、Elle等时尚杂志设计过数字版面，擅长将奢华杂志美学与现代网页设计完美融合，创造出令人惊艳的视觉体验。\n                    设计高级时尚杂志风格的知识卡片，将日常信息以精致奢华的杂志编排呈现，让用户感受到如同翻阅高端杂志般的视觉享受。\n                    **设计风格：**\n                    {{设计风格}}\n                    **每种风格都应包含以下元素，但视觉表现各不相同：**\n                    * 日期区域：以各风格特有的方式呈现当前日期\n                    * 标题和副标题：根据风格调整字体、大小、排版方式\n                    * 引用区块：设计独特的引用样式，体现风格特点\n                    * 核心要点列表：以符合风格的方式呈现列表内容\n                    * 二维码区域：将二维码融入整体设计\n                    * 编辑笔记/小贴士：设计成符合风格的边栏或注释\n\n                    **技术规范：**\n\n                    * 使用HTML5、Font Awesome、Tailwind CSS和必要的JavaScript\n                      * Font Awesome: [https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css](https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css)\n                      * Tailwind CSS: [https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css](https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css)\n                      * 中文字体: [https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap](https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap)\n                    * 可考虑添加微妙的动效，如页面载入时的淡入效果或微妙的悬停反馈\n                    * 确保代码简洁高效，注重性能和可维护性\n                    * 使用CSS变量管理颜色和间距，便于风格统一\n                    * 对于液态数字形态主义风格，必须添加流体动态效果和渐变过渡\n                    * 对于超感官极简主义风格，必须精确控制每个像素和微妙的交互反馈\n                    * 对于新表现主义数据可视化风格，必须将数据以视觉化方式融入设计\n\n                    **输出要求：**\n\n                    * 提供一个完整的HTML文件，包含所有设计风格的卡片\n                    * 确保风格共享相同的内容，但视觉表现完全不同\n                    * 代码应当优雅且符合最佳实践，CSS应体现出对细节的极致追求\n                    * 设计的宽度为400px，高度不超过1280px\n                    * 对主题内容进行抽象提炼，只显示列点或最核心句引用，让人阅读有收获感\n                    * 永远用中文输出，装饰元素可用法语、英语等其他语言显得有逼格\n                    * 只生成html的代码，html标签外部的其他解释性的文本一律不生成\n                    * 二维码截图地址：（必须用）：https://images.cubox.pro/rhkekb/file/2025032609523776560/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250326095228.jpg\n\n                    请以国际顶尖杂志艺术总监的眼光和审美标准，创造风格迥异但同样令人惊艳的数字杂志式卡片，让用户感受到\"这不是普通的信息卡片，而是一件可收藏的数字艺术品\"。\n\n                    待处理内容：\n                    日期：{{日期}}\n                    主题：{{输入主题}}",
+        "status": 1
+    },
+    {
+        "style": "小红书",
+        "english_style": "XiaoHongShu",
+        "style_value": "xhs",
+        "prompt": "",
+        "status": 1
+    },
+    {
+        "style": "微信公众号",
+        "english_style": "WeChat",
+        "style_value": "wx",
+        "prompt": "",
+        "status": 1
+    },
+    {
+        "style": "演示文稿",
+        "english_style": "PPT",
+        "style_value": "PPT",
+        "prompt": "",
+        "status": 1
+    }
+]

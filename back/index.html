@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能卡片生成器</title>
+    <!-- API配置 -->
+    <script src="config.js"></script>
+    <script src="env/env-loader.js"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 min-h-screen transition-colors duration-200">
+    <div class="container mx-auto px-4 py-8">
+        <header class="mb-8 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-primary-600 dark:text-primary-400">智能卡片生成器</h1>
+            <button id="theme-toggle" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-all duration-200">
+                <span id="theme-icon" class="material-icons text-gray-600 dark:text-gray-300">dark_mode</span>
+            </button>
+        </header>
+        
+        <main class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-6">
+            <!-- 输入部分 -->
+            <section class="w-full md:w-1/2 lg:w-1/2">
+                <div class="input-group">
+                    <label for="text-input" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">内容文本</label>
+                    <div class="relative rounded-md overflow-hidden transition-all duration-200 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+                        <textarea id="text-input" rows="10" class="block w-full p-3 bg-transparent border-0 focus:ring-0 focus:outline-none resize-none text-gray-900 dark:text-gray-100" placeholder="请输入卡片内容..."></textarea>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="style-selector" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">选择风格</label>
+                    <div id="style-grid-container" class="border border-gray-200 dark:border-gray-700 rounded-md overflow-auto max-h-[600px] bg-white dark:bg-gray-800">
+                        <div id="style-grid" class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+                            <!-- 宫格风格选项将通过JavaScript动态添加 -->
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="generate-btn" class="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-md shadow-sm transition-all transform hover:scale-[1.02] active:scale-[0.98]">
+                    生成卡片
+                </button>
+                
+                <div class="text-xs text-gray-500 dark:text-gray-400 mt-2 flex items-center">
+                    <span class="material-icons text-xs mr-1">keyboard</span>
+                    <span>提示: 按 Ctrl+Enter 快速生成, Alt+T 切换主题</span>
+                </div>
+            </section>
+            
+            <div class="w-full md:w-1/2 lg:w-1/2 flex flex-col space-y-4">
+                <div class="flex flex-row justify-between items-center">
+                    <h2 class="text-xl font-semibold">生成结果</h2>
+                </div>
+                <div id="preview-stage" class="p-4 bg-white dark:bg-gray-700 rounded-md w-full overflow-auto">
+                    <div id="stream-text" class="font-mono text-sm h-[800px] overflow-auto"></div>
+                    <div id="preview-content" class="mx-auto" style="display: none;"></div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="mt-12 text-center text-sm text-gray-500 dark:text-gray-400 py-4">
+            <p> 2025 智能卡片生成器 - 由AI驱动设计</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // 主题切换功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+            
+            // 检查系统偏好
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                html.classList.add('dark');
+            }
+            
+            // 检查本地存储
+            if (localStorage.getItem('theme') === 'dark') {
+                html.classList.add('dark');
+            } else if (localStorage.getItem('theme') === 'light') {
+                html.classList.remove('dark');
+            }
+            
+            // 切换主题
+            themeToggle.addEventListener('click', function() {
+                if (html.classList.contains('dark')) {
+                    html.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    html.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+        });
+
+        // 添加样式到head，用于宫格选择器
+        const styleSheet = document.createElement("style");
+        styleSheet.textContent = `
+            .style-grid-item {
+                position: relative;
+                cursor: pointer;
+                border-radius: 0.375rem;
+                overflow: hidden;
+                transition: all 0.2s ease;
+                border: 2px solid transparent;
+            }
+            
+            .style-grid-item:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            
+            .style-grid-item.selected {
+                border-color: #0ea5e9;
+                box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.3);
+            }
+            
+            .style-grid-item-img {
+                width: 100%;
+                aspect-ratio: 3/5;
+                object-fit: cover;
+                display: block;
+            }
+            
+            .style-grid-item-label {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.4);
+                color: white;
+                padding: 0.5rem;
+                font-size: 0.875rem;
+                overflow: hidden;
+            }
+            
+            .style-grid-item-text {
+                display: inline-block;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                max-width: 100%;
+            }
+            
+            /* 名字滚动动画 */
+            @keyframes scrollText {
+                0% { transform: translateX(0); }
+                20% { transform: translateX(0); }
+                80% { transform: translateX(calc(-100% + 100px)); }
+                100% { transform: translateX(0); }
+            }
+            
+            /* 鼠标悬浮和选中状态下的名字滚动效果 */
+            .style-grid-item:hover .style-grid-item-text,
+            .style-grid-item.selected .style-grid-item-text {
+                text-overflow: clip;
+                animation: scrollText 3s linear infinite;
+                animation-play-state: running;
+            }
+            
+            /* 没有溢出的文本不应该滚动 */
+            .style-grid-item .style-grid-item-text.no-scroll {
+                animation: none;
+            }
+            
+            .dark .style-grid-item {
+                background-color: #1f2937;
+            }
+            
+            .dark .style-grid-item.selected {
+                border-color: #38bdf8;
+                box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.3);
+            }
+        `;
+        document.head.appendChild(styleSheet);
+    </script>
+</body>
+</html>
