@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蒸汽波美学 | VAPORWAVE AESTHETICS</title>
+    <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=VT323&family=Courier+Prime&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'WindowsFont';
+            src: url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        :root {
+            --color-pink: #ff6ad5;
+            --color-purple: #c774e8;
+            --color-blue: #64d2ff;
+            --color-cyan: #00FFFF;
+            --color-teal: #00eac7;
+            --color-yellow: #ffff8f;
+            --font-serif: 'Playfair Display', 'Noto Serif SC', serif;
+            --font-digital: 'VT323', 'Noto Sans SC', monospace;
+            --font-terminal: 'Courier Prime', 'Noto Sans SC', monospace;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: var(--font-serif);
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .magazine-card {
+            width: 400px;
+            max-height: 1680px;
+            background: linear-gradient(135deg, #ff6ad5 0%, #6c52cc 100%);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(255, 106, 213, 0.5);
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* 扫描线效果 */
+        .scanlines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(0, 0, 0, 0.1) 51%
+            );
+            background-size: 100% 4px;
+            z-index: 200;
+            pointer-events: none;
+            opacity: 0.3;
+            mix-blend-mode: lighten;
+        }
+        
+        /* VHS效果 */
+        .vhs-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                rgba(255, 0, 0, 0.03) 0%, 
+                rgba(0, 255, 0, 0.03) 33%, 
+                rgba(0, 0, 255, 0.03) 66%
+            );
+            z-index: 201;
+            pointer-events: none;
+            opacity: 0.3;
+            mix-blend-mode: screen;
+        }
+        
+        /* 网格背景 */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(100, 210, 255, 0.5) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(100, 210, 255, 0.5) 1px, transparent 1px);
+            background-size: 20px 20px;
+            perspective: 500px;
+            transform: rotateX(60deg) translateY(100px) scale(2);
+            transform-origin: center top;
+            z-index: 1;
+            opacity: 0.3;
+        }
+        
+        /* 星空背景 */
+        .stars-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(white 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            opacity: 0.2;
+        }
+        
+        /* 装饰元素：罗马柱 */
+        .roman-column {
+            position: absolute;
+            width: 30px;
+            height: 120px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(200, 200, 200, 0.7));
+            border-radius: 5px;
+            z-index: 2;
+        }
+        
+        .column-top {
+            position: absolute;
+            top: -15px;
+            left: -5px;
+            width: 40px;
+            height: 15px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(220, 220, 220, 0.8));
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .column-bottom {
+            position: absolute;
+            bottom: -15px;
+            left: -5px;
+            width: 40px;
+            height: 15px;
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.9), rgba(220, 220, 220, 0.8));
+            border-radius: 0 0 5px 5px;
+        }
+        
+        .column-lines {
+            position: absolute;
+            top: 10px;
+            left: 5px;
+            width: 20px;
+            height: 100px;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent,
+                transparent 5px,
+                rgba(200, 200, 200, 0.5) 5px,
+                rgba(200, 200, 200, 0.5) 10px
+            );
+        }
+        
+        .column-1 {
+            bottom: 20px;
+            left: 30px;
+            transform: perspective(500px) rotateY(-20deg);
+        }
+        
+        .column-2 {
+            bottom: 20px;
+            right: 30px;
+            transform: perspective(500px) rotateY(20deg);
+        }
+        
+        /* 装饰元素：古典雕塑 */
+        .sculpture {
+            position: absolute;
+            width: 70px;
+            height: 100px;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHBhdGggZD0iTTUwLDEwIEw0MCwyNSBMMzUsNDUgTDQwLDYwIEw0NSw3MCBMNTAsOTAgTDU1LDcwIEw2MCw2MCBMNjUsNDUgTDYwLDI1IEw1MCwxMCIgZmlsbD0id2hpdGUiIGZpbGwtb3BhY2l0eT0iMC45Ii8+PC9zdmc+');
+            background-size: cover;
+            z-index: 2;
+            opacity: 0.9;
+        }
+        
+        .sculpture-1 {
+            top: 150px;
+            left: 20px;
+            filter: brightness(1.2) contrast(0.8) grayscale(0.5);
+        }
+        
+        .sculpture-2 {
+            top: 400px;
+            right: 20px;
+            filter: brightness(1.2) contrast(0.8) grayscale(0.5) hue-rotate(30deg);
+        }
+        
+        /* 装饰元素：日落 */
+        .sunset {
+            position: absolute;
+            bottom: 200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 100px;
+            background: radial-gradient(
+                ellipse at center bottom,
+                var(--color-yellow) 0%,
+                var(--color-pink) 50%,
+                transparent 80%
+            );
+            border-radius: 100% 100% 0 0;
+            z-index: 1;
+            opacity: 0.5;
+        }
+        
+        /* 装饰元素：老式电脑界面 */
+        .computer-window {
+            position: absolute;
+            width: 120px;
+            height: 90px;
+            background-color: #008080;
+            border: 2px solid #c0c0c0;
+            border-radius: 0;
+            z-index: 2;
+            overflow: hidden;
+        }
+        
+        .window-header {
+            height: 18px;
+            background: linear-gradient(to right, #000080, #0000a0);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5px;
+        }
+        
+        .window-title {
+            color: white;
+            font-family: var(--font-digital);
+            font-size: 10px;
+        }
+        
+        .window-buttons {
+            display: flex;
+        }
+        
+        .window-button {
+            width: 10px;
+            height: 10px;
+            background-color: #c0c0c0;
+            border: 1px outset #dcdcdc;
+            margin-left: 2px;
+        }
+        
+        .window-content {
+            height: calc(100% - 18px);
+            padding: 5px;
+            font-family: var(--font-digital);
+            font-size: 9px;
+            color: white;
+            overflow: hidden;
+        }
+        
+        .window-1 {
+            top: 50px;
+            right: 30px;
+            transform: rotate(-5deg);
+        }
+        
+        .window-2 {
+            bottom: 100px;
+            left: 20px;
+            transform: rotate(5deg);
+        }
+        
+        /* 头部内容 */
+        .header {
+            padding: 40px 20px 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .issue-date {
+            font-family: var(--font-digital);
+            font-size: 16px;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            color: white;
+            background-color: var(--color-purple);
+            padding: 2px 10px;
+            text-shadow: 2px 2px 5px var(--color-pink);
+            transform: rotate(-2deg);
+            z-index: 10;
+            letter-spacing: 2px;
+        }
+        
+        .title-container {
+            margin-top: 20px;
+            position: relative;
+            text-align: center;
+            z-index: 5;
+        }
+        
+        .title-main {
+            font-family: var(--font-serif);
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1.2;
+            color: white;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 0 var(--color-pink), 6px 6px 10px var(--color-purple);
+            letter-spacing: 2px;
+        }
+        
+        .title-japanese {
+            font-family: var(--font-serif);
+            font-size: 18px;
+            margin-top: 10px;
+            color: white;
+            opacity: 0.9;
+            letter-spacing: 5px;
+        }
+        
+        .title-sub {
+            font-family: var(--font-digital);
+            font-size: 16px;
+            margin-top: 15px;
+            color: var(--color-cyan);
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 5px 15px;
+            display: inline-block;
+            text-shadow: 2px 2px 5px var(--color-blue);
+            letter-spacing: 2px;
+        }
+        
+        /* 内容区域 */
+        .content-section {
+            padding: 30px 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .quote-block {
+            margin: 40px 20px;
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--color-cyan);
+            box-shadow: 0 0 15px var(--color-cyan), inset 0 0 15px var(--color-purple);
+            padding: 25px;
+        }
+        
+        .quote-text {
+            font-family: var(--font-serif);
+            font-size: 18px;
+            font-style: italic;
+            line-height: 1.6;
+            color: white;
+            text-shadow: 1px 1px 3px var(--color-purple);
+        }
+        
+        .quote-glitch {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 106, 213, 0.1);
+            mix-blend-mode: overlay;
+            opacity: 0.5;
+            z-index: -1;
+        }
+        
+        .core-points {
+            position: relative;
+            margin: 50px 20px;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--color-pink);
+            box-shadow: 0 0 15px var(--color-pink), inset 0 0 15px var(--color-blue);
+        }
+        
+        .core-points-title {
+            font-family: var(--font-digital);
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--color-yellow);
+            text-transform: uppercase;
+            text-shadow: 2px 2px 5px var(--color-pink);
+            letter-spacing: 3px;
+        }
+        
+        .points-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .points-list li {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 30px;
+            font-family: var(--font-terminal);
+            font-size: 16px;
+            line-height: 1.6;
+            color: white;
+        }
+        
+        .points-list li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: var(--marker-color, var(--color-cyan));
+            font-family: var(--font-digital);
+            text-shadow: 0 0 5px var(--marker-color, var(--color-cyan));
+            animation: blink 2s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .points-list li:nth-child(2)::before {
+            --marker-color: var(--color-pink);
+            animation-delay: 0.4s;
+        }
+        
+        .points-list li:nth-child(3)::before {
+            --marker-color: var(--color-teal);
+            animation-delay: 0.8s;
+        }
+        
+        .points-list li:nth-child(4)::before {
+            --marker-color: var(--color-yellow);
+            animation-delay: 1.2s;
+        }
+        
+        .points-list li:nth-child(5)::before {
+            --marker-color: var(--color-pink);
+            animation-delay: 1.6s;
+        }
+        
+        /* 日文装饰 */
+        .japanese-text {
+            position: absolute;
+            font-family: 'Noto Serif SC', serif;
+            color: white;
+            opacity: 0.7;
+            text-shadow: 2px 2px 5px var(--color-purple);
+            z-index: 2;
+            transform: rotate(var(--rotation, 0deg));
+            letter-spacing: 3px;
+        }
+        
+        .japanese-1 {
+            top: 120px;
+            left: 20px;
+            font-size: 16px;
+            --rotation: -90deg;
+        }
+        
+        .japanese-2 {
+            bottom: 150px;
+            right: 20px;
+            font-size: 14px;
+            --rotation: 90deg;
+        }
+        
+        /* QR码区域 */
+        .qr-section {
+            margin: 50px 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .qr-container {
+            position: relative;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--color-cyan);
+            box-shadow: 0 0 15px var(--color-cyan);
+        }
+        
+        .qr-glitch {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: rgba(255, 106, 213, 0.5);
+            animation: qrGlitch 4s infinite;
+        }
+        
+        @keyframes qrGlitch {
+            0%, 90% { opacity: 0; top: -100px; }
+            92% { opacity: 0.8; top: 20px; }
+            94% { opacity: 0.8; top: 80px; }
+            96% { opacity: 0.8; top: 120px; }
+            98% { opacity: 0.8; top: 180px; }
+            100% { opacity: 0; top: 300px; }
+        }
+        
+        .qr-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            filter: brightness(1.2) contrast(1.2) hue-rotate(180deg);
+            mix-blend-mode: screen;
+            opacity: 0.9;
+        }
+        
+        .qr-label {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-digital);
+            font-size: 14px;
+            color: var(--color-yellow);
+            text-shadow: 2px 2px 5px var(--color-pink);
+            white-space: nowrap;
+            letter-spacing: 2px;
+        }
+        
+        /* 编辑札记 */
+        .editor-notes {
+            margin: 60px 20px 30px;
+            padding: 25px;
+            position: relative;
+            font-family: var(--font-terminal);
+            font-size: 15px;
+            line-height: 1.6;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--color-teal);
+            box-shadow: 0 0 15px var(--color-teal), inset 0 0 15px var(--color-purple);
+        }
+        
+        .editor-title {
+            font-family: var(--font-digital);
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--color-cyan);
+            text-shadow: 2px 2px 5px var(--color-purple);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .editor-notes p {
+            margin-bottom: 10px;
+        }
+        
+        .handwritten {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 16px;
+            display: block;
+            margin-top: 15px;
+            color: var(--color-yellow);
+            text-shadow: 2px 2px 5px var(--color-pink);
+            text-align: right;
+        }
+        
+        /* 页脚 */
+        .footer {
+            padding: 20px;
+            font-family: var(--font-digital);
+            font-size: 12px;
+            color: white;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 1px 1px 3px var(--color-pink);
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 450px) {
+            .magazine-card {
+                width: 95%;
+                margin: 0 auto;
+            }
+            
+            .title-main {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="magazine-card vaporwave">
+        <!-- 扫描线和VHS效果 -->
+        <div class="scanlines"></div>
+        <div class="vhs-effect"></div>
+        
+        <!-- 背景 -->
+        <div class="grid-background"></div>
+        <div class="stars-background"></div>
+        
+        <!-- 装饰元素：日落 -->
+        <div class="sunset"></div>
+        
+        <!-- 装饰元素：罗马柱 -->
+        <div class="roman-column column-1">
+            <div class="column-top"></div>
+            <div class="column-bottom"></div>
+            <div class="column-lines"></div>
+        </div>
+        <div class="roman-column column-2">
+            <div class="column-top"></div>
+            <div class="column-bottom"></div>
+            <div class="column-lines"></div>
+        </div>
+        
+        <!-- 装饰元素：古典雕塑 -->
+        <div class="sculpture sculpture-1"></div>
+        <div class="sculpture sculpture-2"></div>
+        
+        <!-- 装饰元素：老式电脑界面 -->
+        <div class="computer-window window-1">
+            <div class="window-header">
+                <div class="window-title">AESTHETIC.EXE</div>
+                <div class="window-buttons">
+                    <div class="window-button"></div>
+                    <div class="window-button"></div>
+                </div>
+            </div>
+            <div class="window-content">
+                C:\> NOSTALGIA.EXE<br>
+                Loading...<br>
+                ░░░░░░░░░░░░░░░░<br>
+                E S T H E T I C
+            </div>
+        </div>
+        <div class="computer-window window-2">
+            <div class="window-header">
+                <div class="window-title">VAPOR.SYS</div>
+                <div class="window-buttons">
+                    <div class="window-button"></div>
+                    <div class="window-button"></div>
+                </div>
+            </div>
+            <div class="window-content">
+                WAVE STATUS:<br>
+                PROCESSING...<br>
+                ░░░░░░░░░░░░░░░░<br>
+                VHS MODE: ON
+            </div>
+        </div>
+        
+        <!-- 日文装饰 -->
+        <div class="japanese-text japanese-1">蒸気波美学</div>
+        <div class="japanese-text japanese-2">未来からの過去</div>
+        
+        <header class="header">
+            <div class="issue-date">27.03.2025</div>
+            
+            <div class="title-container">
+                <h1 class="title-main">蒸汽波美学</h1>
+                <div class="title-japanese">ＶＡＰＯＲＷＡＶＥ</div>
+                <h2 class="title-sub">互联网亚文化的怀旧未来主义</h2>
+            </div>
+        </header>
+        
+        <div class="content-section">
+            <blockquote class="quote-block">
+                <div class="quote-glitch"></div>
+                <div class="quote-text">蒸汽波美学不仅是一种视觉风格，更是对当代社会的反思和批判——它通过过去的技术和审美符号重构未来，创造一个永远不会实现的乌托邦，一个人造天堂的数字徘徊。</div>
+            </blockquote>
+            
+            <div class="core-points">
+                <h3 class="core-points-title">核心特征</h3>
+                <ul class="points-list">
+                    <li>特定渐变色彩组合，主要为粉紫色到青蓝色，创造黄昏或霓虹效果</li>
+                    <li>混合英文和日文/中文字符，使用80-90年代风格字体，添加阴影和辉光</li>
+                    <li>罗马柱、棕榈树、古典雕塑、格子地面等复古与未来元素的超现实组合</li>
+                    <li>VHS效果、扫描线和轻微失真，模拟老式电视和录像带质感</li>
+                    <li>背景使用网格线或星空，营造虚拟空间感，常搭配日落色调</li>
+                </ul>
+            </div>
+            
+            <div class="qr-section">
+                <div class="qr-container">
+                    <div class="qr-glitch"></div>
+                    <img class="qr-image" src="https://images.cubox.pro/rhkekb/file/2025032609523776560/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250326095228.jpg" alt="QR Code">
+                    <div class="qr-label">SCAN.TO.EXPLORE</div>
+                </div>
+            </div>
+            
+            <div class="editor-notes">
+                <div class="editor-title">编辑札记</div>
+                <p>蒸汽波(Vaporwave)源于2010年代初的网络亚文化，由艺术家如Vektroid (Macintosh Plus)和Chuck Person引领。它通过对80-90年代消费主义美学、早期互联网界面和日本流行文化的重组与变形，创造出一种超现实的怀旧感，同时对现代资本主义和技术至上主义进行微妙的批判。</p>
+                <p class="handwritten">— 在虚拟广场中迷失，在数字黄昏里徘徊。</p>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            ＡＥＳＴＨＥＴＩＣ · ＭＡＣＩＮＴＯＳＨ ＰＬＵＳ · ２０２５
+        </footer>
+    </div>
+</body>
+</html>

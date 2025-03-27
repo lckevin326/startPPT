@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>波普艺术风格 | POP ART</title>
+    <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-red: #FF3B30;
+            --color-yellow: #FFCC00;
+            --color-blue: #007AFF;
+            --color-black: #000000;
+            --color-white: #FFFFFF;
+            --font-comic: 'Bangers', 'Noto Sans SC', cursive;
+            --font-popart: 'Fredoka One', 'Noto Sans SC', cursive;
+            --font-sans: 'Comic Neue', 'Noto Sans SC', sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: var(--font-sans);
+        }
+        
+        .magazine-card {
+            width: 400px;
+            max-height: 1680px;
+            background-color: var(--color-white);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            animation: fadeIn 0.8s ease-in;
+            outline: 8px solid var(--color-black);
+            outline-offset: -8px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* 波普艺术装饰元素 */
+        .dots-pattern {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-color: var(--pattern-color, var(--color-red));
+            background-image: radial-gradient(var(--color-black) 2px, transparent 2px);
+            background-size: 10px 10px;
+            z-index: 0;
+        }
+        
+        .pattern-1 {
+            top: -30px;
+            left: -30px;
+            --pattern-color: var(--color-yellow);
+            transform: rotate(15deg);
+        }
+        
+        .pattern-2 {
+            bottom: -50px;
+            right: -50px;
+            --pattern-color: var(--color-blue);
+            transform: rotate(-15deg);
+        }
+        
+        .pattern-3 {
+            top: 40%;
+            left: -80px;
+            --pattern-color: var(--color-red);
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            transform: rotate(-5deg);
+        }
+        
+        .comic-burst {
+            position: absolute;
+            z-index: 10;
+        }
+        
+        .burst-1 {
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            background-color: var(--color-yellow);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: rotate(15deg);
+        }
+        
+        .burst-text {
+            font-family: var(--font-comic);
+            color: var(--color-black);
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            transform: rotate(-15deg);
+        }
+        
+        .burst-2 {
+            bottom: 100px;
+            left: 20px;
+            width: 100px;
+            height: 100px;
+            background-color: var(--color-red);
+            clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: rotate(-10deg);
+        }
+        
+        .sound-effect {
+            position: absolute;
+            font-family: var(--font-comic);
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--effect-color, var(--color-black));
+            transform: rotate(var(--rotation, 0deg));
+            text-shadow: 2px 2px 0 var(--color-white), -2px -2px 0 var(--color-white), 2px -2px 0 var(--color-white), -2px 2px 0 var(--color-white);
+            z-index: 10;
+        }
+        
+        .sound-1 {
+            top: 200px;
+            right: 30px;
+            --effect-color: var(--color-red);
+            --rotation: 15deg;
+        }
+        
+        .sound-2 {
+            bottom: 150px;
+            right: 40px;
+            --effect-color: var(--color-blue);
+            --rotation: -10deg;
+        }
+        
+        .comic-grid {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-image: linear-gradient(var(--color-black) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--color-black) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .grid-1 {
+            top: 30%;
+            right: 0;
+        }
+        
+        .grid-2 {
+            bottom: 10%;
+            left: 0;
+        }
+        
+        .header {
+            padding: 40px 20px 20px;
+            position: relative;
+            background-color: var(--color-white);
+            z-index: 5;
+        }
+        
+        .issue-date {
+            font-family: var(--font-comic);
+            font-size: 18px;
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            color: var(--color-white);
+            background-color: var(--color-black);
+            padding: 5px 10px;
+            transform: rotate(-5deg);
+            z-index: 10;
+            border: 2px solid var(--color-black);
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .issue-date::after {
+            content: "!";
+            position: absolute;
+            right: -10px;
+            top: -5px;
+            font-size: 24px;
+            color: var(--color-yellow);
+            text-shadow: 1px 1px 0 var(--color-black), -1px -1px 0 var(--color-black), 1px -1px 0 var(--color-black), -1px 1px 0 var(--color-black);
+        }
+        
+        .title-container {
+            margin-top: 20px;
+            position: relative;
+            text-align: center;
+            z-index: 5;
+        }
+        
+        .title-main {
+            font-family: var(--font-comic);
+            font-size: 48px;
+            line-height: 1.2;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 0 var(--color-red), 6px 6px 0 var(--color-blue);
+        }
+        
+        .title-sub {
+            font-family: var(--font-popart);
+            font-size: 20px;
+            margin-top: 15px;
+            color: var(--color-black);
+            background-color: var(--color-yellow);
+            padding: 5px 15px;
+            display: inline-block;
+            border: 2px solid var(--color-black);
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .content-section {
+            padding: 20px;
+            position: relative;
+            background-color: var(--color-white);
+            z-index: 5;
+        }
+        
+        .quote-bubble {
+            margin: 40px 0;
+            position: relative;
+            background-color: var(--color-blue);
+            border: 3px solid var(--color-black);
+            border-radius: 20px;
+            padding: 20px;
+            max-width: 90%;
+            margin-left: auto;
+        }
+        
+        .quote-bubble::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: -20px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 20px 0 20px 20px;
+            border-color: transparent transparent transparent var(--color-blue);
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+        
+        .quote-bubble::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: -23px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 23px 0 23px 23px;
+            border-color: transparent transparent transparent var(--color-black);
+            transform: translateY(-50%);
+            z-index: 0;
+        }
+        
+        .quote-text {
+            font-family: var(--font-sans);
+            font-size: 18px;
+            line-height: 1.5;
+            font-weight: 700;
+            color: var(--color-white);
+            text-shadow: 1px 1px 0 var(--color-black);
+        }
+        
+        .core-points {
+            position: relative;
+            margin: 50px 0;
+            padding: 30px;
+            background-color: var(--color-white);
+            border: 3px solid var(--color-black);
+            box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .points-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--color-yellow);
+            background-image: radial-gradient(var(--color-black) 1px, transparent 1px);
+            background-size: 15px 15px;
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        .core-points-title {
+            font-family: var(--font-comic);
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--color-black);
+            text-align: center;
+            background-color: var(--color-white);
+            padding: 5px 15px;
+            display: inline-block;
+            border: 2px solid var(--color-black);
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+            transform: rotate(-2deg);
+        }
+        
+        .points-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .points-list li {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 30px;
+            font-family: var(--font-sans);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--color-black);
+            font-weight: 700;
+        }
+        
+        .points-list li::before {
+            content: "★";
+            position: absolute;
+            left: 0;
+            color: var(--marker-color, var(--color-red));
+            font-size: 20px;
+        }
+        
+        .points-list li:nth-child(2)::before {
+            --marker-color: var(--color-blue);
+        }
+        
+        .points-list li:nth-child(3)::before {
+            --marker-color: var(--color-red);
+        }
+        
+        .points-list li:nth-child(4)::before {
+            --marker-color: var(--color-blue);
+        }
+        
+        .points-list li:nth-child(5)::before {
+            --marker-color: var(--color-red);
+        }
+        
+        .qr-section {
+            margin: 50px 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .qr-container {
+            position: relative;
+            padding: 15px;
+            background-color: var(--color-white);
+            border: 3px solid var(--color-black);
+            box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+            transform: rotate(-2deg);
+            z-index: 5;
+        }
+        
+        .qr-dots {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-image: radial-gradient(var(--color-red) 1px, transparent 1px);
+            background-size: 8px 8px;
+            opacity: 0.2;
+            mix-blend-mode: multiply;
+            z-index: 1;
+        }
+        
+        .qr-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 2px solid var(--color-black);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .qr-label {
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%) rotate(2deg);
+            font-family: var(--font-comic);
+            font-size: 16px;
+            color: var(--color-white);
+            background-color: var(--color-black);
+            padding: 5px 15px;
+            white-space: nowrap;
+            border: 2px solid var(--color-black);
+            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+        
+        .qr-burst {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--color-red);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            transform: rotate(15deg);
+        }
+        
+        .qr-burst-text {
+            font-family: var(--font-comic);
+            color: var(--color-white);
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            transform: rotate(-15deg);
+        }
+        
+        .editor-notes {
+            margin: 60px 20px 30px;
+            padding: 25px;
+            position: relative;
+            font-family: var(--font-sans);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--color-black);
+            background-color: var(--color-white);
+            border: 3px solid var(--color-black);
+            box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .notes-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--color-blue);
+            background-image: radial-gradient(var(--color-black) 1px, transparent 1px);
+            background-size: 10px 10px;
+            opacity: 0.15;
+            z-index: -1;
+        }
+        
+        .editor-title {
+            font-family: var(--font-comic);
+            font-weight: 700;
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--color-black);
+            padding: 5px 15px;
+            display: inline-block;
+            background-color: var(--color-white);
+            border: 2px solid var(--color-black);
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+            transform: rotate(-2deg);
+        }
+        
+        .editor-notes p {
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .handwritten {
+            font-family: var(--font-popart);
+            font-size: 18px;
+            display: block;
+            margin-top: 15px;
+            color: var(--color-black);
+            transform: rotate(-1deg);
+            text-align: right;
+            background-color: var(--color-yellow);
+            padding: 5px 10px;
+            border: 2px solid var(--color-black);
+            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            float: right;
+        }
+        
+        .footer {
+            padding: 20px;
+            font-family: var(--font-comic);
+            font-size: 14px;
+            color: var(--color-white);
+            text-align: center;
+            background-color: var(--color-black);
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* 英语拟声词装饰 */
+        .pop-sound {
+            position: absolute;
+            font-family: var(--font-comic);
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--sound-color, var(--color-black));
+            background-color: var(--sound-bg, var(--color-white));
+            padding: 5px 10px;
+            border: 2px solid var(--color-black);
+            transform: rotate(var(--rotation, 0deg));
+            z-index: 10;
+            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .pop-1 {
+            top: 100px;
+            left: 20px;
+            --sound-color: var(--color-white);
+            --sound-bg: var(--color-red);
+            --rotation: -5deg;
+        }
+        
+        .pop-2 {
+            bottom: 50px;
+            right: 20px;
+            --sound-color: var(--color-white);
+            --sound-bg: var(--color-blue);
+            --rotation: 5deg;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 450px) {
+            .magazine-card {
+                width: 95%;
+                margin: 0 auto;
+            }
+            
+            .title-main {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="magazine-card popart">
+        <!-- 波普艺术装饰元素 -->
+        <div class="dots-pattern pattern-1"></div>
+        <div class="dots-pattern pattern-2"></div>
+        <div class="dots-pattern pattern-3"></div>
+        
+        <div class="comic-burst burst-1">
+            <div class="burst-text">WOW!</div>
+        </div>
+        <div class="comic-burst burst-2">
+            <div class="burst-text">POW!</div>
+        </div>
+        
+        <div class="sound-effect sound-1">BANG!</div>
+        <div class="sound-effect sound-2">ZAP!</div>
+        
+        <div class="comic-grid grid-1"></div>
+        <div class="comic-grid grid-2"></div>
+        
+        <!-- 英语拟声词装饰 -->
+        <div class="pop-sound pop-1">POP!</div>
+        <div class="pop-sound pop-2">BOOM!</div>
+        
+        <header class="header">
+            <div class="issue-date">27.03.2025</div>
+            
+            <div class="title-container">
+                <h1 class="title-main">波普艺术风格</h1>
+                <h2 class="title-sub">60年代的流行文化艺术革命</h2>
+            </div>
+        </header>
+        
+        <div class="content-section">
+            <div class="quote-bubble">
+                <div class="quote-text">"波普艺术不仅是一种视觉风格，更是对精英文化的挑战——它将大众文化元素、广告和漫画提升为艺术，以大胆直接的视觉语言重新定义了艺术的边界。"</div>
+            </div>
+            
+            <div class="core-points">
+                <div class="points-background"></div>
+                <h3 class="core-points-title">核心特征</h3>
+                <ul class="points-list">
+                    <li>使用亮丽原色（红、黄、蓝）和黑色轮廓线，色彩平面且不含渐变</li>
+                    <li>大胆戏剧化的排版，使用漫画风格字体和夸张的感叹词</li>
+                    <li>半调网点(Halftone)效果处理图像，将视觉简化为点阵和色块</li>
+                    <li>装饰元素包含漫画风格线条、爆炸形状和拟声词</li>
+                    <li>重复图案和网格排列增强视觉冲击，强调流行文化的符号性</li>
+                </ul>
+            </div>
+            
+            <div class="qr-section">
+                <div class="qr-container">
+                    <div class="qr-dots"></div>
+                    <div class="qr-burst">
+                        <div class="qr-burst-text">SCAN!</div>
+                    </div>
+                    <img class="qr-image" src="https://images.cubox.pro/rhkekb/file/2025032609523776560/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250326095228.jpg" alt="QR Code">
+                    <div class="qr-label">SNAP TO EXPLORE!</div>
+                </div>
+            </div>
+            
+            <div class="editor-notes">
+                <div class="notes-pattern"></div>
+                <div class="editor-title">编辑札记</div>
+                <p>波普艺术源于1950年代末的英国，在1960年代初的美国达到高峰，由安迪·沃霍尔、罗伊·李奇滕斯坦等艺术家推动。它通过吸收广告、漫画和流行文化的视觉元素，打破了"高雅艺术"与"低俗艺术"的界限，成为20世纪最具影响力的艺术运动之一。</p>
+                <p class="handwritten">— 艺术就在日常生活中！</p>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            POP ART EDITION · COOL SINCE 1960s · TOTALLY RADICAL!
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新表现主义数据可视化 - 高级时尚杂志风格卡片</title>
+    <link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        :root {
+            /* 色彩变量 - 鲜明原色 */
+            --primary-red: #ff3b30;
+            --primary-blue: #007aff;
+            --primary-yellow: #ffcc00;
+            --primary-green: #4cd964;
+            --primary-purple: #af52de;
+            --primary-orange: #ff9500;
+            
+            --light-red: rgba(255, 59, 48, 0.1);
+            --light-blue: rgba(0, 122, 255, 0.1);
+            --light-yellow: rgba(255, 204, 0, 0.1);
+            --light-green: rgba(76, 217, 100, 0.1);
+            --light-purple: rgba(175, 82, 222, 0.1);
+            --light-orange: rgba(255, 149, 0, 0.1);
+            
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --text-tertiary: #999999;
+            --background: #f9f9f9;
+            
+            /* 间距变量 */
+            --spacing-xs: 6px;
+            --spacing-sm: 12px;
+            --spacing-md: 18px;
+            --spacing-lg: 24px;
+            --spacing-xl: 36px;
+            
+            /* 字体变量 */
+            --font-sans: 'Noto Sans SC', sans-serif;
+            --font-serif: 'Noto Serif SC', serif;
+            
+            /* 动画时间 */
+            --transition-slow: 0.8s;
+            --transition-medium: 0.4s;
+            --transition-fast: 0.2s;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: #e0e0e0;
+            color: var(--text-primary);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .neo-expressionist-card {
+            position: relative;
+            width: 400px;
+            max-height: 1680px;
+            background: var(--background);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            padding: var(--spacing-lg);
+            overflow: hidden;
+            /* 添加微妙纹理背景 */
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23000000' fill-opacity='0.02' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        
+        /* 抽象表现主义涂抹背景 */
+        .abstract-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.4;
+            mix-blend-mode: multiply;
+        }
+        
+        .brush-stroke {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(15px);
+            opacity: 0.15;
+            transform-origin: center;
+        }
+        
+        .stroke-1 {
+            width: 150px;
+            height: 30px;
+            background-color: var(--primary-blue);
+            top: 10%;
+            left: -5%;
+            transform: rotate(25deg);
+        }
+        
+        .stroke-2 {
+            width: 100px;
+            height: 30px;
+            background-color: var(--primary-red);
+            top: 30%;
+            right: -5%;
+            transform: rotate(-15deg);
+        }
+        
+        .stroke-3 {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary-yellow);
+            bottom: 25%;
+            left: 10%;
+            border-radius: 40% 60% 60% 40%;
+        }
+        
+        .stroke-4 {
+            width: 120px;
+            height: 40px;
+            background-color: var(--primary-purple);
+            bottom: 15%;
+            right: 5%;
+            transform: rotate(-10deg);
+            border-radius: 40% 60% 50% 50%;
+        }
+        
+        .ink-splatter {
+            position: absolute;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+        
+        .splatter-1 {
+            width: 100px;
+            height: 100px;
+            top: 5%;
+            right: 10%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50,10 C55,15 60,5 70,15 C80,25 70,40 85,35 C100,30 90,60 80,55 C70,50 80,70 65,75 C50,80 40,65 30,75 C20,85 5,70 15,60 C25,50 10,40 20,30 C30,20 45,5 50,10z' fill='%23000000'/%3E%3C/svg%3E");
+        }
+        
+        .splatter-2 {
+            width: 80px;
+            height: 80px;
+            bottom: 10%;
+            left: 5%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M40,20 C50,10 70,15 65,30 C60,45 80,40 85,55 C90,70 70,75 65,60 C60,45 40,55 30,65 C20,75 10,60 20,50 C30,40 30,30 40,20z' fill='%23000000'/%3E%3C/svg%3E");
+        }
+        
+        /* 日期区域 */
+        .date-section {
+            position: relative;
+            font-family: var(--font-sans);
+            font-weight: 400;
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .date-visualization {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .date-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            letter-spacing: 1px;
+            margin-right: var(--spacing-sm);
+        }
+        
+        .date-bars {
+            display: flex;
+            align-items: flex-end;
+            height: 24px;
+        }
+        
+        .date-bar {
+            width: 3px;
+            margin-right: 2px;
+            border-radius: 2px;
+            transition: height var(--transition-medium) ease;
+        }
+        
+        .date-bar:nth-child(1) { height: 60%; background-color: var(--primary-blue); }
+        .date-bar:nth-child(2) { height: 100%; background-color: var(--primary-red); }
+        .date-bar:nth-child(3) { height: 30%; background-color: var(--primary-yellow); }
+        .date-bar:nth-child(4) { height: 70%; background-color: var(--primary-purple); }
+        .date-bar:nth-child(5) { height: 50%; background-color: var(--primary-green); }
+        .date-bar:nth-child(6) { height: 85%; background-color: var(--primary-orange); }
+        
+        .neo-expressionist-card:hover .date-bar:nth-child(1) { height: 70%; }
+        .neo-expressionist-card:hover .date-bar:nth-child(2) { height: 90%; }
+        .neo-expressionist-card:hover .date-bar:nth-child(3) { height: 45%; }
+        .neo-expressionist-card:hover .date-bar:nth-child(4) { height: 85%; }
+        .neo-expressionist-card:hover .date-bar:nth-child(5) { height: 40%; }
+        .neo-expressionist-card:hover .date-bar:nth-child(6) { height: 75%; }
+        
+        /* 标题区域 */
+        .title-section {
+            position: relative;
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .main-title {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            font-size: 2rem;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-sm);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .title-data-viz {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.1;
+        }
+        
+        .title-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary-blue), var(--primary-red), var(--primary-yellow));
+            top: 50%;
+            left: 0;
+            width: 100%;
+            transform: translateY(-50%);
+        }
+        
+        .title-circles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        
+        .title-circle {
+            position: absolute;
+            border-radius: 50%;
+        }
+        
+        .circle-1 {
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary-blue);
+            top: 20%;
+            left: 10%;
+        }
+        
+        .circle-2 {
+            width: 15px;
+            height: 15px;
+            background-color: var(--primary-red);
+            top: 60%;
+            left: 30%;
+        }
+        
+        .circle-3 {
+            width: 25px;
+            height: 25px;
+            background-color: var(--primary-yellow);
+            top: 40%;
+            right: 15%;
+        }
+        
+        .subtitle {
+            font-family: var(--font-sans);
+            font-weight: 400;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .subtitle-word {
+            position: relative;
+            margin-right: 8px;
+            display: inline-block;
+        }
+        
+        .subtitle-word:nth-child(1) { font-weight: 300; color: var(--primary-blue); }
+        .subtitle-word:nth-child(2) { font-weight: 400; color: var(--primary-red); }
+        .subtitle-word:nth-child(3) { font-weight: 500; color: var(--primary-yellow); }
+        .subtitle-word:nth-child(4) { font-weight: 600; color: var(--primary-purple); }
+        .subtitle-word:nth-child(5) { font-weight: 700; color: var(--primary-green); }
+        .subtitle-word:nth-child(6) { font-weight: 400; color: var(--primary-orange); }
+        .subtitle-word:nth-child(7) { font-weight: 300; color: var(--primary-blue); }
+        .subtitle-word:nth-child(8) { font-weight: 500; color: var(--primary-red); }
+        
+        /* 引用区块 */
+        .quote-section {
+            position: relative;
+            margin: var(--spacing-xl) 0;
+            padding: var(--spacing-md);
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .quote-viz {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .quote-shape {
+            position: absolute;
+            opacity: 0.15;
+        }
+        
+        .quote-shape-1 {
+            width: 60%;
+            height: 20px;
+            background-color: var(--primary-blue);
+            top: 0;
+            left: 0;
+            clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
+        }
+        
+        .quote-shape-2 {
+            width: 40%;
+            height: 15px;
+            background-color: var(--primary-red);
+            bottom: 0;
+            right: 0;
+            clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+        }
+        
+        .quote-text {
+            font-family: var(--font-serif);
+            font-weight: 500;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: var(--spacing-sm);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .quote-text-viz {
+            display: inline-block;
+            position: relative;
+        }
+        
+        .quote-text-viz::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+        }
+        
+        .quote-text-viz:nth-of-type(1)::after { background-color: var(--primary-blue); }
+        .quote-text-viz:nth-of-type(2)::after { background-color: var(--primary-red); }
+        .quote-text-viz:nth-of-type(3)::after { background-color: var(--primary-yellow); }
+        
+        .quote-author {
+            font-family: var(--font-sans);
+            font-weight: 400;
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+            text-align: right;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* 核心要点列表 */
+        .points-section {
+            position: relative;
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .points-title {
+            font-family: var(--font-serif);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .points-viz {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-blue), var(--primary-red));
+            z-index: -1;
+            opacity: 0.2;
+            border-radius: 2px;
+        }
+        
+        .points-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .point-item {
+            position: relative;
+            margin-bottom: var(--spacing-md);
+            padding-left: var(--spacing-xl);
+            font-family: var(--font-sans);
+            font-weight: 400;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .point-viz {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+        }
+        
+        .point-circle {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 4px;
+            transition: transform var(--transition-medium) ease;
+        }
+        
+        .point-item:hover .point-circle {
+            transform: scale(1.2);
+        }
+        
+        .point-item:nth-child(1) .point-circle { background-color: var(--primary-blue); }
+        .point-item:nth-child(2) .point-circle { background-color: var(--primary-red); }
+        .point-item:nth-child(3) .point-circle { background-color: var(--primary-yellow); }
+        .point-item:nth-child(4) .point-circle { background-color: var(--primary-purple); }
+        .point-item:nth-child(5) .point-circle { background-color: var(--primary-green); }
+        .point-item:nth-child(6) .point-circle { background-color: var(--primary-orange); }
+        
+        .point-line {
+            width: calc(var(--spacing-xl) - 14px);
+            height: 2px;
+            background-color: var(--text-tertiary);
+            opacity: 0.3;
+            transition: width var(--transition-medium) ease, opacity var(--transition-medium) ease;
+        }
+        
+        .point-item:hover .point-line {
+            width: calc(var(--spacing-xl) - 8px);
+            opacity: 0.6;
+        }
+        
+        /* 二维码区域 */
+        .qrcode-section {
+            position: relative;
+            margin: var(--spacing-xl) 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .qrcode-container {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            perspective: 1000px;
+        }
+        
+        .qrcode-viz {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: calc(100% + 20px);
+            height: calc(100% + 20px);
+            pointer-events: none;
+        }
+        
+        .qrcode-shape {
+            position: absolute;
+            opacity: 0.2;
+            mix-blend-mode: multiply;
+        }
+        
+        .qrcode-shape-1 {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle at 30% 30%, var(--light-red), transparent 70%);
+        }
+        
+        .qrcode-shape-2 {
+            width: 80%;
+            height: 80%;
+            bottom: 0;
+            right: 0;
+            background: radial-gradient(circle at 70% 70%, var(--light-blue), transparent 70%);
+        }
+        
+        .qrcode-shape-3 {
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 30%;
+            background: radial-gradient(circle at 50% 50%, var(--light-yellow), transparent 70%);
+        }
+        
+        .qrcode-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-medium) ease;
+            transform-style: preserve-3d;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .qrcode-container:hover .qrcode-image {
+            transform: rotateY(10deg) rotateX(5deg);
+        }
+        
+        .qrcode-stroke {
+            position: absolute;
+            width: 40px;
+            height: 8px;
+            background-color: var(--primary-purple);
+            opacity: 0.2;
+            border-radius: 4px;
+        }
+        
+        .qrcode-stroke-1 {
+            top: -10px;
+            right: 20px;
+            transform: rotate(45deg);
+        }
+        
+        .qrcode-stroke-2 {
+            bottom: -5px;
+            left: 15px;
+            transform: rotate(-30deg);
+        }
+        
+        /* 编辑笔记区域 */
+        .notes-section {
+            position: relative;
+            margin-top: var(--spacing-xl);
+            padding: var(--spacing-md);
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 2px;
+        }
+        
+        .notes-viz {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .notes-graph {
+            position: absolute;
+            width: 100%;
+            height: 40px;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            align-items: flex-end;
+            opacity: 0.1;
+        }
+        
+        .graph-bar {
+            flex: 1;
+            height: 100%;
+            margin: 0 1px;
+            background-color: var(--text-primary);
+            transform-origin: bottom;
+        }
+        
+        .graph-bar:nth-child(1) { height: 40%; }
+        .graph-bar:nth-child(2) { height: 70%; }
+        .graph-bar:nth-child(3) { height: 60%; }
+        .graph-bar:nth-child(4) { height: 90%; }
+        .graph-bar:nth-child(5) { height: 50%; }
+        .graph-bar:nth-child(6) { height: 80%; }
+        .graph-bar:nth-child(7) { height: 40%; }
+        .graph-bar:nth-child(8) { height: 65%; }
+        .graph-bar:nth-child(9) { height: 55%; }
+        .graph-bar:nth-child(10) { height: 75%; }
+        
+        .notes-title {
+            font-family: var(--font-serif);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: var(--spacing-sm);
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+        }
+        
+        .notes-content {
+            font-family: var(--font-sans);
+            font-weight: 400;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* 装饰性法语/英语文本 */
+        .decorative-text {
+            position: absolute;
+            font-family: Georgia, serif;
+            font-style: italic;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .french-text {
+            font-size: 4rem;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            color: var(--primary-blue);
+        }
+        
+        .english-text {
+            font-size: 2.5rem;
+            bottom: 10%;
+            right: 10%;
+            transform: rotate(10deg);
+            color: var(--primary-red);
+        }
+        
+        /* 数据可视化元素 */
+        .data-viz-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .data-point {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            opacity: 0.2;
+            transition: transform var(--transition-slow) ease, opacity var(--transition-slow) ease;
+        }
+        
+        .data-point:nth-child(6n+1) { background-color: var(--primary-blue); }
+        .data-point:nth-child(6n+2) { background-color: var(--primary-red); }
+        .data-point:nth-child(6n+3) { background-color: var(--primary-yellow); }
+        .data-point:nth-child(6n+4) { background-color: var(--primary-purple); }
+        .data-point:nth-child(6n+5) { background-color: var(--primary-green); }
+        .data-point:nth-child(6n) { background-color: var(--primary-orange); }
+        
+        .neo-expressionist-card:hover .data-point {
+            opacity: 0.4;
+            transform: scale(1.3);
+        }
+        
+        .data-line {
+            position: absolute;
+            height: 1px;
+            background-color: var(--text-tertiary);
+            opacity: 0.1;
+            transform-origin: left center;
+            transition: width var(--transition-slow) ease, opacity var(--transition-slow) ease;
+        }
+        
+        .neo-expressionist-card:hover .data-line {
+            opacity: 0.2;
+            width: calc(100% + 10px) !important;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 500px) {
+            .neo-expressionist-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="neo-expressionist-card" id="neo-expressionist-card">
+        <!-- 背景涂抹效果 -->
+        <div class="abstract-bg">
+            <div class="brush-stroke stroke-1"></div>
+            <div class="brush-stroke stroke-2"></div>
+            <div class="brush-stroke stroke-3"></div>
+            <div class="brush-stroke stroke-4"></div>
+            <div class="ink-splatter splatter-1"></div>
+            <div class="ink-splatter splatter-2"></div>
+        </div>
+        
+        <!-- 装饰性文本 -->
+        <div class="decorative-text french-text">Perception</div>
+        <div class="decorative-text english-text">Art of Data</div>
+        
+        <!-- 日期区域 -->
+        <div class="date-section">
+            <div class="date-visualization">
+                <div class="date-text">2025.03.27</div>
+                <div class="date-bars">
+                    <div class="date-bar"></div>
+                    <div class="date-bar"></div>
+                    <div class="date-bar"></div>
+                    <div class="date-bar"></div>
+                    <div class="date-bar"></div>
+                    <div class="date-bar"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 标题区域 -->
+        <div class="title-section">
+            <div class="title-data-viz">
+                <div class="title-line"></div>
+                <div class="title-circles">
+                    <div class="title-circle circle-1"></div>
+                    <div class="title-circle circle-2"></div>
+                    <div class="title-circle circle-3"></div>
+                </div>
+            </div>
+            <h1 class="main-title">新表现主义数据可视化</h1>
+            <h2 class="subtitle">
+                <span class="subtitle-word">抽象</span>
+                <span class="subtitle-word">表现</span>
+                <span class="subtitle-word">艺术</span>
+                <span class="subtitle-word">与</span>
+                <span class="subtitle-word">数据</span>
+                <span class="subtitle-word">可视化</span>
+                <span class="subtitle-word">的</span>
+                <span class="subtitle-word">融合</span>
+            </h2>
+        </div>
+        
+        <!-- 引用区块 -->
+        <div class="quote-section">
+            <div class="quote-viz">
+                <div class="quote-shape quote-shape-1"></div>
+                <div class="quote-shape quote-shape-2"></div>
+            </div>
+            <p class="quote-text">
+                「<span class="quote-text-viz">数据不仅是数字</span>，<span class="quote-text-viz">而是关于我们人类体验的故事</span>。<span class="quote-text-viz">它应该被讲述，而非仅被计算</span>。」
+            </p>
+            <p class="quote-author">— Giorgia Lupi, 数据人文主义创始人</p>
+        </div>
+        
+        <!-- 核心要点列表 -->
+        <div class="points-section">
+            <h3 class="points-title">
+                核心要点
+                <div class="points-viz"></div>
+            </h3>
+            <ul class="points-list">
+                <li class="point-item">
+                    <div class="point-viz">
+                        <div class="point-circle"></div>
+                        <div class="point-line"></div>
+                    </div>
+                    看似随意的笔触实则由精确数据驱动
+                </li>
+                <li class="point-item">
+                    <div class="point-viz">
+                        <div class="point-circle"></div>
+                        <div class="point-line"></div>
+                    </div>
+                    文字通过字重变化成为数据表达的一部分
+                </li>
+                <li class="point-item">
+                    <div class="point-viz">
+                        <div class="point-circle"></div>
+                        <div class="point-line"></div>
+                    </div>
+                    鲜明色彩分类对应不同数据类别
+                </li>
+                <li class="point-item">
+                    <div class="point-viz">
+                        <div class="point-circle"></div>
+                        <div class="point-line"></div>
+                    </div>
+                    手绘质感图表展现不规则边缘
+                </li>
+                <li class="point-item">
+                    <div class="point-viz">
+                        <div class="point-circle"></div>
+                        <div class="point-line"></div>
+                    </div>
+                    混沌中的秩序，抽象中的精确信息
+                </li>
+                <li class="point-item">
+                    <div class="point-viz">
+                        <div class="point-circle"></div>
+                        <div class="point-line"></div>
+                    </div>
+                    情感化设计与严谨数据分析结合
+                </li>
+            </ul>
+        </div>
+        
+        <!-- 二维码区域 -->
+        <div class="qrcode-section">
+            <div class="qrcode-container">
+                <div class="qrcode-viz">
+                    <div class="qrcode-shape qrcode-shape-1"></div>
+                    <div class="qrcode-shape qrcode-shape-2"></div>
+                    <div class="qrcode-shape qrcode-shape-3"></div>
+                    <div class="qrcode-stroke qrcode-stroke-1"></div>
+                    <div class="qrcode-stroke qrcode-stroke-2"></div>
+                </div>
+                <img class="qrcode-image" src="https://images.cubox.pro/rhkekb/file/2025032609523776560/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250326095228.jpg" alt="二维码">
+            </div>
+        </div>
+        
+        <!-- 编辑笔记区域 -->
+        <div class="notes-section">
+            <div class="notes-viz">
+                <div class="notes-graph">
+                    <div class="graph-bar"></div>
+                    <div class="graph-bar"></div>
+                    <div class="graph-bar"></div>
+                    <div class="graph-bar"></div>
+                    <div class="graph-bar"></div>
+                    <div class="graph-bar"></div>
+                    <div class="graph-bar"></div>
+                    <div class="graph-bar"></div>
+                    <div class="graph-bar"></div>
+                    <div class="graph-bar"></div>
+                </div>
+            </div>
+            <h3 class="notes-title">编辑札记</h3>
+            <p class="notes-content">新表现主义数据可视化将冷冰冰的数据转化为充满情感的视觉语言，让读者不仅能理解数据，更能感受数据背后的人文故事。这种融合艺术与科学的设计方法，正逐渐成为当代信息美学的重要趋势。</p>
+        </div>
+        
+        <!-- 数据可视化元素 -->
+        <div class="data-viz-elements" id="data-viz-elements">
+            <!-- JavaScript将动态生成数据点和线条 -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const card = document.getElementById('neo-expressionist-card');
+            const dataVizElements = document.getElementById('data-viz-elements');
+            const elements = document.querySelectorAll('.date-section, .title-section, .quote-section, .points-section, .qrcode-section, .notes-section');
+            
+            // 初始化元素为不可见
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            elements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(10px)';
+            });
+            
+            // 生成随机数据点
+            function generateDataPoints() {
+                const numberOfPoints = 30;
+                
+                for (let i = 0; i < numberOfPoints; i++) {
+                    const point = document.createElement('div');
+                    point.className = 'data-point';
+                    
+                    // 随机位置
+                    const left = Math.random() * 95 + 2.5; // 2.5% to 97.5%
+                    const top = Math.random() * 95 + 2.5;  // 2.5% to 97.5%
+                    
+                    point.style.left = `${left}%`;
+                    point.style.top = `${top}%`;
+                    
+                    // 随机大小
+                    const size = Math.random() * 4 + 3; // 3px to 7px
+                    point.style.width = `${size}px`;
+                    point.style.height = `${size}px`;
+                    
+                    dataVizElements.appendChild(point);
+                    
+                    // 为一些点创建连接线
+                    if (Math.random() > 0.4) {
+                        const line = document.createElement('div');
+                        line.className = 'data-line';
+                        
+                        // 随机长度和角度
+                        const length = Math.random() * 80 + 20; // 20px to 100px
+                        const angle = Math.random() * 360; // 0 to 360 degrees
+                        
+                        line.style.width = `${length}px`;
+                        line.style.left = `${left}%`;
+                        line.style.top = `${top}%`;
+                        line.style.transform = `rotate(${angle}deg)`;
+                        
+                        dataVizElements.appendChild(line);
+                    }
+                }
+            }
+            
+            // 在短暂延迟后逐个显示元素
+            setTimeout(function() {
+                // 生成数据可视化元素
+                generateDataPoints();
+                
+                card.style.transition = 'opacity 1s ease, transform 1s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+                
+                elements.forEach((el, index) => {
+                    setTimeout(function() {
+                        el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, 200 + index * 120);
+                });
+            }, 100);
+            
+            // 鼠标移动效果
+            card.addEventListener('mousemove', function(e) {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // 计算相对位置 (0-1)
+                const relX = x / rect.width;
+                const relY = y / rect.height;
+                
+                // 更新笔刷效果
+                const brushStrokes = document.querySelectorAll('.brush-stroke');
+                brushStrokes.forEach((stroke, index) => {
+                    const offsetX = (relX - 0.5) * 10 * (index + 1);
+                    const offsetY = (relY - 0.5) * 10 * (index + 1);
+                    stroke.style.transform = `rotate(${index * 15}deg) translate(${offsetX}px, ${offsetY}px)`;
+                });
+                
+                // 更新数据点和线条
+                const dataPoints = document.querySelectorAll('.data-point');
+                dataPoints.forEach(point => {
+                    const pointRect = point.getBoundingClientRect();
+                    const pointX = (pointRect.left + pointRect.width / 2) - rect.left;
+                    const pointY = (pointRect.top + pointRect.height / 2) - rect.top;
+                    
+                    // 计算与鼠标的距离
+                    const dx = x - pointX;
+                    const dy = y - pointY;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    // 在鼠标附近的点增大
+                    if (distance < 80) {
+                        const scale = 1 + (1 - distance / 80) * 1.5;
+                        point.style.transform = `scale(${scale})`;
+                        point.style.opacity = '0.6';
+                    } else {
+                        point.style.transform = '';
+                        point.style.opacity = '0.2';
+                    }
+                });
+            });
+            
+            // 鼠标离开时重置效果
+            card.addEventListener('mouseleave', function() {
+                const brushStrokes = document.querySelectorAll('.brush-stroke');
+                brushStrokes.forEach((stroke, index) => {
+                    stroke.style.transform = `rotate(${index * 15}deg)`;
+                });
+                
+                const dataPoints = document.querySelectorAll('.data-point');
+                dataPoints.forEach(point => {
+                    point.style.transform = '';
+                    point.style.opacity = '0.2';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

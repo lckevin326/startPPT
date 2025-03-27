@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>包豪斯风格 - 高级时尚杂志卡片</title>
+    <link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* 包豪斯核心色彩 */
+            --bauhaus-red: #E63946;
+            --bauhaus-yellow: #FCBF49;
+            --bauhaus-blue: #003049;
+            --bauhaus-black: #000000;
+            --bauhaus-white: #FFFFFF;
+            --bauhaus-gray: #D9D9D9;
+            --bauhaus-light-gray: #F8F9FA;
+            
+            /* 间距变量 - 基于方块网格 */
+            --grid-unit: 8px;
+            --spacing-1: calc(var(--grid-unit) * 1);
+            --spacing-2: calc(var(--grid-unit) * 2);
+            --spacing-3: calc(var(--grid-unit) * 3);
+            --spacing-4: calc(var(--grid-unit) * 4);
+            --spacing-5: calc(var(--grid-unit) * 5);
+            --spacing-6: calc(var(--grid-unit) * 6);
+            
+            /* 字体变量 */
+            --font-sans: 'Work Sans', 'Noto Sans SC', sans-serif;
+            
+            /* Z-index层级管理 */
+            --z-background: -1;
+            --z-content: 1;
+            --z-overlay: 2;
+            --z-tooltip: 3;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: #1a1a1a;
+            color: var(--bauhaus-black);
+            line-height: 1.5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        /* 主卡片容器 */
+        .bauhaus-card {
+            position: relative;
+            width: 400px;
+            max-height: 1680px;
+            background-color: var(--bauhaus-white);
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 基础网格系统 */
+        .bauhaus-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: auto;
+        }
+        
+        /* 几何装饰元素 */
+        .geometric-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: var(--z-background);
+        }
+        
+        .geometric-shape {
+            position: absolute;
+        }
+        
+        .red-square {
+            width: 80px;
+            height: 80px;
+            background-color: var(--bauhaus-red);
+            top: 60px;
+            right: -40px;
+            z-index: var(--z-background);
+        }
+        
+        .yellow-circle {
+            width: 100px;
+            height: 100px;
+            background-color: var(--bauhaus-yellow);
+            border-radius: 50%;
+            bottom: 40px;
+            left: -50px;
+            z-index: var(--z-background);
+        }
+        
+        .blue-rectangle {
+            width: 60px;
+            height: 200px;
+            background-color: var(--bauhaus-blue);
+            top: 200px;
+            left: -30px;
+            z-index: var(--z-background);
+        }
+        
+        .black-triangle {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 100px solid var(--bauhaus-black);
+            position: absolute;
+            right: 30px;
+            bottom: -50px;
+            opacity: 0.8;
+            z-index: var(--z-background);
+        }
+        
+        .gray-line-horizontal {
+            height: 1px;
+            width: 100%;
+            background-color: var(--bauhaus-gray);
+            position: absolute;
+            top: 50%;
+            left: 0;
+            z-index: var(--z-background);
+            opacity: 0.3;
+        }
+        
+        .gray-line-vertical {
+            width: 1px;
+            height: 100%;
+            background-color: var(--bauhaus-gray);
+            position: absolute;
+            top: 0;
+            left: 66.66%;
+            z-index: var(--z-background);
+            opacity: 0.3;
+        }
+        
+        /* 主要内容区域 */
+        .bauhaus-content {
+            padding: var(--spacing-4);
+            position: relative;
+            z-index: var(--z-content);
+        }
+        
+        /* 日期区域 */
+        .date-section {
+            text-align: right;
+            margin-bottom: var(--spacing-4);
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 1px;
+            color: var(--bauhaus-black);
+            position: relative;
+        }
+        
+        .date-grid {
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .date-marker {
+            width: var(--spacing-2);
+            height: var(--spacing-2);
+            margin-left: var(--spacing-1);
+            display: inline-block;
+        }
+        
+        .date-marker.red {
+            background-color: var(--bauhaus-red);
+        }
+        
+        .date-marker.yellow {
+            background-color: var(--bauhaus-yellow);
+        }
+        
+        .date-marker.blue {
+            background-color: var(--bauhaus-blue);
+        }
+        
+        /* 标题区域 */
+        .title-section {
+            margin: var(--spacing-5) 0;
+        }
+        
+        .main-title {
+            font-weight: 800;
+            font-size: 32px;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: var(--spacing-2);
+            color: var(--bauhaus-black);
+            line-height: 1.2;
+        }
+        
+        .title-accent {
+            color: var(--bauhaus-red);
+        }
+        
+        .subtitle {
+            font-weight: 400;
+            font-size: 16px;
+            color: var(--bauhaus-black);
+            margin-top: var(--spacing-2);
+            position: relative;
+            padding-left: var(--spacing-4);
+        }
+        
+        .subtitle::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: var(--spacing-3);
+            height: 2px;
+            background-color: var(--bauhaus-blue);
+        }
+        
+        /* 分隔元素 */
+        .bauhaus-divider {
+            display: flex;
+            align-items: center;
+            margin: var(--spacing-4) 0;
+        }
+        
+        .divider-line {
+            flex-grow: 1;
+            height: 1px;
+            background-color: var(--bauhaus-black);
+        }
+        
+        .divider-circle {
+            width: var(--spacing-2);
+            height: var(--spacing-2);
+            border-radius: 50%;
+            margin: 0 var(--spacing-2);
+        }
+        
+        .divider-circle.red {
+            background-color: var(--bauhaus-red);
+        }
+        
+        .divider-circle.yellow {
+            background-color: var(--bauhaus-yellow);
+        }
+        
+        .divider-circle.blue {
+            background-color: var(--bauhaus-blue);
+        }
+        
+        /* 引用区块 */
+        .quote-section {
+            margin: var(--spacing-4) 0;
+            padding: var(--spacing-4);
+            position: relative;
+            background-color: var(--bauhaus-light-gray);
+            border-left: 4px solid var(--bauhaus-red);
+        }
+        
+        .quote-text {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: var(--spacing-2);
+            font-family: var(--font-sans);
+        }
+        
+        .quote-author {
+            font-weight: 600;
+            font-size: 14px;
+            text-align: right;
+            color: var(--bauhaus-black);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        
+        .quote-symbol {
+            width: var(--spacing-1);
+            height: var(--spacing-1);
+            background-color: var(--bauhaus-blue);
+            margin-right: var(--spacing-1);
+        }
+        
+        /* 核心要点列表 */
+        .points-section {
+            margin: var(--spacing-5) 0;
+        }
+        
+        .points-title {
+            font-weight: 700;
+            font-size: 18px;
+            text-transform: uppercase;
+            margin-bottom: var(--spacing-3);
+            color: var(--bauhaus-black);
+            display: flex;
+            align-items: center;
+        }
+        
+        .points-title-box {
+            width: var(--spacing-2);
+            height: var(--spacing-2);
+            background-color: var(--bauhaus-yellow);
+            margin-right: var(--spacing-2);
+        }
+        
+        .points-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .point-item {
+            margin-bottom: var(--spacing-3);
+            padding-left: var(--spacing-5);
+            position: relative;
+            font-weight: 400;
+            font-size: 15px;
+            color: var(--bauhaus-black);
+        }
+        
+        .point-marker {
+            position: absolute;
+            left: 0;
+            top: 7px;
+            width: var(--spacing-3);
+            height: 2px;
+            background-color: var(--bauhaus-black);
+        }
+        
+        /* 交替点标记颜色 */
+        .point-item:nth-child(3n+1) .point-marker {
+            background-color: var(--bauhaus-red);
+        }
+        
+        .point-item:nth-child(3n+2) .point-marker {
+            background-color: var(--bauhaus-blue);
+        }
+        
+        .point-item:nth-child(3n+3) .point-marker {
+            background-color: var(--bauhaus-yellow);
+        }
+        
+        /* 二维码区域 */
+        .qrcode-section {
+            margin: var(--spacing-5) 0;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-gap: var(--spacing-2);
+        }
+        
+        .qrcode-container {
+            grid-column: 4 / span 6;
+            position: relative;
+            aspect-ratio: 1;
+            background-color: var(--bauhaus-white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid var(--bauhaus-black);
+        }
+        
+        .qrcode-image {
+            width: 85%;
+            height: 85%;
+            object-fit: contain;
+            filter: grayscale(1) contrast(1.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .qrcode-container:hover .qrcode-image {
+            transform: scale(1.05);
+        }
+        
+        .qrcode-corner {
+            position: absolute;
+            width: var(--spacing-3);
+            height: var(--spacing-3);
+        }
+        
+        .qrcode-corner.top-left {
+            top: -2px;
+            left: -2px;
+            border-top: 4px solid var(--bauhaus-red);
+            border-left: 4px solid var(--bauhaus-red);
+        }
+        
+        .qrcode-corner.top-right {
+            top: -2px;
+            right: -2px;
+            border-top: 4px solid var(--bauhaus-yellow);
+            border-right: 4px solid var(--bauhaus-yellow);
+        }
+        
+        .qrcode-corner.bottom-left {
+            bottom: -2px;
+            left: -2px;
+            border-bottom: 4px solid var(--bauhaus-blue);
+            border-left: 4px solid var(--bauhaus-blue);
+        }
+        
+        .qrcode-corner.bottom-right {
+            bottom: -2px;
+            right: -2px;
+            border-bottom: 4px solid var(--bauhaus-black);
+            border-right: 4px solid var(--bauhaus-black);
+        }
+        
+        /* 编辑笔记区域 */
+        .notes-section {
+            margin-top: var(--spacing-5);
+            padding: var(--spacing-4);
+            background-color: var(--bauhaus-light-gray);
+            position: relative;
+        }
+        
+        .notes-title {
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            margin-bottom: var(--spacing-2);
+            color: var(--bauhaus-black);
+            display: flex;
+            align-items: center;
+        }
+        
+        .notes-title-marker {
+            width: var(--spacing-4);
+            height: var(--spacing-4);
+            background-color: var(--bauhaus-blue);
+            margin-right: var(--spacing-2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .notes-title-marker::before {
+            content: '';
+            width: 50%;
+            height: 50%;
+            background-color: var(--bauhaus-white);
+        }
+        
+        .notes-content {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--bauhaus-black);
+        }
+        
+        /* 装饰性德语文本 */
+        .decorative-text {
+            position: absolute;
+            text-transform: uppercase;
+            font-weight: 800;
+            opacity: 0.03;
+            color: var(--bauhaus-black);
+            pointer-events: none;
+            z-index: var(--z-background);
+        }
+        
+        .german-text {
+            font-size: 4rem;
+            top: 40%;
+            right: -20px;
+            transform: rotate(90deg);
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 500px) {
+            .bauhaus-card {
+                width: 100%;
+            }
+            
+            .geometric-elements {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bauhaus-card" id="bauhaus-card">
+        <!-- 几何装饰元素 -->
+        <div class="geometric-elements">
+            <div class="geometric-shape red-square"></div>
+            <div class="geometric-shape yellow-circle"></div>
+            <div class="geometric-shape blue-rectangle"></div>
+            <div class="geometric-shape black-triangle"></div>
+            <div class="geometric-shape gray-line-horizontal"></div>
+            <div class="geometric-shape gray-line-vertical"></div>
+        </div>
+        
+        <!-- 装饰性德语文本 -->
+        <div class="decorative-text german-text">BAUHAUS</div>
+        
+        <!-- 主要内容区域 -->
+        <div class="bauhaus-content">
+            <!-- 日期区域 -->
+            <div class="date-section">
+                <div class="date-grid">
+                    2025.03.27
+                    <span class="date-marker red"></span>
+                    <span class="date-marker yellow"></span>
+                    <span class="date-marker blue"></span>
+                </div>
+            </div>
+            
+            <!-- 标题区域 -->
+            <div class="title-section">
+                <h1 class="main-title">包豪斯<span class="title-accent">风格</span></h1>
+                <h2 class="subtitle">形式服从功能的设计理念</h2>
+            </div>
+            
+            <div class="bauhaus-divider">
+                <div class="divider-line"></div>
+                <div class="divider-circle red"></div>
+                <div class="divider-circle yellow"></div>
+                <div class="divider-circle blue"></div>
+                <div class="divider-line"></div>
+            </div>
+            
+            <!-- 引用区块 -->
+            <div class="quote-section">
+                <p class="quote-text">「艺术与技术的新统一是我们的目标。形式必须服从功能，美必须来源于结构的完美和材料的诚实。」</p>
+                <div class="quote-author">
+                    <span class="quote-symbol"></span>
+                    瓦尔特·格罗皮乌斯, 包豪斯创始人
+                </div>
+            </div>
+            
+            <!-- 核心要点列表 -->
+            <div class="points-section">
+                <h3 class="points-title">
+                    <span class="points-title-box"></span>
+                    核心特征
+                </h3>
+                <ul class="points-list">
+                    <li class="point-item">
+                        <span class="point-marker"></span>
+                        基本几何形状作为核心设计元素
+                    </li>
+                    <li class="point-item">
+                        <span class="point-marker"></span>
+                        红、黄、蓝三原色加黑白灰
+                    </li>
+                    <li class="point-item">
+                        <span class="point-marker"></span>
+                        无衬线字体与严格的网格系统
+                    </li>
+                    <li class="point-item">
+                        <span class="point-marker"></span>
+                        强调水平和垂直线条的平衡
+                    </li>
+                    <li class="point-item">
+                        <span class="point-marker"></span>
+                        简洁具有几何感的图像处理
+                    </li>
+                    <li class="point-item">
+                        <span class="point-marker"></span>
+                        形式服从功能的设计理念
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- 二维码区域 -->
+            <div class="qrcode-section">
+                <div class="qrcode-container">
+                    <div class="qrcode-corner top-left"></div>
+                    <div class="qrcode-corner top-right"></div>
+                    <div class="qrcode-corner bottom-left"></div>
+                    <div class="qrcode-corner bottom-right"></div>
+                    <img class="qrcode-image" src="https://images.cubox.pro/rhkekb/file/2025032609523776560/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250326095228.jpg" alt="二维码">
+                </div>
+            </div>
+            
+            <!-- 编辑笔记区域 -->
+            <div class="notes-section">
+                <h3 class="notes-title">
+                    <div class="notes-title-marker"></div>
+                    编辑札记
+                </h3>
+                <p class="notes-content">包豪斯运动彻底改变了20世纪设计理念，其对材料诚实性与功能性的追求，至今仍深刻影响着现代设计思想。其理性主义美学不仅启发了建筑与工业设计，更为现代视觉传达奠定了基础原则，成为设计史上不可忽视的里程碑。</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const card = document.getElementById('bauhaus-card');
+            const elements = document.querySelectorAll('.date-section, .title-section, .quote-section, .points-section, .qrcode-section, .notes-section');
+            
+            // 初始设置元素为不可见
+            card.style.opacity = '0';
+            elements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+            });
+            
+            // 在短暂延迟后逐个显示元素，保持机械精确感
+            setTimeout(function() {
+                card.style.transition = 'opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                card.style.opacity = '1';
+                
+                elements.forEach((el, index) => {
+                    setTimeout(function() {
+                        el.style.transition = 'opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, 150 + index * 80); // 精确、机械化的时间间隔
+                });
+            }, 100);
+            
+            // 鼠标悬停效果 - 几何形状的微妙移动
+            const geometricShapes = document.querySelectorAll('.geometric-shape');
+            
+            card.addEventListener('mousemove', function(e) {
+                const cardRect = card.getBoundingClientRect();
+                const xPos = (e.clientX - cardRect.left) / cardRect.width;
+                const yPos = (e.clientY - cardRect.top) / cardRect.height;
+                
+                geometricShapes.forEach((shape, index) => {
+                    // 计算偏移量，确保移动很微小且几何精确
+                    const offsetFactor = (index % 3 + 1) * 5;
+                    const xOffset = (xPos - 0.5) * offsetFactor;
+                    const yOffset = (yPos - 0.5) * offsetFactor;
+                    
+                    // 应用变换，保持几何精确感
+                    shape.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+                });
+            });
+            
+            // 鼠标离开时重置位置
+            card.addEventListener('mouseleave', function() {
+                geometricShapes.forEach(shape => {
+                    shape.style.transform = 'translate(0, 0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

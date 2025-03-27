@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>德国表现主义风格 | GERMAN EXPRESSIONISM</title>
+    <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Pirata+One&family=Grenze+Gotisch:wght@400;700;900&family=Lacquer&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-black: #0a0a0a;
+            --color-dark-blue: #0a1c3b;
+            --color-dark-red: #5a0f15;
+            --color-yellow: #c7a003;
+            --color-dark-green: #0d3b10;
+            --color-off-white: #e5e1d8;
+            --font-gothic: 'Grenze Gotisch', 'Noto Serif SC', serif;
+            --font-fraktur: 'UnifrakturMaguntia', 'Noto Serif SC', serif;
+            --font-distorted: 'Pirata One', 'Noto Serif SC', serif;
+            --font-jagged: 'Lacquer', 'Noto Sans SC', sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: var(--font-gothic);
+            color: var(--color-off-white);
+        }
+        
+        .magazine-card {
+            width: 400px;
+            max-height: 1680px;
+            background-color: var(--color-dark-blue);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 10px 15px 25px rgba(0, 0, 0, 0.5), -10px -10px 25px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1.2s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px) skewY(2deg); }
+            to { opacity: 1; transform: translateY(0) skewY(0); }
+        }
+        
+        /* 纹理背景 */
+        .texture-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iLjE1Ii8+PC9zdmc+');
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        /* 扭曲的路径 */
+        .distorted-path {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.05);
+            clip-path: polygon(var(--path-points, 0% 0%, 100% 0%, 100% 100%, 0% 100%));
+            z-index: 0;
+        }
+        
+        .path-1 {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            --path-points: 0% 20%, 40% 0%, 100% 15%, 70% 100%, 0% 80%;
+        }
+        
+        /* 锯齿状山脉 */
+        .jagged-mountains {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background-color: var(--color-black);
+            clip-path: polygon(0% 100%, 5% 70%, 10% 100%, 20% 60%, 30% 100%, 40% 50%, 50% 80%, 60% 40%, 70% 70%, 80% 30%, 90% 80%, 95% 40%, 100% 100%);
+            opacity: 0.7;
+            z-index: 0;
+        }
+        
+        /* 尖塔 */
+        .spire {
+            position: absolute;
+            background-color: var(--color-black);
+            clip-path: polygon(50% 0%, 30% 100%, 70% 100%);
+            z-index: 1;
+        }
+        
+        .spire-1 {
+            top: 60px;
+            right: 40px;
+            width: 30px;
+            height: 120px;
+            transform: rotate(5deg);
+        }
+        
+        .spire-2 {
+            top: 80px;
+            right: 80px;
+            width: 20px;
+            height: 90px;
+            transform: rotate(-8deg);
+        }
+        
+        .spire-3 {
+            top: 100px;
+            right: 120px;
+            width: 15px;
+            height: 60px;
+            transform: rotate(12deg);
+        }
+        
+        /* 狂野的线条 */
+        .jagged-line {
+            position: absolute;
+            background-color: var(--color-dark-red);
+            height: 2px;
+            transform: rotate(var(--rotation, 0deg)) skewX(var(--skew, 0deg));
+            z-index: 2;
+        }
+        
+        .line-1 {
+            top: 180px;
+            left: 20px;
+            width: 100px;
+            --rotation: 25deg;
+            --skew: 20deg;
+        }
+        
+        .line-2 {
+            bottom: 150px;
+            right: 30px;
+            width: 150px;
+            --rotation: -15deg;
+            --skew: -10deg;
+        }
+        
+        /* 木刻效果蒙版 */
+        .woodcut-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDEgMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iLjA1Ii8+PC9zdmc+');
+            z-index: 1;
+            pointer-events: none;
+            mix-blend-mode: multiply;
+        }
+        
+        /* 内容容器 */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            padding: 40px 30px;
+        }
+        
+        /* 扭曲的阴影效果 */
+        .shadow-element {
+            position: absolute;
+            background-color: var(--color-black);
+            transform: skew(var(--skew-x, 0deg), var(--skew-y, 0deg)) rotate(var(--rotation, 0deg));
+            filter: blur(10px);
+            opacity: 0.5;
+            z-index: -1;
+        }
+        
+        .shadow-1 {
+            width: 80%;
+            height: 20px;
+            bottom: -10px;
+            left: 10%;
+            --skew-x: 20deg;
+            --rotation: 5deg;
+        }
+        
+        /* 日期区域 */
+        .issue-date {
+            font-family: var(--font-jagged);
+            font-size: 16px;
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: var(--color-yellow);
+            transform: rotate(-5deg) skewX(10deg);
+            text-shadow: 3px 3px 0 var(--color-black);
+            z-index: 10;
+        }
+        
+        /* 标题区域 */
+        .title-container {
+            margin-top: 80px;
+            position: relative;
+        }
+        
+        .title-main {
+            font-family: var(--font-fraktur);
+            font-size: 42px;
+            line-height: 1.2;
+            color: var(--color-off-white);
+            margin-left: -15px;
+            margin-bottom: 20px;
+            text-shadow: 6px 6px 0 var(--color-black);
+            transform: skewY(-5deg);
+        }
+        
+        .title-sub {
+            font-family: var(--font-gothic);
+            font-size: 18px;
+            margin-top: 10px;
+            margin-left: 30px;
+            color: var(--color-yellow);
+            transform: skewX(15deg);
+            text-shadow: 2px 2px 0 var(--color-black);
+        }
+        
+        /* 标题阴影 */
+        .title-shadow {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-family: var(--font-fraktur);
+            font-size: 42px;
+            line-height: 1.2;
+            color: transparent;
+            -webkit-text-stroke: 1px var(--color-dark-red);
+            opacity: 0.5;
+            transform: skewY(-5deg);
+            z-index: -1;
+        }
+        
+        /* 引用区块 */
+        .quote-block {
+            margin: 60px 0 40px;
+            position: relative;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.3);
+            transform: skewX(-5deg);
+            border-left: 5px solid var(--color-dark-red);
+        }
+        
+        .quote-text {
+            font-family: var(--font-gothic);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--color-off-white);
+            transform: skewX(5deg);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .quote-shadow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-black);
+            top: 15px;
+            left: 15px;
+            z-index: -1;
+            transform: skewX(-5deg);
+            filter: blur(8px);
+            opacity: 0.5;
+        }
+        
+        /* 核心要点列表 */
+        .core-points {
+            position: relative;
+            margin: 60px 0;
+            padding: 20px 20px 20px 40px;
+            background-color: rgba(10, 28, 59, 0.6);
+            transform: skewY(2deg);
+        }
+        
+        .points-shadow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-black);
+            top: 10px;
+            left: 10px;
+            z-index: -1;
+            transform: skewY(2deg);
+            filter: blur(8px);
+            opacity: 0.5;
+        }
+        
+        .core-points-title {
+            font-family: var(--font-distorted);
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: var(--color-yellow);
+            text-shadow: 3px 3px 0 var(--color-black);
+            transform: skewX(-5deg);
+        }
+        
+        .points-list {
+            list-style-type: none;
+            padding-left: 0;
+            transform: skewY(-2deg);
+        }
+        
+        .points-list li {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 30px;
+            font-family: var(--font-gothic);
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--color-off-white);
+        }
+        
+        .points-list li::before {
+            content: "✗";
+            position: absolute;
+            left: 0;
+            font-family: var(--font-jagged);
+            font-size: 18px;
+            color: var(--color-dark-red);
+        }
+        
+        .points-list li:nth-child(odd) {
+            transform: skewX(3deg);
+        }
+        
+        .points-list li:nth-child(even) {
+            transform: skewX(-3deg);
+        }
+        
+        /* QR码区域 */
+        .qr-section {
+            margin: 60px 0;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .qr-container {
+            position: relative;
+            padding: 5px;
+            background-color: var(--color-off-white);
+            transform: rotate(-3deg) skewX(5deg);
+            z-index: 2;
+        }
+        
+        .qr-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            filter: contrast(1.5) brightness(0.9);
+            mix-blend-mode: multiply;
+        }
+        
+        .qr-label {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%) skewX(-5deg);
+            font-family: var(--font-distorted);
+            font-size: 14px;
+            color: var(--color-yellow);
+            text-shadow: 2px 2px 0 var(--color-black);
+            white-space: nowrap;
+        }
+        
+        /* 编辑札记 */
+        .editor-notes {
+            margin: 80px 0 40px;
+            padding: 30px;
+            position: relative;
+            font-family: var(--font-gothic);
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--color-off-white);
+            background-color: rgba(90, 15, 21, 0.3);
+            transform: skewY(-2deg);
+            border-right: 5px solid var(--color-dark-green);
+        }
+        
+        .notes-shadow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-black);
+            top: 10px;
+            right: -10px;
+            z-index: -1;
+            transform: skewY(-2deg);
+            filter: blur(8px);
+            opacity: 0.5;
+        }
+        
+        .editor-title {
+            font-family: var(--font-fraktur);
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--color-yellow);
+            text-shadow: 2px 2px 0 var(--color-black);
+            transform: skewX(5deg);
+        }
+        
+        .editor-notes p {
+            margin-bottom: 15px;
+            transform: skewY(2deg);
+        }
+        
+        .handwritten {
+            font-family: var(--font-distorted);
+            font-size: 16px;
+            display: block;
+            margin-top: 20px;
+            color: var(--color-yellow);
+            text-align: right;
+            transform: skewX(10deg);
+            text-shadow: 1px 1px 0 var(--color-black);
+        }
+        
+        /* 页脚 */
+        .footer {
+            padding: 25px;
+            font-family: var(--font-gothic);
+            font-size: 12px;
+            color: var(--color-off-white);
+            text-align: center;
+            letter-spacing: 1px;
+            background-color: var(--color-black);
+            position: relative;
+            z-index: 10;
+            transform: skewY(1deg);
+        }
+        
+        /* 德语装饰文本 */
+        .expressionist-text {
+            position: absolute;
+            font-family: var(--font-fraktur);
+            font-size: 14px;
+            color: var(--color-yellow);
+            opacity: 0.4;
+            text-transform: uppercase;
+            z-index: 5;
+            transform: rotate(var(--rotation, 0deg)) skewX(var(--skew, 0deg));
+            text-shadow: 1px 1px 0 var(--color-black);
+        }
+        
+        .expressionist-text-1 {
+            top: 20%;
+            right: 20px;
+            --rotation: 90deg;
+            --skew: 5deg;
+        }
+        
+        .expressionist-text-2 {
+            bottom: 30%;
+            left: 15px;
+            --rotation: -90deg;
+            --skew: -5deg;
+        }
+        
+        /* 扭曲的人物剪影 */
+        .distorted-silhouette {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.15;
+        }
+        
+        .silhouette-1 {
+            bottom: 50px;
+            right: 20px;
+            width: 80px;
+            height: 150px;
+            background-color: var(--color-black);
+            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 70% 100%, 30% 100%, 0% 30%);
+            transform: skewY(10deg);
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 450px) {
+            .magazine-card {
+                width: 95%;
+                margin: 0 auto;
+            }
+            
+            .title-main {
+                font-size: 36px;
+            }
+            
+            .title-shadow {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="magazine-card german-expressionism">
+        <!-- 纹理背景与木刻效果 -->
+        <div class="texture-background"></div>
+        <div class="woodcut-overlay"></div>
+        
+        <!-- 扭曲的路径 -->
+        <div class="distorted-path path-1"></div>
+        
+        <!-- 锯齿状山脉 -->
+        <div class="jagged-mountains"></div>
+        
+        <!-- 尖塔 -->
+        <div class="spire spire-1"></div>
+        <div class="spire spire-2"></div>
+        <div class="spire spire-3"></div>
+        
+        <!-- 狂野的线条 -->
+        <div class="jagged-line line-1"></div>
+        <div class="jagged-line line-2"></div>
+        
+        <!-- 德语装饰文本 -->
+        <div class="expressionist-text expressionist-text-1">AUSDRUCK DER SEELE</div>
+        <div class="expressionist-text expressionist-text-2">INNERE WAHRHEIT</div>
+        
+        <!-- 扭曲的人物剪影 -->
+        <div class="distorted-silhouette silhouette-1"></div>
+        
+        <div class="content-wrapper">
+            <div class="issue-date">27.03.2025</div>
+            
+            <div class="title-container">
+                <div class="title-shadow">德国表现主义风格</div>
+                <h1 class="title-main">德国表现主义风格</h1>
+                <h2 class="title-sub">内在情绪的强烈外化</h2>
+            </div>
+            
+            <blockquote class="quote-block">
+                <div class="quote-shadow"></div>
+                <div class="quote-text">德国表现主义不仅是一种艺术风格，更是对理性世界的情感反抗——它通过扭曲变形的形态、锐利动感的线条和强烈的明暗对比，将内心最深处的焦虑、恐惧和绝望外化为可见的视觉形式，体现'情感真实大于形式真实'的艺术理念。</div>
+            </blockquote>
+            
+            <div class="core-points">
+                <div class="points-shadow"></div>
+                <h3 class="core-points-title">核心特征</h3>
+                <ul class="points-list">
+                    <li>深色调背景如深蓝、黑色或暗红色，创造戏剧性氛围</li>
+                    <li>强烈的明暗对比和扭曲变形的形态，线条锐利且富有动感</li>
+                    <li>不规则且具表现力的排版，文字呈现倾斜或不稳定感</li>
+                    <li>强烈且具象征性的色彩，偏好使用黑色、深红、黄色和深绿等高对比度组合</li>
+                    <li>木刻版画效果的图像处理，强调粗犷的线条和夸张的明暗对比</li>
+                </ul>
+            </div>
+            
+            <div class="qr-section">
+                <div class="qr-container">
+                    <img class="qr-image" src="https://images.cubox.pro/rhkekb/file/2025032609523776560/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250326095228.jpg" alt="QR Code">
+                    <div class="qr-label">SCAN ZUM ENTDECKEN</div>
+                </div>
+            </div>
+            
+            <div class="editor-notes">
+                <div class="notes-shadow"></div>
+                <h4 class="editor-title">编辑札记</h4>
+                <p>德国表现主义兴起于20世纪初的德国，是对当时社会动荡和精神危机的艺术回应。电影《卡里加里博士的小屋》和卡尔·施密特-罗特卢夫的木刻版画是其代表作品。这一风格通过强烈的视觉扭曲和情感夸张，呈现出创作者对世界的主观感受，表达了一战后德国社会普遍的焦虑与不安，对后来的现代艺术产生了深远影响。</p>
+                <p class="handwritten">— 真实不在于外在形式，而在于内心情感的真诚表达。</p>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            DEUTSCHER EXPRESSIONISMUS · SEELISCHE WAHRHEIT · MMXXV
+        </footer>
+    </div>
+</body>
+</html>

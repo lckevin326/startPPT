@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>瑞士国际主义风格的解构版 | DECONSTRUCTED SWISS STYLE</title>
+    <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-black: #000000;
+            --color-white: #ffffff;
+            --color-red: #ff0000;
+            --color-blue: #0066ff;
+            --color-gray: #f0f0f0;
+            --color-dark-gray: #333333;
+            --grid-unit: 8px;
+            --font-sans: 'Inter', 'Noto Sans SC', Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: var(--font-sans);
+        }
+        
+        .magazine-card {
+            width: 400px;
+            max-height: 1680px;
+            background-color: var(--color-white);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.6s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* 网格系统基础 */
+        .grid-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(60, var(--grid-unit));
+            pointer-events: none;
+        }
+        
+        .grid-line-v {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: rgba(0, 0, 0, 0.05);
+            z-index: 0;
+        }
+        
+        .grid-line-h {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: rgba(0, 0, 0, 0.05);
+            z-index: 0;
+        }
+        
+        /* 网格参考标记 */
+        .grid-marker {
+            position: absolute;
+            font-family: var(--font-sans);
+            font-size: 8px;
+            color: var(--color-black);
+            opacity: 0.3;
+            z-index: 2;
+        }
+        
+        /* 解构元素 */
+        .deconstruct-element {
+            position: absolute;
+            background-color: var(--element-color, var(--color-black));
+            z-index: 1;
+            opacity: var(--element-opacity, 1);
+        }
+        
+        .element-1 {
+            top: 50px;
+            left: -20px;
+            width: 80px;
+            height: 3px;
+            --element-color: var(--color-red);
+            transform: rotate(45deg);
+        }
+        
+        .element-2 {
+            bottom: 100px;
+            right: -10px;
+            width: 60px;
+            height: 2px;
+            --element-color: var(--color-blue);
+            transform: rotate(-30deg);
+        }
+        
+        .element-3 {
+            top: 200px;
+            right: 30px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            --element-color: var(--color-black);
+            --element-opacity: 0.1;
+        }
+        
+        .element-4 {
+            bottom: 200px;
+            left: 40px;
+            width: 20px;
+            height: 20px;
+            --element-color: var(--color-red);
+            --element-opacity: 0.15;
+        }
+        
+        /* 解构的网格线 */
+        .broken-grid-line {
+            position: absolute;
+            background-color: var(--line-color, var(--color-black));
+            z-index: 1;
+            opacity: 0.2;
+        }
+        
+        .broken-v-1 {
+            top: 10%;
+            left: 30%;
+            width: 1px;
+            height: 200px;
+            --line-color: var(--color-black);
+            transform: rotate(5deg);
+        }
+        
+        .broken-v-2 {
+            top: 40%;
+            left: 60%;
+            width: 1px;
+            height: 150px;
+            --line-color: var(--color-black);
+            transform: rotate(-3deg);
+        }
+        
+        .broken-h-1 {
+            top: 30%;
+            left: 10%;
+            width: 150px;
+            height: 1px;
+            --line-color: var(--color-black);
+            transform: rotate(-2deg);
+        }
+        
+        .broken-h-2 {
+            top: 60%;
+            left: 40%;
+            width: 200px;
+            height: 1px;
+            --line-color: var(--color-black);
+            transform: rotate(2deg);
+        }
+        
+        .header {
+            padding: 40px 20px 20px;
+            position: relative;
+            overflow: visible;
+            z-index: 5;
+        }
+        
+        .issue-date {
+            font-family: var(--font-sans);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: var(--color-black);
+            text-transform: uppercase;
+            transform: rotate(-90deg) translateX(-100%);
+            transform-origin: left top;
+        }
+        
+        .title-container {
+            margin-top: 30px;
+            position: relative;
+            margin-left: -10px;
+        }
+        
+        .title-main {
+            font-family: var(--font-sans);
+            font-size: 42px;
+            font-weight: 900;
+            line-height: 0.95;
+            color: var(--color-black);
+            margin-bottom: 5px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            width: 95%;
+        }
+        
+        .title-red-block {
+            position: absolute;
+            width: 120px;
+            height: 10px;
+            background-color: var(--color-red);
+            top: 25px;
+            left: -30px;
+            z-index: -1;
+        }
+        
+        .title-sub {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 400;
+            margin-top: 5px;
+            color: var(--color-black);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-left: 40%;
+            position: relative;
+            padding-left: 20px;
+            border-left: 1px solid var(--color-black);
+        }
+        
+        .content-section {
+            padding: 20px;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .quote-block {
+            margin: 60px 0 40px;
+            position: relative;
+            padding-left: 30px;
+            margin-right: -20px;
+        }
+        
+        .quote-text {
+            font-family: var(--font-sans);
+            font-size: 18px;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--color-black);
+            font-style: italic;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .quote-mark {
+            position: absolute;
+            font-family: var(--font-sans);
+            font-size: 80px;
+            font-weight: 900;
+            color: var(--color-black);
+            opacity: 0.1;
+            top: -30px;
+            left: -10px;
+            z-index: 0;
+        }
+        
+        .quote-line {
+            position: absolute;
+            left: 0;
+            top: 15px;
+            width: 2px;
+            height: 80%;
+            background-color: var(--color-blue);
+        }
+        
+        .core-points {
+            position: relative;
+            margin: 80px 0 60px;
+            padding-left: 40px;
+        }
+        
+        .core-points::before {
+            content: "";
+            position: absolute;
+            top: -20px;
+            left: 0;
+            width: 30px;
+            height: 1px;
+            background-color: var(--color-black);
+        }
+        
+        .core-points-title {
+            font-family: var(--font-sans);
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            color: var(--color-black);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-left: -40px;
+        }
+        
+        .points-list {
+            list-style-type: none;
+            padding-left: 0;
+            counter-reset: list-counter;
+        }
+        
+        .points-list li {
+            margin-bottom: 25px;
+            position: relative;
+            font-family: var(--font-sans);
+            font-size: 15px;
+            line-height: 1.5;
+            font-weight: 400;
+            counter-increment: list-counter;
+        }
+        
+        .points-list li::before {
+            content: counter(list-counter, decimal-leading-zero);
+            position: absolute;
+            left: -40px;
+            font-family: var(--font-sans);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--color-black);
+        }
+        
+        .points-list li:nth-child(3) {
+            margin-left: 30px;
+            font-weight: 600;
+            color: var(--color-black);
+        }
+        
+        .points-list li:nth-child(5) {
+            margin-left: -20px;
+            font-size: 14px;
+        }
+        
+        .qr-section {
+            margin: 80px 0 60px;
+            position: relative;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .qr-container {
+            position: relative;
+            margin-right: 40px;
+        }
+        
+        .qr-image {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            position: relative;
+            z-index: 2;
+            filter: grayscale(100%) contrast(1.2);
+        }
+        
+        .qr-box {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border: 1px solid var(--color-black);
+            top: 10px;
+            left: 10px;
+            z-index: 1;
+        }
+        
+        .qr-red-line {
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background-color: var(--color-red);
+            top: -10px;
+            left: -20px;
+            z-index: 3;
+        }
+        
+        .qr-label {
+            position: absolute;
+            bottom: -30px;
+            right: 0;
+            font-family: var(--font-sans);
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-black);
+        }
+        
+        .editor-notes {
+            margin: 60px -20px 40px 20px;
+            padding: 30px 20px 30px 30px;
+            position: relative;
+            font-family: var(--font-sans);
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--color-black);
+            background-color: var(--color-gray);
+            margin-left: 60px;
+        }
+        
+        .editor-notes::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -20px;
+            width: 20px;
+            height: 100%;
+            background-color: var(--color-blue);
+        }
+        
+        .editor-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: var(--color-black);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .editor-notes p {
+            margin-bottom: 15px;
+        }
+        
+        .handwritten {
+            font-family: var(--font-sans);
+            font-style: italic;
+            font-size: 14px;
+            font-weight: 400;
+            display: block;
+            margin-top: 20px;
+            color: var(--color-black);
+            text-align: right;
+            opacity: 0.7;
+        }
+        
+        .footer {
+            padding: 20px;
+            font-family: var(--font-sans);
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--color-black);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 装饰性文本 */
+        .design-text {
+            position: absolute;
+            font-family: var(--font-sans);
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--color-black);
+            opacity: 0.3;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 1;
+            transform: rotate(var(--rotation, 0deg));
+        }
+        
+        .design-text-1 {
+            top: 120px;
+            right: 20px;
+            --rotation: 90deg;
+        }
+        
+        .design-text-2 {
+            bottom: 100px;
+            left: 15px;
+            --rotation: -90deg;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 450px) {
+            .magazine-card {
+                width: 95%;
+                margin: 0 auto;
+            }
+            
+            .title-main {
+                font-size: 36px;
+            }
+        }
+        
+        /* 网格参考标记 */
+        .grid-reference {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--reference-color, var(--color-black));
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
+        .reference-1 {
+            top: 100px;
+            left: 100px;
+            --reference-color: var(--color-red);
+        }
+        
+        .reference-2 {
+            top: 100px;
+            left: 300px;
+            --reference-color: var(--color-black);
+        }
+        
+        .reference-3 {
+            top: 500px;
+            left: 100px;
+            --reference-color: var(--color-blue);
+        }
+        
+        .reference-4 {
+            top: 500px;
+            left: 300px;
+            --reference-color: var(--color-black);
+        }
+    </style>
+</head>
+<body>
+    <div class="magazine-card swiss-deconstruct">
+        <!-- 网格参考标记 -->
+        <div class="grid-reference reference-1"></div>
+        <div class="grid-reference reference-2"></div>
+        <div class="grid-reference reference-3"></div>
+        <div class="grid-reference reference-4"></div>
+        
+        <!-- 解构元素 -->
+        <div class="deconstruct-element element-1"></div>
+        <div class="deconstruct-element element-2"></div>
+        <div class="deconstruct-element element-3"></div>
+        <div class="deconstruct-element element-4"></div>
+        
+        <!-- 解构的网格线 -->
+        <div class="broken-grid-line broken-v-1"></div>
+        <div class="broken-grid-line broken-v-2"></div>
+        <div class="broken-grid-line broken-h-1"></div>
+        <div class="broken-grid-line broken-h-2"></div>
+        
+        <!-- 装饰性文本 -->
+        <div class="design-text design-text-1">DESIGN:DECONSTRUCT</div>
+        <div class="design-text design-text-2">GRID:SYSTEM</div>
+        
+        <header class="header">
+            <div class="issue-date">27.03.2025</div>
+            
+            <div class="title-container">
+                <div class="title-red-block"></div>
+                <h1 class="title-main">瑞士国际主义风格的解构版</h1>
+                <h2 class="title-sub">理性与叛逆并存的视觉张力</h2>
+            </div>
+        </header>
+        
+        <div class="content-section">
+            <blockquote class="quote-block">
+                <div class="quote-mark">"</div>
+                <div class="quote-line"></div>
+                <div class="quote-text">瑞士国际主义的解构并非对经典规则的否定，而是对其边界的探索——它依然尊重网格和秩序，但允许创意突破这些限制，创造更具个性与张力的视觉语言。</div>
+            </blockquote>
+            
+            <div class="core-points">
+                <h3 class="core-points-title">核心特征</h3>
+                <ul class="points-list">
+                    <li>基于经典瑞士网格系统，但有意识地进行打破和扭曲</li>
+                    <li>色彩保持克制，主要使用黑白，辅以一两种鲜艳原色作点缀</li>
+                    <li>使用无衬线几何字体如Helvetica，通过极端的字重、间距与大小创造张力</li>
+                    <li>文字可越过栏格、重叠或被切割，图像保持高对比且可被解构</li>
+                    <li>几乎零装饰，仅使用解构的网格线和参考点作为视觉元素</li>
+                </ul>
+            </div>
+            
+            <div class="qr-section">
+                <div class="qr-container">
+                    <div class="qr-red-line"></div>
+                    <img class="qr-image" src="https://images.cubox.pro/rhkekb/file/2025032609523776560/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250326095228.jpg" alt="QR Code">
+                    <div class="qr-box"></div>
+                    <div class="qr-label">SCAN TO EXPLORE</div>
+                </div>
+            </div>
+            
+            <div class="editor-notes">
+                <h4 class="editor-title">编辑札记</h4>
+                <p>瑞士国际主义风格的解构版源于20世纪70-80年代，由Wolfgang Weingart和April Greiman等设计师引领。他们在尊重瑞士设计传统的同时，通过突破其严格限制，为这一经典风格注入了个性与活力，开创了后现代设计的先河。</p>
+                <p class="handwritten">— 规则的价值在于打破它们时所产生的创造力。</p>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            DECONSTRUCTED SWISS STYLE · GRID AND BEYOND · 2025
+        </footer>
+    </div>
+</body>
+</html>

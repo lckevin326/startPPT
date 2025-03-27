@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>赛博朋克风格 | CYBERPUNK</title>
+    <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-darkblue: #050a1c;
+            --color-black: #000000;
+            --color-neon-pink: #ff2966;
+            --color-neon-blue: #0cddff;
+            --color-neon-green: #39ff14;
+            --color-neon-yellow: #ffdf00;
+            --color-purple: #3d1b57;
+            --color-dark-gray: #1a1a1a;
+            --color-white: #ffffff;
+            --font-future: 'Orbitron', 'Noto Sans SC', sans-serif;
+            --font-pixel: 'VT323', monospace;
+            --font-terminal: 'Share Tech Mono', 'Noto Sans SC', monospace;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: var(--font-terminal);
+            color: var(--color-white);
+        }
+        
+        .magazine-card {
+            width: 400px;
+            max-height: 1680px;
+            background-color: var(--color-darkblue);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(12, 221, 255, 0.3);
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* 扫描线效果 */
+        .scanlines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(0, 0, 0, 0.3) 51%
+            );
+            background-size: 100% 4px;
+            z-index: 100;
+            pointer-events: none;
+            opacity: 0.15;
+            animation: scanlines 0.5s linear infinite;
+        }
+        
+        @keyframes scanlines {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 4px; }
+        }
+        
+        /* 故障效果 */
+        .glitch-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            z-index: 101;
+            pointer-events: none;
+            opacity: 0;
+            animation: glitch 10s infinite;
+        }
+        
+        @keyframes glitch {
+            0%, 90%, 100% { 
+                opacity: 0;
+                transform: translateX(0);
+            }
+            92% { 
+                opacity: 0.8;
+                background-color: rgba(255, 41, 102, 0.2);
+                transform: translateX(-5px);
+            }
+            94% { 
+                opacity: 0.8;
+                background-color: rgba(12, 221, 255, 0.2);
+                transform: translateX(5px);
+            }
+            96% { 
+                opacity: 0.8;
+                background-color: rgba(57, 255, 20, 0.2);
+                transform: translateX(-2px);
+            }
+            98% { 
+                opacity: 0;
+                transform: translateX(0);
+            }
+        }
+        
+        /* 数据流效果 */
+        .data-stream {
+            position: absolute;
+            width: 2px;
+            background-color: var(--data-color, var(--color-neon-green));
+            opacity: 0.5;
+            z-index: 1;
+            overflow: hidden;
+            animation: dataFlow var(--data-speed, 8s) linear infinite;
+        }
+        
+        .data-stream::before {
+            content: "01010101110100011010101010011110101000111010101";
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-family: var(--font-terminal);
+            font-size: 10px;
+            color: var(--data-color, var(--color-neon-green));
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            animation: dataScroll var(--data-speed, 8s) linear infinite;
+        }
+        
+        @keyframes dataFlow {
+            0% { height: 0; }
+            50% { height: 100%; }
+            100% { height: 0; }
+        }
+        
+        @keyframes dataScroll {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        
+        .data-stream-1 {
+            top: 0;
+            left: 30px;
+            --data-color: var(--color-neon-blue);
+            --data-speed: 10s;
+        }
+        
+        .data-stream-2 {
+            top: 0;
+            right: 50px;
+            --data-color: var(--color-neon-green);
+            --data-speed: 12s;
+        }
+        
+        .data-stream-3 {
+            top: 200px;
+            left: 80px;
+            --data-color: var(--color-neon-pink);
+            --data-speed: 8s;
+        }
+        
+        .data-stream-4 {
+            top: 300px;
+            right: 20px;
+            --data-color: var(--color-neon-yellow);
+            --data-speed: 15s;
+        }
+        
+        /* 电路板图案 */
+        .circuit {
+            position: absolute;
+            background-color: rgba(10, 10, 10, 0.5);
+            border: 1px solid var(--circuit-color, var(--color-neon-blue));
+            z-index: 1;
+            opacity: 0.2;
+        }
+        
+        .circuit-1 {
+            top: 10%;
+            left: 0;
+            width: 80px;
+            height: 40px;
+            --circuit-color: var(--color-neon-green);
+        }
+        
+        .circuit-2 {
+            top: 15%;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            --circuit-color: var(--color-neon-pink);
+        }
+        
+        .circuit-3 {
+            bottom: 20%;
+            left: 0;
+            width: 50px;
+            height: 100px;
+            --circuit-color: var(--color-neon-yellow);
+        }
+        
+        .circuit-4 {
+            bottom: 10%;
+            right: 0;
+            width: 70px;
+            height: 50px;
+            --circuit-color: var(--color-neon-blue);
+        }
+        
+        .circuit::before, .circuit::after {
+            content: "";
+            position: absolute;
+            background-color: var(--circuit-color, var(--color-neon-blue));
+        }
+        
+        .circuit::before {
+            top: 50%;
+            left: -20px;
+            width: 20px;
+            height: 1px;
+        }
+        
+        .circuit::after {
+            top: -20px;
+            left: 50%;
+            width: 1px;
+            height: 20px;
+        }
+        
+        /* 全息效果叠加 */
+        .hologram-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(12, 221, 255, 0.05) 0%, rgba(57, 255, 20, 0.05) 50%, rgba(255, 41, 102, 0.05) 100%);
+            z-index: 2;
+            pointer-events: none;
+            opacity: 0.6;
+            mix-blend-mode: overlay;
+        }
+        
+        /* 界面元素 */
+        .interface-element {
+            position: absolute;
+            border: 1px solid var(--interface-color, var(--color-neon-blue));
+            font-family: var(--font-terminal);
+            font-size: 10px;
+            color: var(--interface-color, var(--color-neon-blue));
+            padding: 5px;
+            z-index: 3;
+            box-shadow: 0 0 10px var(--interface-color, var(--color-neon-blue));
+            opacity: 0.7;
+        }
+        
+        .interface-1 {
+            top: 20px;
+            left: 20px;
+            width: 80px;
+            height: 30px;
+            --interface-color: var(--color-neon-green);
+        }
+        
+        .interface-1::before {
+            content: "SYS.INIT";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+        }
+        
+        .interface-2 {
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            height: 25px;
+            --interface-color: var(--color-neon-pink);
+        }
+        
+        .interface-2::before {
+            content: "DATA.STREAM";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+        }
+        
+        .header {
+            padding: 60px 20px 20px;
+            position: relative;
+            overflow: hidden;
+            z-index: 5;
+            border-bottom: 1px solid var(--color-neon-blue);
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, var(--color-darkblue) 100%);
+        }
+        
+        .issue-date {
+            font-family: var(--font-terminal);
+            font-size: 16px;
+            position: absolute;
+            top: 30px;
+            right: 20px;
+            color: var(--color-neon-yellow);
+            text-shadow: 0 0 5px var(--color-neon-yellow);
+            padding: 5px 10px;
+            border: 1px solid var(--color-neon-yellow);
+            background-color: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 10px rgba(255, 223, 0, 0.3);
+            animation: datePulse 4s infinite alternate;
+        }
+        
+        @keyframes datePulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        .date-glitch {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-neon-yellow);
+            mix-blend-mode: overlay;
+            opacity: 0;
+            animation: dateGlitch 10s infinite;
+        }
+        
+        @keyframes dateGlitch {
+            0%, 95%, 100% { opacity: 0; }
+            97% { opacity: 0.8; transform: translateX(-2px); }
+            99% { opacity: 0.8; transform: translateX(2px); }
+        }
+        
+        .title-container {
+            margin-top: 20px;
+            position: relative;
+        }
+        
+        .title-main {
+            font-family: var(--font-future);
+            font-size: 40px;
+            font-weight: 900;
+            line-height: 1.2;
+            color: var(--color-neon-pink);
+            text-shadow: 0 0 10px var(--color-neon-pink);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            animation: titleGlitch 10s infinite;
+        }
+        
+        @keyframes titleGlitch {
+            0%, 90%, 100% { 
+                transform: translateX(0);
+                text-shadow: 0 0 10px var(--color-neon-pink);
+            }
+            92% { 
+                transform: translateX(-2px);
+                text-shadow: -2px 0 var(--color-neon-blue), 2px 0 var(--color-neon-green);
+            }
+            94% { 
+                transform: translateX(2px);
+                text-shadow: 2px 0 var(--color-neon-blue), -2px 0 var(--color-neon-green);
+            }
+            96% { 
+                transform: translateX(-1px);
+                text-shadow: -1px 0 var(--color-neon-yellow), 1px 0 var(--color-neon-pink);
+            }
+            98% { 
+                transform: translateX(0);
+                text-shadow: 0 0 10px var(--color-neon-pink);
+            }
+        }
+        
+        .title-sub {
+            font-family: var(--font-terminal);
+            font-size: 16px;
+            margin-top: 10px;
+            color: var(--color-neon-blue);
+            text-shadow: 0 0 5px var(--color-neon-blue);
+            border-left: 3px solid var(--color-neon-blue);
+            padding-left: 10px;
+            box-shadow: inset 0 0 10px rgba(12, 221, 255, 0.2);
+            padding: 5px 10px;
+        }
+        
+        .content-section {
+            padding: 30px 20px;
+            position: relative;
+            z-index: 5;
+            background: linear-gradient(to bottom, var(--color-darkblue) 0%, rgba(10, 10, 20, 0.9) 100%);
+        }
+        
+        .quote-block {
+            margin: 40px 0;
+            position: relative;
+            font-family: var(--font-terminal);
+            font-size: 18px;
+            line-height: 1.6;
+            padding: 25px;
+            color: var(--color-neon-green);
+            text-shadow: 0 0 5px var(--color-neon-green);
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--color-neon-green);
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.2), inset 0 0 15px rgba(57, 255, 20, 0.1);
+        }
+        
+        .quote-glitch {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(57, 255, 20, 0.1);
+            mix-blend-mode: overlay;
+            opacity: 0;
+            animation: quoteGlitch 8s infinite;
+        }
+        
+        @keyframes quoteGlitch {
+            0%, 94%, 100% { opacity: 0; }
+            96% { opacity: 0.8; transform: translateX(-2px); }
+            98% { opacity: 0.8; transform: translateX(2px); }
+        }
+        
+        .quote-terminal::before {
+            content: "> ";
+            color: var(--color-neon-green);
+        }
+        
+        .quote-terminal::after {
+            content: "_";
+            animation: cursor 1s infinite;
+        }
+        
+        @keyframes cursor {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .core-points {
+            position: relative;
+            margin: 50px 0;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--color-neon-blue);
+            box-shadow: 0 0 15px rgba(12, 221, 255, 0.2), inset 0 0 15px rgba(12, 221, 255, 0.1);
+        }
+        
+        .core-points::before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1px dashed rgba(12, 221, 255, 0.3);
+            pointer-events: none;
+        }
+        
+        .core-points-header {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background-color: var(--color-darkblue);
+            padding: 5px 15px;
+            font-family: var(--font-future);
+            font-size: 18px;
+            color: var(--color-neon-blue);
+            text-shadow: 0 0 5px var(--color-neon-blue);
+            border: 1px solid var(--color-neon-blue);
+            z-index: 1;
+        }
+        
+        .core-points-title {
+            font-family: var(--font-terminal);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--color-neon-blue);
+            text-shadow: 0 0 5px var(--color-neon-blue);
+            border-bottom: 1px solid var(--color-neon-blue);
+            padding-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .points-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .points-list li {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 30px;
+            font-family: var(--font-terminal);
+            font-size: 16px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .points-list li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: var(--marker-color, var(--color-neon-pink));
+            text-shadow: 0 0 5px var(--marker-color, var(--color-neon-pink));
+            font-family: var(--font-terminal);
+            animation: markerPulse 2s infinite alternate;
+        }
+        
+        @keyframes markerPulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        .points-list li:nth-child(2)::before {
+            --marker-color: var(--color-neon-blue);
+            animation-delay: 0.4s;
+        }
+        
+        .points-list li:nth-child(3)::before {
+            --marker-color: var(--color-neon-green);
+            animation-delay: 0.8s;
+        }
+        
+        .points-list li:nth-child(4)::before {
+            --marker-color: var(--color-neon-yellow);
+            animation-delay: 1.2s;
+        }
+        
+        .points-list li:nth-child(5)::before {
+            --marker-color: var(--color-neon-pink);
+            animation-delay: 1.6s;
+        }
+        
+        .qr-section {
+            margin: 50px 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .qr-container {
+            position: relative;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--color-neon-yellow);
+            box-shadow: 0 0 15px rgba(255, 223, 0, 0.2);
+            transform: rotate(-2deg);
+        }
+        
+        .qr-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 41, 102, 0.2) 0%, rgba(12, 221, 255, 0.2) 100%);
+            mix-blend-mode: overlay;
+            z-index: 1;
+        }
+        
+        .qr-glitch {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: rgba(57, 255, 20, 0.5);
+            animation: qrGlitch 8s infinite;
+        }
+        
+        @keyframes qrGlitch {
+            0%, 90% { opacity: 0; top: -100px; }
+            92% { opacity: 0.8; top: 20px; }
+            94% { opacity: 0.8; top: 80px; }
+            96% { opacity: 0.8; top: 120px; }
+            98% { opacity: 0.8; top: 180px; }
+            100% { opacity: 0; top: 300px; }
+        }
+        
+        .qr-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            filter: brightness(1.2) contrast(1.2) hue-rotate(180deg);
+            mix-blend-mode: lighten;
+            animation: qrPulse 4s infinite alternate;
+        }
+        
+        @keyframes qrPulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+        
+        .qr-label {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-terminal);
+            font-size: 14px;
+            color: var(--color-neon-yellow);
+            text-shadow: 0 0 5px var(--color-neon-yellow);
+            white-space: nowrap;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 5px 15px;
+            border: 1px solid var(--color-neon-yellow);
+        }
+        
+        .qr-corners::before, .qr-corners::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-neon-yellow);
+        }
+        
+        .qr-corners::before {
+            top: -5px;
+            left: -5px;
+            border-right: none;
+            border-bottom: none;
+        }
+        
+        .qr-corners::after {
+            bottom: -5px;
+            right: -5px;
+            border-left: none;
+            border-top: none;
+        }
+        
+        .editor-notes {
+            margin: 60px 0 30px;
+            padding: 25px;
+            position: relative;
+            font-family: var(--font-terminal);
+            font-size: 15px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(0, 0, 0, 0.7);
+            border-top: 1px solid var(--color-neon-pink);
+            border-bottom: 1px solid var(--color-neon-pink);
+            box-shadow: 0 0 15px rgba(255, 41, 102, 0.2), inset 0 0 15px rgba(255, 41, 102, 0.1);
+        }
+        
+        .editor-title {
+            font-family: var(--font-future);
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--color-neon-pink);
+            text-shadow: 0 0 5px var(--color-neon-pink);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .editor-notes p {
+            margin-bottom: 10px;
+        }
+        
+        .handwritten {
+            font-family: var(--font-pixel);
+            font-size: 16px;
+            display: block;
+            margin-top: 15px;
+            color: var(--color-neon-green);
+            text-shadow: 0 0 5px var(--color-neon-green);
+            text-align: right;
+        }
+        
+        .footer {
+            padding: 20px;
+            font-family: var(--font-terminal);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            border-top: 1px solid var(--color-neon-blue);
+            background-color: rgba(0, 0, 0, 0.7);
+            position: relative;
+            letter-spacing: 1px;
+        }
+        
+        .footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent,
+                transparent 2px,
+                rgba(12, 221, 255, 0.05) 3px,
+                rgba(12, 221, 255, 0.05) 3px
+            );
+            pointer-events: none;
+        }
+        
+        /* 英语装饰文本 */
+        .cyber-text {
+            position: absolute;
+            font-family: var(--font-terminal);
+            font-size: 12px;
+            color: var(--text-color, var(--color-neon-blue));
+            text-shadow: 0 0 5px var(--text-color, var(--color-neon-blue));
+            opacity: 0.5;
+            z-index: 1;
+        }
+        
+        .cyber-1 {
+            bottom: 80px;
+            right: 20px;
+            transform: rotate(90deg);
+            --text-color: var(--color-neon-yellow);
+        }
+        
+        .cyber-2 {
+            top: 60%;
+            left: 10px;
+            transform: rotate(-90deg);
+            --text-color: var(--color-neon-green);
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 450px) {
+            .magazine-card {
+                width: 95%;
+                margin: 0 auto;
+            }
+            
+            .title-main {
+                font-size: 32px;
+            }
+        }
+        
+        /* 故障线条 */
+        .glitch-line {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background-color: var(--line-color, var(--color-neon-blue));
+            opacity: 0;
+            z-index: 103;
+            animation: glitchLine 10s infinite;
+        }
+        
+        @keyframes glitchLine {
+            0%, 89%, 100% { opacity: 0; }
+            90% { opacity: 0.8; top: 25%; }
+            92% { opacity: 0.8; top: 35%; }
+            94% { opacity: 0.8; top: 65%; }
+            96% { opacity: 0.8; top: 85%; }
+            98% { opacity: 0; }
+        }
+        
+        .glitch-line-1 {
+            --line-color: var(--color-neon-pink);
+            animation-delay: 0.2s;
+        }
+        
+        .glitch-line-2 {
+            --line-color: var(--color-neon-green);
+            animation-delay: 0.4s;
+        }
+        
+        .glitch-line-3 {
+            --line-color: var(--color-neon-blue);
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <div class="magazine-card cyberpunk">
+        <!-- 扫描线效果 -->
+        <div class="scanlines"></div>
+        
+        <!-- 故障效果 -->
+        <div class="glitch-effect"></div>
+        <div class="glitch-line glitch-line-1"></div>
+        <div class="glitch-line glitch-line-2"></div>
+        <div class="glitch-line glitch-line-3"></div>
+        
+        <!-- 数据流效果 -->
+        <div class="data-stream data-stream-1"></div>
+        <div class="data-stream data-stream-2"></div>
+        <div class="data-stream data-stream-3"></div>
+        <div class="data-stream data-stream-4"></div>
+        
+        <!-- 电路板图案 -->
+        <div class="circuit circuit-1"></div>
+        <div class="circuit circuit-2"></div>
+        <div class="circuit circuit-3"></div>
+        <div class="circuit circuit-4"></div>
+        
+        <!-- 全息效果叠加 -->
+        <div class="hologram-overlay"></div>
+        
+        <!-- 界面元素 -->
+        <div class="interface-element interface-1"></div>
+        <div class="interface-element interface-2"></div>
+        
+        <!-- 英语装饰文本 -->
+        <div class="cyber-text cyber-1">NEURAL CONNECT</div>
+        <div class="cyber-text cyber-2">SYS.STATUS.OK</div>
+        
+        <header class="header">
+            <div class="issue-date">
+                27.03.2025
+                <div class="date-glitch"></div>
+            </div>
+            
+            <div class="title-container">
+                <h1 class="title-main">赛博朋克风格</h1>
+                <h2 class="title-sub">高科技·低生活的反乌托邦美学</h2>
+            </div>
+        </header>
+        
+        <div class="content-section">
+            <blockquote class="quote-block">
+                <div class="quote-terminal">"赛博朋克不仅是一种视觉风格，更是对技术未来的预言与警示——霓虹闪烁的高楼之下，是被遗忘的人性与衰败的生活。"</div>
+                <div class="quote-glitch"></div>
+            </blockquote>
+            
+            <div class="core-points">
+                <div class="core-points-header">DATA.FILE</div>
+                <h3 class="core-points-title">核心特征</h3>
+                <ul class="points-list">
+                    <li>深色背景（黑色或深蓝）配以霓虹色彩，营造夜间都市氛围</li>
+                    <li>故障效果排版，使用像素化或等宽字体，添加字符错位与扫描线</li>
+                    <li>科技界面、数据流、电路板图案和全息投影等装饰元素</li>
+                    <li>故障艺术效果如RGB分离、数据损坏和画面撕裂</li>
+                    <li>高对比度图像处理，添加霓虹光效，模拟雨夜霓虹灯反射</li>
+                </ul>
+            </div>
+            
+            <div class="qr-section">
+                <div class="qr-container">
+                    <div class="qr-overlay"></div>
+                    <div class="qr-glitch"></div>
+                    <div class="qr-corners"></div>
+                    <img class="qr-image" src="https://images.cubox.pro/rhkekb/file/2025032609523776560/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250326095228.jpg" alt="QR Code">
+                    <div class="qr-label">SCAN.NEURAL.LINK</div>
+                </div>
+            </div>
+            
+            <div class="editor-notes">
+                <div class="editor-title">编辑札记</div>
+                <p>赛博朋克风格源于1980年代的科幻小说，特别是威廉·吉布森的《神经漫游者》，后被《银翼杀手》等电影视觉化。它通过霓虹灯、都市废墟和高科技低生活的对比，展现了科技发展与人性沦丧的矛盾，在《赛博朋克2077》等当代作品中得到进一步发展。</p>
+                <p class="handwritten">— 未来已至，只是分布不均。</p>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            NIGHTCITY.NET // ACCESS.GRANTED // 2025.MATRIX.PROTOCOL
+        </footer>
+    </div>
+</body>
+</html>

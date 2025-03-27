@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>孟菲斯风格 | MEMPHIS DESIGN</title>
+    <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-pink: #ff3eb5;
+            --color-teal: #00e6c3;
+            --color-yellow: #ffde59;
+            --color-orange: #ff914d;
+            --color-blue: #0099ff;
+            --color-purple: #9b5de5;
+            --color-black: #111111;
+            --color-white: #ffffff;
+            --font-geo: 'Rubik', 'Noto Sans SC', sans-serif;
+            --font-pixel: 'VT323', monospace;
+            --font-bold: 'Press Start 2P', 'Noto Sans SC', sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: var(--font-geo);
+        }
+        
+        .magazine-card {
+            width: 400px;
+            max-height: 1680px;
+            background-color: var(--color-white);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            animation: fadeIn 0.8s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* 孟菲斯风格图形元素 */
+        .shape {
+            position: absolute;
+            z-index: 1;
+        }
+        
+        .zigzag {
+            width: 80px;
+            height: 20px;
+            background: repeating-linear-gradient(45deg, var(--color-yellow) 0px, var(--color-yellow) 10px, transparent 10px, transparent 20px);
+            transform: rotate(var(--rotation, 0deg));
+            animation: shapeFloat 8s ease-in-out infinite;
+        }
+        
+        @keyframes shapeFloat {
+            0%, 100% { transform: translateY(0) rotate(var(--rotation, 0deg)); }
+            50% { transform: translateY(-10px) rotate(var(--rotation, 0deg)); }
+        }
+        
+        .zigzag-1 {
+            top: 40px;
+            right: 30px;
+            --rotation: -20deg;
+            animation-delay: 0.5s;
+        }
+        
+        .zigzag-2 {
+            bottom: 100px;
+            left: 20px;
+            --rotation: 15deg;
+            width: 60px;
+            height: 15px;
+            background: repeating-linear-gradient(45deg, var(--color-orange) 0px, var(--color-orange) 10px, transparent 10px, transparent 20px);
+            animation-delay: 1.2s;
+        }
+        
+        .wavy {
+            width: 100px;
+            height: 20px;
+            background: linear-gradient(var(--color-teal) 0 0) 0 0/20px 100% no-repeat,
+                        linear-gradient(var(--color-teal) 0 0) 25px 0/20px 100% no-repeat,
+                        linear-gradient(var(--color-teal) 0 0) 50px 0/20px 100% no-repeat,
+                        linear-gradient(var(--color-teal) 0 0) 75px 0/20px 100% no-repeat;
+            clip-path: path('M0 10 C5 20, 15 0, 20 10 C25 20, 35 0, 40 10 C45 20, 55 0, 60 10 C65 20, 75 0, 80 10 C85 20, 95 0, 100 10 V20 H0 Z');
+            animation: shapeFloat 7s ease-in-out infinite;
+        }
+        
+        .wavy-1 {
+            top: 120px;
+            left: 30px;
+            animation-delay: 0.3s;
+        }
+        
+        .wavy-2 {
+            bottom: 40px;
+            right: 40px;
+            background: linear-gradient(var(--color-pink) 0 0) 0 0/20px 100% no-repeat,
+                        linear-gradient(var(--color-pink) 0 0) 25px 0/20px 100% no-repeat,
+                        linear-gradient(var(--color-pink) 0 0) 50px 0/20px 100% no-repeat,
+                        linear-gradient(var(--color-pink) 0 0) 75px 0/20px 100% no-repeat;
+            animation-delay: 0.9s;
+        }
+        
+        .confetti {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: shapeFloat 6s ease-in-out infinite;
+        }
+        
+        .confetti-1 {
+            top: 80px;
+            left: 50px;
+            background-color: var(--color-yellow);
+            animation-delay: 1.5s;
+        }
+        
+        .confetti-2 {
+            top: 50px;
+            right: 80px;
+            background-color: var(--color-teal);
+            animation-delay: 0.8s;
+        }
+        
+        .confetti-3 {
+            bottom: 120px;
+            right: 60px;
+            background-color: var(--color-orange);
+            animation-delay: 1.1s;
+        }
+        
+        .confetti-4 {
+            bottom: 80px;
+            left: 80px;
+            background-color: var(--color-blue);
+            animation-delay: 0.2s;
+        }
+        
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-bottom: 50px solid var(--color, var(--color-purple));
+            transform: rotate(var(--rotation, 0deg));
+            animation: shapeFloat 9s ease-in-out infinite;
+        }
+        
+        .triangle-1 {
+            top: 200px;
+            right: 20px;
+            --color: var(--color-blue);
+            --rotation: 20deg;
+            animation-delay: 0.7s;
+        }
+        
+        .triangle-2 {
+            bottom: 150px;
+            left: 10px;
+            --color: var(--color-orange);
+            --rotation: -15deg;
+            animation-delay: 1.3s;
+        }
+        
+        .grid {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-image: linear-gradient(var(--color-pink) 2px, transparent 2px),
+                              linear-gradient(90deg, var(--color-pink) 2px, transparent 2px);
+            background-size: 20px 20px;
+            opacity: 0.2;
+            z-index: 1;
+        }
+        
+        .grid-1 {
+            top: -20px;
+            left: -20px;
+            transform: rotate(15deg);
+        }
+        
+        .grid-2 {
+            bottom: -30px;
+            right: -30px;
+            transform: rotate(-10deg);
+            background-image: linear-gradient(var(--color-teal) 2px, transparent 2px),
+                              linear-gradient(90deg, var(--color-teal) 2px, transparent 2px);
+        }
+        
+        .color-block {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 3px;
+            z-index: 1;
+            transform: rotate(var(--rotation, 0deg));
+        }
+        
+        .block-1 {
+            top: 300px;
+            right: 30px;
+            background-color: var(--color-pink);
+            --rotation: 10deg;
+        }
+        
+        .block-2 {
+            bottom: 250px;
+            left: 20px;
+            background-color: var(--color-yellow);
+            --rotation: -8deg;
+        }
+        
+        .header {
+            padding: 40px 20px 20px;
+            position: relative;
+            background-color: var(--color-white);
+            z-index: 5;
+        }
+        
+        .issue-date {
+            font-family: var(--font-pixel);
+            font-size: 18px;
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            color: var(--color-teal);
+            padding: 5px 10px;
+            background-color: var(--color-yellow);
+            transform: rotate(-2deg);
+            box-shadow: 4px 4px 0 var(--color-pink);
+            z-index: 10;
+        }
+        
+        .title-container {
+            margin-top: 30px;
+            position: relative;
+            text-align: center;
+            z-index: 5;
+        }
+        
+        .title-main {
+            font-family: var(--font-bold);
+            font-size: 38px;
+            line-height: 1.2;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 0 var(--color-pink), 6px 6px 0 var(--color-teal);
+            letter-spacing: 2px;
+        }
+        
+        .title-sub {
+            font-family: var(--font-geo);
+            font-size: 18px;
+            font-weight: 500;
+            margin-top: 15px;
+            color: var(--color-black);
+            background-color: var(--color-yellow);
+            padding: 5px 10px;
+            display: inline-block;
+            transform: skew(-5deg);
+        }
+        
+        .title-underline {
+            width: 80%;
+            height: 5px;
+            margin: 15px auto;
+            background: linear-gradient(90deg, var(--color-teal), var(--color-pink), var(--color-yellow), var(--color-orange));
+        }
+        
+        .content-section {
+            padding: 20px;
+            position: relative;
+            background-color: var(--color-white);
+            z-index: 5;
+        }
+        
+        .quote-block {
+            margin: 40px 0;
+            position: relative;
+            font-family: var(--font-geo);
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 1.5;
+            padding: 30px;
+            color: var(--color-black);
+            background-color: var(--color-white);
+            border: 3px solid var(--color-black);
+            box-shadow: 8px 8px 0 var(--color-yellow);
+        }
+        
+        .quote-block::before {
+            content: """;
+            position: absolute;
+            font-size: 80px;
+            font-family: var(--font-geo);
+            color: var(--color-pink);
+            top: -30px;
+            left: 10px;
+            z-index: -1;
+        }
+        
+        .quote-accent {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: var(--color-teal);
+            top: -10px;
+            right: 30px;
+            z-index: -1;
+        }
+        
+        .quote-accent-2 {
+            position: absolute;
+            width: 20px;
+            height: 70px;
+            background-color: var(--color-orange);
+            bottom: -10px;
+            left: 20px;
+            z-index: -1;
+            transform: rotate(45deg);
+        }
+        
+        .core-points {
+            position: relative;
+            margin: 50px 0;
+            padding: 30px;
+            background-color: var(--color-white);
+            border: 5px solid;
+            border-image: linear-gradient(45deg, var(--color-pink), var(--color-teal), var(--color-yellow), var(--color-orange)) 1;
+        }
+        
+        .points-corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+        }
+        
+        .points-corner-tl {
+            top: -10px;
+            left: -10px;
+            background-color: var(--color-yellow);
+        }
+        
+        .points-corner-tr {
+            top: -10px;
+            right: -10px;
+            background-color: var(--color-pink);
+        }
+        
+        .points-corner-bl {
+            bottom: -10px;
+            left: -10px;
+            background-color: var(--color-teal);
+        }
+        
+        .points-corner-br {
+            bottom: -10px;
+            right: -10px;
+            background-color: var(--color-orange);
+        }
+        
+        .core-points-title {
+            font-family: var(--font-pixel);
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--color-black);
+            text-align: center;
+            background-color: var(--color-yellow);
+            padding: 5px 15px;
+            display: inline-block;
+            transform: rotate(-2deg);
+            box-shadow: 3px 3px 0 var(--color-pink);
+        }
+        
+        .points-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .points-list li {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 30px;
+            font-family: var(--font-geo);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--color-black);
+        }
+        
+        .points-list li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            background-color: var(--marker-color, var(--color-pink));
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+        
+        .points-list li:nth-child(2)::before {
+            --marker-color: var(--color-teal);
+        }
+        
+        .points-list li:nth-child(3)::before {
+            --marker-color: var(--color-yellow);
+        }
+        
+        .points-list li:nth-child(4)::before {
+            --marker-color: var(--color-orange);
+        }
+        
+        .points-list li:nth-child(5)::before {
+            --marker-color: var(--color-blue);
+        }
+        
+        .qr-section {
+            margin: 50px 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .qr-container {
+            position: relative;
+            padding: 15px;
+            background-color: var(--color-white);
+            border: 3px solid var(--color-black);
+            transform: rotate(-2deg);
+        }
+        
+        .qr-shape {
+            position: absolute;
+            z-index: -1;
+        }
+        
+        .qr-shape-1 {
+            top: -15px;
+            left: -15px;
+            width: 30px;
+            height: 30px;
+            background-color: var(--color-teal);
+            transform: rotate(15deg);
+        }
+        
+        .qr-shape-2 {
+            bottom: -10px;
+            right: -20px;
+            width: 40px;
+            height: 10px;
+            background-color: var(--color-orange);
+            transform: rotate(-10deg);
+        }
+        
+        .qr-shape-3 {
+            top: 30px;
+            right: -15px;
+            width: 10px;
+            height: 50px;
+            background-color: var(--color-yellow);
+            transform: rotate(-5deg);
+        }
+        
+        .qr-shape-4 {
+            bottom: 20px;
+            left: -15px;
+            width: 15px;
+            height: 40px;
+            background-color: var(--color-pink);
+            transform: rotate(10deg);
+        }
+        
+        .qr-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 2px solid var(--color-black);
+        }
+        
+        .qr-label {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%) rotate(2deg);
+            font-family: var(--font-pixel);
+            font-size: 14px;
+            color: var(--color-black);
+            background-color: var(--color-yellow);
+            padding: 3px 10px;
+            white-space: nowrap;
+            border: 2px solid var(--color-black);
+            box-shadow: 3px 3px 0 var(--color-pink);
+        }
+        
+        .editor-notes {
+            margin: 60px 20px 30px;
+            padding: 25px;
+            position: relative;
+            font-family: var(--font-geo);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--color-black);
+            background: linear-gradient(45deg, var(--color-teal) 0%, var(--color-white) 100%);
+            border-right: 5px solid var(--color-pink);
+            transform: rotate(-1deg);
+        }
+        
+        .editor-title {
+            font-family: var(--font-pixel);
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--color-black);
+            padding: 3px 10px;
+            display: inline-block;
+            background-color: var(--color-yellow);
+            transform: rotate(2deg);
+            box-shadow: 3px 3px 0 var(--color-orange);
+        }
+        
+        .editor-notes p {
+            margin-bottom: 10px;
+        }
+        
+        .handwritten {
+            font-family: var(--font-pixel);
+            font-size: 16px;
+            display: block;
+            margin-top: 15px;
+            color: var(--color-black);
+            transform: rotate(-1deg);
+            text-align: right;
+            background-color: var(--color-white);
+            padding: 5px 10px;
+            box-shadow: 3px 3px 0 var(--color-teal);
+            display: inline-block;
+            float: right;
+        }
+        
+        .footer {
+            padding: 20px;
+            font-family: var(--font-pixel);
+            font-size: 14px;
+            color: var(--color-white);
+            text-align: center;
+            background-color: var(--color-black);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--color-pink), var(--color-teal), var(--color-yellow), var(--color-orange), var(--color-blue), var(--color-purple));
+        }
+        
+        /* 80s装饰文本 */
+        .eighties-text {
+            position: absolute;
+            font-family: var(--font-pixel);
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--color-pink);
+            text-transform: uppercase;
+            z-index: 1;
+            transform: rotate(var(--rotation, 0deg));
+        }
+        
+        .eighties-1 {
+            top: 10px;
+            right: 100px;
+            --rotation: 5deg;
+        }
+        
+        .eighties-2 {
+            bottom: 40px;
+            left: 30px;
+            --rotation: -5deg;
+            color: var(--color-teal);
+        }
+        
+        /* 装饰线条 */
+        .decoration-line {
+            position: absolute;
+            height: 3px;
+            background-color: var(--line-color, var(--color-pink));
+            z-index: 1;
+            transform: rotate(var(--rotation, 0deg));
+        }
+        
+        .line-1 {
+            top: 250px;
+            left: 20px;
+            width: 50px;
+            --line-color: var(--color-teal);
+            --rotation: 20deg;
+        }
+        
+        .line-2 {
+            bottom: 200px;
+            right: 30px;
+            width: 70px;
+            --line-color: var(--color-orange);
+            --rotation: -15deg;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 450px) {
+            .magazine-card {
+                width: 95%;
+                margin: 0 auto;
+            }
+            
+            .title-main {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="magazine-card memphis">
+        <!-- 孟菲斯风格图形元素 -->
+        <div class="shape zigzag zigzag-1"></div>
+        <div class="shape zigzag zigzag-2"></div>
+        <div class="shape wavy wavy-1"></div>
+        <div class="shape wavy wavy-2"></div>
+        <div class="shape confetti confetti-1"></div>
+        <div class="shape confetti confetti-2"></div>
+        <div class="shape confetti confetti-3"></div>
+        <div class="shape confetti confetti-4"></div>
+        <div class="shape triangle triangle-1"></div>
+        <div class="shape triangle triangle-2"></div>
+        <div class="grid grid-1"></div>
+        <div class="grid grid-2"></div>
+        <div class="shape color-block block-1"></div>
+        <div class="shape color-block block-2"></div>
+        <div class="decoration-line line-1"></div>
+        <div class="decoration-line line-2"></div>
+        
+        <!-- 80年代装饰文本 -->
+        <div class="eighties-text eighties-1">RADICAL!</div>
+        <div class="eighties-text eighties-2">AWESOME!</div>
+        
+        <header class="header">
+            <div class="issue-date">27.03.2025</div>
+            
+            <div class="title-container">
+                <h1 class="title-main">孟菲斯风格</h1>
+                <div class="title-underline"></div>
+                <h2 class="title-sub">80年代意大利前卫设计运动</h2>
+            </div>
+        </header>
+        
+        <div class="content-section">
+            <blockquote class="quote-block">
+                "孟菲斯设计拒绝遵循常规，它将混搭色彩与几何形状推向极致，创造出一种乐观、戏谑且充满活力的视觉语言。"
+                <div class="quote-accent"></div>
+                <div class="quote-accent-2"></div>
+            </blockquote>
+            
+            <div class="core-points">
+                <div class="points-corner points-corner-tl"></div>
+                <div class="points-corner points-corner-tr"></div>
+                <div class="points-corner points-corner-bl"></div>
+                <div class="points-corner points-corner-br"></div>
+                
+                <h3 class="core-points-title">核心特征</h3>
+                <ul class="points-list">
+                    <li>使用鲜艳且不协调的色彩组合，如亮粉、青绿、鲜黄和橙色</li>
+                    <li>几何形状作为核心元素，大量使用不规则图形、锯齿形和波浪线</li>
+                    <li>活泼不拘一格的排版，使用几何感强的无衬线字体，常添加阴影或3D效果</li>
+                    <li>孟菲斯标志性的彩色条纹、圆点和Z字形等装饰元素的运用</li>
+                    <li>图像通常被置于几何框架内或被几何形状切割，呈现打破常规的视觉效果</li>
+                </ul>
+            </div>
+            
+            <div class="qr-section">
+                <div class="qr-container">
+                    <div class="qr-shape qr-shape-1"></div>
+                    <div class="qr-shape qr-shape-2"></div>
+                    <div class="qr-shape qr-shape-3"></div>
+                    <div class="qr-shape qr-shape-4"></div>
+                    <img class="qr-image" src="https://images.cubox.pro/rhkekb/file/2025032609523776560/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250326095228.jpg" alt="QR Code">
+                    <div class="qr-label">SCAN ME, TOTALLY RAD!</div>
+                </div>
+            </div>
+            
+            <div class="editor-notes">
+                <div class="editor-title">编辑札记</div>
+                <p>孟菲斯设计风格于1981年由Ettore Sottsass在意大利米兰创立，是对当时主流极简主义设计的反叛。它以夸张、活泼且反传统的视觉冲击著称，影响了整个80年代的设计语言，从建筑到家具、从服装到平面设计。</p>
+                <p class="handwritten">— 打破规则才是设计的真谛！</p>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            MEMPHIS DESIGN · RADICAL SINCE 1981 · TOTALLY AWESOME!
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>黑金属风格 | BLACK METAL</title>
+    <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Grenze+Gotisch:wght@400;700;900&family=Special+Elite&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'BlackMetalFont';
+            src: url('https://fonts.googleapis.com/css2?family=Grenze+Gotisch&display=swap');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        :root {
+            --color-black: #000000;
+            --color-darkgray: #0a0a0a;
+            --color-gray: #222222;
+            --color-lightgray: #333333;
+            --color-white: #ffffff;
+            --color-blood: #660000;
+            --font-gothic: 'Grenze Gotisch', 'Noto Serif SC', serif;
+            --font-medieval: 'MedievalSharp', 'Noto Serif SC', serif;
+            --font-runic: 'Special Elite', 'Noto Sans SC', monospace;
+            --font-sans: 'Noto Sans SC', sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: var(--font-gothic);
+            color: var(--color-white);
+        }
+        
+        .magazine-card {
+            width: 400px;
+            max-height: 1680px;
+            background-color: var(--color-black);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
+            animation: fadeIn 2s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* 神秘符号和闪烁效果 */
+        .mystical-symbol {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.1);
+            font-size: 40px;
+            z-index: 1;
+            transform: rotate(var(--rotation, 0deg));
+            animation: flicker 4s infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.2; }
+        }
+        
+        .symbol-1 {
+            top: 10%;
+            left: 10%;
+            --rotation: 15deg;
+            animation-delay: 0.5s;
+        }
+        
+        .symbol-2 {
+            top: 20%;
+            right: 15%;
+            --rotation: -10deg;
+            animation-delay: 1s;
+            font-size: 30px;
+        }
+        
+        .symbol-3 {
+            bottom: 15%;
+            left: 20%;
+            --rotation: 5deg;
+            animation-delay: 1.5s;
+        }
+        
+        .symbol-4 {
+            bottom: 25%;
+            right: 10%;
+            --rotation: -5deg;
+            animation-delay: 2s;
+            font-size: 35px;
+        }
+        
+        /* 倒五角星 */
+        .pentagram {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            opacity: 0.15;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBkPSJNNTAgNWwxMiAzNyAzOCAwLTMxIDIyIDEyIDM2LTMxLTIyLTMxIDIyIDEyLTM2LTMxLTIyIDM4IDB6IiBmaWxsPSIjZmZmIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMSIgdHJhbnNmb3JtPSJyb3RhdGUoMTgwIDUwIDUwKSIvPjwvc3ZnPg==');
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 1;
+            animation: flicker 3s infinite alternate;
+        }
+        
+        .pentagram-1 {
+            top: 40px;
+            right: 40px;
+            animation-delay: 0.2s;
+        }
+        
+        .pentagram-2 {
+            bottom: 50px;
+            left: 30px;
+            animation-delay: 0.7s;
+        }
+        
+        /* 古代符文 */
+        .rune {
+            position: absolute;
+            font-family: var(--font-runic);
+            color: rgba(255, 255, 255, 0.15);
+            font-size: 24px;
+            z-index: 1;
+            transform: rotate(var(--rotation, 0deg));
+            animation: flicker 5s infinite alternate;
+        }
+        
+        .rune-1 {
+            top: 100px;
+            left: 20px;
+            --rotation: -5deg;
+            animation-delay: 0.3s;
+        }
+        
+        .rune-2 {
+            bottom: 150px;
+            right: 25px;
+            --rotation: 5deg;
+            animation-delay: 0.9s;
+        }
+        
+        .rune-3 {
+            top: 200px;
+            right: 30px;
+            --rotation: -3deg;
+            animation-delay: 1.2s;
+        }
+        
+        .rune-4 {
+            bottom: 80px;
+            left: 40px;
+            --rotation: 8deg;
+            animation-delay: 1.8s;
+        }
+        
+        /* 神秘学边框 */
+        .occult-border {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .occult-border::before, .occult-border::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .occult-border::before {
+            top: -5px;
+            left: -5px;
+            border-right: none;
+            border-bottom: none;
+        }
+        
+        .occult-border::after {
+            bottom: -5px;
+            right: -5px;
+            border-left: none;
+            border-top: none;
+        }
+        
+        .corner-symbol {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.2;
+            z-index: 2;
+        }
+        
+        .corner-tl {
+            top: 15px;
+            left: 15px;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMCAzMCI+PHBhdGggZD0iTTEgMWgyOHYyOGgtMnYtMjZoLTI2eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==');
+        }
+        
+        .corner-tr {
+            top: 15px;
+            right: 15px;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMCAzMCI+PHBhdGggZD0iTTEgMWgyOHYyOGgtMnYtMjZoLTI2eiIgZmlsbD0iI2ZmZiIgdHJhbnNmb3JtPSJyb3RhdGUoOTAgMTUgMTUpIi8+PC9zdmc+');
+        }
+        
+        .corner-bl {
+            bottom: 15px;
+            left: 15px;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMCAzMCI+PHBhdGggZD0iTTEgMWgyOHYyOGgtMnYtMjZoLTI2eiIgZmlsbD0iI2ZmZiIgdHJhbnNmb3JtPSJyb3RhdGUoMjcwIDE1IDE1KSIvPjwvc3ZnPg==');
+        }
+        
+        .corner-br {
+            bottom: 15px;
+            right: 15px;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMCAzMCI+PHBhdGggZD0iTTEgMWgyOHYyOGgtMnYtMjZoLTI2eiIgZmlsbD0iI2ZmZiIgdHJhbnNmb3JtPSJyb3RhdGUoMTgwIDE1IDE1KSIvPjwvc3ZnPg==');
+        }
+        
+        /* 神秘学图案背景 */
+        .occult-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNDUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIwLjUiIG9wYWNpdHk9IjAuMDUiLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjAuNSIgb3BhY2l0eT0iMC4wNSIvPjxwYXRoIGQ9Ik01MCw1IEw5NSw1MCBMNTAsOTUgTDUsNTAgWiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjAuNSIgb3BhY2l0eT0iMC4wNSIvPjwvc3ZnPg==');
+            background-size: 100px 100px;
+            opacity: 0.1;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        /* 噪点和划痕效果 */
+        .noise-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJub2lzZSIgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuNjUiIHJlc3VsdD0ibm9pc2UiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48ZmVDb2xvck1hdHJpeCBpbj0ibm9pc2UiIHR5cGU9Im1hdHJpeCIgdmFsdWVzPSIxIDAgMCAwIDAgMCAxIDAgMCAwIDAgMCAxIDAgMCAwIDAgMCAwLjUgMCIgcmVzdWx0PSJjb2xvcmVkTm9pc2UiLz48ZmVDb21wb3NpdGUgb3BlcmF0b3I9ImluIiBpbjI9IlNvdXJjZUdyYXBoaWMiLz48ZmVCbGVuZCBtb2RlPSJvdmVybGF5IiBpbjI9IlNvdXJjZUdyYXBoaWMiIHJlc3VsdD0ibWl4Ii8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbGw9IiNmZmYiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuMTUiLz48L3N2Zz4=');
+            pointer-events: none;
+            opacity: 0.2;
+            z-index: 100;
+            mix-blend-mode: overlay;
+        }
+        
+        .scratch {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.05);
+            height: 1px;
+            width: var(--width, 100px);
+            transform: rotate(var(--rotation, 0deg));
+            z-index: 101;
+        }
+        
+        .scratch-1 {
+            top: 30%;
+            left: 10%;
+            --width: 120px;
+            --rotation: 20deg;
+        }
+        
+        .scratch-2 {
+            top: 50%;
+            right: 5%;
+            --width: 80px;
+            --rotation: -15deg;
+        }
+        
+        .scratch-3 {
+            bottom: 35%;
+            left: 20%;
+            --width: 100px;
+            --rotation: 10deg;
+        }
+        
+        .header {
+            padding: 40px 20px 20px;
+            position: relative;
+            overflow: hidden;
+            z-index: 5;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .issue-date {
+            font-family: var(--font-runic);
+            font-size: 14px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 2px;
+            transform: rotate(-2deg);
+        }
+        
+        .title-container {
+            margin-top: 30px;
+            position: relative;
+            text-align: center;
+        }
+        
+        .title-main {
+            font-family: var(--font-gothic);
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1;
+            color: var(--color-white);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            animation: pulsate 4s infinite alternate;
+        }
+        
+        @keyframes pulsate {
+            0%, 100% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.2); }
+            50% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.4); }
+        }
+        
+        .title-sub {
+            font-family: var(--font-medieval);
+            font-size: 16px;
+            margin-top: 5px;
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 2px;
+        }
+        
+        .content-section {
+            padding: 30px 20px;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .quote-block {
+            margin: 40px 0;
+            position: relative;
+            font-family: var(--font-gothic);
+            font-size: 20px;
+            line-height: 1.6;
+            padding: 30px;
+            color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .quote-block::before {
+            content: """;
+            position: absolute;
+            font-size: 60px;
+            font-family: var(--font-gothic);
+            color: var(--color-blood);
+            opacity: 0.4;
+            top: 0;
+            left: 10px;
+            z-index: -1;
+        }
+        
+        .quote-block::after {
+            content: """;
+            position: absolute;
+            font-size: 60px;
+            font-family: var(--font-gothic);
+            color: var(--color-blood);
+            opacity: 0.4;
+            bottom: -30px;
+            right: 10px;
+            z-index: -1;
+        }
+        
+        .core-points {
+            position: relative;
+            margin: 50px 0;
+            padding: 30px;
+            background-color: rgba(10, 10, 10, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .core-points::before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            pointer-events: none;
+        }
+        
+        .core-points-title {
+            font-family: var(--font-gothic);
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--color-white);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-align: center;
+        }
+        
+        .points-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .points-list li {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 30px;
+            font-family: var(--font-sans);
+            font-size: 16px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .points-list li::before {
+            content: "†";
+            position: absolute;
+            left: 0;
+            color: var(--color-blood);
+            font-size: 20px;
+            opacity: 0.8;
+            animation: flicker 3s infinite alternate;
+        }
+        
+        .qr-section {
+            margin: 50px 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .qr-container {
+            position: relative;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            filter: contrast(120%) brightness(90%);
+            max-width: 170px;
+        }
+        
+        .qr-container::before {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: -1;
+        }
+        
+        .qr-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            filter: invert(1) contrast(150%) brightness(90%);
+            mix-blend-mode: lighten;
+        }
+        
+        .qr-label {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-runic);
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            white-space: nowrap;
+            letter-spacing: 1px;
+        }
+        
+        .editor-notes {
+            margin: 60px 0 30px;
+            padding: 25px;
+            position: relative;
+            font-family: var(--font-sans);
+            font-size: 15px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.6);
+            background-color: rgba(10, 10, 10, 0.6);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .editor-title {
+            font-family: var(--font-medieval);
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .editor-notes p {
+            margin-bottom: 10px;
+        }
+        
+        .handwritten {
+            font-family: var(--font-runic);
+            font-size: 14px;
+            display: block;
+            margin-top: 15px;
+            color: rgba(255, 255, 255, 0.5);
+            text-align: right;
+        }
+        
+        .footer {
+            padding: 20px;
+            font-family: var(--font-medieval);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        /* 闪烁效果 */
+        .flicker-element {
+            animation: candleFlicker 5s infinite;
+        }
+        
+        @keyframes candleFlicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.85; }
+            25%, 75% { opacity: 0.7; }
+        }
+        
+        /* 拉丁文装饰文本 */
+        .latin-text {
+            position: absolute;
+            font-family: var(--font-gothic);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.15);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            z-index: 1;
+            transform: rotate(var(--rotation, 0deg));
+        }
+        
+        .latin-1 {
+            top: 15px;
+            left: 50px;
+            --rotation: 5deg;
+        }
+        
+        .latin-2 {
+            bottom: 25px;
+            right: 40px;
+            --rotation: -5deg;
+        }
+    </style>
+</head>
+<body class="flicker-element">
+    <div class="magazine-card black-metal">
+        <!-- 噪点和划痕效果 -->
+        <div class="noise-overlay"></div>
+        <div class="scratch scratch-1"></div>
+        <div class="scratch scratch-2"></div>
+        <div class="scratch scratch-3"></div>
+        
+        <!-- 神秘学图案背景 -->
+        <div class="occult-pattern"></div>
+        
+        <!-- 神秘学边框 -->
+        <div class="occult-border"></div>
+        <div class="corner-symbol corner-tl"></div>
+        <div class="corner-symbol corner-tr"></div>
+        <div class="corner-symbol corner-bl"></div>
+        <div class="corner-symbol corner-br"></div>
+        
+        <!-- 神秘符号 -->
+        <div class="mystical-symbol symbol-1">&#9765;</div>
+        <div class="mystical-symbol symbol-2">&#9763;</div>
+        <div class="mystical-symbol symbol-3">&#9773;</div>
+        <div class="mystical-symbol symbol-4">&#9760;</div>
+        
+        <!-- 倒五角星 -->
+        <div class="pentagram pentagram-1"></div>
+        <div class="pentagram pentagram-2"></div>
+        
+        <!-- 古代符文 -->
+        <div class="rune rune-1">ᚠᚢᚦᚨᚱᚲ</div>
+        <div class="rune rune-2">ᛇᛞᛈᛟᛚᛗ</div>
+        <div class="rune rune-3">ᚹᚺᛃᛁᛒᛖ</div>
+        <div class="rune rune-4">ᚷᚲᛏᚾᛉᛊ</div>
+        
+        <!-- 拉丁文装饰文本 -->
+        <div class="latin-text latin-1">TENEBRAE AETERNAE</div>
+        <div class="latin-text latin-2">MORTIS ET GLORIA</div>
+        
+        <header class="header">
+            <div class="issue-date">XXVII · III · MMXXV</div>
+            
+            <div class="title-container">
+                <h1 class="title-main">黑金属风格</h1>
+                <h2 class="title-sub">深渊与神秘主义的视觉仪式</h2>
+            </div>
+        </header>
+        
+        <div class="content-section">
+            <blockquote class="quote-block">
+                "黑金属不仅是音乐，更是一种哲学——它通过极致的黑暗美学探索死亡、虚无与超越，将神秘符号与仪式感交织在视觉表达的每一个细节中。"
+            </blockquote>
+            
+            <div class="core-points">
+                <h3 class="core-points-title">核心特征</h3>
+                <ul class="points-list">
+                    <li>纯黑或极深灰度的背景，创造压抑、神秘的氛围</li>
+                    <li>古老、难以辨认的哥特式字体或锋利的几何字体，文字扭曲或被符号干扰</li>
+                    <li>神秘符号、倒五角星、古代符文和神秘学图案的大量运用</li>
+                    <li>高对比度且单色的图像处理，配以噪点和划痕效果增强原始感</li>
+                    <li>中世纪风格或神秘学几何图案边框，营造古老典籍的视觉效果</li>
+                </ul>
+            </div>
+            
+            <div class="qr-section">
+                <div class="qr-container">
+                    <img class="qr-image" src="https://images.cubox.pro/rhkekb/file/2025032609523776560/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250326095228.jpg" alt="QR Code">
+                    <div class="qr-label">SCAN THE FORBIDDEN CODE</div>
+                </div>
+            </div>
+            
+            <div class="editor-notes">
+                <div class="editor-title">暗影札记</div>
+                <p>黑金属风格源于挪威的极端音乐场景，以Darkthrone和Mayhem等乐队为代表。其视觉美学借鉴了中世纪神秘学典籍、古代符文和北欧异教元素，创造出一种神秘、冷酷且具仪式感的视觉体验。</p>
+                <p class="handwritten">— 黑暗中隐藏着最深刻的智慧，死亡中孕育着永恒的生命。</p>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            DARKNESS ETERNAL · ANNO DOMINI MMXXV
+        </footer>
+    </div>
+</body>
+</html>

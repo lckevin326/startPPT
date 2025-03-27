@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新表现主义风格 | NEO-EXPRESSIONISM</title>
+    <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Caveat:wght@400;600;700&family=Rock+Salt&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-red: #e62b1e;
+            --color-yellow: #ffd100;
+            --color-blue: #0026ff;
+            --color-green: #00a86b;
+            --color-orange: #ff6a00;
+            --color-purple: #9932cc;
+            --color-black: #000000;
+            --color-white: #ffffff;
+            --font-handwritten: 'Permanent Marker', 'Noto Sans SC', cursive;
+            --font-brush: 'Rock Salt', 'Noto Sans SC', cursive;
+            --font-scribble: 'Caveat', 'Noto Sans SC', cursive;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: var(--font-scribble);
+        }
+        
+        .magazine-card {
+            width: 400px;
+            max-height: 1680px;
+            background-color: #f5f5f5;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.8s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* 涂抹背景效果 */
+        .paint-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f5f5f5;
+            z-index: 1;
+        }
+        
+        /* 颜料喷溅和涂抹效果 */
+        .paint-splash {
+            position: absolute;
+            background-color: var(--splash-color, var(--color-red));
+            z-index: 2;
+            border-radius: 50%;
+            filter: blur(var(--blur, 0px));
+            transform: rotate(var(--rotation, 0deg)) scale(var(--scale, 1));
+            opacity: var(--opacity, 0.8);
+            mix-blend-mode: multiply;
+        }
+        
+        .splash-1 {
+            top: -50px;
+            left: -30px;
+            width: 200px;
+            height: 200px;
+            --splash-color: var(--color-yellow);
+            --blur: 10px;
+            --opacity: 0.7;
+        }
+        
+        .splash-2 {
+            bottom: -30px;
+            right: -40px;
+            width: 180px;
+            height: 180px;
+            --splash-color: var(--color-blue);
+            --blur: 8px;
+            --opacity: 0.65;
+        }
+        
+        .splash-3 {
+            top: 40%;
+            left: -60px;
+            width: 150px;
+            height: 150px;
+            --splash-color: var(--color-red);
+            --blur: 5px;
+            --opacity: 0.6;
+        }
+        
+        .splash-4 {
+            top: 20%;
+            right: -50px;
+            width: 120px;
+            height: 120px;
+            --splash-color: var(--color-green);
+            --blur: 7px;
+            --opacity: 0.5;
+        }
+        
+        /* 笔刷效果 */
+        .brush-stroke {
+            position: absolute;
+            background-color: var(--stroke-color, var(--color-black));
+            z-index: 3;
+            border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%;
+            transform: rotate(var(--rotation, 0deg)) skew(var(--skew, 0deg));
+            opacity: var(--opacity, 0.8);
+        }
+        
+        .stroke-1 {
+            top: 100px;
+            left: 30px;
+            width: 80px;
+            height: 15px;
+            --stroke-color: var(--color-black);
+            --rotation: 30deg;
+            --skew: 20deg;
+        }
+        
+        .stroke-2 {
+            bottom: 150px;
+            right: 40px;
+            width: 100px;
+            height: 12px;
+            --stroke-color: var(--color-black);
+            --rotation: -25deg;
+            --skew: -15deg;
+        }
+        
+        .stroke-3 {
+            top: 300px;
+            left: 50px;
+            width: 60px;
+            height: 20px;
+            --stroke-color: var(--color-black);
+            --rotation: -10deg;
+            --skew: 5deg;
+        }
+        
+        /* 原始符号装饰 */
+        .primitive-symbol {
+            position: absolute;
+            z-index: 4;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            color: var(--symbol-color, var(--color-black));
+            text-shadow: 1px 1px 0 var(--color-white);
+            transform: rotate(var(--rotation, 0deg));
+        }
+        
+        .symbol-1 {
+            top: 50px;
+            right: 30px;
+            font-size: 30px;
+            --symbol-color: var(--color-red);
+            --rotation: 15deg;
+        }
+        
+        .symbol-2 {
+            bottom: 100px;
+            left: 40px;
+            font-size: 36px;
+            --symbol-color: var(--color-blue);
+            --rotation: -10deg;
+        }
+        
+        /* 涂鸦线条 */
+        .scribble {
+            position: absolute;
+            z-index: 3;
+            width: var(--width, 100px);
+            height: var(--height, 2px);
+            background-color: var(--scribble-color, var(--color-black));
+            transform: rotate(var(--rotation, 0deg)) translateY(var(--translate, 0px));
+            opacity: 0.8;
+        }
+        
+        .scribble-1 {
+            top: 150px;
+            left: 0;
+            --width: 150px;
+            --height: 3px;
+            --scribble-color: var(--color-black);
+            --rotation: 5deg;
+            --translate: 10px;
+        }
+        
+        .scribble-2 {
+            top: 160px;
+            left: 0;
+            --width: 130px;
+            --height: 2px;
+            --scribble-color: var(--color-black);
+            --rotation: 7deg;
+            --translate: 15px;
+        }
+        
+        .scribble-3 {
+            bottom: 200px;
+            right: 0;
+            --width: 120px;
+            --height: 4px;
+            --scribble-color: var(--color-black);
+            --rotation: -10deg;
+            --translate: -5px;
+        }
+        
+        /* 面具图案 */
+        .mask-pattern {
+            position: absolute;
+            z-index: 3;
+            width: 80px;
+            height: 100px;
+            border: 3px solid var(--color-black);
+            background-color: transparent;
+            border-radius: 40% 40% 50% 50% / 60% 60% 40% 40%;
+            transform: rotate(var(--rotation, 0deg));
+            opacity: 0.6;
+        }
+        
+        .mask-1 {
+            top: 250px;
+            right: 20px;
+            --rotation: -5deg;
+        }
+        
+        .mask-1::before, .mask-1::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 10px;
+            background-color: var(--color-black);
+            border-radius: 50%;
+            top: 30px;
+        }
+        
+        .mask-1::before {
+            left: 15px;
+        }
+        
+        .mask-1::after {
+            right: 15px;
+        }
+        
+        .mask-2 {
+            bottom: 150px;
+            left: 30px;
+            transform: scale(0.7) rotate(10deg);
+        }
+        
+        .mask-2::before, .mask-2::after {
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 8px;
+            background-color: var(--color-black);
+            border-radius: 50%;
+            top: 35px;
+        }
+        
+        .mask-2::before {
+            left: 18px;
+        }
+        
+        .mask-2::after {
+            right: 18px;
+        }
+        
+        .header {
+            padding: 40px 20px 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .issue-date {
+            font-family: var(--font-handwritten);
+            font-size: 18px;
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            color: var(--color-white);
+            background-color: var(--color-red);
+            padding: 5px 15px;
+            transform: rotate(-5deg);
+            z-index: 10;
+            letter-spacing: 1px;
+            box-shadow: 3px 3px 0 var(--color-black);
+        }
+        
+        .date-cross {
+            position: absolute;
+            font-size: 30px;
+            font-weight: bold;
+            top: -10px;
+            right: -10px;
+            color: var(--color-black);
+            transform: rotate(15deg);
+        }
+        
+        .title-container {
+            margin-top: 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .title-main {
+            font-family: var(--font-brush);
+            font-size: 38px;
+            line-height: 1.2;
+            color: var(--color-black);
+            margin-left: 10px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 0 var(--color-red);
+            position: relative;
+            display: inline-block;
+            transform: rotate(-2deg);
+        }
+        
+        .title-underline {
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--color-black);
+            transform: rotate(1deg) translateY(2px);
+        }
+        
+        .title-sub {
+            font-family: var(--font-scribble);
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 10px;
+            margin-left: 40px;
+            color: var(--color-black);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .content-section {
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .quote-block {
+            margin: 40px 0;
+            position: relative;
+            font-family: var(--font-scribble);
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.5;
+            padding: 25px;
+            color: var(--color-black);
+            background-color: rgba(255, 255, 255, 0.7);
+            border: 2px solid var(--color-black);
+            border-radius: 0;
+            transform: rotate(-1deg);
+        }
+        
+        .quote-mark {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            font-family: var(--font-handwritten);
+            font-size: 60px;
+            color: var(--color-red);
+            transform: rotate(5deg);
+        }
+        
+        .quote-mark-end {
+            position: absolute;
+            bottom: -40px;
+            right: 20px;
+            font-family: var(--font-handwritten);
+            font-size: 60px;
+            color: var(--color-blue);
+            transform: rotate(-5deg);
+        }
+        
+        .quote-paint {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 10px;
+            background-color: var(--color-yellow);
+            opacity: 0.5;
+            z-index: -1;
+        }
+        
+        .quote-paint-2 {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40%;
+            height: 15px;
+            background-color: var(--color-green);
+            opacity: 0.5;
+            z-index: -1;
+        }
+        
+        .core-points {
+            position: relative;
+            margin: 50px 0;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 3px solid var(--color-black);
+            transform: rotate(1deg);
+        }
+        
+        .points-paint {
+            position: absolute;
+            top: -20px;
+            right: -10px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--color-yellow);
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .points-paint-2 {
+            position: absolute;
+            bottom: -15px;
+            left: -15px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--color-blue);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            z-index: -1;
+        }
+        
+        .core-points-title {
+            font-family: var(--font-handwritten);
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--color-black);
+            text-transform: uppercase;
+            background-color: var(--color-yellow);
+            padding: 5px 15px;
+            display: inline-block;
+            transform: rotate(-2deg);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .points-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .points-list li {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 40px;
+            font-family: var(--font-scribble);
+            font-size: 18px;
+            line-height: 1.5;
+            color: var(--color-black);
+            font-weight: 700;
+        }
+        
+        .points-list li::before {
+            content: "×";
+            position: absolute;
+            left: 0;
+            font-family: var(--font-handwritten);
+            font-size: 30px;
+            color: var(--marker-color, var(--color-red));
+            transform: rotate(var(--marker-rotation, 0deg));
+        }
+        
+        .points-list li:nth-child(2)::before {
+            --marker-color: var(--color-blue);
+            --marker-rotation: 10deg;
+        }
+        
+        .points-list li:nth-child(3)::before {
+            --marker-color: var(--color-green);
+            --marker-rotation: -15deg;
+        }
+        
+        .points-list li:nth-child(4)::before {
+            --marker-color: var(--color-orange);
+            --marker-rotation: 5deg;
+        }
+        
+        .points-list li:nth-child(5)::before {
+            --marker-color: var(--color-purple);
+            --marker-rotation: -8deg;
+        }
+        
+        .points-list li:nth-child(odd) {
+            transform: rotate(-1deg);
+        }
+        
+        .points-list li:nth-child(even) {
+            transform: rotate(1deg);
+        }
+        
+        .qr-section {
+            margin: 50px 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .qr-container {
+            position: relative;
+            padding: 15px;
+            background-color: white;
+            transform: rotate(-3deg);
+            z-index: 10;
+        }
+        
+        .qr-border {
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 3px solid var(--color-black);
+            z-index: -1;
+            transform: rotate(2deg);
+        }
+        
+        .qr-paint {
+            position: absolute;
+            top: -15px;
+            left: -20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--color-red);
+            border-radius: 50%;
+            opacity: 0.6;
+            z-index: -2;
+        }
+        
+        .qr-paint-2 {
+            position: absolute;
+            bottom: -20px;
+            right: -15px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--color-blue);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            opacity: 0.6;
+            z-index: -2;
+        }
+        
+        .qr-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 2px solid var(--color-black);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .qr-scratch {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 2px;
+            background-color: var(--color-red);
+            transform: rotate(45deg);
+            z-index: 2;
+        }
+        
+        .qr-scratch-2 {
+            position: absolute;
+            bottom: 20px;
+            left: 15px;
+            width: 25px;
+            height: 3px;
+            background-color: var(--color-black);
+            transform: rotate(-30deg);
+            z-index: 2;
+        }
+        
+        .qr-label {
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%) rotate(2deg);
+            font-family: var(--font-handwritten);
+            font-size: 16px;
+            color: var(--color-black);
+            background-color: var(--color-yellow);
+            padding: 5px 10px;
+            border: 2px solid var(--color-black);
+            white-space: nowrap;
+            z-index: 3;
+        }
+        
+        .editor-notes {
+            margin: 60px 20px 30px;
+            padding: 25px;
+            position: relative;
+            font-family: var(--font-scribble);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--color-black);
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 2px solid var(--color-black);
+            border-left: 8px solid var(--color-red);
+            transform: rotate(1deg);
+        }
+        
+        .notes-paint {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30%;
+            height: 15px;
+            background-color: var(--color-blue);
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        .editor-title {
+            font-family: var(--font-handwritten);
+            font-weight: 700;
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--color-black);
+            border-bottom: 3px solid var(--color-black);
+            display: inline-block;
+            padding-bottom: 5px;
+            transform: rotate(-1deg);
+        }
+        
+        .editor-notes p {
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .handwritten {
+            font-family: var(--font-handwritten);
+            font-size: 16px;
+            display: block;
+            margin-top: 20px;
+            color: var(--color-black);
+            text-align: right;
+            transform: rotate(-2deg);
+        }
+        
+        .footer {
+            padding: 20px;
+            font-family: var(--font-handwritten);
+            font-size: 12px;
+            color: var(--color-white);
+            text-align: center;
+            background-color: var(--color-black);
+            position: relative;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        /* 英语装饰文本 */
+        .art-text {
+            position: absolute;
+            font-family: var(--font-handwritten);
+            font-weight: bold;
+            font-size: 14px;
+            color: var(--color-black);
+            transform: rotate(var(--rotation, 0deg));
+            z-index: 5;
+        }
+        
+        .art-text-1 {
+            top: 80px;
+            right: 30px;
+            --rotation: 90deg;
+        }
+        
+        .art-text-2 {
+            bottom: 100px;
+            left: 15px;
+            --rotation: -90deg;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 450px) {
+            .magazine-card {
+                width: 95%;
+                margin: 0 auto;
+            }
+            
+            .title-main {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="magazine-card neo-expressionism">
+        <!-- 涂抹背景 -->
+        <div class="paint-background"></div>
+        
+        <!-- 颜料喷溅 -->
+        <div class="paint-splash splash-1"></div>
+        <div class="paint-splash splash-2"></div>
+        <div class="paint-splash splash-3"></div>
+        <div class="paint-splash splash-4"></div>
+        
+        <!-- 笔刷效果 -->
+        <div class="brush-stroke stroke-1"></div>
+        <div class="brush-stroke stroke-2"></div>
+        <div class="brush-stroke stroke-3"></div>
+        
+        <!-- 原始符号 -->
+        <div class="primitive-symbol symbol-1">&#9733;</div>
+        <div class="primitive-symbol symbol-2">&#9776;</div>
+        
+        <!-- 涂鸦线条 -->
+        <div class="scribble scribble-1"></div>
+        <div class="scribble scribble-2"></div>
+        <div class="scribble scribble-3"></div>
+        
+        <!-- 面具图案 -->
+        <div class="mask-pattern mask-1"></div>
+        <div class="mask-pattern mask-2"></div>
+        
+        <!-- 英语装饰文本 -->
+        <div class="art-text art-text-1">RAW EMOTION</div>
+        <div class="art-text art-text-2">EXPRESSIVE ART</div>
+        
+        <header class="header">
+            <div class="issue-date">
+                27.03.2025
+                <span class="date-cross">×</span>
+            </div>
+            
+            <div class="title-container">
+                <h1 class="title-main">
+                    新表现主义风格
+                    <div class="title-underline"></div>
+                </h1>
+                <h2 class="title-sub">80年代艺术运动的原始能量</h2>
+            </div>
+        </header>
+        
+        <div class="content-section">
+            <blockquote class="quote-block">
+                <div class="quote-mark">"</div>
+                <div class="quote-mark-end">"</div>
+                <div class="quote-paint"></div>
+                <div class="quote-paint-2"></div>
+                <div class="quote-text">新表现主义不仅是一种视觉风格，更是情感的直接表达——它打破了极简主义的冷静理性，回归到艺术最原始的功能：以最直接、最原始的方式传递人类的情感与能量。</div>
+            </blockquote>
+            
+            <div class="core-points">
+                <div class="points-paint"></div>
+                <div class="points-paint-2"></div>
+                <h3 class="core-points-title">核心特征</h3>
+                <ul class="points-list">
+                    <li>强烈且不协调的色彩组合，使用原始、未经调和的色彩，常包含泼溅和涂抹</li>
+                    <li>富有表现力且不规则的排版，使用手写或笔刷字体，文字可被部分遮挡</li>
+                    <li>粗犷且富有动感的线条，展现明显的笔触和手工感</li>
+                    <li>图像被重新诠释，添加涂鸦、划痕或重绘效果</li>
+                    <li>随意但富有象征性的装饰元素，如原始符号、面具图案或抽象人物</li>
+                </ul>
+            </div>
+            
+            <div class="qr-section">
+                <div class="qr-container">
+                    <div class="qr-border"></div>
+                    <div class="qr-paint"></div>
+                    <div class="qr-paint-2"></div>
+                    <div class="qr-scratch"></div>
+                    <div class="qr-scratch-2"></div>
+                    <img class="qr-image" src="https://images.cubox.pro/rhkekb/file/2025032609523776560/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250326095228.jpg" alt="QR Code">
+                    <div class="qr-label">SCAN TO EXPLORE</div>
+                </div>
+            </div>
+            
+            <div class="editor-notes">
+                <div class="notes-paint"></div>
+                <h4 class="editor-title">编辑札记</h4>
+                <p>新表现主义源于20世纪80年代，是对60-70年代极简主义和概念艺术的反动。以Jean-Michel Basquiat、Georg Baselitz和Julian Schnabel等艺术家为代表，这一运动重新强调了绘画的表现力和情感性，突出个人风格与直觉创作，并常带有文化、社会和政治批判。</p>
+                <p class="handwritten">— 真正的艺术源于内心的爆发，而非理性的计算。</p>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            NEO-EXPRESSIONISM · RAW EMOTION · PRIMAL ENERGY · 2025
+        </footer>
+    </div>
+</body>
+</html>

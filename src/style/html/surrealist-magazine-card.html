@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>超现实主义数字拼贴 | SURREALIST DIGITAL COLLAGE</title>
+    <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Poiret+One&family=Philosopher:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-sunset1: #ff9e7d;
+            --color-sunset2: #e95c90;
+            --color-sunset3: #9966cc;
+            --color-moonlight1: #8ec5fc;
+            --color-moonlight2: #c4b5fd;
+            --color-moonlight3: #5448c8;
+            --color-cloud: #f8f9fa;
+            --color-shadow: #252440;
+            --color-accent: #21e6c1;
+            --font-dream: 'Poiret One', 'Noto Sans SC', cursive;
+            --font-surreal: 'Italiana', 'Noto Serif SC', serif;
+            --font-floating: 'Philosopher', 'Noto Sans SC', serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: var(--font-surreal);
+        }
+        
+        .magazine-card {
+            width: 400px;
+            max-height: 1680px;
+            background: linear-gradient(145deg, var(--color-moonlight3) 0%, var(--color-shadow) 100%);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 1.2s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        /* 创建超现实拼贴背景 */
+        .collage-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(37, 36, 64, 0.8), rgba(37, 36, 64, 0.9));
+            z-index: 0;
+        }
+        
+        /* 月亮元素 */
+        .moon {
+            position: absolute;
+            top: 50px;
+            right: 40px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 40% 40%, var(--color-cloud) 0%, var(--color-moonlight1) 70%, var(--color-moonlight2) 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(142, 197, 252, 0.5);
+            z-index: 1;
+            transform: translateZ(50px);
+            filter: drop-shadow(0 0 10px rgba(142, 197, 252, 0.3));
+        }
+        
+        /* 古典雕塑元素 */
+        .statue {
+            position: absolute;
+            top: 180px;
+            left: 30px;
+            width: 80px;
+            height: 120px;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSIxMjAiIHZpZXdCb3g9IjAgMCA4MCAxMjAiPjxwYXRoIGQ9Ik00MCwxMCBMMzAsMjAgTDI1LDQwIEwzMCw3MCBMNDA5MCBMNTAsNzAgTDU1LDQwIEw1MCwyMCBMNDAsMTAiIGZpbGw9IiNmOGY5ZmEiLz48L3N2Zz4=');
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 2;
+            opacity: 0.9;
+            filter: drop-shadow(0 0 5px rgba(248, 249, 250, 0.5));
+        }
+        
+        /* 悬浮几何形状 */
+        .floating-geometry {
+            position: absolute;
+            z-index: 2;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+            animation: float 8s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        .geometry-1 {
+            bottom: 150px;
+            right: 50px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--color-accent);
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+            animation-delay: 0s;
+        }
+        
+        .geometry-2 {
+            top: 300px;
+            left: 150px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--color-sunset2);
+            border-radius: 50%;
+            animation-delay: 1s;
+        }
+        
+        .geometry-3 {
+            bottom: 250px;
+            left: 70px;
+            width: 70px;
+            height: 30px;
+            background-color: var(--color-moonlight2);
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+            animation-delay: 2s;
+        }
+        
+        /* 不可能的建筑 */
+        .impossible-stair {
+            position: absolute;
+            bottom: 50px;
+            left: 40px;
+            width: 120px;
+            height: 80px;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCAxMjAgODAiPjxwYXRoIGQ9Ik0xMCwxMCBMMTEwLDEwIEwxMTAsNDAgTDQwLDQwIEw0MCw3MCBMMTAsNzAgTDEwLDEwIiBzdHJva2U9IiNmOGY5ZmEiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0xMTAsNDAgTDExMCw3MCBMNDAsNzAiIHN0cm9rZT0iI2Y4ZjlmYSIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIi8+PC9zdmc+');
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 2;
+            opacity: 0.8;
+        }
+        
+        /* 飘浮的云朵 */
+        .cloud {
+            position: absolute;
+            background-color: var(--color-cloud);
+            border-radius: 50%;
+            filter: blur(15px);
+            opacity: 0.3;
+            z-index: 1;
+        }
+        
+        .cloud-1 {
+            top: 80px;
+            left: 160px;
+            width: 100px;
+            height: 60px;
+        }
+        
+        .cloud-2 {
+            bottom: 120px;
+            right: 30px;
+            width: 150px;
+            height: 80px;
+            opacity: 0.15;
+        }
+        
+        /* 超现实门框 */
+        .surreal-frame {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px;
+            height: 250px;
+            border: 3px solid var(--color-cloud);
+            box-shadow: 0 0 20px rgba(248, 249, 250, 0.2);
+            z-index: 1;
+            opacity: 0.4;
+        }
+        
+        /* 神秘符号 */
+        .mystical-symbol {
+            position: absolute;
+            font-size: 24px;
+            color: var(--color-cloud);
+            opacity: 0.6;
+            z-index: 3;
+            filter: drop-shadow(0 0 5px rgba(248, 249, 250, 0.3));
+        }
+        
+        .symbol-1 {
+            top: 50px;
+            left: 100px;
+            transform: rotate(15deg);
+        }
+        
+        .symbol-2 {
+            bottom: 80px;
+            right: 120px;
+            transform: rotate(-10deg);
+        }
+        
+        /* 日期悬浮在云上 */
+        .header {
+            padding: 40px 25px 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .issue-date {
+            font-family: var(--font-dream);
+            font-size: 16px;
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: var(--color-cloud);
+            text-shadow: 0 0 10px rgba(142, 197, 252, 0.8);
+            z-index: 10;
+            letter-spacing: 1px;
+            transform: translateZ(20px);
+        }
+        
+        .date-shadow {
+            position: absolute;
+            top: 33px;
+            left: 42px;
+            font-family: var(--font-dream);
+            font-size: 16px;
+            color: var(--color-sunset2);
+            opacity: 0.8;
+            filter: blur(4px);
+            z-index: 9;
+        }
+        
+        /* 标题融入超现实场景 */
+        .title-container {
+            margin-top: 100px;
+            position: relative;
+            text-align: center;
+            z-index: 10;
+        }
+        
+        .title-main {
+            font-family: var(--font-surreal);
+            font-size: 32px;
+            font-weight: 400;
+            line-height: 1.2;
+            color: var(--color-cloud);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(142, 197, 252, 0.5);
+            transform: perspective(500px) rotateX(5deg);
+        }
+        
+        .title-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(142, 197, 252, 0.3), transparent);
+            filter: blur(5px);
+            z-index: -1;
+            animation: titleGlow 8s infinite;
+        }
+        
+        @keyframes titleGlow {
+            0%, 100% { transform: translateX(-100%); opacity: 0; }
+            50% { transform: translateX(100%); opacity: 1; }
+        }
+        
+        .title-sub {
+            font-family: var(--font-dream);
+            font-size: 18px;
+            margin-top: 10px;
+            color: var(--color-moonlight1);
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+        
+        /* 内容区域 */
+        .content-section {
+            padding: 30px 25px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* 引用块漂浮在云上 */
+        .quote-block {
+            margin: 60px 20px 40px;
+            position: relative;
+            background: rgba(248, 249, 250, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(248, 249, 250, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: perspective(1000px) rotateX(5deg);
+            z-index: 20;
+        }
+        
+        .quote-text {
+            font-family: var(--font-floating);
+            font-size: 17px;
+            font-style: italic;
+            line-height: 1.6;
+            color: var(--color-cloud);
+            text-shadow: 0 0 5px rgba(142, 197, 252, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .quote-clouds {
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            top: -25%;
+            left: -25%;
+            background: radial-gradient(circle at center, rgba(142, 197, 252, 0.2), transparent 70%);
+            filter: blur(20px);
+            z-index: -1;
+            opacity: 0.5;
+            animation: cloudMove 15s infinite alternate;
+        }
+        
+        @keyframes cloudMove {
+            0%, 100% { transform: translateX(-10%) translateY(0); }
+            50% { transform: translateX(10%) translateY(-10%); }
+        }
+        
+        /* 核心要点列表环绕月亮 */
+        .core-points {
+            position: relative;
+            margin: 80px 20px 60px;
+            padding: 30px 20px;
+            background: rgba(37, 36, 64, 0.6);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            border: 1px solid rgba(196, 181, 253, 0.3);
+            overflow: hidden;
+            z-index: 20;
+        }
+        
+        .points-moon {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 40% 40%, var(--color-cloud) 0%, var(--color-moonlight1) 70%);
+            border-radius: 50%;
+            filter: blur(2px);
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        .core-points-title {
+            font-family: var(--font-surreal);
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 25px;
+            color: var(--color-cloud);
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 10px rgba(142, 197, 252, 0.5);
+            z-index: 1;
+        }
+        
+        .points-list {
+            list-style-type: none;
+            padding-left: 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .points-list li {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 35px;
+            font-family: var(--font-floating);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--color-cloud);
+        }
+        
+        .points-list li::before {
+            content: "✧";
+            position: absolute;
+            left: 5px;
+            top: 2px;
+            font-size: 18px;
+            color: var(--marker-color, var(--color-moonlight1));
+            text-shadow: 0 0 8px var(--marker-color, var(--color-moonlight1));
+            animation: starTwinkle 3s infinite;
+        }
+        
+        @keyframes starTwinkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+        
+        .points-list li:nth-child(2)::before {
+            --marker-color: var(--color-sunset2);
+            animation-delay: 0.6s;
+        }
+        
+        .points-list li:nth-child(3)::before {
+            --marker-color: var(--color-accent);
+            animation-delay: 1.2s;
+        }
+        
+        .points-list li:nth-child(4)::before {
+            --marker-color: var(--color-sunset3);
+            animation-delay: 1.8s;
+        }
+        
+        .points-list li:nth-child(5)::before {
+            --marker-color: var(--color-moonlight2);
+            animation-delay: 2.4s;
+        }
+        
+        /* 扭曲的路径文本 */
+        .warped-text-path {
+            position: absolute;
+            top: 60%;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            z-index: 5;
+            overflow: hidden;
+        }
+        
+        .warped-text {
+            position: absolute;
+            width: 100%;
+            font-family: var(--font-dream);
+            font-size: 12px;
+            color: var(--color-cloud);
+            opacity: 0.5;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            animation: textWave 15s linear infinite;
+        }
+        
+        @keyframes textWave {
+            0% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(5%) translateY(10px); }
+            50% { transform: translateX(0) translateY(20px); }
+            75% { transform: translateX(-5%) translateY(10px); }
+            100% { transform: translateX(0) translateY(0); }
+        }
+        
+        /* QR码作为超现实物体 */
+        .qr-section {
+            margin: 80px 0 60px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            z-index: 20;
+        }
+        
+        .qr-container {
+            position: relative;
+            transform: perspective(800px) rotateY(-15deg);
+            transition: all 0.5s ease;
+        }
+        
+        .qr-container:hover {
+            transform: perspective(800px) rotateY(0deg);
+        }
+        
+        .qr-frame {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 1px solid rgba(248, 249, 250, 0.3);
+            box-shadow: 0 0 20px rgba(142, 197, 252, 0.3), inset 0 0 20px rgba(142, 197, 252, 0.2);
+            z-index: -1;
+        }
+        
+        .qr-image {
+            width: 130px;
+            height: 130px;
+            object-fit: cover;
+            filter: contrast(1.2) brightness(1.1) drop-shadow(0 0 10px rgba(142, 197, 252, 0.5));
+            border: 1px solid rgba(248, 249, 250, 0.3);
+        }
+        
+        .qr-reflection {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, transparent 80%);
+            z-index: 1;
+            opacity: 0.3;
+        }
+        
+        .qr-floating-eye {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-cloud);
+            border-radius: 50%;
+            z-index: 2;
+            animation: floatEye 6s infinite alternate ease-in-out;
+        }
+        
+        @keyframes floatEye {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(10px, -10px); }
+        }
+        
+        .qr-eye-1 {
+            top: -30px;
+            left: 20px;
+            animation-delay: 0s;
+        }
+        
+        .qr-eye-2 {
+            bottom: -20px;
+            right: 10px;
+            animation-delay: 2s;
+        }
+        
+        .qr-label {
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-dream);
+            font-size: 14px;
+            color: var(--color-cloud);
+            white-space: nowrap;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(142, 197, 252, 0.5);
+        }
+        
+        /* 编辑札记如梦境记录 */
+        .editor-notes {
+            margin: 80px 20px 40px;
+            padding: 25px;
+            position: relative;
+            font-family: var(--font-floating);
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--color-cloud);
+            background: rgba(37, 36, 64, 0.6);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            border: 1px solid rgba(196, 181, 253, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 20;
+        }
+        
+        .notes-dreamlike {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(233, 92, 144, 0.1), rgba(142, 197, 252, 0.1));
+            filter: blur(10px);
+            border-radius: 15px;
+            z-index: -1;
+            opacity: 0.6;
+            animation: dreamPulse 10s infinite alternate;
+        }
+        
+        @keyframes dreamPulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.05); }
+        }
+        
+        .editor-title {
+            font-family: var(--font-surreal);
+            font-weight: 400;
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--color-cloud);
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(142, 197, 252, 0.5);
+        }
+        
+        .editor-notes p {
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .handwritten {
+            font-family: var(--font-dream);
+            font-style: italic;
+            font-size: 15px;
+            display: block;
+            margin-top: 20px;
+            color: var(--color-accent);
+            text-align: right;
+            text-shadow: 0 0 10px rgba(33, 230, 193, 0.5);
+        }
+        
+        .footer {
+            padding: 25px;
+            font-family: var(--font-dream);
+            font-size: 12px;
+            color: var(--color-cloud);
+            text-align: center;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 10;
+            text-shadow: 0 0 10px rgba(142, 197, 252, 0.5);
+        }
+        
+        /* 法语超现实标语 */
+        .surreal-text {
+            position: absolute;
+            font-family: var(--font-dream);
+            font-size: 12px;
+            color: var(--color-moonlight1);
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            z-index: 5;
+            transform: rotate(var(--rotation, 0deg));
+            text-shadow: 0 0 5px rgba(142, 197, 252, 0.3);
+        }
+        
+        .surreal-text-1 {
+            top: 10%;
+            right: 20px;
+            --rotation: 90deg;
+        }
+        
+        .surreal-text-2 {
+            bottom: 15%;
+            left: 15px;
+            --rotation: -90deg;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 450px) {
+            .magazine-card {
+                width: 95%;
+                margin: 0 auto;
+            }
+            
+            .title-main {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="magazine-card surrealist-collage">
+        <!-- 超现实拼贴背景 -->
+        <div class="collage-background"></div>
+        
+        <!-- 超现实元素 -->
+        <div class="moon"></div>
+        <div class="statue"></div>
+        <div class="floating-geometry geometry-1"></div>
+        <div class="floating-geometry geometry-2"></div>
+        <div class="floating-geometry geometry-3"></div>
+        <div class="impossible-stair"></div>
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="surreal-frame"></div>
+        <div class="mystical-symbol symbol-1">⚝</div>
+        <div class="mystical-symbol symbol-2">⚜</div>
+        
+        <!-- 扭曲的路径文本 -->
+        <div class="warped-text-path">
+            <div class="warped-text">ce n'est pas une carte · ce n'est pas une carte · ce n'est pas une carte</div>
+        </div>
+        
+        <!-- 法语超现实标语 -->
+        <div class="surreal-text surreal-text-1">CECI N'EST PAS LA RÉALITÉ</div>
+        <div class="surreal-text surreal-text-2">LE RÊVE EST ÉVEILLÉ</div>
+        
+        <header class="header">
+            <div class="issue-date">27.03.2025</div>
+            <div class="date-shadow">27.03.2025</div>
+            
+            <div class="title-container">
+                <div class="title-glow"></div>
+                <h1 class="title-main">超现实主义数字拼贴</h1>
+                <h2 class="title-sub">梦境与现实的边界之旅</h2>
+            </div>
+        </header>
+        
+        <div class="content-section">
+            <blockquote class="quote-block">
+                <div class="quote-clouds"></div>
+                <div class="quote-text">超现实主义拼贴不仅是一种视觉表达，更是一场思维的冒险——它打破常规的逻辑关联，将不相关的元素并置，创造出一种介于梦境与现实之间的新维度，引发观者内心深处的潜意识共鸣。</div>
+            </blockquote>
+            
+            <div class="core-points">
+                <div class="points-moon"></div>
+                <h3 class="core-points-title">核心特征</h3>
+                <ul class="points-list">
+                    <li>组合不相关元素创造意外联系，如古典雕塑与现代电子产品</li>
+                    <li>比例故意失调，创造视觉张力和梦境般的效果</li>
+                    <li>梦幻色彩组合，如暖日落色调或冷月光色调，添加轻微色偏</li>
+                    <li>文字环绕物体、穿过图像或成为构图的一部分</li>
+                    <li>超现实符号如悬浮物体、不可能的建筑和变形元素的运用</li>
+                </ul>
+            </div>
+            
+            <div class="qr-section">
+                <div class="qr-container">
+                    <div class="qr-frame"></div>
+                    <div class="qr-floating-eye qr-eye-1"></div>
+                    <div class="qr-floating-eye qr-eye-2"></div>
+                    <img class="qr-image" src="https://images.cubox.pro/rhkekb/file/2025032609523776560/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250326095228.jpg" alt="QR Code">
+                    <div class="qr-reflection"></div>
+                    <div class="qr-label">ENTER THE DREAM</div>
+                </div>
+            </div>
+            
+            <div class="editor-notes">
+                <div class="notes-dreamlike"></div>
+                <h4 class="editor-title">编辑札记</h4>
+                <p>超现实主义数字拼贴源于20世纪初超现实主义艺术运动，由René Magritte等大师奠基，在当代由数字艺术家如Justin Peters发扬光大。它通过打破逻辑与现实的界限，将不相关元素组合在一起，创造出一种超越理性的视觉体验，引导观者探索潜意识与梦境的边界。</p>
+                <p class="handwritten">— 在梦与醒之间，是创意最自由流动的空间。</p>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            SURREALIST DIGITAL COLLAGE · DREAMS & REALITY · 2025
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>孟菲斯风格 - 高级时尚杂志卡片</title>
+    <link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Righteous&family=Rubik:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* 孟菲斯明亮色彩 */
+            --memphis-pink: #FF6B99;
+            --memphis-teal: #00E0C7; 
+            --memphis-yellow: #FFDE59;
+            --memphis-orange: #FF914D;
+            --memphis-blue: #5271FF;
+            --memphis-purple: #B967FF;
+            --memphis-black: #171717;
+            --memphis-white: #FFFFFF;
+            
+            /* 间距变量 */
+            --spacing-1: 8px;
+            --spacing-2: 16px;
+            --spacing-3: 24px;
+            --spacing-4: 32px;
+            --spacing-5: 48px;
+            
+            /* 字体变量 */
+            --font-sans: 'Noto Sans SC', 'Rubik', sans-serif;
+            --font-display: 'Righteous', 'Noto Sans SC', cursive;
+            --font-retro: 'VT323', monospace;
+            
+            /* Z-index层级管理 */
+            --z-background: -1;
+            --z-content: 1;
+            --z-overlay: 2;
+            --z-popup: 3;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: #1a1a1a;
+            color: var(--memphis-black);
+            line-height: 1.5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        /* 主卡片容器 */
+        .memphis-card {
+            position: relative;
+            width: 400px;
+            max-height: 1680px;
+            background-color: var(--memphis-white);
+            overflow: hidden;
+            padding-bottom: var(--spacing-3);
+            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 背景图案元素 */
+        .memphis-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: var(--z-background);
+            overflow: hidden;
+        }
+        
+        /* 点状图案 */
+        .dot-pattern {
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            top: 30%;
+            right: -20px;
+            background-image: radial-gradient(circle, var(--memphis-blue) 2px, transparent 2px);
+            background-size: 12px 12px;
+            transform: rotate(15deg);
+            opacity: 0.5;
+        }
+        
+        /* 波浪线 */
+        .zigzag-line {
+            position: absolute;
+            bottom: 15%;
+            left: -30px;
+            width: 200px;
+            height: 20px;
+            background-image: linear-gradient(45deg, transparent 33.333%, var(--memphis-orange) 33.333%, var(--memphis-orange) 66.667%, transparent 66.667%), linear-gradient(-45deg, transparent 33.333%, var(--memphis-orange) 33.333%, var(--memphis-orange) 66.667%, transparent 66.667%);
+            background-size: 20px 40px;
+            transform: rotate(-10deg);
+            opacity: 0.6;
+        }
+        
+        /* 网格模式 */
+        .grid-pattern {
+            position: absolute;
+            top: 60%;
+            left: 10%;
+            width: 150px;
+            height: 150px;
+            background-image: 
+                linear-gradient(var(--memphis-teal) 1px, transparent 1px),
+                linear-gradient(90deg, var(--memphis-teal) 1px, transparent 1px);
+            background-size: 15px 15px;
+            transform: rotate(-5deg);
+            opacity: 0.3;
+        }
+        
+        /* 装饰性几何形状 */
+        .shape {
+            position: absolute;
+            z-index: var(--z-background);
+        }
+        
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 80px solid var(--memphis-pink);
+            top: 10%;
+            left: -25px;
+            transform: rotate(-15deg);
+            opacity: 0.7;
+        }
+        
+        .squiggle {
+            width: 100px;
+            height: 30px;
+            background-color: var(--memphis-yellow);
+            border-radius: 50px 0 50px 0;
+            top: 70%;
+            right: -20px;
+            transform: rotate(30deg);
+            opacity: 0.7;
+        }
+        
+        .circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--memphis-teal);
+            top: 45%;
+            left: -30px;
+            opacity: 0.5;
+        }
+        
+        .rectangle {
+            width: 40px;
+            height: 120px;
+            background-color: var(--memphis-purple);
+            bottom: 10%;
+            right: 30px;
+            transform: skew(-10deg, 5deg);
+            opacity: 0.6;
+        }
+        
+        /* 条纹装饰 */
+        .stripes {
+            position: absolute;
+            width: 100%;
+            height: 10px;
+            top: 0;
+            left: 0;
+            background-image: 
+                linear-gradient(90deg, 
+                var(--memphis-pink) 20%, 
+                var(--memphis-teal) 20%, 
+                var(--memphis-teal) 40%,
+                var(--memphis-yellow) 40%, 
+                var(--memphis-yellow) 60%,
+                var(--memphis-orange) 60%, 
+                var(--memphis-orange) 80%,
+                var(--memphis-blue) 80%);
+        }
+        
+        /* 主要内容区域 */
+        .memphis-content {
+            position: relative;
+            z-index: var(--z-content);
+            padding: var(--spacing-3);
+            padding-top: calc(var(--spacing-3) + 10px); /* 给顶部条纹留出空间 */
+        }
+        
+        /* 日期区域 */
+        .date-section {
+            margin-bottom: var(--spacing-3);
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .date-container {
+            position: relative;
+            display: inline-block;
+            font-family: var(--font-retro);
+            font-size: 16px;
+            letter-spacing: 1px;
+            padding: var(--spacing-1) var(--spacing-2);
+            color: var(--memphis-white);
+            background-color: var(--memphis-black);
+            transform: rotate(-3deg);
+            clip-path: polygon(0% 0%, 95% 0%, 100% 100%, 5% 100%);
+        }
+        
+        .date-container::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            right: 3px;
+            bottom: 3px;
+            border: 1px dashed var(--memphis-white);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        
+        /* 标题区域 */
+        .title-section {
+            margin: var(--spacing-3) 0;
+            position: relative;
+        }
+        
+        .title-box {
+            position: relative;
+            padding: var(--spacing-2);
+            margin-bottom: var(--spacing-2);
+            background-color: var(--memphis-yellow);
+            clip-path: polygon(0% 0%, 100% 0%, 97% 100%, 3% 100%);
+            transform: rotate(-1deg);
+        }
+        
+        .title-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(45deg, var(--memphis-orange) 25%, transparent 25%, transparent 75%, var(--memphis-orange) 75%),
+                linear-gradient(45deg, var(--memphis-orange) 25%, transparent 25%, transparent 75%, var(--memphis-orange) 75%);
+            background-size: 10px 10px;
+            background-position: 0 0, 5px 5px;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+        
+        .main-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 36px;
+            line-height: 1.1;
+            color: var(--memphis-black);
+            text-shadow: 3px 3px 0 var(--memphis-orange);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transform: rotate(1deg);
+        }
+        
+        .subtitle-container {
+            position: relative;
+            text-align: center;
+            margin-top: var(--spacing-1);
+        }
+        
+        .subtitle {
+            font-family: var(--font-sans);
+            font-weight: 500;
+            font-size: 16px;
+            display: inline-block;
+            padding: var(--spacing-1) var(--spacing-3);
+            color: var(--memphis-white);
+            background-color: var(--memphis-blue);
+            transform: rotate(-1deg);
+            border-radius: 20px 20px 20px 0;
+        }
+        
+        /* 引用区块 */
+        .quote-section {
+            margin: var(--spacing-4) 0;
+            position: relative;
+        }
+        
+        .quote-container {
+            position: relative;
+            padding: var(--spacing-3);
+            background-color: var(--memphis-white);
+            border: 2px solid var(--memphis-black);
+            box-shadow: 5px 5px 0 var(--memphis-pink);
+        }
+        
+        .quote-zigzag {
+            position: absolute;
+            left: -10px;
+            top: -10px;
+            width: 90%;
+            height: 10px;
+            background-image: linear-gradient(135deg, var(--memphis-teal) 25%, transparent 25%) -5px 0, linear-gradient(225deg, var(--memphis-teal) 25%, transparent 25%) -5px 0;
+            background-size: 20px 20px;
+            background-repeat: repeat-x;
+        }
+        
+        .quote-circles {
+            position: absolute;
+            right: -10px;
+            bottom: -10px;
+            width: 60px;
+            height: 60px;
+        }
+        
+        .quote-circle {
+            position: absolute;
+            border-radius: 50%;
+        }
+        
+        .quote-circle:nth-child(1) {
+            width: 60px;
+            height: 60px;
+            background-color: var(--memphis-yellow);
+            opacity: 0.6;
+        }
+        
+        .quote-circle:nth-child(2) {
+            width: 40px;
+            height: 40px;
+            background-color: var(--memphis-orange);
+            top: 10px;
+            left: 10px;
+            opacity: 0.7;
+        }
+        
+        .quote-circle:nth-child(3) {
+            width: 20px;
+            height: 20px;
+            background-color: var(--memphis-pink);
+            top: 20px;
+            left: 20px;
+            opacity: 0.8;
+        }
+        
+        .quote-text {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: var(--spacing-2);
+            padding-left: var(--spacing-2);
+            border-left: 4px solid var(--memphis-teal);
+        }
+        
+        .quote-author {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: 14px;
+            text-align: right;
+            color: var(--memphis-black);
+            padding-right: var(--spacing-2);
+        }
+        
+        /* 核心要点列表 */
+        .points-section {
+            margin: var(--spacing-4) 0;
+            position: relative;
+        }
+        
+        .points-header {
+            position: relative;
+            margin-bottom: var(--spacing-3);
+        }
+        
+        .points-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 22px;
+            text-transform: uppercase;
+            color: var(--memphis-white);
+            background-color: var(--memphis-purple);
+            display: inline-block;
+            padding: var(--spacing-1) var(--spacing-2);
+            transform: rotate(-2deg);
+            margin-bottom: var(--spacing-2);
+            box-shadow: 3px 3px 0 var(--memphis-black);
+        }
+        
+        .points-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .point-item {
+            margin-bottom: var(--spacing-3);
+            padding-left: 40px;
+            position: relative;
+            font-weight: 500;
+            font-size: 15px;
+        }
+        
+        .point-marker {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .marker-shape {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .point-item:nth-child(1) .marker-shape {
+            background-color: var(--memphis-pink);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            transform: rotate(10deg);
+        }
+        
+        .point-item:nth-child(2) .marker-shape {
+            background-color: var(--memphis-yellow);
+            clip-path: circle(50% at 50% 50%);
+        }
+        
+        .point-item:nth-child(3) .marker-shape {
+            background-color: var(--memphis-teal);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            transform: rotate(45deg);
+        }
+        
+        .point-item:nth-child(4) .marker-shape {
+            background-color: var(--memphis-blue);
+            clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
+        }
+        
+        .point-item:nth-child(5) .marker-shape {
+            background-color: var(--memphis-orange);
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+            transform: rotate(15deg);
+        }
+        
+        .point-item:nth-child(6) .marker-shape {
+            background-color: var(--memphis-purple);
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-15deg);
+        }
+        
+        .point-text {
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: var(--spacing-1) var(--spacing-2);
+            border-radius: 2px;
+            z-index: 1;
+        }
+        
+        .point-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 20px;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.03);
+            transform: skew(-5deg);
+            z-index: 0;
+        }
+        
+        /* 二维码区域 */
+        .qrcode-section {
+            margin: var(--spacing-4) 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        .qrcode-container {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            background-color: var(--memphis-white);
+            z-index: 1;
+        }
+        
+        .qrcode-decoration {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 170px;
+            height: 170px;
+            z-index: 0;
+        }
+        
+        .qrcode-lines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .qrcode-line {
+            position: absolute;
+            background-color: var(--memphis-pink);
+        }
+        
+        .line-1 {
+            width: 100%;
+            height: 10px;
+            top: 20px;
+            transform: rotate(-5deg);
+        }
+        
+        .line-2 {
+            width: 10px;
+            height: 100%;
+            left: 30px;
+            transform: rotate(5deg);
+        }
+        
+        .line-3 {
+            width: 100%;
+            height: 10px;
+            bottom: 30px;
+            transform: rotate(5deg);
+            background-color: var(--memphis-yellow);
+        }
+        
+        .line-4 {
+            width: 10px;
+            height: 100%;
+            right: 25px;
+            transform: rotate(-5deg);
+            background-color: var(--memphis-blue);
+        }
+        
+        .qrcode-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border: 3px solid var(--memphis-black);
+            background-color: var(--memphis-white);
+            position: relative;
+            z-index: 2;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .qrcode-container:hover .qrcode-image {
+            transform: rotate(-5deg);
+            box-shadow: 5px 5px 0 var(--memphis-teal);
+        }
+        
+        /* 编辑笔记区域 */
+        .notes-section {
+            margin-top: var(--spacing-4);
+            position: relative;
+        }
+        
+        .notes-container {
+            position: relative;
+            padding: var(--spacing-3);
+            background-color: var(--memphis-black);
+            color: var(--memphis-white);
+            clip-path: polygon(0% 0%, 100% 0%, 98% 100%, 2% 100%);
+        }
+        
+        .notes-decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            opacity: 0.1;
+        }
+        
+        .notes-dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--memphis-white);
+        }
+        
+        .dot-1 { top: 20%; left: 10%; }
+        .dot-2 { top: 70%; left: 20%; }
+        .dot-3 { top: 40%; left: 90%; }
+        .dot-4 { top: 80%; left: 80%; }
+        .dot-5 { top: 30%; left: 50%; }
+        
+        .notes-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 18px;
+            text-transform: uppercase;
+            margin-bottom: var(--spacing-2);
+            color: var(--memphis-yellow);
+            display: inline-block;
+            position: relative;
+        }
+        
+        .notes-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-image: linear-gradient(90deg, var(--memphis-yellow), transparent);
+        }
+        
+        .notes-content {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        /* 装饰性英语文本 */
+        .decorative-text {
+            position: absolute;
+            font-family: var(--font-retro);
+            text-transform: uppercase;
+            font-weight: 900;
+            opacity: 0.05;
+            color: var(--memphis-black);
+            pointer-events: none;
+            z-index: var(--z-background);
+        }
+        
+        .english-text {
+            font-size: 5rem;
+            bottom: 20%;
+            right: -10px;
+            transform: rotate(90deg);
+        }
+        
+        /* 80年代元素 - 霓虹效果 */
+        .neon-text {
+            position: absolute;
+            font-family: var(--font-retro);
+            font-size: 14px;
+            bottom: 10px;
+            right: 10px;
+            color: var(--memphis-white);
+            text-shadow: 
+                0 0 5px var(--memphis-blue),
+                0 0 10px var(--memphis-blue),
+                0 0 15px var(--memphis-blue),
+                0 0 20px var(--memphis-blue);
+            opacity: 0.9;
+            animation: neonPulse 1.5s infinite alternate;
+        }
+        
+        @keyframes neonPulse {
+            from {
+                text-shadow: 
+                    0 0 5px var(--memphis-blue),
+                    0 0 10px var(--memphis-blue),
+                    0 0 15px var(--memphis-blue),
+                    0 0 20px var(--memphis-blue);
+            }
+            to {
+                text-shadow: 
+                    0 0 2px var(--memphis-blue),
+                    0 0 5px var(--memphis-blue),
+                    0 0 10px var(--memphis-blue),
+                    0 0 15px var(--memphis-blue);
+            }
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 500px) {
+            .memphis-card {
+                width: 100%;
+            }
+            
+            .main-title {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="memphis-card" id="memphis-card">
+        <!-- 顶部条纹 -->
+        <div class="stripes"></div>
+        
+        <!-- 背景装饰元素 -->
+        <div class="memphis-background">
+            <div class="dot-pattern"></div>
+            <div class="zigzag-line"></div>
+            <div class="grid-pattern"></div>
+            
+            <div class="shape triangle"></div>
+            <div class="shape squiggle"></div>
+            <div class="shape circle"></div>
+            <div class="shape rectangle"></div>
+        </div>
+        
+        <!-- 装饰性英语文本 -->
+        <div class="decorative-text english-text">MEMPHIS</div>
+        
+        <!-- 80年代霓虹文本 -->
+        <div class="neon-text">RETRO-FUTURISM</div>
+        
+        <!-- 主要内容区域 -->
+        <div class="memphis-content">
+            <!-- 日期区域 -->
+            <div class="date-section">
+                <div class="date-container">2025.03.27</div>
+            </div>
+            
+            <!-- 标题区域 -->
+            <div class="title-section">
+                <div class="title-box">
+                    <div class="title-pattern"></div>
+                    <h1 class="main-title">孟菲斯风格</h1>
+                </div>
+                <div class="subtitle-container">
+                    <h2 class="subtitle">80年代的前卫设计美学</h2>
+                </div>
+            </div>
+            
+            <!-- 引用区块 -->
+            <div class="quote-section">
+                <div class="quote-container">
+                    <div class="quote-zigzag"></div>
+                    <div class="quote-circles">
+                        <div class="quote-circle"></div>
+                        <div class="quote-circle"></div>
+                        <div class="quote-circle"></div>
+                    </div>
+                    <p class="quote-text">「设计应该是情感的，充满色彩的，有趣的——我们应该摆脱功能主义的束缚，回归装饰与表达的本质。」</p>
+                    <p class="quote-author">— 埃托雷·索特萨斯，孟菲斯设计小组创始人</p>
+                </div>
+            </div>
+            
+            <!-- 核心要点列表 -->
+            <div class="points-section">
+                <div class="points-header">
+                    <h3 class="points-title">核心特征</h3>
+                </div>
+                <ul class="points-list">
+                    <li class="point-item">
+                        <div class="point-marker">
+                            <div class="marker-shape"></div>
+                        </div>
+                        <div class="point-text">鲜艳且刻意不协调的色彩组合</div>
+                    </li>
+                    <li class="point-item">
+                        <div class="point-marker">
+                            <div class="marker-shape"></div>
+                        </div>
+                        <div class="point-text">不规则几何形状与锯齿形、波浪线</div>
+                    </li>
+                    <li class="point-item">
+                        <div class="point-marker">
+                            <div class="marker-shape"></div>
+                        </div>
+                        <div class="point-text">点状图案、条纹与几何网格的混合</div>
+                    </li>
+                    <li class="point-item">
+                        <div class="point-marker">
+                            <div class="marker-shape"></div>
+                        </div>
+                        <div class="point-text">活泼不拘一格的几何感字体设计</div>
+                    </li>
+                    <li class="point-item">
+                        <div class="point-marker">
+                            <div class="marker-shape"></div>
+                        </div>
+                        <div class="point-text">打破传统网格系统的自由布局</div>
+                    </li>
+                    <li class="point-item">
+                        <div class="point-marker">
+                            <div class="marker-shape"></div>
+                        </div>
+                        <div class="point-text">80年代流行文化元素的抽象表现</div>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- 二维码区域 -->
+            <div class="qrcode-section">
+                <div class="qrcode-container">
+                    <div class="qrcode-decoration">
+                        <div class="qrcode-lines">
+                            <div class="qrcode-line line-1"></div>
+                            <div class="qrcode-line line-2"></div>
+                            <div class="qrcode-line line-3"></div>
+                            <div class="qrcode-line line-4"></div>
+                        </div>
+                    </div>
+                    <img class="qrcode-image" src="https://images.cubox.pro/rhkekb/file/2025032609523776560/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250326095228.jpg" alt="二维码">
+                </div>
+            </div>
+            
+            <!-- 编辑笔记区域 -->
+            <div class="notes-section">
+                <div class="notes-container">
+                    <div class="notes-decoration">
+                        <div class="notes-dot dot-1"></div>
+                        <div class="notes-dot dot-2"></div>
+                        <div class="notes-dot dot-3"></div>
+                        <div class="notes-dot dot-4"></div>
+                        <div class="notes-dot dot-5"></div>
+                    </div>
+                    <h3 class="notes-title">编辑札记</h3>
+                    <p class="notes-content">孟菲斯设计以其大胆挑战传统的姿态彻底改变了80年代设计语言，其反功能主义的反叛精神至今仍影响着当代设计。在追求极简主义盛行的今天，孟菲斯风格提醒我们：设计不仅是解决问题，更是表达情感与个性的媒介，色彩、形状与混沌也是设计的重要语言。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const card = document.getElementById('memphis-card');
+            const elements = document.querySelectorAll('.date-section, .title-section, .quote-section, .points-section, .qrcode-section, .notes-section');
+            const decorations = document.querySelectorAll('.shape, .dot-pattern, .zigzag-line, .grid-pattern, .qrcode-line, .notes-dot');
+            
+            // 初始设置元素为不可见
+            card.style.opacity = '0';
+            elements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+            });
+            
+            decorations.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = item.style.transform ? 
+                    item.style.transform + ' scale(0.5)' : 'scale(0.5)';
+            });
+            
+            // 在短暂延迟后逐个显示元素
+            setTimeout(function() {
+                card.style.transition = 'opacity 0.8s cubic-bezier(0.5, 0, 0.5, 1)';
+                card.style.opacity = '1';
+                
+                // 装饰元素动画
+                decorations.forEach((item, index) => {
+                    setTimeout(function() {
+                        item.style.transition = 'opacity 0.6s ease, transform 0.8s cubic-bezier(0.5, 0, 0.5, 1.5)';
+                        item.style.opacity = '';
+                        item.style.transform = item.style.transform.replace(' scale(0.5)', '');
+                    }, 100 + Math.random() * 700); // 随机时间增强孟菲斯风格的活泼感
+                });
+                
+                // 内容元素动画
+                elements.forEach((el, index) => {
+                    setTimeout(function() {
+                        el.style.transition = 'opacity 0.7s ease, transform 0.7s cubic-bezier(0.5, 0, 0.5, 1.5)';
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, 300 + index * 150);
+                });
+            }, 100);
+            
+            // 鼠标移动效果 - 装饰元素跟随移动
+            card.addEventListener('mousemove', function(e) {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // 计算鼠标位置相对于卡片的百分比
+                const xPercent = x / rect.width;
+                const yPercent = y / rect.height;
+                
+                // 应用微妙的移动效果
+                decorations.forEach((item, index) => {
+                    const factorX = (index % 3 - 1) * 5; // -5, 0, or 5
+                    const factorY = (Math.floor(index / 3) % 3 - 1) * 5; // -5, 0, or 5
+                    
+                    const moveX = (xPercent - 0.5) * factorX;
+                    const moveY = (yPercent - 0.5) * factorY;
+                    
+                    item.style.transform = item.style.transform.split('translate')[0] + 
+                        ` translate(${moveX}px, ${moveY}px)`;
+                });
+            });
+            
+            // 鼠标离开时重置位置
+            card.addEventListener('mouseleave', function() {
+                decorations.forEach(item => {
+                    item.style.transform = item.style.transform.split('translate')[0];
+                });
+            });
+        });
+    </script>
+</body>
+</html>

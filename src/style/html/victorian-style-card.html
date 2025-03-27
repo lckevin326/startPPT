@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>维多利亚风格 - 高级时尚杂志卡片</title>
+    <link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IM+Fell+English:ital@0;1&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* 色彩变量 - 维多利亚风格 */
+            --parchment: #f5e9cb;
+            --aged-parchment: #e8d7b0;
+            --dark-brown: #3a2921;
+            --medium-brown: #6b4f3f;
+            --light-brown: #9e7e5f;
+            --deep-red: #8b2c2c;
+            --burgundy: #5c1f2a;
+            --gold: #c9a959;
+            --faded-gold: #d5bd8f;
+            --shadow: rgba(58, 41, 33, 0.3);
+            
+            /* 间距变量 */
+            --spacing-xs: 8px;
+            --spacing-sm: 12px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            
+            /* 字体变量 */
+            --font-serif-en: 'Playfair Display', serif;
+            --font-alt-en: 'IM Fell English', serif;
+            --font-display-en: 'Cinzel', serif;
+            --font-serif-cn: 'Noto Serif SC', serif;
+            --font-sans-cn: 'Noto Sans SC', sans-serif;
+            
+            /* 装饰变量 */
+            --border-width: 20px;
+            --inner-border-width: 8px;
+            --corner-size: 40px;
+        }
+        
+        body {
+            font-family: var(--font-serif-cn);
+            background-color: #1a1a1a;
+            color: var(--dark-brown);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .victorian-card {
+            position: relative;
+            width: 400px;
+            max-height: 1680px;
+            background-color: var(--parchment);
+            overflow: hidden;
+            padding: var(--border-width);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            /* 纸张纹理 */
+            background-image: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 100 100'%3E%3Cpath fill='%23aa8e6c' fill-opacity='0.08' d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z'/%3E%3C/svg%3E"),
+                radial-gradient(var(--parchment), var(--aged-parchment));
+        }
+        
+        /* 精致维多利亚边框 */
+        .victorian-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            /* 使边框在内容之上 */
+            z-index: 10;
+        }
+        
+        .border-top, .border-bottom, .border-left, .border-right {
+            position: absolute;
+            background-color: transparent;
+        }
+        
+        .border-top, .border-bottom {
+            left: 0;
+            width: 100%;
+            height: var(--border-width);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 40'%3E%3Cpath fill='%236b4f3f' d='M0,0 H1000 V40 H0 V0 Z M20,10 C20,16 26,20 30,20 C34,20 40,16 40,10 C40,4 34,0 30,0 C26,0 20,4 20,10 Z M60,10 C60,16 66,20 70,20 C74,20 80,16 80,10 C80,4 74,0 70,0 C66,0 60,4 60,10 Z M100,10 C100,16 106,20 110,20 C114,20 120,16 120,10 C120,4 114,0 110,0 C106,0 100,4 100,10 Z M140,10 C140,16 146,20 150,20 C154,20 160,16 160,10 C160,4 154,0 150,0 C146,0 140,4 140,10 Z M180,10 C180,16 186,20 190,20 C194,20 200,16 200,10 C200,4 194,0 190,0 C186,0 180,4 180,10 Z M220,10 C220,16 226,20 230,20 C234,20 240,16 240,10 C240,4 234,0 230,0 C226,0 220,4 220,10 Z M260,10 C260,16 266,20 270,20 C274,20 280,16 280,10 C280,4 274,0 270,0 C266,0 260,4 260,10 Z M300,10 C300,16 306,20 310,20 C314,20 320,16 320,10 C320,4 314,0 310,0 C306,0 300,4 300,10 Z M340,10 C340,16 346,20 350,20 C354,20 360,16 360,10 C360,4 354,0 350,0 C346,0 340,4 340,10 Z M380,10 C380,16 386,20 390,20 C394,20 400,16 400,10 C400,4 394,0 390,0 C386,0 380,4 380,10 Z M420,10 C420,16 426,20 430,20 C434,20 440,16 440,10 C440,4 434,0 430,0 C426,0 420,4 420,10 Z M460,10 C460,16 466,20 470,20 C474,20 480,16 480,10 C480,4 474,0 470,0 C466,0 460,4 460,10 Z M500,10 C500,16 506,20 510,20 C514,20 520,16 520,10 C520,4 514,0 510,0 C506,0 500,4 500,10 Z M540,10 C540,16 546,20 550,20 C554,20 560,16 560,10 C560,4 554,0 550,0 C546,0 540,4 540,10 Z M580,10 C580,16 586,20 590,20 C594,20 600,16 600,10 C600,4 594,0 590,0 C586,0 580,4 580,10 Z M620,10 C620,16 626,20 630,20 C634,20 640,16 640,10 C640,4 634,0 630,0 C626,0 620,4 620,10 Z M660,10 C660,16 666,20 670,20 C674,20 680,16 680,10 C680,4 674,0 670,0 C666,0 660,4 660,10 Z M700,10 C700,16 706,20 710,20 C714,20 720,16 720,10 C720,4 714,0 710,0 C706,0 700,4 700,10 Z M740,10 C740,16 746,20 750,20 C754,20 760,16 760,10 C760,4 754,0 750,0 C746,0 740,4 740,10 Z M780,10 C780,16 786,20 790,20 C794,20 800,16 800,10 C800,4 794,0 790,0 C786,0 780,4 780,10 Z M820,10 C820,16 826,20 830,20 C834,20 840,16 840,10 C840,4 834,0 830,0 C826,0 820,4 820,10 Z M860,10 C860,16 866,20 870,20 C874,20 880,16 880,10 C880,4 874,0 870,0 C866,0 860,4 860,10 Z M900,10 C900,16 906,20 910,20 C914,20 920,16 920,10 C920,4 914,0 910,0 C906,0 900,4 900,10 Z M940,10 C940,16 946,20 950,20 C954,20 960,16 960,10 C960,4 954,0 950,0 C946,0 940,4 940,10 Z M980,10 C980,16 986,20 990,20 C994,20 1000,16 1000,10 C1000,4 994,0 990,0 C986,0 980,4 980,10 Z'/%3E%3C/svg%3E");
+            background-size: 100% 100%;
+            opacity: 0.85;
+        }
+        
+        .border-left, .border-right {
+            top: 0;
+            width: var(--border-width);
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 1000'%3E%3Cpath fill='%236b4f3f' d='M0,0 H40 V1000 H0 V0 Z M30,20 C24,20 20,26 20,30 C20,34 24,40 30,40 C36,40 40,34 40,30 C40,26 36,20 30,20 Z M30,60 C24,60 20,66 20,70 C20,74 24,80 30,80 C36,80 40,74 40,70 C40,66 36,60 30,60 Z M30,100 C24,100 20,106 20,110 C20,114 24,120 30,120 C36,120 40,114 40,110 C40,106 36,100 30,100 Z M30,140 C24,140 20,146 20,150 C20,154 24,160 30,160 C36,160 40,154 40,150 C40,146 36,140 30,140 Z M30,180 C24,180 20,186 20,190 C20,194 24,200 30,200 C36,200 40,194 40,190 C40,186 36,180 30,180 Z M30,220 C24,220 20,226 20,230 C20,234 24,240 30,240 C36,240 40,234 40,230 C40,226 36,220 30,220 Z M30,260 C24,260 20,266 20,270 C20,274 24,280 30,280 C36,280 40,274 40,270 C40,266 36,260 30,260 Z M30,300 C24,300 20,306 20,310 C20,314 24,320 30,320 C36,320 40,314 40,310 C40,306 36,300 30,300 Z M30,340 C24,340 20,346 20,350 C20,354 24,360 30,360 C36,360 40,354 40,350 C40,346 36,340 30,340 Z M30,380 C24,380 20,386 20,390 C20,394 24,400 30,400 C36,400 40,394 40,390 C40,386 36,380 30,380 Z M30,420 C24,420 20,426 20,430 C20,434 24,440 30,440 C36,440 40,434 40,430 C40,426 36,420 30,420 Z M30,460 C24,460 20,466 20,470 C20,474 24,480 30,480 C36,480 40,474 40,470 C40,466 36,460 30,460 Z M30,500 C24,500 20,506 20,510 C20,514 24,520 30,520 C36,520 40,514 40,510 C40,506 36,500 30,500 Z M30,540 C24,540 20,546 20,550 C20,554 24,560 30,560 C36,560 40,554 40,550 C40,546 36,540 30,540 Z M30,580 C24,580 20,586 20,590 C20,594 24,600 30,600 C36,600 40,594 40,590 C40,586 36,580 30,580 Z M30,620 C24,620 20,626 20,630 C20,634 24,640 30,640 C36,640 40,634 40,630 C40,626 36,620 30,620 Z M30,660 C24,660 20,666 20,670 C20,674 24,680 30,680 C36,680 40,674 40,670 C40,666 36,660 30,660 Z M30,700 C24,700 20,706 20,710 C20,714 24,720 30,720 C36,720 40,714 40,710 C40,706 36,700 30,700 Z M30,740 C24,740 20,746 20,750 C20,754 24,760 30,760 C36,760 40,754 40,750 C40,746 36,740 30,740 Z M30,780 C24,780 20,786 20,790 C20,794 24,800 30,800 C36,800 40,794 40,790 C40,786 36,780 30,780 Z M30,820 C24,820 20,826 20,830 C20,834 24,840 30,840 C36,840 40,834 40,830 C40,826 36,820 30,820 Z M30,860 C24,860 20,866 20,870 C20,874 24,880 30,880 C36,880 40,874 40,870 C40,866 36,860 30,860 Z M30,900 C24,900 20,906 20,910 C20,914 24,920 30,920 C36,920 40,914 40,910 C40,906 36,900 30,900 Z M30,940 C24,940 20,946 20,950 C20,954 24,960 30,960 C36,960 40,954 40,950 C40,946 36,940 30,940 Z M30,980 C24,980 20,986 20,990 C20,994 24,1000 30,1000 C36,1000 40,994 40,990 C40,986 36,980 30,980 Z'/%3E%3C/svg%3E");
+            background-size: 100% 100%;
+            opacity: 0.85;
+        }
+        
+        .border-top {
+            top: 0;
+        }
+        
+        .border-bottom {
+            bottom: 0;
+            transform: rotate(180deg);
+        }
+        
+        .border-left {
+            left: 0;
+        }
+        
+        .border-right {
+            right: 0;
+            transform: rotate(180deg);
+        }
+        
+        /* 维多利亚角落装饰 */
+        .corner {
+            position: absolute;
+            width: var(--corner-size);
+            height: var(--corner-size);
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            z-index: 11;
+        }
+        
+        .corner-image {
+            position: absolute;
+            width: var(--corner-size);
+            height: var(--corner-size);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%238b2c2c' d='M0,0 L100,0 L100,100 C80,90 70,80 60,60 C50,40 30,30 0,0 Z'/%3E%3Cpath fill='%23c9a959' d='M20,0 L80,0 L80,80 C70,70 60,60 50,50 C40,40 30,30 20,0 Z'/%3E%3Cpath fill='%236b4f3f' d='M40,0 L60,0 L60,60 C55,55 50,50 45,45 C40,40 35,35 40,0 Z'/%3E%3C/svg%3E");
+            opacity: 0.9;
+        }
+        
+        .top-left {
+            top: 0;
+            left: 0;
+        }
+        
+        .top-right {
+            top: 0;
+            right: 0;
+            transform: scaleX(-1);
+        }
+        
+        .bottom-left {
+            bottom: 0;
+            left: 0;
+            transform: scaleY(-1);
+        }
+        
+        .bottom-right {
+            bottom: 0;
+            right: 0;
+            transform: scale(-1);
+        }
+        
+        /* 内容区域 */
+        .victorian-content {
+            position: relative;
+            padding: var(--spacing-lg);
+            margin: var(--spacing-sm);
+            border: 1px solid rgba(107, 79, 63, 0.2);
+        }
+        
+        /* 微妙的磨损效果覆盖层 */
+        .victorian-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 800 800'%3E%3Cfilter id='a'%3E%3CfeTurbulence baseFrequency='.15' numOctaves='2' seed='0'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)' opacity='.1' fill='transparent'/%3E%3C/svg%3E");
+            opacity: 0.5;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        /* 装饰分隔线 */
+        .victorian-divider {
+            position: relative;
+            height: 10px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10'%3E%3Cpath fill='none' stroke='%236b4f3f' stroke-width='1' d='M0,5 C10,2 20,8 30,5 C40,2 50,8 60,5 C70,2 80,8 90,5 C100,2 110,8 120,5'/%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+            background-size: auto 100%;
+            margin: var(--spacing-md) 0;
+            opacity: 0.7;
+        }
+        
+        .fancy-divider {
+            position: relative;
+            height: 15px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 15'%3E%3Cpath fill='none' stroke='%238b2c2c' stroke-width='1' d='M0,7.5 C10,3 20,12 30,7.5 C40,3 50,12 60,7.5 C70,3 80,12 90,7.5 C100,3 110,12 120,7.5'/%3E%3Ccircle fill='%23c9a959' cx='25' cy='7.5' r='2'/%3E%3Ccircle fill='%23c9a959' cx='50' cy='7.5' r='2'/%3E%3Ccircle fill='%23c9a959' cx='75' cy='7.5' r='2'/%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+            background-size: auto 100%;
+            margin: var(--spacing-lg) 0;
+            opacity: 0.85;
+        }
+        
+        /* 日期区域 */
+        .date-section {
+            position: relative;
+            text-align: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .date-stamp {
+            position: relative;
+            display: inline-block;
+            font-family: var(--font-alt-en);
+            font-size: 0.8rem;
+            color: var(--dark-brown);
+            letter-spacing: 1px;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            transform: rotate(-2deg);
+            z-index: 2;
+        }
+        
+        .date-stamp::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--aged-parchment);
+            border: 1px solid var(--medium-brown);
+            border-radius: 5px;
+            transform: rotate(2deg);
+            z-index: -1;
+        }
+        
+        .date-stamp::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            width: 30px;
+            height: 30px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle fill='%238b2c2c' cx='50' cy='50' r='45'/%3E%3Ccircle fill='%23f5e9cb' cx='50' cy='50' r='35'/%3E%3Cpath fill='%238b2c2c' d='M50,25 L55,45 L75,45 L60,55 L65,75 L50,65 L35,75 L40,55 L25,45 L45,45 Z'/%3E%3C/svg%3E");
+            background-size: 100% 100%;
+            z-index: 1;
+            opacity: 0.85;
+            transform: rotate(15deg);
+        }
+        
+        /* 标题区域 */
+        .title-section {
+            text-align: center;
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .main-title {
+            font-family: var(--font-serif-cn);
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--dark-brown);
+            margin-bottom: var(--spacing-xs);
+            letter-spacing: 1px;
+            line-height: 1.4;
+            position: relative;
+            display: inline-block;
+        }
+        
+        /* 装饰性首字母 */
+        .main-title::first-letter {
+            font-family: var(--font-display-en);
+            font-size: 2.5rem;
+            color: var(--deep-red);
+            float: left;
+            margin-right: 5px;
+            line-height: 1;
+        }
+        
+        .subtitle {
+            font-family: var(--font-serif-cn);
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--medium-brown);
+            font-style: italic;
+            line-height: 1.5;
+            margin-top: var(--spacing-xs);
+        }
+        
+        .subtitle::before,
+        .subtitle::after {
+            content: "~";
+            display: inline-block;
+            color: var(--light-brown);
+            margin: 0 8px;
+        }
+        
+        /* 引用区块 */
+        .quote-section {
+            position: relative;
+            margin: var(--spacing-xl) 0;
+            padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg) var(--spacing-xl);
+            background-color: rgba(245, 233, 203, 0.5);
+            border-left: 3px solid var(--deep-red);
+        }
+        
+        .quote-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath fill='%23c9a959' fill-opacity='0.05' d='M30,30 Q50,0 70,30 L70,70 Q50,100 30,70 Z'/%3E%3C/svg%3E");
+            background-size: 100px 100px;
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        .quote-marks {
+            position: absolute;
+            font-family: Georgia, serif;
+            font-size: 3rem;
+            color: var(--deep-red);
+            opacity: 0.3;
+            line-height: 1;
+        }
+        
+        .quote-open {
+            top: 5px;
+            left: 5px;
+        }
+        
+        .quote-close {
+            bottom: 0;
+            right: 10px;
+        }
+        
+        .quote-text {
+            font-family: var(--font-serif-cn);
+            font-weight: 500;
+            font-size: 1.05rem;
+            font-style: italic;
+            color: var(--dark-brown);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-sm);
+            text-indent: 0;
+        }
+        
+        .quote-author {
+            font-family: var(--font-sans-cn);
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--medium-brown);
+            text-align: right;
+        }
+        
+        /* 核心要点列表 */
+        .points-section {
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .points-title {
+            font-family: var(--font-serif-cn);
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--dark-brown);
+            margin-bottom: var(--spacing-md);
+            letter-spacing: 0.5px;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .points-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--medium-brown), transparent);
+        }
+        
+        .points-list {
+            list-style: none;
+            padding: 0;
+            margin: var(--spacing-md) 0;
+        }
+        
+        .point-item {
+            margin-bottom: var(--spacing-md);
+            padding-left: 30px;
+            position: relative;
+            font-family: var(--font-serif-cn);
+            font-size: 0.95rem;
+            color: var(--dark-brown);
+            line-height: 1.6;
+            text-indent: 0;
+        }
+        
+        .point-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%238b2c2c' d='M10,0 L13,7 L20,7 L15,12 L17,20 L10,15 L3,20 L5,12 L0,7 L7,7 Z'/%3E%3C/svg%3E");
+            background-size: 100% 100%;
+            opacity: 0.8;
+        }
+        
+        /* 二维码区域 */
+        .qrcode-section {
+            margin: var(--spacing-xl) 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .qrcode-frame {
+            position: relative;
+            padding: 15px;
+            background-color: var(--parchment);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--medium-brown);
+        }
+        
+        .qrcode-frame::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1px solid var(--light-brown);
+            pointer-events: none;
+        }
+        
+        .qrcode-inner {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            overflow: hidden;
+        }
+        
+        .qrcode-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(0.2) contrast(1.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .qrcode-frame:hover .qrcode-image {
+            transform: scale(1.05);
+        }
+        
+        .qrcode-ornament {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23c9a959' d='M10,0 L12,8 L20,10 L12,12 L10,20 L8,12 L0,10 L8,8 Z'/%3E%3C/svg%3E");
+            background-size: 100% 100%;
+            pointer-events: none;
+        }
+        
+        .ornament-1 { top: -10px; left: -10px; }
+        .ornament-2 { top: -10px; right: -10px; }
+        .ornament-3 { bottom: -10px; left: -10px; }
+        .ornament-4 { bottom: -10px; right: -10px; }
+        
+        /* 编辑笔记区域 */
+        .notes-section {
+            margin-top: var(--spacing-xl);
+            padding: var(--spacing-md);
+            background-color: rgba(245, 233, 203, 0.5);
+            border: 1px solid var(--light-brown);
+            position: relative;
+        }
+        
+        .notes-title {
+            font-family: var(--font-serif-cn);
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--dark-brown);
+            margin-bottom: var(--spacing-sm);
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .notes-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%236b4f3f' d='M30,10 L70,10 L90,30 L90,90 L10,90 L10,30 Z'/%3E%3Cpath fill='%23f5e9cb' d='M30,15 L70,15 L85,30 L85,85 L15,85 L15,30 Z'/%3E%3Cpath fill='%236b4f3f' d='M30,25 L70,25 L70,35 L30,35 Z M30,45 L70,45 L70,55 L30,55 Z M30,65 L70,65 L70,75 L30,75 Z'/%3E%3C/svg%3E");
+            background-size: 100% 100%;
+            opacity: 0.9;
+        }
+        
+        .notes-content {
+            font-family: var(--font-serif-cn);
+            font-size: 0.9rem;
+            color: var(--dark-brown);
+            line-height: 1.7;
+            text-indent: 2em;
+        }
+        
+        .notes-watermark {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%236b4f3f' fill-opacity='0.1' d='M50,0 C22.4,0 0,22.4 0,50 C0,77.6 22.4,100 50,100 C77.6,100 100,77.6 100,50 C100,22.4 77.6,0 50,0 Z M50,20 C50,20 65,25 65,50 C65,75 50,80 50,80 L50,20 Z'/%3E%3C/svg%3E");
+            background-size: 100% 100%;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        /* 装饰性法语/英语文本 */
+        .decorative-text {
+            position: absolute;
+            font-family: var(--font-alt-en);
+            font-style: italic;
+            opacity: 0.04;
+            color: var(--dark-brown);
+            transform: rotate(-5deg);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .french-text {
+            font-size: 2rem;
+            top: 40%;
+            left: 5%;
+        }
+        
+        .english-text {
+            font-size: 1.5rem;
+            bottom: 20%;
+            right: 5%;
+            transform: rotate(5deg);
+        }
+        
+        /* 页角卷曲效果 */
+        .page-curl {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(135deg, transparent 45%, var(--aged-parchment) 50%, var(--light-brown) 50%, var(--aged-parchment) 50.5%, var(--parchment) 57%);
+            box-shadow: -3px -3px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            z-index: 9;
+            opacity: 0.7;
+            border-radius: 0 0 0 10px;
+        }
+        
+        .victorian-card:hover .page-curl {
+            width: 70px;
+            height: 70px;
+            opacity: 0.9;
+        }
+        
+        /* 微妙的纸张光泽效果 */
+        .paper-shine {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.03) 40%, 
+                rgba(255, 255, 255, 0.08) 50%, 
+                rgba(255, 255, 255, 0.03) 60%, 
+                rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+            z-index: 5;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .victorian-card:hover .paper-shine {
+            opacity: 1;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 500px) {
+            .victorian-card {
+                width: 100%;
+                padding: 15px;
+            }
+            
+            .border-top, .border-bottom, .border-left, .border-right {
+                background-size: contain;
+            }
+            
+            .corner {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="victorian-card" id="victorian-card">
+        <!-- 维多利亚边框 -->
+        <div class="victorian-border">
+            <div class="border-top"></div>
+            <div class="border-bottom"></div>
+            <div class="border-left"></div>
+            <div class="border-right"></div>
+        </div>
+        
+        <!-- 角落装饰 -->
+        <div class="corner top-left">
+            <div class="corner-image"></div>
+        </div>
+        <div class="corner top-right">
+            <div class="corner-image"></div>
+        </div>
+        <div class="corner bottom-left">
+            <div class="corner-image"></div>
+        </div>
+        <div class="corner bottom-right">
+            <div class="corner-image"></div>
+        </div>
+        
+        <!-- 装饰文本 -->
+        <div class="decorative-text french-text">L'élégance victorienne</div>
+        <div class="decorative-text english-text">Vintage Luxury</div>
+        
+        <!-- 页角卷曲效果 -->
+        <div class="page-curl"></div>
+        
+        <!-- 纸张光泽效果 -->
+        <div class="paper-shine"></div>
+        
+        <!-- 主要内容区域 -->
+        <div class="victorian-content">
+            <!-- 日期区域 -->
+            <div class="date-section">
+                <div class="date-stamp">2025年3月27日</div>
+            </div>
+            
+            <!-- 标题区域 -->
+            <div class="title-section">
+                <h1 class="main-title">维多利亚风格</h1>
+                <div class="victorian-divider"></div>
+                <h2 class="subtitle">19世纪华丽印刷美学</h2>
+            </div>
+            
+            <!-- 引用区块 -->
+            <div class="quote-section">
+                <div class="quote-marks quote-open">"</div>
+                <p class="quote-text">「真正的优雅不仅体现在装饰的繁复，更在于精工细作的传统工艺与精神传承。」</p>
+                <p class="quote-author">— William Morris, 艺术与手工艺运动倡导者</p>
+                <div class="quote-marks quote-close">"</div>
+            </div>
+            
+            <div class="fancy-divider"></div>
+            
+            <!-- 核心要点列表 -->
+            <div class="points-section">
+                <h3 class="points-title">核心特征</h3>
+                <ul class="points-list">
+                    <li class="point-item">繁复的装饰花纹与卷草图案环绕设计</li>
+                    <li class="point-item">传统印刷色调：棕色、深红与金色的典雅搭配</li>
+                    <li class="point-item">严格对称且庄重的排版结构</li>
+                    <li class="point-item">装饰性首字母与华丽的衬线字体</li>
+                    <li class="point-item">精致的边框与角落装饰图案</li>
+                    <li class="point-item">模拟老式印刷与褪色纸张效果</li>
+                </ul>
+            </div>
+            
+            <div class="victorian-divider"></div>
+            
+            <!-- 二维码区域 -->
+            <div class="qrcode-section">
+                <div class="qrcode-frame">
+                    <div class="qrcode-inner">
+                        <img class="qrcode-image" src="https://images.cubox.pro/rhkekb/file/2025032609523776560/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250326095228.jpg" alt="二维码">
+                    </div>
+                    <div class="qrcode-ornament ornament-1"></div>
+                    <div class="qrcode-ornament ornament-2"></div>
+                    <div class="qrcode-ornament ornament-3"></div>
+                    <div class="qrcode-ornament ornament-4"></div>
+                </div>
+            </div>
+            
+            <!-- 编辑笔记区域 -->
+            <div class="notes-section">
+                <h3 class="notes-title">编辑札记</h3>
+                <p class="notes-content">维多利亚风格不仅是一种视觉美学，更是一段历史的缩影与工艺的结晶。在当代数字媒体中重现这一风格，能够唤起人们对精工细作传统的怀念与尊重，提醒我们在快节奏的现代生活中，依然珍视历史积淀的美学价值。</p>
+                <div class="notes-watermark"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const card = document.getElementById('victorian-card');
+            const elements = document.querySelectorAll('.date-section, .title-section, .quote-section, .points-section, .qrcode-section, .notes-section');
+            
+            // 初始设置元素为不可见
+            card.style.opacity = '0';
+            elements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+            });
+            
+            // 在短暂延迟后逐个显示元素，模拟古老印刷品展开的效果
+            setTimeout(function() {
+                card.style.transition = 'opacity 1.2s ease';
+                card.style.opacity = '1';
+                
+                elements.forEach((el, index) => {
+                    setTimeout(function() {
+                        el.style.transition = 'opacity 1s ease, transform 1s ease';
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, 300 + index * 200);
+                });
+            }, 100);
+            
+            // 轻微的纸张悬停效果
+            card.addEventListener('mousemove', function(e) {
+                const cardRect = card.getBoundingClientRect();
+                const centerX = cardRect.width / 2;
+                const centerY = cardRect.height / 2;
+                
+                const moveX = (e.clientX - cardRect.left - centerX) / 25;
+                const moveY = (e.clientY - cardRect.top - centerY) / 25;
+                
+                card.style.transform = `perspective(1000px) rotateX(${-moveY}deg) rotateY(${moveX}deg)`;
+                
+                // 调整纸张光泽的位置
+                const paperShine = document.querySelector('.paper-shine');
+                const shineX = ((e.clientX - cardRect.left) / cardRect.width) * 100;
+                const shineY = ((e.clientY - cardRect.top) / cardRect.height) * 100;
+                
+                paperShine.style.background = `radial-gradient(circle at ${shineX}% ${shineY}%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 80%)`;
+            });
+            
+            // 鼠标离开时恢复原状
+            card.addEventListener('mouseleave', function() {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
