@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小红书风格</title>
+  <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #FF2442; /* 小红书品牌红 */
+      --secondary-color: #666666;
+      --tertiary-color: #999999;
+      --background-color: #ffffff;
+      --subtle-color: #f5f5f5;
+      --space-unit: 8px;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    body {
+      background-color: #fafafa;
+      color: #333;
+      font-family: 'Noto Sans SC', sans-serif;
+      line-height: 1.5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    
+    .xhs-card {
+      width: 375px;
+      max-height: 667px;
+      margin: 0 auto;
+      background: var(--background-color);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    
+    .content {
+      padding: calc(var(--space-unit) * 3);
+    }
+    
+    .header {
+      display: flex;
+      align-items: center;
+      margin-bottom: calc(var(--space-unit) * 3);
+    }
+    
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: calc(var(--space-unit) * 2);
+      background-color: #eee;
+    }
+    
+    .user-info {
+      flex: 1;
+    }
+    
+    .username {
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+    
+    .post-time {
+      font-size: 12px;
+      color: var(--tertiary-color);
+    }
+    
+    .follow-btn {
+      color: var(--primary-color);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 4px 12px;
+      border: 1px solid var(--primary-color);
+      border-radius: 15px;
+      background: transparent;
+    }
+    
+    .post-image {
+      width: 100%;
+      height: 375px;
+      background-color: #eee;
+      margin-bottom: calc(var(--space-unit) * 3);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .post-content {
+      margin-bottom: calc(var(--space-unit) * 3);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: calc(var(--space-unit) * 3);
+    }
+    
+    .tag {
+      font-size: 12px;
+      color: var(--primary-color);
+      margin-right: calc(var(--space-unit) * 2);
+      margin-bottom: calc(var(--space-unit) * 2);
+    }
+    
+    .actions {
+      display: flex;
+      justify-content: space-around;
+      padding: calc(var(--space-unit) * 2) 0;
+      border-top: 1px solid var(--subtle-color);
+    }
+    
+    .action-item {
+      display: flex;
+      align-items: center;
+      color: var(--secondary-color);
+      font-size: 14px;
+    }
+    
+    .action-item i {
+      margin-right: calc(var(--space-unit));
+    }
+    
+    .liked {
+      color: var(--primary-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="xhs-card">
+    <div class="content">
+      <!-- Header -->
+      <div class="header">
+        <div class="avatar"></div>
+        <div class="user-info">
+          <div class="username">小红书用户</div>
+          <div class="post-time">3小时前</div>
+        </div>
+        <button class="follow-btn">关注</button>
+      </div>
+      
+      <!-- Post Content -->
+      <div class="post-content">
+        今天分享一个超实用的生活小技巧！✨
+        <br><br>
+        只需要简单的几步，就能让你的生活变得更美好～ #生活小妙招 #实用技巧
+      </div>
+      
+      <!-- Tags -->
+      <div class="tags">
+        <div class="tag">#生活小妙招</div>
+        <div class="tag">#实用技巧</div>
+        <div class="tag">#小红书创作</div>
+      </div>
+      
+      <!-- Post Image -->
+      <div class="post-image"></div>
+      
+      <!-- Actions -->
+      <div class="actions">
+        <div class="action-item">
+          <i class="far fa-heart"></i> 1.2k
+        </div>
+        <div class="action-item">
+          <i class="far fa-comment"></i> 328
+        </div>
+        <div class="action-item">
+          <i class="far fa-bookmark"></i> 收藏
+        </div>
+        <div class="action-item">
+          <i class="fas fa-share"></i> 分享
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
