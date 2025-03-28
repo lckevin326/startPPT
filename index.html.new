@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能卡片生成器 - AI驱动的创意设计工具</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* 新未来主义风格的基础样式 */
+        :root {
+            --neo-bg: #f8f9fa;
+            --neo-primary: #0066CC;
+            --neo-accent: #FF3B30;
+            --neo-metal-silver: #D1D5DB;
+            --neo-metal-titanium: #F3F4F6;
+            --neo-metal-chrome: #FCD34D;
+            --neo-dark: #1F2937;
+            --neo-carbon: #374151;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--neo-bg);
+            color: var(--neo-dark);
+            overflow-x: hidden;
+        }
+        
+        /* 流线型曲线和有机几何形状 */
+        .neo-curve {
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .neo-curve::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+            pointer-events: none;
+        }
+        
+        /* 金属质感材料模拟 */
+        .neo-metal {
+            background: linear-gradient(145deg, var(--neo-metal-titanium), var(--neo-metal-silver));
+            box-shadow: 
+                0 10px 15px -3px rgba(0, 0, 0, 0.1),
+                0 4px 6px -2px rgba(0, 0, 0, 0.05),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+        
+        .neo-carbon {
+            background: linear-gradient(145deg, #2B333D, #1A202C);
+            box-shadow: 
+                0 10px 15px -3px rgba(0, 0, 0, 0.2),
+                0 4px 6px -2px rgba(0, 0, 0, 0.1),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+        }
+        
+        .neo-glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        /* 动态排版效果 */
+        .neo-heading {
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            background: linear-gradient(90deg, var(--neo-dark) 0%, #4B5563 100%);
+            -webkit-background-clip: text;
+            color: transparent;
+            transform-origin: left center;
+        }
+        
+        .neo-heading-accent {
+            background: linear-gradient(90deg, var(--neo-primary) 0%, var(--neo-accent) 100%);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        
+        /* 超大字体 */
+        .neo-display {
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+        }
+        
+        /* Apple风格滚动动效 */
+        .scroll-section {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        /* 高亮色透明度渐变 */
+        .neo-gradient {
+            position: relative;
+        }
+        
+        .neo-gradient::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0, 102, 204, 0.2), rgba(0, 102, 204, 0));
+            z-index: -1;
+        }
+        
+        /* 导航栏样式 */
+        .neo-navbar {
+            backdrop-filter: blur(20px);
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(209, 213, 219, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .neo-navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .neo-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .neo-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+            transition: all 0.6s ease;
+        }
+        
+        .neo-button:hover::before {
+            left: 100%;
+        }
+        
+        /* 简洁勾线图形 */
+        .neo-icon {
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        /* 卡片风格展示区 */
+        .style-card {
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .style-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* 动画类 */
+        .animate-fade-up {
+            animation: fadeUp 1s ease forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-delay-1 { animation-delay: 0.1s; }
+        .animate-delay-2 { animation-delay: 0.2s; }
+        .animate-delay-3 { animation-delay: 0.3s; }
+        .animate-delay-4 { animation-delay: 0.4s; }
+        .animate-delay-5 { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="neo-navbar fixed top-0 left-0 w-full z-50 px-4 py-3">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center group">
+                <svg class="h-8 w-8 text-neo-primary mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"></circle>
+                    <path d="M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                    <path d="M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                </svg>
+                <span class="text-xl font-bold text-neo-dark">智能卡片生成器</span>
+            </a>
+            
+            <!-- 桌面端导航链接 -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="font-medium text-neo-primary">首页</a>
+                <a href="#features" class="font-medium text-gray-600 hover:text-neo-primary transition-colors">功能特点</a>
+                <a href="#card-styles" class="font-medium text-gray-600 hover:text-neo-primary transition-colors">卡片风格</a>
+                <a href="#pricing" class="font-medium text-gray-600 hover:text-neo-primary transition-colors">会员方案</a>
+                <a href="card-generator.html" class="py-2 px-4 bg-neo-primary text-white rounded-full hover:bg-opacity-90 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 duration-300 neo-button">
+                    创建卡片
+                </a>
+            </div>
+            
+            <!-- 移动端菜单按钮 -->
+            <button id="menu-toggle" class="md:hidden text-gray-700 focus:outline-none">
+                <span class="material-icons">menu</span>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- 移动端菜单 -->
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-40 flex flex-col pt-16 px-6 pb-8 transform translate-x-full transition-transform duration-300">
+        <div class="flex justify-end">
+            <button id="close-menu" class="text-gray-700 focus:outline-none">
+                <span class="material-icons">close</span>
+            </button>
+        </div>
+        
+        <div class="flex flex-col space-y-6 mt-8">
+            <a href="index.html" class="font-medium text-xl text-neo-primary">首页</a>
+            <a href="#features" class="font-medium text-xl text-gray-600">功能特点</a>
+            <a href="#card-styles" class="font-medium text-xl text-gray-600">卡片风格</a>
+            <a href="#pricing" class="font-medium text-xl text-gray-600">会员方案</a>
+            <a href="card-generator.html" class="py-3 px-6 bg-neo-primary text-white text-center rounded-full text-xl font-medium">
+                创建卡片
+            </a>
+        </div>
+    </div>
+    
+    <!-- 英雄区域 -->
+    <section class="scroll-section bg-white relative overflow-hidden pt-24 md:pt-32">
+        <div class="container mx-auto px-4 md:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center min-h-[80vh]">
+                <div class="space-y-8 animate-fade-up">
+                    <div>
+                        <p class="text-neo-primary font-semibold mb-4 uppercase tracking-wide animate-fade-up animate-delay-1">AI POWERED CARD GENERATOR</p>
+                        <h1 class="neo-display mb-4 animate-fade-up animate-delay-2">
+                            <span class="neo-heading-accent">智能</span>
+                            <span class="block">卡片生成器</span>
+                        </h1>
+                        <p class="text-xl md:text-2xl text-gray-600 animate-fade-up animate-delay-3">
+                            一键生成专业级别的概念卡片、小红书封面和公众号封面
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 animate-fade-up animate-delay-4">
+                        <a href="card-generator.html" class="py-3 px-8 bg-neo-primary text-white rounded-full font-bold hover:bg-opacity-90 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-300 neo-button flex items-center justify-center">
+                            <span class="material-icons mr-2">add_circle</span>开始创建
+                        </a>
+                        <a href="#features" class="py-3 px-8 bg-gray-100 text-gray-800 rounded-full font-bold hover:bg-gray-200 transition-all flex items-center justify-center">
+                            <span class="material-icons mr-2">play_arrow</span>观看演示
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="relative animate-fade-up animate-delay-5">
+                    <div class="absolute -top-20 -right-20 w-64 h-64 bg-neo-primary opacity-10 rounded-full filter blur-3xl"></div>
+                    <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-neo-accent opacity-10 rounded-full filter blur-3xl"></div>
+                    
+                    <div class="relative">
+                        <div class="neo-curve neo-metal p-2 shadow-xl transform rotate-1">
+                            <img src="https://via.placeholder.com/600x400/f5f5f5/cccccc?text=AI+Card+Generator" alt="智能卡片生成器" class="rounded-xl">
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 bg-neo-accent text-white py-2 px-4 rounded-full shadow-lg transform rotate-3">
+                            <span class="font-bold">AI 驱动</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 装饰性元素 -->
+        <div class="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-gray-100 to-transparent"></div>
+        <div class="absolute top-1/4 left-10 w-1 h-20 bg-neo-primary rounded-full opacity-50"></div>
+        <div class="absolute top-1/3 right-10 w-1 h-40 bg-neo-accent rounded-full opacity-50"></div>
+    </section>
+    
+    <!-- 功能特点部分 -->
+    <section id="features" class="scroll-section bg-gray-100 py-20 relative overflow-hidden">
+        <div class="container mx-auto px-4 md:px-8 relative z-10">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 neo-heading">
+                    <span class="text-3xl text-neo-primary">01</span>
+                    <span class="block mt-2">强大功能 · 简单操作</span>
+                    <span class="block text-xl font-normal text-gray-500 mt-4">POWERFUL FEATURES</span>
+                </h2>
+                <p class="text-xl text-gray-600">我们的AI技术让创建专业卡片变得轻而易举，无需设计经验</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                <!-- 功能1 -->
+                <div class="bg-white p-8 neo-curve shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2">
+                    <div class="w-16 h-16 mb-6 bg-neo-primary bg-opacity-10 rounded-2xl flex items-center justify-center text-neo-primary">
+                        <span class="material-icons text-3xl">auto_fix_high</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">AI驱动创意</h3>
+                    <p class="text-gray-600">利用最先进的AI技术，根据您的描述自动生成创意内容和设计，省去繁琐设计过程</p>
+                </div>
+                
+                <!-- 功能2 -->
+                <div class="bg-white p-8 neo-curve shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2">
+                    <div class="w-16 h-16 mb-6 bg-neo-primary bg-opacity-10 rounded-2xl flex items-center justify-center text-neo-primary">
+                        <span class="material-icons text-3xl">bolt</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">快速生成</h3>
+                    <p class="text-gray-600">几秒钟内即可生成专业级别的卡片设计，满足您的紧急需求</p>
+                </div>
+                
+                <!-- 功能3 -->
+                <div class="bg-white p-8 neo-curve shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2">
+                    <div class="w-16 h-16 mb-6 bg-neo-primary bg-opacity-10 rounded-2xl flex items-center justify-center text-neo-primary">
+                        <span class="material-icons text-3xl">style</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">多种风格模板</h3>
+                    <p class="text-gray-600">提供丰富的设计风格和模板，满足不同场景和平台的需求</p>
+                </div>
+            </div>
+            
+            <!-- 数字亮点 -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
+                <div class="text-center p-6 bg-white neo-curve shadow-md">
+                    <span class="block text-5xl font-bold text-neo-primary mb-2">10+</span>
+                    <span class="text-sm text-gray-500 uppercase tracking-wide">设计风格</span>
+                </div>
+                <div class="text-center p-6 bg-white neo-curve shadow-md">
+                    <span class="block text-5xl font-bold text-neo-primary mb-2">3秒</span>
+                    <span class="text-sm text-gray-500 uppercase tracking-wide">生成速度</span>
+                </div>
+                <div class="text-center p-6 bg-white neo-curve shadow-md">
+                    <span class="block text-5xl font-bold text-neo-primary mb-2">99%</span>
+                    <span class="text-sm text-gray-500 uppercase tracking-wide">用户满意度</span>
+                </div>
+                <div class="text-center p-6 bg-white neo-curve shadow-md">
+                    <span class="block text-5xl font-bold text-neo-primary mb-2">24h</span>
+                    <span class="text-sm text-gray-500 uppercase tracking-wide">全天候服务</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 装饰性元素 -->
+        <div class="absolute top-0 right-0 w-1/3 h-1/3 bg-neo-accent opacity-5 rounded-bl-full"></div>
+        <div class="absolute bottom-0 left-0 w-1/3 h-1/3 bg-neo-primary opacity-5 rounded-tr-full"></div>
+        <svg class="absolute top-20 left-10 text-gray-200 w-24 h-24 neo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" stroke="currentColor" stroke-width="2" fill="none"/>
+            <path d="M30 50 L70 50" stroke="currentColor" stroke-width="2"/>
+            <path d="M50 30 L50 70" stroke="currentColor" stroke-width="2"/>
+        </svg>
+    </section>
+
+    <!-- 卡片风格展示 -->
+    <section id="card-styles" class="scroll-section bg-white py-20 relative overflow-hidden">
+        <div class="container mx-auto px-4 md:px-8 relative z-10">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 neo-heading">
+                    <span class="text-3xl text-neo-primary">02</span>
+                    <span class="block mt-2">多样风格 · 自由选择</span>
+                    <span class="block text-xl font-normal text-gray-500 mt-4">VERSATILE STYLES</span>
+                </h2>
+                <p class="text-xl text-gray-600">从经典到前卫，从简约到奢华，满足各种场景需求</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 relative">
+                <!-- 风格1：新未来主义 -->
+                <div class="style-card bg-white shadow-lg group">
+                    <div class="h-48 bg-gradient-to-br from-blue-400 to-indigo-600 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-500"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white text-2xl font-bold">新未来主义</h3>
+                            <p class="text-white text-opacity-80">Neo-Futurism</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600">采用新未来主义风格设计，体现当代建筑和产品设计中的前沿美学</p>
+                        <a href="card-generator.html?style=neo-futurism" class="inline-block mt-4 text-neo-primary font-medium hover:underline">选择此风格</a>
+                    </div>
+                </div>
+                
+                <!-- 风格2：简约主义 -->
+                <div class="style-card bg-white shadow-lg group">
+                    <div class="h-48 bg-gradient-to-br from-gray-200 to-gray-400 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black bg-opacity-10 group-hover:bg-opacity-0 transition-all duration-500"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-gray-800 text-2xl font-bold">简约主义</h3>
+                            <p class="text-gray-600">Minimalism</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600">纯粹简约的设计，强调留白和极简元素，表达"少即是多"的设计理念</p>
+                        <a href="card-generator.html?style=minimalism" class="inline-block mt-4 text-neo-primary font-medium hover:underline">选择此风格</a>
+                    </div>
+                </div>
+                
+                <!-- 风格3：赛博朋克 -->
+                <div class="style-card bg-white shadow-lg group">
+                    <div class="h-48 bg-gradient-to-br from-purple-500 to-pink-600 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-20 transition-all duration-500"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white text-2xl font-bold">赛博朋克</h3>
+                            <p class="text-white text-opacity-80">Cyberpunk</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600">融合高科技与低生活的反乌托邦风格，霓虹色彩与未来城市氛围</p>
+                        <a href="card-generator.html?style=cyberpunk" class="inline-block mt-4 text-neo-primary font-medium hover:underline">选择此风格</a>
+                    </div>
+                </div>
+                
+                <!-- 风格4：自然有机 -->
+                <div class="style-card bg-white shadow-lg group">
+                    <div class="h-48 bg-gradient-to-br from-green-400 to-teal-500 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-500"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white text-2xl font-bold">自然有机</h3>
+                            <p class="text-white text-opacity-80">Organic</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600">受自然界启发的有机形态设计，柔和曲线和生物结构的和谐融合</p>
+                        <a href="card-generator.html?style=organic" class="inline-block mt-4 text-neo-primary font-medium hover:underline">选择此风格</a>
+                    </div>
+                </div>
+                
+                <!-- 风格5：复古波普 -->
+                <div class="style-card bg-white shadow-lg group">
+                    <div class="h-48 bg-gradient-to-br from-yellow-400 to-red-500 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-500"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white text-2xl font-bold">复古波普</h3>
+                            <p class="text-white text-opacity-80">Retro Pop</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600">结合20世纪中期的复古元素与现代流行文化，鲜艳色彩与大胆图案</p>
+                        <a href="card-generator.html?style=retro-pop" class="inline-block mt-4 text-neo-primary font-medium hover:underline">选择此风格</a>
+                    </div>
+                </div>
+                
+                <!-- 风格6：更多风格 -->
+                <div class="style-card bg-gray-50 shadow-lg group flex flex-col justify-center items-center p-8 text-center">
+                    <div class="w-20 h-20 rounded-full flex items-center justify-center bg-neo-primary bg-opacity-10 mb-6">
+                        <span class="material-icons text-neo-primary text-3xl">add</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">探索更多风格</h3>
+                    <p class="text-gray-600 mb-6">
+                        在创建页面发现更多精美风格和自定义选项
+                    </p>
+                    <a href="card-generator.html" class="py-2 px-6 bg-neo-primary text-white rounded-full hover:bg-opacity-90 transition-all shadow hover:shadow-lg transform hover:-translate-y-0.5 duration-300 neo-button">
+                        开始创建
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 装饰性元素 -->
+        <div class="absolute top-1/3 right-10 w-40 h-40 bg-neo-primary opacity-5 rounded-full"></div>
+        <div class="absolute bottom-1/3 left-10 w-40 h-40 bg-neo-accent opacity-5 rounded-full"></div>
+    </section>
+    
+    <!-- 会员方案 -->
+    <section id="pricing" class="scroll-section bg-gray-100 py-20 relative overflow-hidden">
+        <div class="container mx-auto px-4 md:px-8 relative z-10">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 neo-heading">
+                    <span class="text-3xl text-neo-primary">03</span>
+                    <span class="block mt-2">灵活方案 · 优质服务</span>
+                    <span class="block text-xl font-normal text-gray-500 mt-4">FLEXIBLE PRICING</span>
+                </h2>
+                <p class="text-xl text-gray-600">为不同需求提供多种选择，从免费体验到专业方案</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 免费方案 -->
+                <div class="bg-white p-8 neo-curve shadow-lg relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-gray-100"></div>
+                    <div class="absolute top-0 right-0 w-0 h-0 border-t-[80px] border-t-transparent border-r-[80px] border-r-gray-200"></div>
+                    
+                    <h3 class="text-2xl font-bold mb-2">免费体验</h3>
+                    <p class="text-gray-500 mb-6">适合初次体验的用户</p>
+                    
+                    <div class="mb-6">
+                        <span class="text-5xl font-bold">0</span>
+                        <span class="text-xl text-gray-500">元/月</span>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <span class="material-icons text-green-500 mr-2">check_circle</span>
+                            <span>每天生成3张卡片</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="material-icons text-green-500 mr-2">check_circle</span>
+                            <span>基础风格选择</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="material-icons text-green-500 mr-2">check_circle</span>
+                            <span>标准分辨率导出</span>
+                        </li>
+                        <li class="flex items-start text-gray-400">
+                            <span class="material-icons mr-2">cancel</span>
+                            <span>无水印导出</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="card-generator.html" class="block w-full py-3 text-center bg-gray-200 text-gray-800 rounded-full font-medium hover:bg-gray-300 transition-all">
+                        开始体验
+                    </a>
+                </div>
+                
+                <!-- 专业方案 -->
+                <div class="bg-white p-8 neo-curve shadow-xl relative overflow-hidden transform scale-105 z-10 border-2 border-neo-primary">
+                    <div class="absolute -top-5 -right-5 bg-neo-primary text-white py-1 px-4 rounded-lg shadow transform rotate-3">
+                        <span class="font-bold">最受欢迎</span>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold mb-2">专业版</h3>
+                    <p class="text-gray-500 mb-6">适合个人创作者</p>
+                    
+                    <div class="mb-6">
+                        <span class="text-5xl font-bold">29</span>
+                        <span class="text-xl text-gray-500">元/月</span>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <span class="material-icons text-green-500 mr-2">check_circle</span>
+                            <span>每天生成30张卡片</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="material-icons text-green-500 mr-2">check_circle</span>
+                            <span>所有风格任意选择</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="material-icons text-green-500 mr-2">check_circle</span>
+                            <span>高清分辨率导出</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="material-icons text-green-500 mr-2">check_circle</span>
+                            <span>无水印导出</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="#" class="block w-full py-3 text-center bg-neo-primary text-white rounded-full font-medium hover:bg-opacity-90 shadow-lg hover:shadow-xl transition-all neo-button">
+                        立即购买
+                    </a>
+                </div>
+                
+                <!-- 团队方案 -->
+                <div class="bg-white p-8 neo-curve shadow-lg relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-gray-100"></div>
+                    <div class="absolute top-0 right-0 w-0 h-0 border-t-[80px] border-t-transparent border-r-[80px] border-r-gray-200"></div>
+                    
+                    <h3 class="text-2xl font-bold mb-2">企业版</h3>
+                    <p class="text-gray-500 mb-6">适合团队协作使用</p>
+                    
+                    <div class="mb-6">
+                        <span class="text-5xl font-bold">99</span>
+                        <span class="text-xl text-gray-500">元/月</span>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <span class="material-icons text-green-500 mr-2">check_circle</span>
+                            <span>无限制卡片生成</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="material-icons text-green-500 mr-2">check_circle</span>
+                            <span>所有风格+独家风格</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="material-icons text-green-500 mr-2">check_circle</span>
+                            <span>超高清分辨率导出</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="material-icons text-green-500 mr-2">check_circle</span>
+                            <span>团队共享与协作</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="#" class="block w-full py-3 text-center bg-gray-800 text-white rounded-full font-medium hover:bg-gray-700 transition-all">
+                        联系我们
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 装饰性元素 -->
+        <div class="absolute top-20 right-10 w-1 h-40 bg-neo-primary rounded-full opacity-30"></div>
+        <div class="absolute bottom-20 left-10 w-1 h-20 bg-neo-accent rounded-full opacity-30"></div>
+    </section>
+    
+    <!-- 页脚区域 -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <svg class="h-8 w-8 text-neo-primary mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"></circle>
+                            <path d="M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                            <path d="M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                        </svg>
+                        <span class="text-xl font-bold">智能卡片生成器</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        AI驱动的创意设计工具，一键生成专业级别的概念卡片、小红书封面和公众号封面
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://weibo.com/" target="_blank" class="text-gray-400 hover:text-neo-primary transition-colors">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M10.096 19.1a6.705 6.705 0 0 1-2.093.756 6.142 6.142 0 0 1-2.24-.007 2.76 2.76 0 0 1-1.59-.9 2.22 2.22 0 0 1-.21-1.695c.3-1.421 2.034-2.696 4.217-2.696.508 0 1.017.062 1.52.19a10.463 10.463 0 0 0-1.673-3.87 13.77 13.77 0 0 0-2.686-3.116c-.97-.844-1.951-1.391-2.932-1.628-1.674-.404-2.767.085-3.287.9-.614.962-.214 2.51.952 4.127-.231.094-.446.219-.634.372-.404.33-.604.69-.608 1.193-.006 1.317 1.84 2.696 4.223 3.116 1.264.22 2.446.067 3.157-.382.707-.45 1.011-1.125.805-1.881-.256-.94-1.22-1.622-2.551-1.83-1.092-.17-2.182.044-2.762.629a.683.683 0 0 1-1.032-.36.767.767 0 0 1 .29-1.032c1.062-1.06 2.637-1.622 4.177-1.371 1.54.251 2.732 1.346 3.06 2.802.319 1.41-.337 2.696-1.662 3.395a6.742 6.742 0 0 1-3.442.542c-1.6-.279-2.767-1.243-2.93-2.37-.079-.541.117-.893.59-1.245a1.9 1.9 0 0 1 .654-.332 15.224 15.224 0 0 1-1.171-1.628A7.209 7.209 0 0 1 4.563 6.75c-.026-2.022 1.607-4.171 4.076-4.42 2.177-.22 4.277.893 5.607 2.99 1.088 1.711 1.516 3.67 1.224 5.535a16.04 16.04 0 0 1-.471 1.911c.2.025.399.07.588.131.971.322 1.436.923 1.436 1.745 0 1.333-1.607 2.635-3.834 2.635-.399 0-.797-.043-1.19-.12-.001.67-.227 1.321-.642 1.863a3.056 3.056 0 0 1-1.261.081zm.856-6.526c.262-.962.353-1.998.239-3.043a8.177 8.177 0 0 0-1.435-4.104c-1.011-1.592-2.593-2.51-4.264-2.341-1.805.19-2.892 1.628-2.88 3.033.006.771.32 1.628.845 2.342.526.717 1.249 1.325 2.044 1.755 1.518.824 2.929 1.07 3.716.666.785-.404 1.482-1.345 1.734-2.308z"></path>
+                            </svg>
+                        </a>
+                        <a href="https://www.zhihu.com/" target="_blank" class="text-gray-400 hover:text-neo-primary transition-colors">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12.2 2C6.7 2 2 6.7 2 12.2s4.7 10.2 10.2 10.2 10.2-4.7 10.2-10.2S17.7 2 12.2 2zM16 15.9c-1.2-.1-1.7-.8-1.7-1.5 0-.7.6-1.4 1.2-1.9 1.5-1.5 1.7-4.5.4-6.4-.4-.6-2.8-1.9-4.2-2h-.1c-.4.7-.9 1.1-2.1 1.1-2.6 0-2.7-1.9-2.7-2.3 0-.5.5-1 .9-1.4.4-.4.8-.7 1.3-.7h.1c.3 0 .5.1.7.2.3-.1.6-.2.9-.3h.2c.8 0 3 .4 5.2 1.7 2.2 1.3 1.9 3.2 1.8 3.7h-.1c1.6 2.1 1.3 5.5-.2 7.2 1.2.6 2.7 1.3 2.7 2.7s-1.3 1.9-2.3 1.9z"/>
+                                <path d="M13.4 12.6v-.1c-.1-.2-.1-.5 0-.8v-.1c.8-.6 1.9-2.1 1.9-3.1 0-1.1-.3-1.9-1.5-1.9-1.1 0-1.5.9-1.5 1.9 0 .7.5 1.5 1.2 2.1.1.1.1.1 0 .2l-.1.1c-.4.4-1.8 1.5-1.9 1.8-.1.3 0 .6.1.8.1.2.7.8.9.8h2.2c.2 0 .3-.1.3-.3 0-.2-.2-.3-.3-.3h-1.8c.5-.4.8-.9.6-1.2zm-5.3-1.5c.1-.1.2-.3.3-.8V10c.7-2.1 1.4-4.3 1.8-6.3v-.1c0-.2-.2-.4-.4-.4h-.9c-.2 0-.4.2-.4.4 0 .2-.1 2.8-1.8 6.3 0 0 0 .1-.1.1-.1.3-.2.8.2 1 .2.1.4.1.5.1h.8z"/>
+                            </svg>
+                        </a>
+                        <a href="https://github.com/" target="_blank" class="text-gray-400 hover:text-neo-primary transition-colors">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 .297c-6.63 0-12 5.373-12 12.2s4.7 10.2 10.2 10.2 10.2-4.7 10.2-10.2S17.7 2 12.2 2zM16 15.9c-1.2-.1-1.7-.8-1.7-1.5 0-.7.6-1.4 1.2-1.9 1.5-1.5 1.7-4.5.4-6.4-.4-.6-2.8-1.9-4.2-2h-.1c-.4.7-.9 1.1-2.1 1.1-2.6 0-2.7-1.9-2.7-2.3 0-.5.5-1 .9-1.4.4-.4.8-.7 1.3-.7h.1c.3 0 .5.1.7.2.3-.1.6-.2.9-.3h.2c.8 0 3 .4 5.2 1.7 2.2 1.3 1.9 3.2 1.8 3.7h-.1c1.6 2.1 1.3 5.5-.2 7.2 1.2.6 2.7 1.3 2.7 2.7s-1.3 1.9-2.3 1.9z"/>
+                                <path d="M13.4 12.6v-.1c-.1-.2-.1-.5 0-.8v-.1c.8-.6 1.9-2.1 1.9-3.1 0-1.1-.3-1.9-1.5-1.9-1.1 0-1.5.9-1.5 1.9 0 .7.5 1.5 1.2 2.1.1.1.1.1 0 .2l-.1.1c-.4.4-1.8 1.5-1.9 1.8-.1.3 0 .6.1.8.1.2.7.8.9.8h2.2c.2 0 .3-.1.3-.3 0-.2-.2-.3-.3-.3h-1.8c.5-.4.8-.9.6-1.2zm-5.3-1.5c.1-.1.2-.3.3-.8V10c.7-2.1 1.4-4.3 1.8-6.3v-.1c0-.2-.2-.4-.4-.4h-.9c-.2 0-.4.2-.4.4 0 .2-.1 2.8-1.8 6.3 0 0 0 .1-.1.1-.1.3-.2.8.2 1 .2.1.4.1.5.1h.8z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold mb-6">快速链接</h4>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-white transition-colors">首页</a>
+                        </li>
+                        <li>
+                            <a href="#features" class="text-gray-400 hover:text-white transition-colors">功能特点</a>
+                        </li>
+                        <li>
+                            <a href="#card-styles" class="text-gray-400 hover:text-white transition-colors">卡片风格</a>
+                        </li>
+                        <li>
+                            <a href="#pricing" class="text-gray-400 hover:text-white transition-colors">会员方案</a>
+                        </li>
+                        <li>
+                            <a href="card-generator.html" class="text-gray-400 hover:text-white transition-colors">创建卡片</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold mb-6">联系作者</h4>
+                    <p class="text-gray-400 mb-3">
+                        <span class="font-bold text-white">刘超</span> - 产品设计师
+                    </p>
+                    <p class="text-gray-400 mb-6">专注于AI驱动的创意工具开发</p>
+                    <a href="mailto:contact@example.com" class="text-neo-primary hover:text-white transition-colors">
+                        发送邮件联系
+                    </a>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 text-center text-gray-500">
+                <p>&copy; 2025 智能卡片生成器. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+    
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.neo-navbar');
+            if (window.scrollY > 10) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // 移动端菜单
+        const menuToggle = document.getElementById('menu-toggle');
+        const closeMenu = document.getElementById('close-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuToggle.addEventListener('click', function() {
+            mobileMenu.classList.remove('translate-x-full');
+        });
+        
+        closeMenu.addEventListener('click', function() {
+            mobileMenu.classList.add('translate-x-full');
+        });
+        
+        // 平滑滚动到锚点
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                mobileMenu.classList.add('translate-x-full');
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

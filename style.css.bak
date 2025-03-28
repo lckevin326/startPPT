@@ -1,0 +1,410 @@
+/* 全局样式和动画 */
+:root {
+  --animation-duration: 200ms;
+}
+
+/* 主题切换过渡效果 */
+.theme-transition {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 淡入动画 */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 图标闪烁动画 */
+.animate-pulse-custom {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* 按钮悬停和点击效果 */
+button:not(:disabled),
+.button {
+  transition: all 0.2s ease;
+}
+
+button:not(:disabled):hover,
+.button:hover {
+  transform: translateY(-1px);
+}
+
+button:not(:disabled):active,
+.button:active {
+  transform: translateY(1px);
+}
+
+/* 输入框样式增强 */
+.input-group textarea:focus {
+  box-shadow: 0 0 0 3px rgba(var(--color-primary-500), 0.2);
+  outline: none;
+}
+
+/* 自定义滚动条 */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* 卡片悬停效果 */
+.card {
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.dark .card:hover {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* 风格选择框比例 */
+.aspect-3-5 {
+  aspect-ratio: 3/5;
+}
+
+.aspect-3-4 {
+  aspect-ratio: 3/4;
+}
+
+.aspect-3\.5-1 {
+  aspect-ratio: 3.5/1;
+}
+
+/* 移动端适配优化 */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  .input-group {
+    margin-bottom: 1rem;
+  }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) {
+  button:not(:disabled):hover,
+  .button:hover {
+    transform: none;
+  }
+  
+  .card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* 分类选择器样式 */
+.category-selector {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 10px 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(14, 165, 233, 0.4) transparent;
+}
+
+.category-selector::-webkit-scrollbar {
+  height: 6px;
+}
+
+.category-selector::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+.category-selector::-webkit-scrollbar-thumb {
+  background-color: rgba(14, 165, 233, 0.4);
+  border-radius: 10px;
+}
+
+.category-item {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border-radius: 30px;
+  background: var(--bg-item, rgba(255, 255, 255, 0.05));
+  border: 1px solid var(--border-item, rgba(255, 255, 255, 0.1));
+  color: var(--text-item, #64748b);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  white-space: nowrap;
+}
+
+.dark .category-item {
+  --bg-item: rgba(23, 25, 35, 0.7);
+  --border-item: rgba(255, 255, 255, 0.05);
+  --text-item: #94a3b8;
+}
+
+.category-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --bg-item: rgba(255, 255, 255, 0.1);
+  --border-item: rgba(14, 165, 233, 0.3);
+  --text-item: #0ea5e9;
+}
+
+.dark .category-item:hover {
+  --bg-item: rgba(23, 25, 35, 0.8);
+  --border-item: rgba(14, 165, 233, 0.4);
+  --text-item: #38bdf8;
+}
+
+.category-item.selected {
+  --bg-item: rgba(14, 165, 233, 0.1);
+  --border-item: rgba(14, 165, 233, 0.5);
+  --text-item: #0ea5e9;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(14, 165, 233, 0.15);
+}
+
+.dark .category-item.selected {
+  --bg-item: rgba(14, 165, 233, 0.2);
+  --border-item: rgba(14, 165, 233, 0.5);
+  --text-item: #38bdf8;
+  box-shadow: 0 5px 15px rgba(14, 165, 233, 0.1);
+}
+
+/* 控制属性样式增强 */
+.control-slider {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(to right, rgba(14, 165, 233, 0.2), rgba(14, 165, 233, 0.7));
+  border-radius: 10px;
+  outline: none;
+  margin: 10px 0;
+}
+
+.control-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #0ea5e9;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(14, 165, 233, 0.5);
+  transition: all 0.2s ease;
+}
+
+.control-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 8px rgba(14, 165, 233, 0.7);
+}
+
+.control-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #0ea5e9;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(14, 165, 233, 0.5);
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.control-slider::-moz-range-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 8px rgba(14, 165, 233, 0.7);
+}
+
+.dark .control-slider {
+  background: linear-gradient(to right, rgba(56, 189, 248, 0.2), rgba(56, 189, 248, 0.7));
+}
+
+.dark .control-slider::-webkit-slider-thumb {
+  background: #38bdf8;
+  box-shadow: 0 0 5px rgba(56, 189, 248, 0.5);
+}
+
+.dark .control-slider::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
+}
+
+.dark .control-slider::-moz-range-thumb {
+  background: #38bdf8;
+  box-shadow: 0 0 5px rgba(56, 189, 248, 0.5);
+}
+
+.dark .control-slider::-moz-range-thumb:hover {
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
+}
+
+/* 侧边栏样式 */
+#sidebar {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  box-shadow: 5px 0 25px rgba(0, 0, 0, 0.2);
+  z-index: 50;
+  backdrop-filter: blur(10px);
+  overflow-y: auto;
+  height: 100vh;
+}
+
+/* 自定义侧边栏滚动条 */
+#sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+#sidebar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+#sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+    width: 80% !important;
+    max-width: 300px;
+    transform: translateX(-100%);
+  }
+  
+  #sidebar.hidden {
+    transform: translateX(-100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  #sidebar:not(.hidden) {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+#menu-toggle {
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+#menu-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+#menu-toggle:active {
+  transform: scale(0.95);
+}
+
+/* 菜单项悬停效果 */
+#sidebar nav a {
+  position: relative;
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+#sidebar nav a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(14, 165, 233, 0), rgba(14, 165, 233, 0.1), rgba(14, 165, 233, 0));
+  transition: transform 0.6s ease;
+}
+
+#sidebar nav a:hover::before {
+  transform: translateX(100%);
+}
+
+/* 活跃菜单项样式 */
+#sidebar nav a.active {
+  background: linear-gradient(90deg, rgba(14, 165, 233, 0.2) 0%, rgba(56, 189, 248, 0.1) 100%);
+  border-left: 3px solid #0ea5e9;
+}
+
+/* 用户信息面板效果 */
+#sidebar .user-info {
+  position: relative;
+  overflow: hidden;
+}
+
+#sidebar .user-info::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(14, 165, 233, 0.1) 0%,
+    rgba(14, 165, 233, 0) 70%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#sidebar .user-info:hover::after {
+  opacity: 1;
+}
+
+/* 主内容区域的左侧内边距 */
+@media (min-width: 768px) {
+  .md\:pl-64 {
+    padding-left: 16rem;
+  }
+}

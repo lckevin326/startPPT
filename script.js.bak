@@ -158,15 +158,10 @@ document.addEventListener('DOMContentLoaded', async function() {
                                 content: fullPrompt
                             }
                         ],
-                        max_tokens: 131000,  // 设置为131K
+                        max_tokens: 4000,
                         temperature: 0.7,  // 使用固定值
                         stream: true
                     };
-                    
-                    // 打印请求体数据，用于调试
-                    console.log('OpenRouter API请求体数据:', JSON.stringify(requestBody, null, 2));
-                    console.log('使用模型:', window.OPENROUTER_CONFIG.MODEL);
-                    console.log('API端点:', window.OPENROUTER_CONFIG.API_URL);
                     
                     const response = await fetch(window.OPENROUTER_CONFIG.API_URL, {
                         method: 'POST',
@@ -205,18 +200,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                             const { done, value } = await reader.read();
                             if (done) {
                                 // 流结束后，显示最终HTML预览
-                                console.log('流式接收完成，准备显示最终结果...');
-                                
-                                // 显示处理状态
-                                streamTextArea.innerHTML += `<p>数据接收完成，正在渲染预览...</p>`;
-                                
-                                // 确保流式输出区域可见
-                                streamTextArea.style.display = 'block';
-                                
-                                // 延迟一下再显示最终结果，确保用户能看到处理过程
-                                setTimeout(() => {
-                                    displayFinalHTML(fullResponse, document.getElementById('preview-content'), true);
-                                }, 500);
+                                displayFinalHTML(fullResponse, document.getElementById('preview-content'), true);
                                 
                                 // 更新生成状态
                                 window.appState.isGenerating = false;
@@ -996,7 +980,9 @@ async function previewStyleExample(styleName, styles) {
                 // 显示HTML内容
                 if (previewContent) {
                     // 添加水平居中、上部20px内边距和淡灰色背景，并应用正确的宽高比
-                    previewContent.innerHTML = `<div class="w-full flex justify-center pt-5">${htmlContent}</div>`;
+                    previewContent.innerHTML = `<div class="w-full flex justify-center pt-5 bg-gray-50">
+                        <div class="${aspectRatioClass} preview-container">${htmlContent}</div>
+                    </div>`;
                     previewContent.style.display = 'block';
                 }
                 
@@ -1066,8 +1052,8 @@ function displayFallbackPreview(styleObject, container, aspectRatioClass) {
     
     previewHTML += '</div>';
     
-    // 添加水平居中、上部20px内边距，并应用正确的宽高比
-    container.innerHTML = `<div class="w-full flex justify-center pt-5">
+    // 添加水平居中、上部20px内边距和淡灰色背景，并应用正确的宽高比
+    container.innerHTML = `<div class="w-full flex justify-center pt-5 bg-gray-50">
         <div class="${aspectRatioClass} preview-container">${previewHTML}</div>
     </div>`;
     container.style.display = 'block';
@@ -1086,29 +1072,15 @@ function displayFinalHTML(content, container, isComplete = false) {
         let htmlCode = extractHTML(content);
         
         if (htmlCode && htmlCode.trim()) {
-            console.log('成功提取HTML代码，准备显示预览');
-            
-            // 设置HTML预览，确保内容居中
-            container.innerHTML = `<div class="flex justify-center items-center w-full h-full p-4">${htmlCode}</div>`;
+            // 设置HTML预览
+            container.innerHTML = htmlCode;
             
             // 显示预览内容，隐藏流式输出
-            if (streamText) {
-                streamText.style.display = 'none';
-                console.log('隐藏流式输出区域');
-            }
-            if (previewContent) {
-                previewContent.style.display = 'flex'; // 改为flex以支持居中
-                previewContent.classList.add('justify-center', 'items-center');
-                console.log('显示预览内容区域');
-            }
+            if (streamText) streamText.style.display = 'none';
+            if (previewContent) previewContent.style.display = 'block';
             
             // 如果生成完成，更新应用状态
             if (isComplete) {
-                console.log('卡片生成完成，更新应用状态');
-                
-                // 在数据接收完成后添加提示信息
-                console.log('数据接收完成，正在渲染预览');
-                
                 // 恢复生成按钮状态
                 const generateBtn = document.getElementById('generate-btn');
                 if (generateBtn) {
@@ -1126,24 +1098,16 @@ function displayFinalHTML(content, container, isComplete = false) {
                 console.log('卡片生成完成，已启用风格切换确认');
             }
         } else {
-            console.warn('无法提取HTML代码，显示原始响应');
+            console.warn('无法提取HTML代码');
             // 展示原始响应
             container.innerHTML = `<div class="p-4">
                 <h3 class="font-semibold text-lg mb-2">生成结果</h3>
                 <pre class="bg-gray-100 dark:bg-gray-800 p-3 rounded text-sm overflow-auto">${escapeHtml(content)}</pre>
             </div>`;
-            
-            // 确保预览区域可见
-            if (previewContent) previewContent.style.display = 'block';
-            if (streamText) streamText.style.display = 'none';
         }
     } catch (error) {
         console.error('显示HTML预览时出错:', error);
         container.innerHTML = `<div class="p-4 text-red-500">显示预览时出错: ${error.message}</div>`;
-        
-        // 确保预览区域可见
-        if (previewContent) previewContent.style.display = 'block';
-        if (streamText) streamText.style.display = 'none';
     }
 }
 
