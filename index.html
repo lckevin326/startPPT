@@ -389,7 +389,6 @@
             transition: all 0.3s ease;
             cursor: pointer;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            aspect-ratio: 3/5;
         }
         
         .style-item:hover {
@@ -444,7 +443,6 @@
             transition: all 0.3s ease;
             cursor: pointer;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            aspect-ratio: 3/5;
         }
         
         .style-item:hover {
@@ -503,96 +501,217 @@
     </style>
 </head>
 <body class="min-h-screen bg-gray-50">
+    <!-- 左侧菜单 - 新未来主义深色风格 -->
+    <aside class="fixed top-0 left-0 bottom-0 w-64 bg-neo-dark text-white hidden md:block z-50 shadow-xl" id="sidebar">
+        <!-- Logo部分 -->
+        <div class="p-6 border-b border-neo-carbon flex items-center">
+            <a href="index.html" class="flex items-center group">
+                <svg class="h-8 w-8 text-neo-accent mr-3 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17 7L7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    <path d="M14 11H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    <path d="M10 15H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2" />
+                </svg>
+                <span class="font-bold text-lg transition-colors duration-300 group-hover:text-neo-accent">智能卡片</span>
+            </a>
+        </div>
+        
+        <!-- 菜单项 -->
+        <nav class="py-6 px-4">
+            <div class="space-y-6">
+                <!-- 当前用户信息 -->
+                <div class="p-3 rounded-xl bg-neo-carbon bg-opacity-50 backdrop-blur-sm border border-neo-glass flex items-center space-x-3 user-info">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-r from-primary-400 to-primary-600 flex items-center justify-center text-white">
+                        <span class="text-sm font-bold" id="user-avatar">用户</span>
+                    </div>
+                    <div class="flex-1 truncate">
+                        <div class="text-sm font-medium" id="user-name">访客用户</div>
+                        <div class="text-xs text-gray-400" id="user-plan">免费计划</div>
+                    </div>
+                </div>
+                
+                <!-- 菜单分组：主要功能 -->
+                <div>
+                    <h3 class="text-xs uppercase tracking-wider text-gray-400 mb-3 px-3">主要功能</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="index.html" class="flex items-center px-3 py-2 rounded-lg bg-primary-700 bg-opacity-50 relative overflow-hidden active">
+                                <span class="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-800 opacity-50"></span>
+                                <span class="material-icons mr-3 text-white relative z-10">home</span>
+                                <span class="relative z-10">首页</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="dashboard.html" class="flex items-center px-3 py-2 rounded-lg hover:bg-neo-carbon group transition-all duration-300">
+                                <span class="material-icons mr-3 text-gray-400 group-hover:text-neo-accent">dashboard</span>
+                                <span>控制台</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="card-generator.html" class="flex items-center px-3 py-2 rounded-lg hover:bg-neo-carbon group transition-all duration-300">
+                                <span class="material-icons mr-3 text-gray-400 group-hover:text-neo-accent">add_box</span>
+                                <span>创建卡片</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- 菜单分组：卡片类型 -->
+                <div>
+                    <h3 class="text-xs uppercase tracking-wider text-gray-400 mb-3 px-3">卡片类型</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#" class="flex items-center px-3 py-2 rounded-lg hover:bg-neo-carbon group transition-all duration-300">
+                                <span class="material-icons mr-3 text-gray-400 group-hover:text-neo-accent">style</span>
+                                <span>概念卡片</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center px-3 py-2 rounded-lg hover:bg-neo-carbon group transition-all duration-300">
+                                <span class="material-icons mr-3 text-gray-400 group-hover:text-neo-accent">filter_frames</span>
+                                <span>小红书封面</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center px-3 py-2 rounded-lg hover:bg-neo-carbon group transition-all duration-300">
+                                <span class="material-icons mr-3 text-gray-400 group-hover:text-neo-accent">wysiwyg</span>
+                                <span>公众号封面</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- 菜单分组：账户 -->
+                <div>
+                    <h3 class="text-xs uppercase tracking-wider text-gray-400 mb-3 px-3">账户</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#" class="flex items-center px-3 py-2 rounded-lg hover:bg-neo-carbon group transition-all duration-300">
+                                <span class="material-icons mr-3 text-gray-400 group-hover:text-neo-accent">account_circle</span>
+                                <span>个人资料</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center px-3 py-2 rounded-lg hover:bg-neo-carbon group transition-all duration-300">
+                                <span class="material-icons mr-3 text-gray-400 group-hover:text-neo-accent">history</span>
+                                <span>使用记录</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center px-3 py-2 rounded-lg hover:bg-neo-carbon group transition-all duration-300">
+                                <span class="material-icons mr-3 text-gray-400 group-hover:text-neo-accent">logout</span>
+                                <span>退出登录</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- 底部版权信息 -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 text-xs text-center text-gray-500">
+            <p> 2025 智能卡片生成器</p>
+        </div>
+    </aside>
+    
+    <!-- 移动端菜单控制按钮 -->
+    <button id="menu-toggle" class="fixed top-4 left-4 z-20 md:hidden bg-neo-dark text-white rounded-full p-2 shadow-lg">
+        <span class="material-icons">menu</span>
+    </button>
+
     <!-- 背景流体形状 -->
     <div class="neo-shape bg-blue-300" style="width: 400px; height: 400px; top: -100px; left: -100px;"></div>
     <div class="neo-shape bg-cyan-200" style="width: 300px; height: 300px; bottom: -50px; right: -50px;"></div>
     <div class="neo-shape bg-indigo-200" style="width: 200px; height: 200px; bottom: 30%; left: 15%;"></div>
 
     <!-- 主容器 -->
-    <div class="container mx-auto px-4 py-8">
-        <header class="mb-8 flex justify-between items-center">
-            <div class="flex items-center">
-                <svg class="h-8 w-8 text-primary-500 mr-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M17 7L7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    <path d="M12 12H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    <path d="M20 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    <path d="M14 17L7 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    <path d="M17 12C17 11.4477 17.4477 11 18 11C18.5523 11 19 11.4477 19 12C19 12.5523 18.5523 13 18 13C17.4477 13 17 12.5523 17 12Z" fill="currentColor" />
-                </svg>
-                <h1 class="text-2xl font-bold neo-text">智能卡片生成器</h1>
-            </div>
-        </header>
-        
-        <main class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
-            <!-- 左侧区域 - 使用neo-card作为整体容器 -->
-            <section class="w-full md:w-1/2 lg:w-1/2 flex flex-col">
-                <div class="neo-card p-6 flex-grow flex flex-col space-y-6">
-                    <!-- 分类选择器 -->
-                    <div class="input-group">
-                        <label class="block mb-3 text-sm font-medium text-gray-700 uppercase tracking-wider">选择分类</label>
-                        <div id="category-selector" class="category-selector">
-                            <!-- 分类选项将通过JavaScript动态添加 -->
-                        </div>
-                    </div>
-                    
-                    <!-- 内容输入区域 -->
-                    <div class="input-group">
-                        <label for="text-input" class="block mb-3 text-sm font-medium text-gray-700 uppercase tracking-wider">内容文本</label>
-                        <div class="neo-input overflow-hidden transition-all duration-300">
-                            <textarea id="text-input" rows="6" class="block w-full p-4 bg-transparent border-0 focus:ring-0 focus:outline-none resize-none text-gray-900" placeholder="请输入卡片内容..."></textarea>
-                        </div>
-                    </div>
-                    
-                    <!-- 风格选择区域 -->
-                    <div class="input-group">
-                        <label for="style-selector" class="block mb-3 text-sm font-medium text-gray-700 uppercase tracking-wider">选择风格</label>
-                        <div id="style-grid-container" class="neo-card overflow-auto max-h-[700px] p-1">
-                            <div id="style-grid" class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-                                <!-- 宫格风格选项将通过JavaScript动态添加 -->
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 生成按钮 -->
-                    <button id="generate-btn" class="w-full py-3 neo-button text-white font-medium transition-all transform hover:scale-[1.02] active:scale-[0.98]">
-                        生成卡片
-                    </button>
-                    
-                    <div class="text-xs text-gray-500 mt-2 flex items-center">
-                        <span class="material-icons text-xs mr-1">keyboard</span>
-                        <span>提示: 按 Ctrl+Enter 快速生成</span>
-                    </div>
+    <div class="min-h-screen w-full md:pl-64">
+        <div class="container mx-auto px-4 py-8">
+            <header class="mb-8 flex justify-between items-center">
+                <div class="flex items-center">
+                    <svg class="h-8 w-8 text-primary-500 mr-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17 7L7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        <path d="M12 12H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        <path d="M20 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        <path d="M14 17L7 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        <path d="M17 12C17 11.4477 17.4477 11 18 11C18.5523 11 19 11.4477 19 12C19 12.5523 18.5523 13 18 13C17.4477 13 17 12.5523 17 12Z" fill="currentColor" />
+                    </svg>
+                    <h1 class="text-2xl font-bold neo-text">智能卡片生成器</h1>
                 </div>
-            </section>
+            </header>
             
-            <!-- 右侧预览区域 -->
-            <div class="w-full md:w-1/2 lg:w-1/2 flex flex-col">
-                <div class="neo-card neo-decor h-full flex flex-col">
-                    <div class="flex flex-row justify-between items-center p-4 border-b border-gray-200">
-                        <h2 class="text-xl font-semibold neo-text">生成结果</h2>
-                    </div>
-                    <div id="preview-stage" class="flex-grow flex flex-col justify-center items-center overflow-auto h-full" style="min-height: 600px;">
-                        <!-- 流式输出区域 -->
-                        <div id="stream-text" class="p-4 w-full text-sm font-mono whitespace-pre-wrap overflow-auto">
-                            <!-- 流式输出内容 -->
+            <main class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
+                <!-- 左侧区域 - 使用neo-card作为整体容器 -->
+                <section class="w-full md:w-1/2 lg:w-1/2 flex flex-col">
+                    <div class="neo-card p-6 flex-grow flex flex-col space-y-6">
+                        <!-- 分类选择器 -->
+                        <div class="input-group">
+                            <label class="block mb-3 text-sm font-medium text-gray-700 uppercase tracking-wider">选择分类</label>
+                            <div id="category-selector" class="category-selector">
+                                <!-- 分类选项将通过JavaScript动态添加 -->
+                            </div>
                         </div>
                         
-                        <!-- 预览内容区域 -->
-                        <div id="preview-content" class="w-full h-full flex justify-center items-center">
-                            <div class="p-4 text-center text-gray-500">
-                                <p class="mb-4">卡片预览将在这里显示</p>
-                                <p class="text-sm">请选择风格，或点击生成按钮创建新卡片</p>
+                        <!-- 内容输入区域 -->
+                        <div class="input-group">
+                            <label for="text-input" class="block mb-3 text-sm font-medium text-gray-700 uppercase tracking-wider">内容文本</label>
+                            <div class="neo-input overflow-hidden transition-all duration-300">
+                                <textarea id="text-input" rows="6" class="block w-full p-4 bg-transparent border-0 focus:ring-0 focus:outline-none resize-none text-gray-900" placeholder="请输入卡片内容..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- 风格选择区域 -->
+                        <div class="input-group">
+                            <label for="style-selector" class="block mb-3 text-sm font-medium text-gray-700 uppercase tracking-wider">选择风格</label>
+                            <div id="style-grid-container" class="neo-card overflow-auto max-h-[700px] p-1">
+                                <div id="style-grid" class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+                                    <!-- 宫格风格选项将通过JavaScript动态添加 -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 生成按钮 -->
+                        <button id="generate-btn" class="w-full py-3 neo-button text-white font-medium transition-all transform hover:scale-[1.02] active:scale-[0.98]">
+                            生成卡片
+                        </button>
+                        
+                        <div class="text-xs text-gray-500 mt-2 flex items-center">
+                            <span class="material-icons text-xs mr-1">keyboard</span>
+                            <span>提示: 按 Ctrl+Enter 快速生成</span>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 右侧预览区域 -->
+                <div class="w-full md:w-1/2 lg:w-1/2 flex flex-col">
+                    <div class="neo-card neo-decor h-full flex flex-col">
+                        <div class="flex flex-row justify-between items-center p-4 border-b border-gray-200">
+                            <h2 class="text-xl font-semibold neo-text">生成结果</h2>
+                        </div>
+                        <div id="preview-stage" class="flex-grow flex flex-col justify-center items-center overflow-auto h-full" style="min-height: 600px;">
+                            <!-- 流式输出区域 -->
+                            <div id="stream-text" class="p-4 w-full text-sm font-mono whitespace-pre-wrap overflow-auto">
+                                <!-- 流式输出内容 -->
+                            </div>
+                            
+                            <!-- 预览内容区域 -->
+                            <div id="preview-content" class="w-full h-full flex justify-center items-center overflow-hidden">
+                                <div class="w-full p-4 justify-center text-center text-gray-500">
+                                    <div class="text-center">
+                                        <p class="mb-4">卡片预览将在这里显示</p>
+                                        <p class="text-sm">请选择风格，或点击生成按钮创建新卡片</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </main>
-        
-        <footer class="mt-12 py-6 border-t border-gray-200 text-center text-gray-500 text-sm">
-            <p> 2023 智能卡片生成器 - 新未来主义风格设计</p>
-        </footer>
-    </div>
+            </main>
+            
+            <footer class="mt-12 py-6 border-t border-gray-200 text-center text-gray-500 text-sm">
+                <p> 2023 智能卡片生成器 - 新未来主义风格设计</p>
+            </footer>
+        </div>
 
     <!-- 主脚本 -->
     <script src="script.js"></script>

@@ -348,64 +348,99 @@ async function initializeCategorySelector() {
             return;
         }
         
-        // 清空选择器
-        categorySelector.innerHTML = '';
+        // 创建滚动容器
+        const scrollableContainer = document.createElement('div');
+        scrollableContainer.className = 'category-scroll-container relative flex items-center';
+        categorySelector.innerHTML = ''; // 清空选择器
+        categorySelector.appendChild(scrollableContainer);
+        
+        // 创建滚动内容区
+        const scrollContent = document.createElement('div');
+        scrollContent.className = 'category-items-container flex space-x-2 overflow-x-hidden scroll-smooth';
+        scrollContent.style.scrollBehavior = 'smooth';
+        scrollableContainer.appendChild(scrollContent);
+        
+        // 创建左右滚动按钮
+        const leftArrow = document.createElement('button');
+        leftArrow.className = 'scroll-arrow scroll-left absolute left-0 z-10 bg-white/80 hover:bg-white text-gray-700 rounded-full p-1 shadow-md hidden';
+        leftArrow.innerHTML = '<span class="material-icons">chevron_left</span>';
+        leftArrow.onclick = () => {
+            scrollContent.scrollBy({ left: -200, behavior: 'smooth' });
+        };
+        
+        const rightArrow = document.createElement('button');
+        rightArrow.className = 'scroll-arrow scroll-right absolute right-0 z-10 bg-white/80 hover:bg-white text-gray-700 rounded-full p-1 shadow-md hidden';
+        rightArrow.innerHTML = '<span class="material-icons">chevron_right</span>';
+        rightArrow.onclick = () => {
+            scrollContent.scrollBy({ left: 200, behavior: 'smooth' });
+        };
+        
+        scrollableContainer.appendChild(leftArrow);
+        scrollableContainer.appendChild(rightArrow);
         
         // 从style.md加载所有风格数据
-        const allStyles = await loadStyleMD();
-        if (!allStyles || allStyles.length === 0) {
+        const styleData = await loadStyleMD();
+        if (!styleData || styleData.length === 0) {
             console.error('从style.md加载风格数据失败');
             return;
         }
         
-        console.log('从style.md加载的风格数据:', allStyles);
+        console.log('从style.md加载的风格数据:', styleData);
         
         // 只保留状态为1的风格
-        const activeStyles = allStyles.filter(style => style.status === 1);
+        const activeStyles = styleData.filter(style => style.status === 1);
         console.log('状态为1的有效风格数量:', activeStyles.length);
         
-        // 预定义分类与风格的映射关系
-        const categoryMappings = {
-            '知识卡片': ['card', '卡片', '知识'],
-            '小红书': ['xhs', '小红书', '社交'],
-            '微信公众号': ['wx', 'wechat', '微信', '公众号'],
-            '演示文稿': ['ppt', '演示', '幻灯片']
-        };
+        // 直接从style.md中获取分类名称，不再使用预定义映射
+        const categories = [];
+        const categoryIcons = {};
         
-        // 为每个分类匹配相应的风格
-        const categories = Object.keys(categoryMappings);
-        const categoryHasStyles = {};
-        
-        // 检查每个分类是否有匹配的风格
-        categories.forEach(category => {
-            const keywords = categoryMappings[category];
-            const matchedStyles = activeStyles.filter(style => {
-                const styleValue = (style.style_value || '').toLowerCase();
-                const styleName = (style.style || '').toLowerCase();
-                
-                return keywords.some(keyword => 
-                    styleValue.includes(keyword.toLowerCase()) || 
-                    styleName.includes(keyword.toLowerCase())
-                );
-            });
-            
-            categoryHasStyles[category] = matchedStyles.length > 0;
-            console.log(`分类 "${category}" 匹配到 ${matchedStyles.length} 个风格`);
+        // 提取所有唯一的分类名称和图标
+        activeStyles.forEach(style => {
+            if (style.style && !categories.includes(style.style)) {
+                categories.push(style.style);
+                // 保存图标信息，如果有的话
+                categoryIcons[style.style] = style.icon || '';
+            }
         });
         
-        // 只显示有风格的分类
-        const availableCategories = categories.filter(category => categoryHasStyles[category]);
-        console.log('有可用风格的分类:', availableCategories);
+        console.log('从style.md提取的分类:', categories);
         
-        // 如果没有可用分类，显示所有预定义分类
-        const displayCategories = availableCategories.length > 0 ? availableCategories : categories;
+        // 计算每个分类项的宽度，确保一致
+        const categoryWidth = categories.length <= 4 ? '25%' : '120px';
         
         // 添加分类选项
-        displayCategories.forEach(category => {
+        categories.forEach(category => {
             const categoryItem = document.createElement('div');
-            categoryItem.className = 'category-item';
-            categoryItem.textContent = category;
+            categoryItem.className = 'category-item flex flex-col justify-center items-center';
             categoryItem.dataset.category = category;
+            categoryItem.style.width = categoryWidth;
+            categoryItem.style.minWidth = '120px';
+            
+            // 创建上下布局的结构
+            let iconHtml = '';
+            // 如果有图标，添加图标元素
+            if (categoryIcons[category]) {
+                iconHtml = `<div class="category-icon flex justify-center items-center mb-2">${categoryIcons[category]}</div>`;
+            } else {
+                // 使用Material Icons默认图标
+                const defaultIcons = {
+                    '知识卡片': 'card_membership',
+                    '小红书': 'book',
+                    '微信公众号': 'public',
+                    '知识总结': 'summarize',
+                    '演示文稿': 'slideshow'
+                };
+                
+                const iconName = defaultIcons[category] || 'style';
+                iconHtml = `<div class="category-icon flex justify-center items-center mb-2"><span class="material-icons">${iconName}</span></div>`;
+            }
+            
+            // 设置内容为图标+文字的上下布局，并确保水平居中
+            categoryItem.innerHTML = `
+                ${iconHtml}
+                <div class="category-name text-sm text-center">${category}</div>
+            `;
             
             // 添加点击事件
             categoryItem.addEventListener('click', () => {
@@ -417,33 +452,71 @@ async function initializeCategorySelector() {
                 // 添加选中状态
                 categoryItem.classList.add('selected');
                 
+                // 显示该风格的示例
+                console.log('已选择分类:', category);
+                
                 // 更新全局状态
                 window.appState.currentCategory = category;
-                console.log('已选择分类:', category);
                 
                 // 更新风格选择器，仅显示该分类的风格
                 populateStyleSelector();
+                
+                // 更新输入表单，显示该分类需要的输入字段
+                updateInputForm(category);
             });
             
-            // 添加到容器
-            categorySelector.appendChild(categoryItem);
+            // 添加到滚动内容容器
+            scrollContent.appendChild(categoryItem);
         });
         
         // 默认选择第一个分类
-        if (displayCategories.length > 0) {
-            const firstCategory = categorySelector.querySelector('.category-item');
+        if (categories.length > 0) {
+            const firstCategory = scrollContent.querySelector('.category-item');
             if (firstCategory) {
                 // 设置初始分类
-                window.appState.currentCategory = displayCategories[0];
-                console.log('默认选择分类:', displayCategories[0]);
+                window.appState.currentCategory = categories[0];
+                console.log('默认选择分类:', categories[0]);
                 firstCategory.classList.add('selected');
                 
                 // 初始加载该分类下的风格
                 populateStyleSelector();
+                
+                // 初始更新输入表单
+                updateInputForm(categories[0]);
             }
         }
+        
+        // 添加滚动检测，决定是否显示箭头按钮
+        checkScrollArrows(scrollContent, leftArrow, rightArrow);
+        scrollContent.addEventListener('scroll', () => {
+            checkScrollArrows(scrollContent, leftArrow, rightArrow);
+        });
+        
+        // 窗口大小改变时，检查是否需要显示箭头
+        window.addEventListener('resize', () => {
+            checkScrollArrows(scrollContent, leftArrow, rightArrow);
+        });
+        
     } catch (error) {
         console.error('初始化分类选择器失败:', error);
+    }
+}
+
+// 检查是否需要显示滚动箭头
+function checkScrollArrows(scrollContent, leftArrow, rightArrow) {
+    // 检查是否可以向左滚动
+    if (scrollContent.scrollLeft > 0) {
+        leftArrow.classList.remove('hidden');
+    } else {
+        leftArrow.classList.add('hidden');
+    }
+    
+    // 检查是否可以向右滚动
+    if (scrollContent.scrollWidth > scrollContent.clientWidth && 
+        scrollContent.scrollLeft < scrollContent.scrollWidth - scrollContent.clientWidth) {
+        rightArrow.classList.remove('hidden');
+    } else {
+        rightArrow.classList.add('hidden');
     }
 }
 
@@ -647,6 +720,69 @@ function setupEventListeners() {
     
     // 移除主题切换快捷键
     // 不再监听Alt+T快捷键
+    
+    // 侧边栏菜单交互
+    const menuToggle = document.getElementById('menu-toggle');
+    const sidebar = document.getElementById('sidebar');
+
+    if (menuToggle && sidebar) {
+        // 点击菜单按钮时切换侧边栏显示/隐藏
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation(); // 阻止事件冒泡
+            sidebar.classList.toggle('hidden');
+            
+            // 切换菜单图标
+            const iconElement = menuToggle.querySelector('.material-icons');
+            if (iconElement) {
+                if (sidebar.classList.contains('hidden')) {
+                    iconElement.textContent = 'menu';
+                } else {
+                    iconElement.textContent = 'close';
+                }
+            }
+        });
+        
+        // 在移动设备上点击侧边栏外部区域时关闭侧边栏
+        document.addEventListener('click', (e) => {
+            // 检查点击事件是否发生在侧边栏或菜单按钮之外
+            const isOutsideSidebar = !sidebar.contains(e.target) && !menuToggle.contains(e.target);
+            
+            // 如果是移动设备且侧边栏显示中，点击外部区域时关闭侧边栏
+            if (window.innerWidth < 768 && isOutsideSidebar && !sidebar.classList.contains('hidden')) {
+                sidebar.classList.add('hidden');
+                
+                // 更新菜单图标
+                const iconElement = menuToggle.querySelector('.material-icons');
+                if (iconElement) {
+                    iconElement.textContent = 'menu';
+                }
+            }
+        });
+        
+        // 窗口大小调整时处理侧边栏显示
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                // 在桌面设备上始终显示侧边栏（移除hidden类）
+                sidebar.classList.remove('hidden');
+            } else if (!sidebar.classList.contains('hidden')) {
+                // 在移动设备上转换时，如果侧边栏显示，则隐藏它
+                sidebar.classList.add('hidden');
+                
+                // 更新菜单图标
+                const iconElement = menuToggle.querySelector('.material-icons');
+                if (iconElement) {
+                    iconElement.textContent = 'menu';
+                }
+            }
+        });
+        
+        // 初始化侧边栏显示状态
+        if (window.innerWidth < 768) {
+            sidebar.classList.add('hidden');
+        } else {
+            sidebar.classList.remove('hidden');
+        }
+    }
 }
 
 // 主题切换函数 - 现在此函数不做任何切换，永远保持浅色主题
@@ -728,7 +864,7 @@ function displayHTML(html, container) {
     try {
         // 创建一个包装div元素来确保内容居中显示
         const wrapperDiv = document.createElement('div');
-        wrapperDiv.className = 'w-full h-full flex justify-center items-center p-4';
+        wrapperDiv.className = 'w-full flex justify-center';
         
         // 创建一个iframe元素来显示HTML内容
         const iframe = document.createElement('iframe');
@@ -815,6 +951,18 @@ async function previewStyleExample(styleName, styles) {
         if (streamText) streamText.style.display = 'none';
         if (previewContent) previewContent.style.display = 'block';
         
+        // 根据当前分类设置宽高比
+        const selectedCategory = window.appState.currentCategory;
+        let aspectRatioClass = 'aspect-3-5'; // 默认3:5（知识卡片）
+        
+        if (selectedCategory === '小红书') {
+            aspectRatioClass = 'aspect-3-4'; // 小红书3:4
+        } else if (selectedCategory === '微信公众号') {
+            aspectRatioClass = 'aspect-3.35-1'; // 微信公众号3.35:1
+        } else if (selectedCategory === '知识总结') {
+            aspectRatioClass = 'aspect-9-16'; // 知识总结9:16
+        }
+        
         // 使用chinese_example字段加载HTML示例
         if (styleObject.chinese_example) {
             try {
@@ -831,7 +979,10 @@ async function previewStyleExample(styleName, styles) {
                 
                 // 显示HTML内容
                 if (previewContent) {
-                    previewContent.innerHTML = htmlContent;
+                    // 添加水平居中、上部20px内边距和淡灰色背景，并应用正确的宽高比
+                    previewContent.innerHTML = `<div class="w-full flex justify-center pt-5 bg-gray-50">
+                        <div class="${aspectRatioClass} preview-container">${htmlContent}</div>
+                    </div>`;
                     previewContent.style.display = 'block';
                 }
                 
@@ -839,12 +990,12 @@ async function previewStyleExample(styleName, styles) {
             } catch (error) {
                 console.error('加载预览HTML失败:', error);
                 // 加载失败时显示替代内容
-                displayFallbackPreview(styleObject, previewContent);
+                displayFallbackPreview(styleObject, previewContent, aspectRatioClass);
             }
         } else {
             console.warn('风格对象没有chinese_example字段:', styleObject.style);
             // 显示替代内容
-            displayFallbackPreview(styleObject, previewContent);
+            displayFallbackPreview(styleObject, previewContent, aspectRatioClass);
         }
     } catch (error) {
         console.error('预览风格示例失败:', error);
@@ -852,43 +1003,59 @@ async function previewStyleExample(styleName, styles) {
 }
 
 // 显示备用预览内容
-function displayFallbackPreview(styleObject, container) {
+function displayFallbackPreview(styleObject, container, aspectRatioClass) {
     if (!container) return;
     
+    // 如果没有传入宽高比，则根据当前分类获取
+    if (!aspectRatioClass) {
+        const selectedCategory = window.appState.currentCategory;
+        aspectRatioClass = 'aspect-3-5'; // 默认3:5（知识卡片）
+        
+        if (selectedCategory === '小红书') {
+            aspectRatioClass = 'aspect-3-4'; // 小红书3:4
+        } else if (selectedCategory === '微信公众号') {
+            aspectRatioClass = 'aspect-3.35-1'; // 微信公众号3.35:1
+        } else if (selectedCategory === '知识总结') {
+            aspectRatioClass = 'aspect-9-16'; // 知识总结9:16
+        }
+    }
+    
     // 使用风格信息创建预览内容
-    let previewContent = '';
+    let previewHTML = '';
     
     // 显示风格名称
-    previewContent += `<div class="p-4">
+    previewHTML += `<div class="p-4">
         <h3 class="font-bold text-xl mb-4">${styleObject.style}</h3>`;
     
     // 如果有图片，显示图片
     if (styleObject.chinese_reference_image || styleObject.english_reference_image) {
         const imagePath = styleObject.chinese_reference_image || styleObject.english_reference_image;
-        previewContent += `<div class="mb-4">
+        previewHTML += `<div class="mb-4">
             <img class="max-w-full h-auto rounded" src="${imagePath}" alt="${styleObject.style}" />
         </div>`;
     }
     
     // 如果有描述，显示描述
     if (styleObject.description) {
-        previewContent += `<div class="mt-4">
+        previewHTML += `<div class="mt-4">
             <h4 class="font-semibold mb-2">风格描述:</h4>
             <div class="bg-gray-100 p-3 rounded text-sm">${styleObject.description.substring(0, 200)}...</div>
         </div>`;
     }
     
     // 显示分类信息
-    previewContent += `<div class="mt-4">
+    previewHTML += `<div class="mt-4">
         <span class="inline-block px-2 py-1 text-xs rounded bg-blue-500 text-white">
             分类: ${styleObject.cate || '未分类'}
         </span>
     </div>`;
     
-    previewContent += '</div>';
+    previewHTML += '</div>';
     
-    // 显示预览内容
-    container.innerHTML = previewContent;
+    // 添加水平居中、上部20px内边距和淡灰色背景，并应用正确的宽高比
+    container.innerHTML = `<div class="w-full flex justify-center pt-5 bg-gray-50">
+        <div class="${aspectRatioClass} preview-container">${previewHTML}</div>
+    </div>`;
     container.style.display = 'block';
 }
 
@@ -957,5 +1124,129 @@ function checkTextOverflow(event) {
         textSpan.classList.remove('no-scroll');
     } else {
         textSpan.classList.add('no-scroll');
+    }
+}
+
+// 更新输入表单，根据分类显示不同的输入字段
+function updateInputForm(category) {
+    // 获取输入组容器
+    const inputGroup = document.querySelector('.input-group:nth-child(2)'); // 内容输入区域的容器
+    if (!inputGroup) {
+        console.error('找不到输入表单容器');
+        return;
+    }
+    
+    // 获取文本输入框
+    const textInput = document.getElementById('text-input');
+    if (!textInput) {
+        console.error('找不到文本输入框');
+        return;
+    }
+    
+    // 清除现有的额外输入字段
+    const existingExtraFields = document.getElementById('extra-fields');
+    if (existingExtraFields) {
+        existingExtraFields.remove();
+    }
+    
+    // 创建额外字段容器
+    const extraFields = document.createElement('div');
+    extraFields.id = 'extra-fields';
+    extraFields.className = 'mt-4 space-y-4';
+    
+    // 设置每种分类的特定标签和占位符
+    let inputLabelText = '内容文本';
+    let mainInputPlaceholder = '请输入卡片内容...';
+    let extraFieldsHtml = '';
+    
+    // 根据分类设置不同的输入字段
+    if (category === '知识卡片') {
+        inputLabelText = '输入主题';
+        mainInputPlaceholder = '请输入卡片主题内容...';
+        extraFieldsHtml = `
+            <div class="input-field">
+                <label for="card-date" class="block mb-2 text-sm font-medium text-gray-700">日期</label>
+                <div class="neo-input overflow-hidden">
+                    <input id="card-date" type="text" class="block w-full p-3 bg-transparent border-0 focus:ring-0 focus:outline-none text-gray-900" 
+                        value="${getCurrentBeijingDate()}" placeholder="请输入日期">
+                </div>
+            </div>
+        `;
+    }
+    else if (category === '小红书') {
+        inputLabelText = '封面文案';
+        mainInputPlaceholder = '请输入小红书封面文案...';
+        // 小红书需要账号名称和可选标语
+        extraFieldsHtml = `
+            <div class="input-field">
+                <label for="account-name" class="block mb-2 text-sm font-medium text-gray-700">账号名称</label>
+                <div class="neo-input overflow-hidden">
+                    <input id="account-name" type="text" class="block w-full p-3 bg-transparent border-0 focus:ring-0 focus:outline-none text-gray-900" 
+                        value="超人（chaoren.ai）" placeholder="请输入账号名称">
+                </div>
+            </div>
+            <div class="input-field">
+                <label for="slogan" class="block mb-2 text-sm font-medium text-gray-700">可选标语</label>
+                <div class="neo-input overflow-hidden">
+                    <input id="slogan" type="text" class="block w-full p-3 bg-transparent border-0 focus:ring-0 focus:outline-none text-gray-900" 
+                        placeholder="请输入可选标语（非必填）">
+                </div>
+            </div>
+        `;
+    }
+    else if (category === '微信公众号') {
+        inputLabelText = '公众号标题';
+        mainInputPlaceholder = '请输入公众号标题...';
+        // 微信公众号需要emoji
+        extraFieldsHtml = `
+            <div class="input-field">
+                <label for="emoji" class="block mb-2 text-sm font-medium text-gray-700">Emoji图标</label>
+                <div class="neo-input overflow-hidden">
+                    <input id="emoji" type="text" class="block w-full p-3 bg-transparent border-0 focus:ring-0 focus:outline-none text-gray-900" 
+                        value="🚀" placeholder="请输入emoji图标">
+                </div>
+            </div>
+        `;
+    }
+    else if (category === '知识总结') {
+        inputLabelText = '文案内容';
+        mainInputPlaceholder = '请输入需要总结的文案内容...';
+        // 知识总结需要作者、社交链接和年份
+        extraFieldsHtml = `
+            <div class="input-field">
+                <label for="author-name" class="block mb-2 text-sm font-medium text-gray-700">作者姓名</label>
+                <div class="neo-input overflow-hidden">
+                    <input id="author-name" type="text" class="block w-full p-3 bg-transparent border-0 focus:ring-0 focus:outline-none text-gray-900" 
+                        placeholder="请输入作者姓名">
+                </div>
+            </div>
+            <div class="input-field">
+                <label for="social-link" class="block mb-2 text-sm font-medium text-gray-700">社交媒体链接</label>
+                <div class="neo-input overflow-hidden">
+                    <input id="social-link" type="text" class="block w-full p-3 bg-transparent border-0 focus:ring-0 focus:outline-none text-gray-900" 
+                        placeholder="请输入社交媒体链接">
+                </div>
+            </div>
+            <div class="input-field">
+                <label for="year" class="block mb-2 text-sm font-medium text-gray-700">年份</label>
+                <div class="neo-input overflow-hidden">
+                    <input id="year" type="text" class="block w-full p-3 bg-transparent border-0 focus:ring-0 focus:outline-none text-gray-900" 
+                        value="${new Date().getFullYear()}" placeholder="请输入年份">
+                </div>
+            </div>
+        `;
+    }
+    
+    // 更新主输入框的标签和占位符
+    const mainInputLabel = inputGroup.querySelector('label');
+    if (mainInputLabel) {
+        mainInputLabel.textContent = inputLabelText;
+    }
+    textInput.placeholder = mainInputPlaceholder;
+    
+    // 如果有额外字段，添加到表单
+    if (extraFieldsHtml) {
+        extraFields.innerHTML = extraFieldsHtml;
+        inputGroup.appendChild(extraFields);
     }
 }

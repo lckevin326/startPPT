@@ -289,3 +289,122 @@ button:not(:disabled):active,
 .dark .control-slider::-moz-range-thumb:hover {
   box-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
 }
+
+/* 侧边栏样式 */
+#sidebar {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  box-shadow: 5px 0 25px rgba(0, 0, 0, 0.2);
+  z-index: 50;
+  backdrop-filter: blur(10px);
+  overflow-y: auto;
+  height: 100vh;
+}
+
+/* 自定义侧边栏滚动条 */
+#sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+#sidebar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+#sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+    width: 80% !important;
+    max-width: 300px;
+    transform: translateX(-100%);
+  }
+  
+  #sidebar.hidden {
+    transform: translateX(-100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  #sidebar:not(.hidden) {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+#menu-toggle {
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+#menu-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+#menu-toggle:active {
+  transform: scale(0.95);
+}
+
+/* 菜单项悬停效果 */
+#sidebar nav a {
+  position: relative;
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+#sidebar nav a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(14, 165, 233, 0), rgba(14, 165, 233, 0.1), rgba(14, 165, 233, 0));
+  transition: transform 0.6s ease;
+}
+
+#sidebar nav a:hover::before {
+  transform: translateX(100%);
+}
+
+/* 活跃菜单项样式 */
+#sidebar nav a.active {
+  background: linear-gradient(90deg, rgba(14, 165, 233, 0.2) 0%, rgba(56, 189, 248, 0.1) 100%);
+  border-left: 3px solid #0ea5e9;
+}
+
+/* 用户信息面板效果 */
+#sidebar .user-info {
+  position: relative;
+  overflow: hidden;
+}
+
+#sidebar .user-info::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(14, 165, 233, 0.1) 0%,
+    rgba(14, 165, 233, 0) 70%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#sidebar .user-info:hover::after {
+  opacity: 1;
+}
+
+/* 主内容区域的左侧内边距 */
+@media (min-width: 768px) {
+  .md\:pl-64 {
+    padding-left: 16rem;
+  }
+}

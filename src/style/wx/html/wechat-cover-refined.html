@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微信公众号封面 - 如何让儿童学习AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --baby-pink: #ffd6e0;
+            --light-blue: #c1e3ff;
+            --mint-green: #c9f7d9;
+            --soft-yellow: #fff3c1;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container-wrapper {
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .cover-container {
+            width: 100%;
+            position: relative;
+            background: white;
+            /* 直角边框 */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 保持3.35:1的比例 */
+        .aspect-ratio-box {
+            position: relative;
+            width: 100%;
+            padding-top: 29.85%; /* 100% ÷ 3.35 */
+        }
+
+        .content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .main-cover {
+            width: 70.15%; /* 2.35 ÷ 3.35 * 100% */
+            background: linear-gradient(135deg, var(--baby-pink), var(--light-blue));
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            margin: 10px;
+            margin-right: 5px;
+        }
+
+        .moments-cover {
+            width: 29.85%; /* 1 ÷ 3.35 * 100% */
+            background: linear-gradient(135deg, var(--baby-pink), var(--light-blue));
+            position: relative;
+            border-radius: 20px;
+            margin: 10px;
+            margin-left: 5px;
+        }
+
+        /* 文字样式 */
+        .title-text {
+            font-size: 4.2vw;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            line-height: 1.3;
+            font-family: 'Ma Shan Zheng', cursive;
+            text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.7);
+        }
+
+        .subtitle-text {
+            font-size: 1.8vw;
+            color: #555;
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .tips-text {
+            font-size: 1.3vw;
+            color: #666;
+            margin-top: 15px;
+            text-align: center;
+            max-width: 80%;
+            line-height: 1.5;
+        }
+
+        .highlight {
+            font-weight: bold;
+            background: linear-gradient(transparent 70%, var(--soft-yellow) 70%);
+            padding: 0 5px;
+        }
+
+        /* 朋友圈四字排列 */
+        .moments-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            height: 100%;
+            width: 100%;
+        }
+
+        .moments-char {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5vw;
+            font-weight: bold;
+            color: #333;
+            font-family: 'Ma Shan Zheng', cursive;
+            text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
+        }
+
+        /* 装饰元素 */
+        .decoration {
+            position: absolute;
+            z-index: 1;
+        }
+
+        .baby-elements {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 2vw;
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        .baby-elements-side {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+            font-size: 2vw;
+            color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .cloud {
+            position: absolute;
+            font-size: 2vw;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .cloud-1 {
+            top: 10%;
+            left: 15%;
+        }
+
+        .cloud-2 {
+            bottom: 20%;
+            right: 10%;
+        }
+
+        .stars {
+            position: absolute;
+            font-size: 1.2vw;
+            color: #fff3c1;
+        }
+
+        .stars-1 {
+            top: 15%;
+            right: 10%;
+        }
+
+        .stars-2 {
+            bottom: 30%;
+            left: 10%;
+        }
+
+        .hearts {
+            position: absolute;
+            font-size: 1.2vw;
+            color: #ffd6e0;
+        }
+
+        .hearts-1 {
+            top: 25%;
+            left: 20%;
+        }
+
+        .hearts-2 {
+            bottom: 20%;
+            right: 20%;
+        }
+
+        .dotted-border {
+            position: absolute;
+            height: 85%;
+            width: 85%;
+            top: 7.5%;
+            left: 7.5%;
+            border: 2px dashed rgba(255, 255, 255, 0.6);
+            border-radius: 15px;
+            z-index: 0;
+        }
+
+        /* 波浪分隔线 */
+        .wave-divider {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 30" preserveAspectRatio="none"><path d="M0,0 C150,40 350,0 500,30 C650,60 850,20 1200,30 L1200,0 Z" fill="white" opacity="0.3"/></svg>') repeat-x;
+            background-size: 1200px 30px;
+        }
+        
+        /* 母婴场景 */
+        .scene-container {
+            position: absolute;
+            bottom: 45px;
+            right: 15px;
+            width: 18%;
+        }
+        
+        .scene-icon {
+            font-size: 3vw;
+            color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.4);
+            width: 4vw;
+            height: 4vw;
+            border-radius: 50%;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            margin: 0 auto 10px;
+        }
+        
+        .scene-text {
+            font-size: 0.9vw;
+            text-align: center;
+            font-weight: bold;
+            color: #555;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container-wrapper">
+        <div class="cover-container">
+            <div class="aspect-ratio-box">
+                <div class="content">
+                    <!-- 主封面 (2.35:1) -->
+                    <div class="main-cover">
+                        <div class="dotted-border"></div>
+                        
+                        <!-- 云朵装饰 -->
+                        <div class="cloud cloud-1">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <div class="cloud cloud-2">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        
+                        <!-- 星星装饰 -->
+                        <div class="stars stars-1">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="stars stars-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        
+                        <!-- 爱心装饰 -->
+                        <div class="hearts hearts-1">
+                            <i class="fas fa-heart"></i>
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="hearts hearts-2">
+                            <i class="fas fa-heart"></i>
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        
+                        <!-- 主文字 -->
+                        <div class="flex flex-col justify-center items-center h-full px-8">
+                            <div class="title-text">如何让儿童学习AI ❤️</div>
+                            <div class="subtitle-text">
+                                宝爸宝妈的AI启蒙指南！
+                                <span class="ml-1">👶 🍼</span>
+                            </div>
+                            <div class="tips-text">
+                                让<span class="highlight">宝宝</span>在游戏中认识人工智能，
+                                培养未来科技天才！从互动故事到趣味编程，
+                                <span class="highlight">科技素养</span>从小培养！
+                            </div>
+                        </div>
+                        
+                        <!-- 母婴场景展示 -->
+                        <div class="scene-container">
+                            <div class="scene-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="scene-text">AI启蒙</div>
+                        </div>
+                        
+                        <!-- 侧边装饰元素 -->
+                        <div class="baby-elements-side">
+                            <i class="fas fa-baby"></i>
+                            <i class="fas fa-gamepad"></i>
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        
+                        <!-- 婴儿元素装饰 -->
+                        <div class="baby-elements">
+                            <i class="fas fa-baby"></i>
+                            <i class="fas fa-baby-carriage ml-2"></i>
+                            <i class="fas fa-gamepad ml-2"></i>
+                            <i class="fas fa-robot ml-2"></i>
+                        </div>
+                        
+                        <!-- 波浪分隔线 -->
+                        <div class="wave-divider"></div>
+                    </div>
+                    
+                    <!-- 朋友圈封面 (1:1) -->
+                    <div class="moments-cover">
+                        <div class="dotted-border"></div>
+                        
+                        <!-- 四个大字 -->
+                        <div class="moments-grid">
+                            <div class="moments-char">儿</div>
+                            <div class="moments-char">童</div>
+                            <div class="moments-char">学</div>
+                            <div class="moments-char">AI</div>
+                        </div>
+                        
+                        <!-- 婴儿元素装饰 -->
+                        <div class="baby-elements" style="font-size: 1.5vw; bottom: 5px;">
+                            <i class="fas fa-robot"></i>
+                            <i class="fas fa-child ml-2"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

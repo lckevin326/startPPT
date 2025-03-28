@@ -576,10 +576,10 @@
       "english_style": "Warm Maternity & Infant Knowledge Card Style",
       "style_value": "warm-maternity-infant-knowledge-card-style",
       "description": "## 设计风格 :\n- 柔和色彩基调: 以婴儿粉、淡蓝、薄荷绿等温和色调为主，营造温馨舒适氛围\n- 圆角卡片结构: 所有内容采用大圆角矩形或气泡形状容器，营造柔软安全感\n- 简约留白处理: 适当留白增强可读性，避免视觉拥挤感\n- 渐变色背景: 部分卡片使用柔和渐变背景，增加温暖感和层次感\n- 情感化设计: 整体风格偏向温馨、亲切，传递母爱和关怀\n- 统一视觉语言: 各卡片尽管内容不同，但维持一致的设计语言\n- 轻量化边框: 使用点线、波浪线等柔和边框元素增加童趣感\n\n## 文字排版风格:\n- 大字号标题: 标题文字加粗加大，使用圆润字体，吸引第一眼注意\n- 紧凑段落布局: 育儿知识点分段清晰，段落间距适中\n- 感叹号点缀: 频繁使用感叹号增强情感表达和亲近感\n- 表情符号融入: 在文字中加入\"❤️\"\"👶\"\"🍼\"等母婴相关表情符号增加表现力\n- 重点句加粗: 育儿关键信息或总结性内容加粗处理\n- 亲切语言表达: 采用\"宝妈\"\"宝爸\"\"宝宝\"等亲切称呼，营造家庭感\n- 多层级排版: 标题、副标题、正文、育儿小贴士等形成清晰的阅读层级\n\n## 视觉元素风格:\n- 可爱婴儿元素: 底部配置可爱的婴儿或妈妈形象，增加亲和力\n- 母婴用品图标: 使用奶瓶、尿布、玩具等母婴用品图标作为装饰元素\n- 场景化呈现: 如妈妈抱婴儿、宝宝爬行、喂奶等温馨场景化表达\n- 实物图融合: 如真实婴儿照片与卡通风格的结合\n- 点缀型装饰: 适量使用小装饰元素，如星星、爱心、小云朵等\n- 形象位置统一: 视觉元素多位于卡片底部或侧边，形成稳定的视觉期待\n- 柔和边框: 使用虚线、点线或波浪线作为分隔，增加童趣感",
-      "chinese_example": "src/style/wx/html",
-      "english_example": "src/style/wx/html",
-      "chinese_reference_image": "src/style/wx/img",
-      "english_reference_image": "src/style/wx/img",
+      "chinese_example": "src/style/wx/html/wechat-cover-refined.html",
+      "english_example": "src/style/wx/html/wechat-cover-refined.html",
+      "chinese_reference_image": "src/style/wx/img/wechat-cover-refined.png",
+      "english_reference_image": "src/style/wx/img/wechat-cover-refined.png",
       "cate": "微信公众号"
     },
     {
